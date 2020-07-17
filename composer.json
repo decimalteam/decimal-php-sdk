@@ -16,8 +16,7 @@
         "bitwasp/bech32": "^0.0.1",
         "guzzlehttp/guzzle": "^7.0",
         "kornrunner/secp256k1": "^0.1.2",
-        "simplito/elliptic-php": "^1.0",
-        "php": "^7.0"
+        "simplito/elliptic-php": "^1.0"
     },
     "autoload": {
         "psr-4": {
