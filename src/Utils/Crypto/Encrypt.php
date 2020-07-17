@@ -3,7 +3,6 @@
 
 namespace DecimalSDK\Utils\Crypto;
 
-use BIP\BIP44 as extBIP44;
 use BitWasp\Bitcoin\Key\Factory\HierarchicalKeyFactory;
 use BitWasp\Bitcoin\Mnemonic\Bip39\Bip39SeedGenerator;
 use BitWasp\Bitcoin\Mnemonic\MnemonicFactory;
@@ -47,9 +46,6 @@ class Encrypt
     public static function createExtendedKeysFromSeed($seed,$path = "m/44'/60'/0'/0")
     {
         $keys = BIP44::fromMasterSeed($seed)->deriveKey($path);
-//        $keys2 = extBIP44::fromMasterSeed($seed)->derive($path);
-//        echo $keys->getPrivateExtendedKey().'   '.PHP_EOL.PHP_EOL;
-//        echo $keys2->getPrivateExtendedKey();
         return [
             'privateExtended' => $keys->getPrivateExtendedKey(),
             'publicExtended' => $keys->getPublicExtendedKey()
@@ -142,10 +138,8 @@ class Encrypt
 			return '';
 		}
 
-		// Convert the hex string to a base10 integer
 		$num = gmp_strval(gmp_init($hex, 16), 58);
 
-		// Check that number isn't just 0 - which would be all padding.
 		if ($num != '0') {
 			$num = strtr(
 				$num,
@@ -156,7 +150,6 @@ class Encrypt
 			$num = '';
 		}
 
-		// Pad the leading 1's
 		$pad = '';
 		$n = 0;
 		while (substr($hex, $n, 2) == '00') {
