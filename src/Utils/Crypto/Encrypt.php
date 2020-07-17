@@ -15,6 +15,7 @@ use kornrunner\Serializer\HexSignatureSerializer;
 class Encrypt
 {
     /**
+     * init
      * @param int $size
      * @return string
      * @throws \BitWasp\Bitcoin\Exceptions\RandomBytesFailure
