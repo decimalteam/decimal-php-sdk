@@ -1,29 +1,12 @@
-# README #
+# Decimal PHP SDK
 
-This README would normally document whatever steps are necessary to get your application up and running.
+For detailed explanation on how things work, checkout the:
 
-### What is this repository for? ###
+- [Decimal SDK docs](https://help.decimalchain.com/sdk/).
+- [Decimal Console site](https://console.decimalchain.com/).
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+# Install
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+```bash
+$ composer require decimal-js-sdk
+```
