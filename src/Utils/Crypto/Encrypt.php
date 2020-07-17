@@ -60,6 +60,7 @@ class Encrypt
      * @throws \BitWasp\Bitcoin\Exceptions\Base58ChecksumFailure
      * @throws \BitWasp\Bitcoin\Exceptions\InvalidDerivationException
      * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
+     *
      */
 
     public static function derivedKeysFromExtended($key,$child = 0)

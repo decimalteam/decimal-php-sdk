@@ -1,6 +1,5 @@
 {
     "name": "decimalteam/decimal-php-sdk",
-    "version": "0.1.0",
     "description": "",
     "license": "MIT",
     "authors": [
@@ -16,7 +15,8 @@
         "bitwasp/bech32": "^0.0.1",
         "guzzlehttp/guzzle": "^7.0",
         "kornrunner/secp256k1": "^0.1.2",
-        "simplito/elliptic-php": "^1.0"
+        "simplito/elliptic-php": "^1.0",
+        "php": "^7.1"
     },
     "autoload": {
         "psr-4": {
@@ -25,5 +25,7 @@
         "files": [
             "src/helpers.php"
         ]
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
