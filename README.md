@@ -8,5 +8,5 @@ For detailed explanation on how things work, checkout the:
 # Install
 
 ```bash
-$ composer require decimal-js-sdk
+$ composer require decimalteam/decimal-php-sdk
 ```
