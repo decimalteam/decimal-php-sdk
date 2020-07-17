@@ -3,10 +3,6 @@
 
 namespace DecimalSDK\Utils\Crypto\Bip44;
 
-
-//use BIP\HDKey;
-//use BIP\Library\Helper;
-//use BIP\Library\KeyPair;
 use Elliptic\EC;
 use DecimalSDK\Utils\Crypto\Encrypt;
 
