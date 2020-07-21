@@ -28,4 +28,8 @@ class WalletHelpers {
 			'address' => $address,
 		];
 	}
+
+	public static function createNewMnemonics($size = 128){
+	    return Encrypt::createMnemonics($size);
+    }
 }

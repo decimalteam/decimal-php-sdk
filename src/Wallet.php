@@ -9,8 +9,10 @@ class Wallet
 {
     private $arguments;
 
-    public function __construct($mnemonics = 'hollow luggage slice soup leg vague icon walnut session candy improve struggle')
+    public function __construct($mnemonics = null)
     {
+        if(!$mnemonics) $mnemonics = WalletHelpers::createNewMnemonics();
+
 	    $this->arguments = WalletHelpers::generateNewAddress('dx',$mnemonics);
     }
 
