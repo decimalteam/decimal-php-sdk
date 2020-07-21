@@ -77,10 +77,11 @@ trait TransactionHelpers {
                     array_push($errors, [$k => 'not found']);
                     continue;
                 }
-                if ($v === 'number') {
-                    if ((gettype($payload[$k]) === 'string' && !ctype_digit($payload[$k]))
-                        || gettype($payload[$k]) !== 'integer') array_push($errors, [$k => 'field must be a number']);
-                } else if ($v === 'string' && gettype($payload[$k]) !== 'string') {
+                $t = gettype($payload[$k]);
+                $isNum = $t === 'integer' || ctype_digit($payload[$k]);
+                if ($v === 'number' && !$isNum) {
+                    array_push($errors, [$k => 'field must be a number']);
+                } else if ($v === 'string' && $t !== 'string') {
                     array_push($errors, [$k => 'field must be a string']);
                 }
             }
