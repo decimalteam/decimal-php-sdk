@@ -91,7 +91,7 @@ class Transaction
         $this->checkRequiredFields('COIN_SEND',$payload);
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
-            'receiver' => $this->wallet->getAddress(),
+            'receiver' => $payload['to'],
             'coin' => [
                 'amount' => amountUNIRecalculate($payload['amount']),
                 'denom' => strtolower($payload['coin']),
