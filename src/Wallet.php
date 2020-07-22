@@ -8,11 +8,12 @@ use DecimalSDK\Utils\WalletHelpers;
 class Wallet
 {
     private $arguments;
+    private $mnemonics;
 
     public function __construct($mnemonics = null)
     {
         if(!$mnemonics) $mnemonics = WalletHelpers::createNewMnemonics();
-
+        $this->mnemonics = $mnemonics;
 	    $this->arguments = WalletHelpers::generateNewAddress('dx',$mnemonics);
     }
 
@@ -40,6 +41,11 @@ class Wallet
     public function getArguments()
     {
     	return $this->arguments;
+    }
+
+    public function getMnemonics()
+    {
+    	return $this->mnemonics;
     }
 
 }
