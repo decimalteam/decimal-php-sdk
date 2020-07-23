@@ -68,25 +68,38 @@ trait TransactionHelpers {
     }
 
 
-    public function checkRequiredFields($type,$payload = [])
+    public function fieldsValidation(&$scheme,$payload = [])
     {
-        if ($scheme = $this->txSchemes[$type]) {
+        if (isset($scheme) && is_array($scheme)) {
             $errors = [];
-            foreach ($scheme['scheme'] as $k => $v) {
-                if (!isset($payload[$k])) {
-                    array_push($errors, [$k => 'not found']);
-                    continue;
+            foreach ($payload as $key => $value){
+                if(!$scheme['fieldTypes'][$key]){
+                    if(is_array($value))
+                        $errors = array_merge($errors,$this->fieldsValidation($scheme,$value));
+                    else continue;
                 }
-                $t = gettype($payload[$k]);
-                $isNum = $t === 'integer' || ctype_digit($payload[$k]);
-                if ($v === 'number' && !$isNum) {
-                    array_push($errors, [$k => 'field must be a number']);
-                } else if ($v === 'string' && $t !== 'string') {
-                    array_push($errors, [$k => 'field must be a string']);
+                $mustBe = $scheme['fieldTypes'][$key];
+                $fieldType = gettype($value);
+
+                if(
+                    ($mustBe === 'number' && ($fieldType !== 'integer' && !ctype_digit($value)))
+                    || ($mustBe === 'string' && $fieldType !== 'string')
+                    || ($mustBe === 'array' && !is_array($value))
+                ){
+                    $errors[$key] = "field must be a $mustBe";continue;
+                }
+
+
+                if(in_array($key,$scheme['requiredFields'])){
+                    if($mustBe === 'array' && !count($value)){
+                        array_push($errors, [$key => 'array is empty']);
+                        continue;
+                    }
+                    array_splice($scheme['requiredFields'],array_search($key,$scheme['requiredFields']),1);
                 }
             }
-            if (count($errors)) throw new DecimalException("Fields validation errors: " . json_encode($errors, JSON_UNESCAPED_SLASHES));
-            return true;
+
+            return $errors;
         }
         throw new DecimalException('Wrong operation scheme');
     }

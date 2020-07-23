@@ -21,62 +21,262 @@ class Transaction
         'COIN_BUY' => [
             'type' => 'coin/buy_coin',
             'scheme' => [
-                'amount' => 'number',
-                'buyCoin' => 'string',
-                'spendCoin' => 'string',
-            ]
+                'fieldTypes' => [
+                    'buyCoin' => 'string',
+                    'amount' => 'number',
+                    'spendCoin' => 'string',
+                    'maxSpendLimit' => 'number',
+                ],
+                'requiredFields' => [
+                    'buyCoin',
+                    'amount',
+                    'spendCoin',
+                ],
+            ],
         ],
-        'COIN_CREATE' => 'coin/create_coin',
+        'COIN_CREATE' => [
+            'type' => 'coin/create_coin',
+            'scheme' => [
+                'fieldTypes' => [
+                    'title' => 'string',
+                    'ticker' => 'string',
+                    'initSupply' => 'number',
+                    'maxSupply' => 'number',
+                    'reserve' => 'number',
+                    'crr' => 'number'
+                ],
+                'requiredFields' => [
+                    'title',
+                    'ticker',
+                    'initSupply',
+                    'maxSupply',
+                    'reserve',
+                    'crr',
+                ],
+            ],
+        ],
         'COIN_SELL' => [
             'type' => 'coin/sell_coin',
             'scheme' => [
-                'amount' => 'number',
-                'sellCoin' => 'string',
-                'getCoin' => 'string',
+                'fieldTypes' => [
+                    'getCoin' => 'string',
+                    'amount' => 'number',
+                    'sellCoin' => 'string',
+                    'minBuyLimit' => 'number',
+                ],
+                'requiredFields' => [
+                    'getCoin',
+                    'amount',
+                    'sellCoin'
+                ],
             ],
         ],
         'COIN_SEND' => [
             'type' => 'coin/send_coin',
             'scheme' => [
-                'amount' => 'number',
-                'to' => 'string',
-                'coin' => 'string'
-
-            ]
+                'fieldTypes' => [
+                    'to' => 'string',
+                    'amount' => 'number',
+                    'coin' => 'string',
+                ],
+                'requiredFields' => [
+                    'to',
+                    'amount',
+                    'coin'
+                ],
+            ],
         ],
         'COIN_MULTISEND' => 'coin/multi_send_coin',
         'COIN_SELL_ALL' => [
             'type' => 'coin/sell_all_coin',
             'scheme' => [
-                'sellCoin' => 'string',
-                'getCoin' => 'string',
+                'fieldTypes' => [
+                    'sellCoin' => 'string',
+                    'getCoin' => 'string',
+                    'minBuyLimit' => 'number',
+                ],
+                'requiredFields' => [
+                    'sellCoin',
+                    'getCoin',
+                ],
             ],
         ],
-        'COIN_REDEEM_CHECK' => 'coin/redeem_check',
-        'COIN_ISSUE_CHECK' => 'coin/issue_check',
-        'VALIDATOR_CANDIDATE' => 'validator/declare_candidate',
-        'VALIDATOR_DELEGATE' => 'validator/delegate',
-        'VALIDATOR_SET_ONLINE' => 'validator/set_online',
-        'VALIDATOR_SET_OFFLINE' => 'validator/set_offline',
-        'VALIDATOR_UNBOND' => 'validator/unbond',
-        'VALIDATOR_CANDIDATE_EDIT' => 'validator/edit_candidate',
-        'MULTISIG_CREATE_WALLET' => 'multisig/create_wallet',
-        'MULTISIG_CREATE_TX' => 'multisig/create_transaction',
-        'MULTISIG_SIGN_TX' => 'multisig/sign_transaction',
+        'COIN_REDEEM_CHECK' => [
+            'type' => 'coin/redeem_check',
+            'scheme' => [
+                'fieldTypes' => [
+                    'check' => 'string',
+                    'password' => 'string',
+                ],
+                'requiredFields' => [
+                    'check',
+                    'password',
+                ],
+            ],
+        ],
+        'COIN_ISSUE_CHECK' => [
+            'type' => 'coin/issue_check',
+            'scheme' => [
+                'fieldTypes' => [
+                    'nonce' => 'number',
+                    'coin' => 'string',
+                    'amount' => 'number',
+                    'password' => 'string',
+                    'dueBlock' => 'number',
+                ],
+                'requiredFields' => [
+                    'nonce',
+                    'coin',
+                    'amount',
+                    'password',
+                    'dueBlock'
+                ],
+            ],
+        ],
+        'VALIDATOR_CANDIDATE' => [
+            'type' => 'validator/declare_candidate',
+            'scheme' => [
+                'fieldTypes' => [
+                    'rewardAddress' => 'string',
+                    'stake' => 'number',
+                    'coin' => 'string',
+                    'pubKey' => 'string',
+                    'commission' => 'number',
+                    'moniker' => 'string',
+                    'identity' => 'string',
+                    'website' => 'string',
+                    'securityContact' => 'string',
+                    'details' => 'string',
+                ],
+                'requiredFields' => [
+                    'rewardAddress',
+                    'stake',
+                    'coin',
+                    'pubKey',
+                    'commission',
+                    'moniker',
+                    'identity',
+                    'website',
+                    'securityContact',
+                    'details',
+                ],
+            ],
+        ],
+        'VALIDATOR_DELEGATE' => [
+            'type' => 'validator/delegate',
+            'scheme' => [
+                'fieldTypes' => [
+                    'address' => 'string',
+                    'stake' => 'number',
+                    'coin' => 'string',
+                ],
+                'requiredFields' => [
+                    'address',
+                    'stake',
+                    'coin'
+                ],
+            ],
+        ],
+        'VALIDATOR_SET_ONLINE' => [
+            'type' => 'validator/set_online'
+        ],
+        'VALIDATOR_SET_OFFLINE' => [
+            'type' => 'validator/set_offline'
+        ],
+        'VALIDATOR_UNBOND' => [
+            'type' => 'validator/unbond',
+            'scheme' => [
+                'fieldTypes' => [
+                    'address' => 'string',
+                    'stake' => 'number',
+                    'coin' => 'string',
+                ],
+                'requiredFields' => [
+                    'address',
+                    'stake',
+                    'coin'
+                ],
+            ],
+        ],
+        'VALIDATOR_CANDIDATE_EDIT' => [
+            'type' => 'validator/edit_candidate',
+            'scheme' => [
+                'fieldTypes' => [
+                    'rewardAddress' => 'string',
+                    'moniker' => 'string',
+                    'identity' => 'string',
+                    'website' => 'string',
+                    'securityContact' => 'string',
+                    'details' => 'string',
+                ],
+                'requiredFields' => [
+                    'rewardAddress',
+                    'moniker',
+                    'identity',
+                    'website',
+                    'securityContact',
+                    'details',
+                ],
+            ],
+        ],
+        'MULTISIG_CREATE_WALLET' => [
+            'type' => 'multisig/create_wallet',
+            'scheme' => [
+                'fieldTypes' => [
+                    'threshold' => 'string',
+                    'owners' => 'array',
+                    'weights' => 'array',
+                ],
+                'requiredFields' => [
+                    'threshold',
+                    'owners',
+                    'weights',
+                ],
+            ],
+        ],
+        'MULTISIG_CREATE_TX' => [
+            'type' => 'multisig/create_transaction',
+            'scheme' => [
+                'fieldTypes' => [
+                    'from' => 'string',
+                    'to' => 'string',
+                    'coin' => 'string',
+                    'amount' => 'number',
+                ],
+                'requiredFields' => [
+                    'from',
+                    'to',
+                    'coin',
+                    'amount',
+                ],
+            ],
+        ],
+        'MULTISIG_SIGN_TX' => [
+            'type' => 'multisig/sign_transaction',
+            'scheme' => [
+                'fieldTypes' => [
+                    'txId' => 'string',
+                ],
+                'requiredFields' => [
+                    'txId',
+                ],
+            ],
+        ],
     ];
 
     /**
      * Transaction constructor.
      * @param \DecimalSDK\Wallet $wallet
+     * @param array $options
      * @throws DecimalException
      */
 
-    public function __construct(Wallet $wallet)
+    public function __construct(Wallet $wallet, $options = [])
     {
         if (!$wallet) throw new DecimalException('Wrong wallet');
 
         $this->wallet = $wallet;
-        $this->requester = new ApiRequester();
+        $this->requester = new ApiRequester($options);
         $this->signMeta = $this->requester->getSignMeta($this->wallet);
     }
 
@@ -161,7 +361,6 @@ class Transaction
      */
     public function sellAllCoinsData($payload)
     {
-        $minBuyLimit = $payload['minBuyLimit'] ?? '1';
         $type = $this->txSchemes['COIN_SELL_ALL']['type'];
         $this->checkRequiredFields('COIN_SELL_ALL',$payload);
         $prePayload = [
@@ -171,12 +370,192 @@ class Transaction
                 'denom' => strtolower($payload['sellCoin']),
             ],
             'min_coin_to_buy' => [
-                'amount' => $minBuyLimit,
+                'amount' => $payload['minBuyLimit'] ?? '1',
                 'denom' => strtolower($payload['getCoin']),
             ],
         ];
 
         $preparedTx = $this->prepareTransaction($type,$prePayload);
         return $this->requester->sendTx($preparedTx);
+    }
+    public function validatorDelegate($payload)
+    {
+        $type = $this->txSchemes['VALIDATOR_DELEGATE']['type'];
+        $result = $this->checkRequiredFields('VALIDATOR_DELEGATE', $payload);
+        $prePayload = [
+            'delegator_address' => $this->wallet->getAddress(),
+            'validator_address' => $payload['address'],
+            'coin' => [
+                'amount' => amountUNIRecalculate($payload['stake']),
+                'denom' => strtolower($payload['coin']),
+            ],
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function validatorUnbound($payload)
+    {
+        $type = $this->txSchemes['VALIDATOR_UNBOND']['type'];
+        $result = $this->checkRequiredFields('VALIDATOR_UNBOND', $payload);
+        $prePayload = [
+            'delegator_address' => $this->wallet->getAddress(),
+            'validator_address' => $payload['address'],
+            'coin' => [
+                'amount' => amountUNIRecalculate($payload['stake']),
+                'denom' => strtolower($payload['coin']),
+            ],
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function validatorDeclare($payload)
+    {
+        $type = $this->txSchemes['VALIDATOR_CANDIDATE']['type'];
+        $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE', $payload);
+        $prePayload = [
+            'commision' => ($payload['commission'] / 100) . '00000000000000000',
+            'validator_addr' => $this->wallet->getValidatorAddress(),
+            'reward_addr' => $payload['rewardAddress'],
+            'pub_key' => [
+                'type' => 'tendermint/PubKeyEd25519',
+                'value' => $payload['pubKey'],
+            ],
+            'stake' => [
+                'denom' => $payload['coin'],
+                'amount' => amountUNIRecalculate($payload['stake']),
+            ],
+            'description' => [
+                'moniker' => $payload['description']['moniker'],
+                'identity' => $payload['description']['identity'],
+                'website' => $payload['description']['website'],
+                'security_contact' => $payload['description']['securityContact'],
+                'details' => $payload['description']['details'],
+            ],
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function validatorEdit($payload)
+    {
+        $type = $this->txSchemes['VALIDATOR_CANDIDATE_EDIT']['type'];
+        $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE_EDIT', $payload);
+        $prePayload = [
+            'validator_addr' => $this->wallet->getValidatorAddress(),
+            'reward_address' => $payload['rewardAddress'],
+            'description' => [
+                'moniker' => $payload['description']['moniker'],
+                'identity' => $payload['description']['identity'],
+                'website' => $payload['description']['website'],
+                'security_contact' => $payload['description']['securityContact'],
+                'details' => $payload['description']['details'],
+            ],
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function disableValidator($payload)
+    {
+        $type = $this->txSchemes['VALIDATOR_SET_OFFLINE']['type'];
+
+        $prePayload = ['validator_address' => $this->wallet->getValidatorAddress()];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function enableValidator($payload)
+    {
+        $type = $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
+
+        $prePayload = ['validator_address' => $this->wallet->getValidatorAddress()];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function createCoin($payload)
+    {
+        $type = $this->txSchemes['COIN_CREATE']['type'];
+        $result = $this->checkRequiredFields('COIN_CREATE', $payload);
+        $prePayload = [
+            'sender' => $this->wallet->getAddress(),
+            'title' => $payload['title'],
+            'symbol' => $payload['ticker'],
+            'constant_reserve_ratio' => $payload['crr'],
+            'initial_volume' => amountUNIRecalculate($payload['initSupply']),
+            'initial_reserve' => amountUNIRecalculate($payload['reserve']),
+            'limit_volume' => amountUNIRecalculate($payload['maxSupply'])
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function multisigCreate($payload)
+    {
+        $type = $this->txSchemes['MULTISIG_CREATE_WALLET']['type'];
+        $result = $this->checkRequiredFields('MULTISIG_CREATE_WALLET', $payload);
+        $prePayload = [
+            'sender' => $this->wallet->getAddress(),
+            'owners' => $payload['owners'],
+            'weights' => $payload['weights'],
+            'threshold' => $payload['threshold']
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function multisigCreateTX($payload)
+    {
+        $type = $this->txSchemes['MULTISIG_CREATE_TX']['type'];
+        $result = $this->checkRequiredFields('MULTISIG_CREATE_TX', $payload);
+        $prePayload = [
+            'sender' => $this->wallet->getAddress(),
+            'wallet' => $payload['from'],
+            'receiver' => $payload['to'],
+            'coins' => [
+                [
+                    'denom' => strtolower($payload['coin']),
+                    'amount' => amountUNIRecalculate($payload['amount']),
+                ]
+            ]
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function multisigSignTX($payload)
+    {
+        $type = $this->txSchemes['MULTISIG_SIGN_TX']['type'];
+        $result = $this->checkRequiredFields('MULTISIG_SIGN_TX', $payload);
+        $prePayload = [
+            'sender' => $this->wallet->getAddress(),
+            'tx_id' => $payload['txId'],
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    private function checkRequiredFields($name, $payload)
+    {
+        if (!$this->txSchemes[$name] || !$this->txSchemes[$name]['scheme']) throw new DecimalException('Called scheme not exists');
+        $scheme = $this->txSchemes[$name]['scheme'];
+        $errors = $this->fieldsValidation($scheme, $payload);
+        if (count($scheme['requiredFields']))
+            $errors = array_merge(array_fill_keys($scheme['requiredFields'], 'field is required'), $errors);
+        if (count($errors)) throw new DecimalException("payload validation fails " . json_encode($errors, JSON_UNESCAPED_SLASHES));
+
+        return true;
     }
 }

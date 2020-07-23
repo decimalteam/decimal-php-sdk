@@ -15,11 +15,11 @@ class ApiRequester
     private $delete = 'delete';
     private $patch = 'patch';
 
-    public function __construct($options = null)
+    public function __construct($options = [])
     {
         $this->options = $options;
         $this->client = $client = new GClient([
-            'base_uri' => 'https://testnet-gate.decimalchain.com/api/',
+            'base_uri' => $this->options['baseUrl'] ?? 'https://testnet-gate.decimalchain.com/api/',
             'timeout'  => 5.0,
         ]);
     }
