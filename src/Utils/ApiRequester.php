@@ -3,6 +3,7 @@
 
 namespace DecimalSDK\Utils;
 
+use DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Wallet;
 use GuzzleHttp\Client as GClient;
 class ApiRequester
@@ -45,6 +46,99 @@ class ApiRequester
     {
         $url = "rpc/auth/accounts/$address";
         return $this->_request($url,$this->get);
+    }
+    public function getCoinsList($limit = 1,$offset = 0,$query = null)
+    {
+        $url = "/coin?limit=$limit&offset=$offset";
+
+        if($query) $url += "&$query";
+
+        return $this->_request($url,$this->get);
+    }
+
+    public function getCoin($symbol)
+    {
+        if(!$symbol) throw new DecimalException('symbol is required');
+
+        $url = "/coin/$symbol";
+
+        return $this->_request($url,$this->get);
+    }
+
+    public function getAddress($address,$txLimit = 0)
+    {
+        if(!$address) throw new DecimalException('address is required');
+
+        $url = "/address/$address?txLimit=$txLimit";
+
+        return $this->_request($url,$this->get);
+    }
+
+    public function getNonce($address)
+    {
+        if(!$address) throw new DecimalException('address is required');
+
+        $url = "/rpc/auth/accounts/$address";
+
+        $res = $this->_request($url,$this->get);
+        $res->result->value->sequence++;
+        return $res;
+    }
+
+    public function getMultisigsByAdress($address)
+    {
+        if(!$address) throw new DecimalException('address is required');
+
+        $url = "/address/$address/multisigs";
+
+        $res = $this->_request($url,$this->get);
+        return $res->result;
+    }
+
+    public function getMultisig($address)
+    {
+        if(!$address) throw new DecimalException('address is required');
+
+        $url = "/multisig/$address";
+
+        $res = $this->_request($url,$this->get);
+        return $res->result;
+    }
+
+    public function getMultisigTXs($address,$limit = 1, $offset = 0)
+    {
+        if(!$address) throw new DecimalException('address is required');
+
+        $url = "/multisig/$address/txs?limit=$limit&offset=$offset";
+
+        $res = $this->_request($url,$this->get);
+        return $res->result;
+    }
+
+    public function getStakesByAddress($address)
+    {
+        if(!$address) throw new DecimalException('address is required');
+
+        $url = "/address/$address/stakes";
+
+        $res = $this->_request($url,$this->get);
+        return $res->result;
+    }
+
+    public function getValidator($address)
+    {
+        try {
+            if (!$address) throw new DecimalException('address is required');
+
+            $url = "/validator/$address";
+
+            $res = $this->_request($url, $this->get);
+
+            return $res->result;
+
+        }catch (\Exception $e){
+            throw new DecimalException('Such a validator does not exist');
+        }
     }
 
     public function sendTx($tx)
