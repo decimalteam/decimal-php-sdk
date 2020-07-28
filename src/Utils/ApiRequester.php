@@ -49,7 +49,7 @@ class ApiRequester
     }
     public function getCoinsList($limit = 1,$offset = 0,$query = null)
     {
-        $url = "/coin?limit=$limit&offset=$offset";
+        $url = "coin?limit=$limit&offset=$offset";
 
         if($query) $url += "&$query";
 
@@ -60,7 +60,7 @@ class ApiRequester
     {
         if(!$symbol) throw new DecimalException('symbol is required');
 
-        $url = "/coin/$symbol";
+        $url = "coin/$symbol";
 
         return $this->_request($url,$this->get);
     }
@@ -69,7 +69,7 @@ class ApiRequester
     {
         if(!$address) throw new DecimalException('address is required');
 
-        $url = "/address/$address?txLimit=$txLimit";
+        $url = "address/$address?txLimit=$txLimit";
 
         return $this->_request($url,$this->get);
     }
@@ -78,7 +78,7 @@ class ApiRequester
     {
         if(!$address) throw new DecimalException('address is required');
 
-        $url = "/rpc/auth/accounts/$address";
+        $url = "rpc/auth/accounts/$address";
 
         $res = $this->_request($url,$this->get);
         $res->result->value->sequence++;
@@ -89,7 +89,7 @@ class ApiRequester
     {
         if(!$address) throw new DecimalException('address is required');
 
-        $url = "/address/$address/multisigs";
+        $url = "address/$address/multisigs";
 
         $res = $this->_request($url,$this->get);
         return $res->result;
@@ -99,7 +99,7 @@ class ApiRequester
     {
         if(!$address) throw new DecimalException('address is required');
 
-        $url = "/multisig/$address";
+        $url = "multisig/$address";
 
         $res = $this->_request($url,$this->get);
         return $res->result;
@@ -109,7 +109,7 @@ class ApiRequester
     {
         if(!$address) throw new DecimalException('address is required');
 
-        $url = "/multisig/$address/txs?limit=$limit&offset=$offset";
+        $url = "multisig/$address/txs?limit=$limit&offset=$offset";
 
         $res = $this->_request($url,$this->get);
         return $res->result;
@@ -119,7 +119,7 @@ class ApiRequester
     {
         if(!$address) throw new DecimalException('address is required');
 
-        $url = "/address/$address/stakes";
+        $url = "address/$address/stakes";
 
         $res = $this->_request($url,$this->get);
         return $res->result;
@@ -130,7 +130,7 @@ class ApiRequester
         try {
             if (!$address) throw new DecimalException('address is required');
 
-            $url = "/validator/$address";
+            $url = "validator/$address";
 
             $res = $this->_request($url, $this->get);
 

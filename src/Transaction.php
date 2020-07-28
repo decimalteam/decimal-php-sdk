@@ -461,7 +461,7 @@ class Transaction
         return $this->requester->sendTx($preparedTx);
     }
 
-    public function disableValidator($payload)
+    public function disableValidator()
     {
         $type = $this->txSchemes['VALIDATOR_SET_OFFLINE']['type'];
 
@@ -471,7 +471,7 @@ class Transaction
         return $this->requester->sendTx($preparedTx);
     }
 
-    public function enableValidator($payload)
+    public function enableValidator()
     {
         $type = $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
 
