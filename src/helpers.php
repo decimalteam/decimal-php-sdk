@@ -21,7 +21,10 @@ if (! function_exists('amountUNIRecalculate')) {
     function amountUNIRecalculate($amount,$from = false)
     {
         $exp = 18;if($from) $exp = -18;
-        return gmp_mul($amount,gmp_pow(10,$exp));
+        $numb= $amount * pow(10,$exp);
+        $preparednum = number_format($numb, 0, ',', '');
+        return $preparednum;
+
     }
 }
 if (! function_exists('pretty_p')) {

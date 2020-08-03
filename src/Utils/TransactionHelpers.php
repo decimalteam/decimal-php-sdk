@@ -56,7 +56,7 @@ trait TransactionHelpers
     {
         $operationFee = 100;
         foreach ($this->txSchemes as $value){
-            if($value['type'] === $type){
+            if(is_array($value) && in_array('type',$value) && $value['type'] === $type){
                 $operationFee = $value['fee'];
             }
         }
@@ -72,22 +72,22 @@ trait TransactionHelpers
         ];
 
         if (!isset($options['feeCoin']) || $type === 'coin/redeem_check') {
-            $fee = $this->getCommission($wrapped,'del',$operationFee,$options);
-            $gasAmountSize = strlen($fee['base']);
-            $feeForGasAmount = round(gmp_mul(gmp_sub($gasAmountSize,2),2),0,PHP_ROUND_HALF_DOWN);
-
-            if ($type === 'validator/delegate') {
-                $wrapped['fee']['gas'] = round(gmp_mul(gmp_add($fee['base'],$feeForGasAmount),10),0,PHP_ROUND_HALF_DOWN);
-            } else {
-                $wrapped['fee']['gas'] = round(gmp_add($fee['base'],$feeForGasAmount),0,PHP_ROUND_HALF_DOWN);
-            }
+//            $fee = $this->getCommission($wrapped,'del',$operationFee,$options);
+//            $gasAmountSize = strlen($fee['base']);
+//            $feeForGasAmount = round(gmp_mul(gmp_sub($gasAmountSize,2),2),0,PHP_ROUND_HALF_DOWN);
+//
+//            if ($type === 'validator/delegate') {
+//                $wrapped['fee']['gas'] = round(gmp_mul(gmp_add($fee['base'],$feeForGasAmount),10),0,PHP_ROUND_HALF_DOWN);
+//            } else {
+//                $wrapped['fee']['gas'] = round(gmp_add($fee['base'],$feeForGasAmount),0,PHP_ROUND_HALF_DOWN);
+//            }
 
             return $wrapped;
         };
 
-        $customFeedTx = $this->setCommission($wrapped,$options['feeCoin']);
-
-        return $customFeedTx;
+//        $customFeedTx = $this->setCommission($wrapped,$options['feeCoin']);
+//
+//        return $customFeedTx;
 
     }
 
@@ -106,7 +106,7 @@ trait TransactionHelpers
                 $fieldType = gettype($value);
 
                 if (
-                    ($mustBe === 'number' && ($fieldType !== 'integer' && !ctype_digit($value)))
+                    ($mustBe === 'number' && (!in_array($fieldType,['integer','double']) && !ctype_digit($value)))
                     || ($mustBe === 'string' && $fieldType !== 'string')
                     || ($mustBe === 'array' && !is_array($value))
                 ) {
@@ -161,7 +161,7 @@ trait TransactionHelpers
         ];
         $signatureSize = 109;
         $requester = new ApiRequester($options);
-        $encodeTxResp = $requester->post('/rpc/txs/encode', $preparedTx);
+        $encodeTxResp = $requester->post('rpc/txs/encode', $preparedTx);
         $size = strlen($encodeTxResp->tx) + $signatureSize;
 
         return $size;
