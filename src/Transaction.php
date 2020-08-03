@@ -17,8 +17,10 @@ class Transaction
     private $requester;
     private $nodeMeta;
 
+    protected $unit = 0.001;
     protected $txSchemes = [
         'COIN_BUY' => [
+            'fee' => 100,
             'type' => 'coin/buy_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -35,6 +37,7 @@ class Transaction
             ],
         ],
         'COIN_CREATE' => [
+            'fee' => 100,
             'type' => 'coin/create_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -56,6 +59,7 @@ class Transaction
             ],
         ],
         'COIN_SELL' => [
+            'fee' => 100,
             'type' => 'coin/sell_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -72,6 +76,7 @@ class Transaction
             ],
         ],
         'COIN_SEND' => [
+            'fee' => 10,
             'type' => 'coin/send_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -88,6 +93,7 @@ class Transaction
         ],
         'COIN_MULTISEND' => 'coin/multi_send_coin',
         'COIN_SELL_ALL' => [
+            'fee' => 100,
             'type' => 'coin/sell_all_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -102,6 +108,7 @@ class Transaction
             ],
         ],
         'COIN_REDEEM_CHECK' => [
+            'fee' => 30,
             'type' => 'coin/redeem_check',
             'scheme' => [
                 'fieldTypes' => [
@@ -115,6 +122,7 @@ class Transaction
             ],
         ],
         'COIN_ISSUE_CHECK' => [
+            'fee' => 0,
             'type' => 'coin/issue_check',
             'scheme' => [
                 'fieldTypes' => [
@@ -134,6 +142,7 @@ class Transaction
             ],
         ],
         'VALIDATOR_CANDIDATE' => [
+            'fee' => 10000,
             'type' => 'validator/declare_candidate',
             'scheme' => [
                 'fieldTypes' => [
@@ -163,6 +172,7 @@ class Transaction
             ],
         ],
         'VALIDATOR_DELEGATE' => [
+            'fee' => 200,
             'type' => 'validator/delegate',
             'scheme' => [
                 'fieldTypes' => [
@@ -178,12 +188,15 @@ class Transaction
             ],
         ],
         'VALIDATOR_SET_ONLINE' => [
+            'fee' => 100,
             'type' => 'validator/set_online'
         ],
         'VALIDATOR_SET_OFFLINE' => [
+            'fee' => 100,
             'type' => 'validator/set_offline'
         ],
         'VALIDATOR_UNBOND' => [
+            'fee' => 200,
             'type' => 'validator/unbond',
             'scheme' => [
                 'fieldTypes' => [
@@ -199,6 +212,7 @@ class Transaction
             ],
         ],
         'VALIDATOR_CANDIDATE_EDIT' => [
+            'fee' => 10000,
             'type' => 'validator/edit_candidate',
             'scheme' => [
                 'fieldTypes' => [
@@ -220,6 +234,7 @@ class Transaction
             ],
         ],
         'MULTISIG_CREATE_WALLET' => [
+            'fee' => 100,
             'type' => 'multisig/create_wallet',
             'scheme' => [
                 'fieldTypes' => [
@@ -235,6 +250,7 @@ class Transaction
             ],
         ],
         'MULTISIG_CREATE_TX' => [
+            'fee' => 100,
             'type' => 'multisig/create_transaction',
             'scheme' => [
                 'fieldTypes' => [
@@ -252,6 +268,7 @@ class Transaction
             ],
         ],
         'MULTISIG_SIGN_TX' => [
+            'fee' => 100,
             'type' => 'multisig/sign_transaction',
             'scheme' => [
                 'fieldTypes' => [
@@ -298,7 +315,7 @@ class Transaction
             ]
         ];
 
-        $preparedTx = $this->prepareTransaction($type,$prePayload);
+        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
 
     }
@@ -324,7 +341,7 @@ class Transaction
                 'denom' => strtolower($payload['spendCoin']),
             ],
         ];
-        $preparedTx = $this->prepareTransaction($type,$prePayload);
+        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -350,7 +367,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type,$prePayload);
+        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -375,7 +392,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type,$prePayload);
+        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
     public function validatorDelegate($payload)
@@ -391,7 +408,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -408,7 +425,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -437,7 +454,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -457,7 +474,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -495,7 +512,7 @@ class Transaction
             'limit_volume' => amountUNIRecalculate($payload['maxSupply'])
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -510,7 +527,7 @@ class Transaction
             'threshold' => $payload['threshold']
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -530,7 +547,7 @@ class Transaction
             ]
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -543,7 +560,7 @@ class Transaction
             'tx_id' => $payload['txId'],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 

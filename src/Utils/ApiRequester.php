@@ -146,6 +146,10 @@ class ApiRequester
         $url = "rpc/txs";
         return $this->txResult($this->_request($url,$this->post,$tx));
     }
+    public function post($url,$payload)
+    {
+        return $this->_request($url,$this->post,$payload);
+    }
 
     private function _request($url,$method,$payload = null)
     {
