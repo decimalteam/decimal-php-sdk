@@ -169,7 +169,7 @@ class ApiRequester
     public function txResult($jsonResp)
     {
         $resp = $jsonResp;
-        if($jsonResp->code){
+        if(property_exists('jsonResp','code')){
             if($jsonResp->raw_log){
                 $rawLogAsString = json_encode($jsonResp->raw_log);
                 if(substr($rawLogAsString,0) === '{' && $jsonResp->raw_log->message){
@@ -187,7 +187,7 @@ class ApiRequester
                     ]
                 ];
             }
-        }else{
+        }else if(property_exists('jsonResp','txhash')){
             $resp = [
                 'hash' => $jsonResp->txhash,
                 'success' => true,
