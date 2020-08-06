@@ -15,6 +15,7 @@ class ApiRequester
     private $put = 'put';
     private $delete = 'delete';
     private $patch = 'patch';
+    private $validModes = ['sync','async','block'];
 
     public function __construct($options = [])
     {
@@ -141,24 +142,26 @@ class ApiRequester
         }
     }
 
-    public function sendTx($tx)
+    public function sendTx($tx,$options = [])
     {
         $url = "rpc/txs";
-        return $this->txResult($this->_request($url,$this->post,$tx));
+        return $this->txResult($this->_request($url,$this->post,$tx,$options));
     }
     public function post($url,$payload)
     {
         return $this->_request($url,$this->post,$payload);
     }
 
-    private function _request($url,$method,$payload = null)
+    private function _request($url,$method,$payload = null, $optional = [])
     {
         $options = [];
         if($payload){
             $options['headers'] = [
                 'Content-Type' => 'application/json',
             ];
-            $options['body'] = json_encode(['tx' => $payload,'mode' => 'sync'],JSON_UNESCAPED_SLASHES);
+
+            $mode = isset($optional['mode']) && in_array($optional['mode'],$this->valideModes) ? $optional['mode'] : 'sync';
+            $options['body'] = json_encode(['tx' => $payload,'mode' => $mode],JSON_UNESCAPED_SLASHES);
         }
         $res = $this->client->$method($url,$options);
         if($res->getStatusCode() === 200){

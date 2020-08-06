@@ -54,19 +54,20 @@ trait TransactionHelpers
 
     public function wrapTx($type, $txValue, $options = [])
     {
-        $operationFee = 100;
-        foreach ($this->txSchemes as $value){
-            if(is_array($value) && in_array('type',$value) && $value['type'] === $type){
-                $operationFee = $value['fee'];
-            }
-        }
+//        $operationFee = 100;
+//        foreach ($this->txSchemes as $value){
+//            if(is_array($value) && in_array('type',$value) && $value['type'] === $type){
+//                $operationFee = $value['fee'];
+//            }
+//        }
         $wrapped = [
             'msg' => [
                 ['type' => $type, 'value' => $txValue]
             ],
             'fee' => [
                 'amount' => [],
-                'gas' => $options['gas'] ?? $this->defaultGasLimit
+//                'gas' => $options['gas'] ?? $this->defaultGasLimit
+                'gas' => '0'
             ],
             'memo' => $options['memo'] ?? ''
         ];
@@ -85,9 +86,10 @@ trait TransactionHelpers
             return $wrapped;
         };
 
-//        $customFeedTx = $this->setCommission($wrapped,$options['feeCoin']);
+
+        $customFeedTx = $this->setCommission($wrapped,$options['feeCoin']);
 //
-//        return $customFeedTx;
+        return $customFeedTx;
 
     }
 
@@ -97,14 +99,13 @@ trait TransactionHelpers
         if (isset($scheme) && is_array($scheme)) {
             $errors = [];
             foreach ($payload as $key => $value) {
-                if (!$scheme['fieldTypes'][$key]) {
+                if (!isset($scheme['fieldTypes'][$key])) {
                     if (is_array($value))
                         $errors = array_merge($errors, $this->fieldsValidation($scheme, $value));
                     else continue;
                 }
                 $mustBe = $scheme['fieldTypes'][$key];
                 $fieldType = gettype($value);
-
                 if (
                     ($mustBe === 'number' && (!in_array($fieldType,['integer','double']) && !ctype_digit($value)))
                     || ($mustBe === 'string' && $fieldType !== 'string')
@@ -187,29 +188,29 @@ trait TransactionHelpers
     }
     public function setCommission($tx, $feeCoin)
     {
-    $tx['fee']['amount'] = [[
-      'denom' => $feeCoin,
-      'amount' => '0',
-    ]];
+        $tx['fee']['amount'] = [[
+            'denom' => $feeCoin,
+            'amount' => '0',
+        ]];
 
-    $fee = $this->getCommission($tx, $feeCoin);
+        $fee = $this->getCommission($tx, $feeCoin);
 
-    $feeAmountSize = strlen(amountUNIRecalculate(gmp_mul($fee['value'],$this->unit)));
-    $gasAmountSize = strlen(round($fee['base'],0,PHP_ROUND_HALF_DOWN));
-    $feeForFeeAmount = gmp_mul(gmp_add($feeAmountSize,$gasAmountSize),2);
+        $feeAmountSize = strlen(amountUNIRecalculate(gmp_mul($fee['value'],$this->unit)));
+        $gasAmountSize = strlen(round($fee['base'],0,PHP_ROUND_HALF_DOWN));
+        $feeForFeeAmount = gmp_mul(gmp_add($feeAmountSize,$gasAmountSize),2);
 
-    $totalFee = '';
+        $totalFee = '';
 
-    if (in_array($feeCoin,['tdel','del'])) {
-        $feeForFeeAmountToCustom = gmp_mul($feeForFeeAmount,$fee['coinPrice']);
-        $totalFee = gmp_mul(gmp_add($fee['value'],$feeForFeeAmountToCustom),$this->unit);
-    } else {
-        $totalFee = gmp_mul(gmp_add($fee['value'],$feeForFeeAmount),$this->unit);
+        if (in_array($feeCoin,['tdel','del'])) {
+            $feeForFeeAmountToCustom = gmp_mul($feeForFeeAmount,$fee['coinPrice']);
+            $totalFee = gmp_mul(gmp_add($fee['value'],$feeForFeeAmountToCustom),$this->unit);
+        } else {
+            $totalFee = gmp_mul(gmp_add($fee['value'],$feeForFeeAmount),$this->unit);
+        }
+
+        $tx['fee']['amount'][0]['amount'] = amountUNIRecalculate($totalFee);
+        $tx['fee']['gas'] = round(gmp_add($fee['base'],$feeForFeeAmount),0,PHP_ROUND_HALF_DOWN);
+
+        return $tx;
     }
-
-    $tx['fee']['amount'][0]['amount'] = amountUNIRecalculate($totalFee);
-    $tx['fee']['gas'] = round(gmp_add($fee['base'],$feeForFeeAmount),0,PHP_ROUND_HALF_DOWN);
-
-    return $tx;
-  }
 }
