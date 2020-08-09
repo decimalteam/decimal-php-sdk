@@ -107,7 +107,7 @@ trait TransactionHelpers
                 $mustBe = $scheme['fieldTypes'][$key];
                 $fieldType = gettype($value);
                 if (
-                    ($mustBe === 'number' && (!in_array($fieldType,['integer','double']) && !ctype_digit($value)))
+                    ($mustBe === 'number' && (!in_array($fieldType,['integer','double']) && !is_numeric($value)))
                     || ($mustBe === 'string' && $fieldType !== 'string')
                     || ($mustBe === 'array' && !is_array($value))
                 ) {
