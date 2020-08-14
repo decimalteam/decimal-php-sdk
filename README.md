@@ -50,9 +50,9 @@ $txPayload = [
     'minBuyLimit' => '2', //Optionally
 ];
 
-$result = $transaction->sendCoins($txPayload);
+$result = $transaction->sellCoins($txPayload);
 
-//Buy Coins
+// Buy Coins
 
 $txPayload = [
     'buyCoin' => 'BTC',
@@ -61,5 +61,119 @@ $txPayload = [
     'maxSpendLimit' => '20', //Optionally
 ];
 
-$result = $transaction->sendCoins($txPayload);
+$result = $transaction->getCoins($txPayload);
+
+// Sell all coins
+
+$txPayload = [
+    'sellCoin' => 'BTC',
+    'getCoin' => 'DEL',
+    'maxSpendLimit' => '2', //Optionally
+];
+
+$result = $transaction->sellAllCoinsData($txPayload);
+
+// Validator delegate
+
+$txPayload = [
+    'adress' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
+    'stake' => '10',
+    'coin' => 'tdel',
+];
+
+$result = $transaction->validatorDelegate($txPayload);
+
+// Validator unbound
+
+$txPayload = [
+    'address' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
+    'stake' => '10',
+    'coin' => 'tdel',
+];
+
+$result = $transaction->validatorUnbound($txPayload);
+
+//Validator declare
+
+$txPayload = [
+    'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'stake' => '10',
+    'coin' => 'tdel',
+    'pubKey' => 'JRlv38BXuD1TvWQJ9ic1KHr8PzuOITZH3rD8Zm0Vj3Y',
+    'commission' => '10',
+    'moniker' => 'my-node-123',
+    'identity' => '',
+    'website' => 'hello.ru',
+    'securityContact' => 'test@test.com',
+    'details' => 'details node',
+];
+
+$result = $transaction->validatorDeclare($txPayload);
+
+//Validator edit
+
+$txPayload = [
+    'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'moniker' => 'my-node-123-edit',
+    'identity' => '321',
+    'website' => 'hello.ru',
+    'securityContact' => 'test@test.com',
+    'details' => 'details node',
+];
+
+$result = $transaction->validatorEdit($txPayload);
+
+// Disable validator
+
+$result = $transaction->disableValidator($txPayload);
+
+// Enable validator
+
+$result = $transaction->enableValidator($txPayload);
+
+// Create coin
+
+$txPayload = [
+    'title' => 'Test coin',
+    'ticker' => 'TESTTT',
+    'initSupply' => '50000',
+    'maxSupply' => '100000',
+    'reserve' => '12000',
+    'crr' => '45'
+];
+
+$result = $transaction->createCoin($txPayload);
+
+// Multisig create
+
+$txPayload = [
+    'threshold' => '2',
+    'owners' => ['dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', 'dx1v9macmluxh7rk3zsd69v7dwv9fsjhctn2jfhz9'],
+    'weights' => ['1', '1'],
+];
+
+$result = $transaction->multisigCreate($txPayload);
+
+// Multisig create tx
+
+$txPayload = [
+    'from' => 'dx1am6ke3l79kjzdqhwgx37em04mzg686ekf9p3pq',
+    'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'coin' => 'tdel',
+    'amount' => '10',
+];
+
+$result = $transaction->multisigCreateTX($txPayload);
+
+// Multisig Sign tx
+
+$txPayload = [
+    'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
+];
+
+$result = $transaction->multisigSignTX($txPayload);
+
+// Check required fields
+
+$result = $transaction->checkRequiredFields($data ,$txPayload);
 ```
