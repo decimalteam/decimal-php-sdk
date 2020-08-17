@@ -33,8 +33,8 @@ $wallet = new Wallet();
 $transaction = new Transaction($wallet);
 ```
 
-// Send coins
-// transaction payload
+Send coins
+transaction payload
 ```php
 $txPayload = [
     'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', //receiver address
@@ -44,7 +44,7 @@ $txPayload = [
 $result = $transaction->sendCoins($txPayload);
 ```
 
-// Sell coins
+Sell coins
 ```php
 $txPayload = [
     'sellCoin' => 'DEL',
@@ -56,7 +56,7 @@ $txPayload = [
 $result = $transaction->sellCoins($txPayload);
 ```
 
-// Buy Coins
+Buy Coins
 ```php
 $txPayload = [
     'buyCoin' => 'BTC',
@@ -68,7 +68,7 @@ $txPayload = [
 $result = $transaction->getCoins($txPayload);
 ```
 
-// Sell all coins
+Sell all coins
 ```php
 $txPayload = [
     'sellCoin' => 'BTC',
@@ -79,7 +79,7 @@ $txPayload = [
 $result = $transaction->sellAllCoinsData($txPayload);
 ```
 
-// Validator delegate
+Validator delegate
 ```php
 $txPayload = [
     'adress' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
@@ -90,7 +90,7 @@ $txPayload = [
 $result = $transaction->validatorDelegate($txPayload);
 ```
 
-// Validator unbound
+Validator unbound
 ```php
 $txPayload = [
     'address' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
@@ -101,7 +101,7 @@ $txPayload = [
 $result = $transaction->validatorUnbound($txPayload);
 ```
 
-//Validator declare
+Validator declare
 ```php
 $txPayload = [
     'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
@@ -119,7 +119,7 @@ $txPayload = [
 $result = $transaction->validatorDeclare($txPayload);
 ```
 
-//Validator edit
+Validator edit
 ```php
 $txPayload = [
     'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
@@ -133,17 +133,17 @@ $txPayload = [
 $result = $transaction->validatorEdit($txPayload);
 ```
 
-// Disable validator
+Disable validator
 ```php
 $result = $transaction->disableValidator($txPayload);
 ```
 
-// Enable validator
+Enable validator
 ```php
 $result = $transaction->enableValidator($txPayload);
 ```
 
-// Create coin
+Create coin
 ```php
 $txPayload = [
     'title' => 'Test coin',
@@ -157,7 +157,7 @@ $txPayload = [
 $result = $transaction->createCoin($txPayload);
 ```
 
-// Multisig create
+Multisig create
 ```php
 $txPayload = [
     'threshold' => '2',
@@ -168,7 +168,7 @@ $txPayload = [
 $result = $transaction->multisigCreate($txPayload);
 ```
 
-// Multisig create tx
+Multisig create tx
 ```php
 $txPayload = [
     'from' => 'dx1am6ke3l79kjzdqhwgx37em04mzg686ekf9p3pq',
@@ -180,7 +180,7 @@ $txPayload = [
 $result = $transaction->multisigCreateTX($txPayload);
 ```
 
-// Multisig Sign tx
+Multisig Sign tx
 ```php
 $txPayload = [
     'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
@@ -189,7 +189,7 @@ $txPayload = [
 $result = $transaction->multisigSignTX($txPayload);
 ```
 
-// Check required fields
+Check required fields
 ```php
 $result = $transaction->checkRequiredFields($data ,$txPayload);
 ```
