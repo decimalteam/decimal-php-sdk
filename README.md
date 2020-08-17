@@ -34,7 +34,6 @@ $transaction = new Transaction($wallet);
 ```
 
 ## Send coins
-## transaction payload
 ```php
 $txPayload = [
     'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', //receiver address
