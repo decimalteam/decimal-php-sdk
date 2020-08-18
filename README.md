@@ -10,9 +10,9 @@ For detailed explanation on how things work, checkout the:
 ```bash
 $ composer require decimalteam/decimal-php-sdk
 ```
-#Usage
+# Usage
 
-Create wallet
+## Create wallet
 ```php
 use DecimalSDK\Wallet;
 
@@ -22,7 +22,7 @@ $wallet = new Wallet(/*your mnemonics*/);
 echo $wallet->getAddress();
 ```
 
-Coins operations
+## Coins operations
 
 ```php
 use DecimalSDK\Wallet;
@@ -31,18 +31,20 @@ use DecimalSDK\Transaction;
 // Use wallet instance to init transaction
 $wallet = new Wallet();
 $transaction = new Transaction($wallet);
+```
 
-// Send coins
-// transaction payload
+## Send coins
+```php
 $txPayload = [
     'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', //receiver address
     'coin' => 'tDEL', //coin
     'amount' => '100', // 100 tDEL
 ];
 $result = $transaction->sendCoins($txPayload);
+```
 
-// Sell coins
-
+## Sell coins
+```php
 $txPayload = [
     'sellCoin' => 'DEL',
     'getCoin' => 'ETH',
@@ -51,9 +53,10 @@ $txPayload = [
 ];
 
 $result = $transaction->sellCoins($txPayload);
+```
 
-// Buy Coins
-
+## Buy Coins
+```php
 $txPayload = [
     'buyCoin' => 'BTC',
     'spendCoin' => 'DEL',
@@ -62,9 +65,10 @@ $txPayload = [
 ];
 
 $result = $transaction->getCoins($txPayload);
+```
 
-// Sell all coins
-
+## Sell all coins
+```php
 $txPayload = [
     'sellCoin' => 'BTC',
     'getCoin' => 'DEL',
@@ -72,9 +76,10 @@ $txPayload = [
 ];
 
 $result = $transaction->sellAllCoinsData($txPayload);
+```
 
-// Validator delegate
-
+## Validator delegate
+```php
 $txPayload = [
     'adress' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
     'stake' => '10',
@@ -82,9 +87,10 @@ $txPayload = [
 ];
 
 $result = $transaction->validatorDelegate($txPayload);
+```
 
-// Validator unbound
-
+## Validator unbound
+```php
 $txPayload = [
     'address' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
     'stake' => '10',
@@ -92,9 +98,10 @@ $txPayload = [
 ];
 
 $result = $transaction->validatorUnbound($txPayload);
+```
 
-//Validator declare
-
+## Validator declare
+```php
 $txPayload = [
     'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
     'stake' => '10',
@@ -109,9 +116,10 @@ $txPayload = [
 ];
 
 $result = $transaction->validatorDeclare($txPayload);
+```
 
-//Validator edit
-
+## Validator edit
+```php
 $txPayload = [
     'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
     'moniker' => 'my-node-123-edit',
@@ -122,17 +130,20 @@ $txPayload = [
 ];
 
 $result = $transaction->validatorEdit($txPayload);
+```
 
-// Disable validator
-
+## Disable validator
+```php
 $result = $transaction->disableValidator($txPayload);
+```
 
-// Enable validator
-
+## Enable validator
+```php
 $result = $transaction->enableValidator($txPayload);
+```
 
-// Create coin
-
+## Create coin
+```php
 $txPayload = [
     'title' => 'Test coin',
     'ticker' => 'TESTTT',
@@ -143,9 +154,10 @@ $txPayload = [
 ];
 
 $result = $transaction->createCoin($txPayload);
+```
 
-// Multisig create
-
+## Multisig create
+```php
 $txPayload = [
     'threshold' => '2',
     'owners' => ['dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', 'dx1v9macmluxh7rk3zsd69v7dwv9fsjhctn2jfhz9'],
@@ -153,9 +165,10 @@ $txPayload = [
 ];
 
 $result = $transaction->multisigCreate($txPayload);
+```
 
-// Multisig create tx
-
+## Multisig create tx
+```php
 $txPayload = [
     'from' => 'dx1am6ke3l79kjzdqhwgx37em04mzg686ekf9p3pq',
     'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
@@ -164,16 +177,18 @@ $txPayload = [
 ];
 
 $result = $transaction->multisigCreateTX($txPayload);
+```
 
-// Multisig Sign tx
-
+## Multisig Sign tx
+```php
 $txPayload = [
     'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
 ];
 
 $result = $transaction->multisigSignTX($txPayload);
+```
 
-// Check required fields
-
+## Check required fields
+```php
 $result = $transaction->checkRequiredFields($data ,$txPayload);
 ```
