@@ -9,7 +9,7 @@ use DecimalSDK\Utils\Crypto\Encrypt;
 
 class WalletHelpers {
 
-	public static function generateNewAddress($hrp = 'dx',$mnemonics = null)
+	public static function generateNewAddress($hrp = null,$mnemonics = null)
 	{
 		if (!$mnemonics) $mnemonics = Encrypt::createMnemonics();
 
@@ -18,6 +18,7 @@ class WalletHelpers {
 		$derivedKeys = Encrypt::derivedKeysFromExtended($extendedKeys['privateExtended']);
 		$bech32Bits = Encrypt::derivedPublicToBech32Bits($derivedKeys['derivedPublicKey']);
 		$address = Encrypt::createAddressFromBech32Bits($hrp,$bech32Bits);
+        $validatorAddress = Encrypt::createAddressFromBech32Bits($hrp,$bech32Bits);
 
 		return [
 			$hexSeed,
@@ -26,6 +27,7 @@ class WalletHelpers {
 			'derivedPublicKey' => $derivedKeys['derivedPublicKey'],
 			'derivedSecretKey' => $derivedKeys['derivedPrivateKey'],
 			'address' => $address,
+            'validatorAddress' => $validatorAddress,
 		];
 	}
 

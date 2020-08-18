@@ -434,7 +434,7 @@ class Transaction
         $type = $this->txSchemes['VALIDATOR_CANDIDATE']['type'];
         $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE', $payload);
         $prePayload = [
-            'commision' => ($payload['commission'] / 100) . '00000000000000000',
+            'commission' => ($payload['commission'] / 100) . '00000000000000000',
             'validator_addr' => $this->wallet->getValidatorAddress(),
             'reward_addr' => $payload['rewardAddress'],
             'pub_key' => [
@@ -446,11 +446,11 @@ class Transaction
                 'amount' => amountUNIRecalculate($payload['stake']),
             ],
             'description' => [
-                'moniker' => $payload['description']['moniker'],
-                'identity' => $payload['description']['identity'],
-                'website' => $payload['description']['website'],
-                'security_contact' => $payload['description']['securityContact'],
-                'details' => $payload['description']['details'],
+                'moniker' => $payload['moniker'],
+                'identity' => $payload['identity'],
+                'website' => $payload['website'],
+                'security_contact' => $payload['securityContact'],
+                'details' => $payload['details'],
             ],
         ];
 
@@ -463,14 +463,14 @@ class Transaction
         $type = $this->txSchemes['VALIDATOR_CANDIDATE_EDIT']['type'];
         $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE_EDIT', $payload);
         $prePayload = [
-            'validator_addr' => $this->wallet->getValidatorAddress(),
+            'validator_address' => $this->wallet->getValidatorAddress(),
             'reward_address' => $payload['rewardAddress'],
             'description' => [
-                'moniker' => $payload['description']['moniker'],
-                'identity' => $payload['description']['identity'],
-                'website' => $payload['description']['website'],
-                'security_contact' => $payload['description']['securityContact'],
-                'details' => $payload['description']['details'],
+                'moniker' => $payload['moniker'],
+                'identity' => $payload['identity'],
+                'website' => $payload['website'],
+                'security_contact' => $payload['securityContact'],
+                'details' => $payload['details'],
             ],
         ];
 

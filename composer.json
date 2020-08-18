@@ -16,7 +16,7 @@
         "guzzlehttp/guzzle": "~6.5",
         "kornrunner/secp256k1": "^0.1.2",
         "simplito/elliptic-php": "^1.0",
-        "php": "^7.1"
+        "php": "7.*"
     },
     "autoload": {
         "psr-4": {

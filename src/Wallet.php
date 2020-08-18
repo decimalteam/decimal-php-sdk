@@ -8,6 +8,7 @@ use DecimalSDK\Utils\WalletHelpers;
 class Wallet
 {
     private $arguments;
+    private $validatorAddress;
     private $mnemonics;
 
     public function __construct($mnemonics = null)
@@ -15,6 +16,7 @@ class Wallet
         if(!$mnemonics) $mnemonics = WalletHelpers::createNewMnemonics();
         $this->mnemonics = $mnemonics;
 	    $this->arguments = WalletHelpers::generateNewAddress('dx',$mnemonics);
+	    $this->validatorAddress = WalletHelpers::generateNewAddress('dxvaloper', $mnemonics);
     }
 
     public function getAddress()
@@ -22,6 +24,13 @@ class Wallet
         if(!$this->arguments['address']) throw new DecimalException('Address wasn`t created' );
 
     	return $this->arguments['address'];
+    }
+
+    public function getValidatorAddress()
+    {
+        if(!$this->validatorAddress['validatorAddress']) throw new DecimalException('Validator address wasn`t created' );
+
+        return $this->validatorAddress['validatorAddress'];
     }
 
     public function getPrivateKey()
@@ -47,5 +56,4 @@ class Wallet
     {
     	return $this->mnemonics;
     }
-
 }
