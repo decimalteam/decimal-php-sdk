@@ -34,6 +34,7 @@ class Encrypt
 
     public static function generateSeedFromMnemonics($mnemonics,$passphrase = '')
     {
+        (MnemonicFactory::bip39())->mnemonicToEntropy($mnemonics);
         return (new Bip39SeedGenerator())->getSeed($mnemonics, $passphrase)->getHex();
     }
 
