@@ -184,7 +184,7 @@ trait TransactionHelpers
         }
 
         $coinPrice = $this->getCoinPrice($ticker, $options);
-        $feeInCustom = round(gmp_mul($coinPrice, $feeInBase),0,PHP_ROUND_HALF_DOWN);
+        $feeInCustom = round($coinPrice * $feeInBase,0,PHP_ROUND_HALF_DOWN);
         return ['coinPrice' => $coinPrice, 'value' => $feeInCustom, 'base' => $feeInBase];
 
     }
