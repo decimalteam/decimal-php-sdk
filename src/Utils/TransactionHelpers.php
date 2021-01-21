@@ -135,8 +135,10 @@ trait TransactionHelpers
         $requester = new ApiRequester($options);
         $coin = $requester->getCoin($ticker);
         if (!$coin) throw new DecimalException('Coin not found');
-
-        $reserve = amountUNIRecalculate($coin->reserve, true);
+        $reserve = 0;
+        if(!empty($coin->reserve)){
+            $reserve = amountUNIRecalculate($coin->reserve, true);
+        }
         $supply = amountUNIRecalculate($coin->volume, true);
         $crr = $coin->crr / 100;
 
