@@ -139,6 +139,7 @@ trait TransactionHelpers
         $coin = $coin->result;
 
         $supply = amountUNIRecalculate($coin->volume, true);
+        $reserve = amountUNIRecalculate($coin->reserve, true);
         $crr = $coin->crr / 100;
 
         $amount = min($supply, 1);
@@ -169,7 +170,7 @@ trait TransactionHelpers
         return $size;
     }
 
-    public function getCommission($tx, $feeCoin, $operationFee, $options = [])
+    public function getCommission($tx, $feeCoin, $operationFee = 0, $options = [])
     {
 
         $ticker = $feeCoin;
@@ -187,14 +188,14 @@ trait TransactionHelpers
         return ['coinPrice' => $coinPrice, 'value' => $feeInCustom, 'base' => $feeInBase];
 
     }
-    public function setCommission($tx, $feeCoin)
+    public function setCommission($tx, $feeCoin, $options = [])
     {
         $tx['fee']['amount'] = [[
             'denom' => $feeCoin,
             'amount' => '0',
         ]];
 
-        $fee = $this->getCommission($tx, $feeCoin);
+        $fee = $this->getCommission($tx, $feeCoin, 0, $options);
 
         $feeAmountSize = strlen(amountUNIRecalculate(gmp_mul($fee['value'],$this->unit)));
         $gasAmountSize = strlen(round($fee['base'],0,PHP_ROUND_HALF_DOWN));
