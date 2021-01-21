@@ -176,8 +176,8 @@ trait TransactionHelpers
         $ticker = $feeCoin;
         $textSize = $this->getTxSize($tx, $options);
 
-        $feeForText = gmp_mul($textSize, 2);
-        $feeInBase = gmp_add($operationFee, $feeForText);
+        $feeForText = $textSize * 2;
+        $feeInBase = $operationFee + $feeForText;
 
         if (in_array($feeCoin, ['del', 'tdel'])) {
             return ['coinPrice' => '1', 'value' => $feeInBase, 'base' => $feeInBase];
