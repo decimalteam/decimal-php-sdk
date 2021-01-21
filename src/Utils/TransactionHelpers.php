@@ -148,10 +148,10 @@ trait TransactionHelpers
             return 0;
         }
 
-        $result = gmp_div($amount, $supply);
-        $result = gmp_sub(1, $result);
-        $result = gmp_pow($result, gmp_div(1, $crr));
-        $result = gmp_sub(1, gmp_mul($result, $reserve));
+        $result = $amount / $supply;
+        $result = 1 - $result;
+        $result = pow($result, 1 / $crr);
+        $result = 1 - ($result * $reserve);
 
         return $result;
     }
