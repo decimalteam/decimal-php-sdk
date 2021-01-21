@@ -163,7 +163,7 @@ trait TransactionHelpers
         $signatureSize = 109;
         $requester = new ApiRequester($options);
         $encodeTxResp = $requester->post('rpc/txs/encode', $preparedTx);
-        $size = strlen($encodeTxResp->tx) + $signatureSize;
+        $size = strlen(base64_decode($encodeTxResp->tx)) + $signatureSize;
 
         return $size;
     }
