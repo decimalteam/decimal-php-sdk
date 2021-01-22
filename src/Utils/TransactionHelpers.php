@@ -207,7 +207,7 @@ trait TransactionHelpers
             $feeForFeeAmountToCustom = $feeForFeeAmount * $fee['coinPrice'];
             $totalFee = ($fee['value'] + $feeForFeeAmountToCustom) * $this->unit;
         } else {
-            $totalFee = ($fee['value'] + feeForFeeAmount) * $this->unit;
+            $totalFee = ($fee['value'] + $feeForFeeAmount) * $this->unit;
         }
 
         $tx['fee']['amount'][0]['amount'] = amountUNIRecalculate($totalFee);
