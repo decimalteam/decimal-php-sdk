@@ -79,7 +79,7 @@ trait TransactionHelpers
         };
 
 
-        $customFeedTx = $this->setCommission($wrapped,$options['feeCoin']);
+        $customFeedTx = $this->setCommission($wrapped,$options['feeCoin'], $options);
 //
         return $customFeedTx;
 
