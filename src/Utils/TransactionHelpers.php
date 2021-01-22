@@ -184,7 +184,7 @@ trait TransactionHelpers
         }
 
         $coinPrice = $this->getCoinPrice($ticker, $options);
-        $feeInCustom = round(gmp_mul($coinPrice, $feeInBase),0,PHP_ROUND_HALF_DOWN);
+        $feeInCustom = round($coinPrice * $feeInBase,0,PHP_ROUND_HALF_DOWN);
         return ['coinPrice' => $coinPrice, 'value' => $feeInCustom, 'base' => $feeInBase];
 
     }
@@ -197,21 +197,21 @@ trait TransactionHelpers
 
         $fee = $this->getCommission($tx, $feeCoin, 0, $options);
 
-        $feeAmountSize = strlen(amountUNIRecalculate(gmp_mul($fee['value'],$this->unit)));
+        $feeAmountSize = strlen(amountUNIRecalculate($fee['value'] * $this->unit));
         $gasAmountSize = strlen(round($fee['base'],0,PHP_ROUND_HALF_DOWN));
-        $feeForFeeAmount = gmp_mul(gmp_add($feeAmountSize,$gasAmountSize),2);
+        $feeForFeeAmount = ($feeAmountSize + $gasAmountSize) * 2;
 
         $totalFee = '';
 
         if (in_array($feeCoin,['tdel','del'])) {
-            $feeForFeeAmountToCustom = gmp_mul($feeForFeeAmount,$fee['coinPrice']);
-            $totalFee = gmp_mul(gmp_add($fee['value'],$feeForFeeAmountToCustom),$this->unit);
+            $feeForFeeAmountToCustom = $feeForFeeAmount * $fee['coinPrice'];
+            $totalFee = ($fee['value'] + $feeForFeeAmountToCustom) * $this->unit;
         } else {
-            $totalFee = gmp_mul(gmp_add($fee['value'],$feeForFeeAmount),$this->unit);
+            $totalFee = ($fee['value'] + feeForFeeAmount) * $this->unit;
         }
 
         $tx['fee']['amount'][0]['amount'] = amountUNIRecalculate($totalFee);
-        $tx['fee']['gas'] = round(gmp_add($fee['base'],$feeForFeeAmount),0,PHP_ROUND_HALF_DOWN);
+        $tx['fee']['gas'] = round($fee['base'] + $feeForFeeAmount,0,PHP_ROUND_HALF_DOWN);
 
         return $tx;
     }
