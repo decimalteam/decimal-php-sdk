@@ -143,7 +143,7 @@ trait TransactionHelpers
         $result = $amount / $supply;
         $result = 1 - $result;
         $result = pow($result, 1 / $crr);
-        $result = 1 - ($result * $reserve);
+        $result = (1 - $result) * $reserve;
 
         return $result;
     }
