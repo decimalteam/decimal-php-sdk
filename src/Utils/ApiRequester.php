@@ -161,8 +161,7 @@ class ApiRequester
             ];
 
             $mode = isset($optional['mode']) && in_array($optional['mode'],$this->valideModes) ? $optional['mode'] : 'sync';
-            $payload['mode'] = $mode;
-            $options['body'] = json_encode($payload,JSON_UNESCAPED_SLASHES);
+            $options['body'] = json_encode(['tx' => $payload,'mode' => $mode],JSON_UNESCAPED_SLASHES);
         }
         $res = $this->client->$method($url,$options);
         if($res->getStatusCode() === 200){
