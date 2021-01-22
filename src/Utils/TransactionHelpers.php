@@ -12,6 +12,7 @@ trait TransactionHelpers
 
     protected $pubKeyType = 'tendermint/PubKeySecp256k1';
     protected $defaultGasLimit = '9000000000000000000';
+    protected $unit = 0.001;
     protected $signMeta = [
         'account_number' => null,
         'sequence' => null,
@@ -73,15 +74,6 @@ trait TransactionHelpers
         ];
 
         if (!isset($options['feeCoin']) || $type === 'coin/redeem_check') {
-//            $fee = $this->getCommission($wrapped,'del',$operationFee,$options);
-//            $gasAmountSize = strlen($fee['base']);
-//            $feeForGasAmount = round(gmp_mul(gmp_sub($gasAmountSize,2),2),0,PHP_ROUND_HALF_DOWN);
-//
-//            if ($type === 'validator/delegate') {
-//                $wrapped['fee']['gas'] = round(gmp_mul(gmp_add($fee['base'],$feeForGasAmount),10),0,PHP_ROUND_HALF_DOWN);
-//            } else {
-//                $wrapped['fee']['gas'] = round(gmp_add($fee['base'],$feeForGasAmount),0,PHP_ROUND_HALF_DOWN);
-//            }
 
             return $wrapped;
         };
@@ -177,15 +169,22 @@ trait TransactionHelpers
         $textSize = $this->getTxSize($tx, $options);
 
         $feeForText = $textSize * 2;
-        $feeInBase = $operationFee + $feeForText;
+        $feeInBase = $operationFee + $feeForText + 10;
+
+        if ($tx['msg'][0]['type'] === 'coin/multi_send_coin') {
+            $numberOfParticipants = count($tx['msg'][0]['value']['sends']);
+            $feeForParticipants = 5 * ($numberOfParticipants - 1);
+            $feeInBase = $feeInBase + $feeForParticipants;
+        }
 
         if (in_array($feeCoin, ['del', 'tdel'])) {
             return ['coinPrice' => '1', 'value' => $feeInBase, 'base' => $feeInBase];
         }
 
         $coinPrice = $this->getCoinPrice($ticker, $options);
-        $feeInCustom = round($coinPrice * $feeInBase,0,PHP_ROUND_HALF_DOWN);
-        return ['coinPrice' => $coinPrice, 'value' => $feeInCustom, 'base' => $feeInBase];
+        $feeInCustom = $feeInBase / ($coinPrice / $this->unit);
+
+        return ['coinPrice' => (string)$coinPrice, 'value' => (string)($feeInCustom / $this->unit), 'base' => (string)$feeInBase];
 
     }
     public function setCommission($tx, $feeCoin, $options = [])
@@ -195,7 +194,7 @@ trait TransactionHelpers
             'amount' => '0',
         ]];
 
-        $fee = $this->getCommission($tx, $feeCoin, 0, $options);
+        $fee = $this->getCommission($tx, $feeCoin, $options['fee'], $options);
 
         $feeAmountSize = strlen(amountUNIRecalculate($fee['value'] * $this->unit));
         $gasAmountSize = strlen(round($fee['base'],0,PHP_ROUND_HALF_DOWN));
@@ -211,7 +210,7 @@ trait TransactionHelpers
         }
 
         $tx['fee']['amount'][0]['amount'] = amountUNIRecalculate($totalFee);
-        $tx['fee']['gas'] = round($fee['base'] + $feeForFeeAmount,0,PHP_ROUND_HALF_DOWN);
+        $tx['fee']['gas'] = (string)($fee['base'] + $feeForFeeAmount);
 
         return $tx;
     }

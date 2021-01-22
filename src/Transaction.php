@@ -306,6 +306,7 @@ class Transaction
     {
         $type = $this->txSchemes['COIN_SEND']['type'];
         $this->checkRequiredFields('COIN_SEND',$payload);
+        $payload['fee'] = $this->txSchemes['COIN_SEND']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
             'receiver' => $payload['to'],
@@ -330,6 +331,7 @@ class Transaction
         $maxSpendLimit = $payload['maxSpendLimit'] ?? '100000000000';
         $type = $this->txSchemes['COIN_BUY']['type'];
         $this->checkRequiredFields('COIN_BUY',$payload);
+        $payload['fee'] = $this->txSchemes['COIN_BUY']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
             'coin_to_buy' => [
@@ -355,6 +357,7 @@ class Transaction
         $minBuyLimit = $payload['minBuyLimit'] ?? '1';
         $type = $this->txSchemes['COIN_SELL']['type'];
         $this->checkRequiredFields('COIN_SELL',$payload);
+        $payload['fee'] = $this->txSchemes['COIN_SELL']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
             'coin_to_sell' => [
@@ -380,6 +383,7 @@ class Transaction
     {
         $type = $this->txSchemes['COIN_SELL_ALL']['type'];
         $this->checkRequiredFields('COIN_SELL_ALL',$payload);
+        $payload['fee'] = $this->txSchemes['COIN_SELL_ALL']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
             'coin_to_sell' => [
@@ -399,6 +403,7 @@ class Transaction
     {
         $type = $this->txSchemes['VALIDATOR_DELEGATE']['type'];
         $result = $this->checkRequiredFields('VALIDATOR_DELEGATE', $payload);
+        $payload['fee'] = $this->txSchemes['VALIDATOR_DELEGATE']['fee'];
         $prePayload = [
             'delegator_address' => $this->wallet->getAddress(),
             'validator_address' => $payload['address'],
@@ -416,6 +421,7 @@ class Transaction
     {
         $type = $this->txSchemes['VALIDATOR_UNBOND']['type'];
         $result = $this->checkRequiredFields('VALIDATOR_UNBOND', $payload);
+        $payload['fee'] = $this->txSchemes['VALIDATOR_UNBOND']['fee'];
         $prePayload = [
             'delegator_address' => $this->wallet->getAddress(),
             'validator_address' => $payload['address'],
@@ -433,6 +439,7 @@ class Transaction
     {
         $type = $this->txSchemes['VALIDATOR_CANDIDATE']['type'];
         $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE', $payload);
+        $payload['fee'] = $this->txSchemes['VALIDATOR_CANDIDATE']['fee'];
         $prePayload = [
             'commission' => ($payload['commission'] / 100) . '00000000000000000',
             'validator_addr' => $this->wallet->getValidatorAddress(),
@@ -462,6 +469,7 @@ class Transaction
     {
         $type = $this->txSchemes['VALIDATOR_CANDIDATE_EDIT']['type'];
         $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE_EDIT', $payload);
+        $payload['fee'] = $this->txSchemes['VALIDATOR_CANDIDATE_EDIT']['fee'];
         $prePayload = [
             'validator_address' => $this->wallet->getValidatorAddress(),
             'reward_address' => $payload['rewardAddress'],
@@ -483,6 +491,7 @@ class Transaction
         $type = $this->txSchemes['VALIDATOR_SET_OFFLINE']['type'];
 
         $prePayload = ['validator_address' => $this->wallet->getValidatorAddress()];
+        $payload['fee'] = $this->txSchemes['VALIDATOR_SET_OFFLINE']['fee'];
 
         $preparedTx = $this->prepareTransaction($type, $prePayload);
         return $this->requester->sendTx($preparedTx);
@@ -493,7 +502,7 @@ class Transaction
         $type = $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
 
         $prePayload = ['validator_address' => $this->wallet->getValidatorAddress()];
-
+        $payload['fee'] = $this->txSchemes['VALIDATOR_SET_ONLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
         return $this->requester->sendTx($preparedTx);
     }
@@ -502,6 +511,7 @@ class Transaction
     {
         $type = $this->txSchemes['COIN_CREATE']['type'];
         $result = $this->checkRequiredFields('COIN_CREATE', $payload);
+        $payload['fee'] = $this->txSchemes['COIN_CREATE']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
             'title' => $payload['title'],
@@ -520,6 +530,7 @@ class Transaction
     {
         $type = $this->txSchemes['MULTISIG_CREATE_WALLET']['type'];
         $result = $this->checkRequiredFields('MULTISIG_CREATE_WALLET', $payload);
+        $payload['fee'] = $this->txSchemes['MULTISIG_CREATE_WALLET']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
             'owners' => $payload['owners'],
@@ -535,6 +546,7 @@ class Transaction
     {
         $type = $this->txSchemes['MULTISIG_CREATE_TX']['type'];
         $result = $this->checkRequiredFields('MULTISIG_CREATE_TX', $payload);
+        $payload['fee'] = $this->txSchemes['MULTISIG_CREATE_TX']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
             'wallet' => $payload['from'],
@@ -555,6 +567,7 @@ class Transaction
     {
         $type = $this->txSchemes['MULTISIG_SIGN_TX']['type'];
         $result = $this->checkRequiredFields('MULTISIG_SIGN_TX', $payload);
+        $payload['fee'] = $this->txSchemes['MULTISIG_SIGN_TX']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
             'tx_id' => $payload['txId'],
