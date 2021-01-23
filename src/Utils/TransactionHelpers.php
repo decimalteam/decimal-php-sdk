@@ -72,7 +72,8 @@ trait TransactionHelpers
         };
 
 
-        return $this->setCommission($wrapped,$options['feeCoin']);
+        $customFeedTx = $this->setCommission($wrapped,$options['feeCoin']);
+        return $customFeedTx;
 
     }
 
@@ -178,6 +179,8 @@ trait TransactionHelpers
     }
     public function setCommission($tx, $feeCoin, $options = [])
     {
+        if(!isset($tx['fee']))$tx['fee'] = [];
+
         $tx['fee']['amount'] = [[
             'denom' => $feeCoin,
             'amount' => '0',
