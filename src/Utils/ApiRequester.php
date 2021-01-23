@@ -145,6 +145,9 @@ class ApiRequester
     public function sendTx($tx,$options = [])
     {
         $url = "rpc/txs";
+        $mode = isset($options['mode']) ? $options['mode'] : 'sync';
+        $tx = ['tx' => $tx,'mode' => $mode];
+
         return $this->txResult($this->_request($url,$this->post,$tx,$options));
     }
     public function post($url,$payload)
@@ -159,9 +162,7 @@ class ApiRequester
             $options['headers'] = [
                 'Content-Type' => 'application/json',
             ];
-
-            $mode = isset($optional['mode']) && in_array($optional['mode'],$this->valideModes) ? $optional['mode'] : 'sync';
-            $options['body'] = json_encode(['tx' => $payload,'mode' => $mode],JSON_UNESCAPED_SLASHES);
+            $options['body'] = json_encode($payload,JSON_UNESCAPED_SLASHES);
         }
         $res = $this->client->$method($url,$options);
         if($res->getStatusCode() === 200){

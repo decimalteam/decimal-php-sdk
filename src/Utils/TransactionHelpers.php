@@ -55,19 +55,12 @@ trait TransactionHelpers
 
     public function wrapTx($type, $txValue, $options = [])
     {
-//        $operationFee = 100;
-//        foreach ($this->txSchemes as $value){
-//            if(is_array($value) && in_array('type',$value) && $value['type'] === $type){
-//                $operationFee = $value['fee'];
-//            }
-//        }
         $wrapped = [
             'msg' => [
                 ['type' => $type, 'value' => $txValue]
             ],
             'fee' => [
                 'amount' => [],
-//                'gas' => $options['gas'] ?? $this->defaultGasLimit
                 'gas' => '0'
             ],
             'memo' => $options['memo'] ?? ''
@@ -79,9 +72,7 @@ trait TransactionHelpers
         };
 
 
-        $customFeedTx = $this->setCommission($wrapped,$options['feeCoin'], $options);
-//
-        return $customFeedTx;
+        return $this->setCommission($wrapped,$options['feeCoin']);
 
     }
 
@@ -122,10 +113,9 @@ trait TransactionHelpers
         throw new DecimalException('Wrong operation scheme');
     }
 
-    public function getCoinPrice($ticker, $options = [])
+    public function getCoinPrice($ticker)
     {
-        $requester = new ApiRequester($options);
-        $coin = $requester->getCoin($ticker);
+        $coin = $this->requester->getCoin($ticker);
 
         if (!$coin || !$coin->result) throw new DecimalException('Coin not found');
         $coin = $coin->result;
@@ -148,25 +138,24 @@ trait TransactionHelpers
         return $result;
     }
 
-    public function getTxSize($tx, $options = [])
+    public function getTxSize($tx)
     {
         $preparedTx = [
             'type' => 'cosmos-sdk/StdTx',
             'value' => $tx
         ];
         $signatureSize = 109;
-        $requester = new ApiRequester($options);
-        $encodeTxResp = $requester->post('rpc/txs/encode', $preparedTx);
-        $size = strlen(base64_decode($encodeTxResp->tx)) + $signatureSize;
+        $encodedTxResp = $this->requester->post('rpc/txs/encode', $preparedTx);
 
-        return $size;
+        return strlen(base64_decode($encodedTxResp->tx)) + $signatureSize;
+
     }
 
     public function getCommission($tx, $feeCoin, $operationFee = 0, $options = [])
     {
 
         $ticker = $feeCoin;
-        $textSize = $this->getTxSize($tx, $options);
+        $textSize = $this->getTxSize($tx);
 
         $feeForText = $textSize * 2;
         $feeInBase = $operationFee + $feeForText + 10;
@@ -181,7 +170,7 @@ trait TransactionHelpers
             return ['coinPrice' => '1', 'value' => $feeInBase, 'base' => $feeInBase];
         }
 
-        $coinPrice = $this->getCoinPrice($ticker, $options);
+        $coinPrice = $this->getCoinPrice($ticker);
         $feeInCustom = $feeInBase / ($coinPrice / $this->unit);
 
         return ['coinPrice' => (string)$coinPrice, 'value' => (string)($feeInCustom / $this->unit), 'base' => (string)$feeInBase];
@@ -197,20 +186,19 @@ trait TransactionHelpers
         $fee = $this->getCommission($tx, $feeCoin, $options['fee'], $options);
 
         $feeAmountSize = strlen(amountUNIRecalculate($fee['value'] * $this->unit));
-        $gasAmountSize = strlen(round($fee['base'],0,PHP_ROUND_HALF_DOWN));
-        $feeForFeeAmount = ($feeAmountSize + $gasAmountSize) * 2;
-
+//        $gasAmountSize = strlen(round($fee['base'],0,PHP_ROUND_HALF_DOWN));
+//        $feeForFeeAmount = ($feeAmountSize + $gasAmountSize) * 2;
+        $feeForFeeAmount = $feeAmountSize * 2;
         $totalFee = '';
-
-        if (in_array($feeCoin,['tdel','del'])) {
-            $feeForFeeAmountToCustom = $feeForFeeAmount * $fee['coinPrice'];
+        if (!in_array($feeCoin,['tdel','del'])) {
+            $feeForFeeAmountToCustom = $feeForFeeAmount / $fee['coinPrice'];
             $totalFee = ($fee['value'] + $feeForFeeAmountToCustom) * $this->unit;
         } else {
             $totalFee = ($fee['value'] + $feeForFeeAmount) * $this->unit;
         }
 
         $tx['fee']['amount'][0]['amount'] = amountUNIRecalculate($totalFee);
-        $tx['fee']['gas'] = (string)($fee['base'] + $feeForFeeAmount);
+//        $tx['fee']['gas'] = (string)($fee['base'] + $feeForFeeAmount);
 
         return $tx;
     }
