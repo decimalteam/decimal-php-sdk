@@ -11,12 +11,18 @@ class Wallet
     private $validatorAddress;
     private $mnemonics;
 
-    public function __construct($mnemonics = null)
+    /**
+     * Wallet constructor.
+     * @param null $mnemonics
+     * @param string $path_key
+     * @throws \Exception
+     */
+    public function __construct($mnemonics = null, $path_key = "m/44'/60'/0'/0")
     {
         if(!$mnemonics) $mnemonics = WalletHelpers::createNewMnemonics();
         $this->mnemonics = $mnemonics;
-	    $this->arguments = WalletHelpers::generateNewAddress('dx',$mnemonics);
-	    $this->validatorAddress = WalletHelpers::generateNewAddress('dxvaloper', $mnemonics);
+	    $this->arguments = WalletHelpers::generateNewAddress('dx',$mnemonics, $path_key);
+	    $this->validatorAddress = WalletHelpers::generateNewAddress('dxvaloper', $mnemonics, $path_key);
     }
 
     public function getAddress()
