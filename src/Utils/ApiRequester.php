@@ -8,6 +8,8 @@ use DecimalSDK\Wallet;
 use GuzzleHttp\Client as GClient;
 class ApiRequester
 {
+    const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api/';
+
     private $options;
     private $client;
     private $get = 'get';
@@ -21,7 +23,7 @@ class ApiRequester
     {
         $this->options = $options;
         $this->client = $client = new GClient([
-            'base_uri' => $this->options['baseUrl'] ?? 'https://testnet-gate.decimalchain.com/api/',
+            'base_uri' => $this->options['baseUrl'] ?? self::TEST_GATE_API,
             'timeout'  => 5.0,
         ]);
     }
