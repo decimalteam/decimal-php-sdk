@@ -45,7 +45,7 @@ class Encrypt
      * @throws \Exception
      */
 
-    public static function createExtendedKeysFromSeed($seed,$path = "m/44'/60'/0'/0")
+    public static function createExtendedKeysFromSeed($seed, string $path)
     {
         $keys = BIP44::fromMasterSeed($seed)->deriveKey($path);
         return [
