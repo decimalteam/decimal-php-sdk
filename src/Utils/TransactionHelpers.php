@@ -114,7 +114,7 @@ trait TransactionHelpers
                     array_splice($scheme['requiredFields'], array_search($key, $scheme['requiredFields']), 1);
                 }
             }
-dump($errors);
+
             return $errors;
         }
         throw new DecimalException('Wrong operation scheme');

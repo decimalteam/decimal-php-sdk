@@ -127,7 +127,6 @@ class KeyPairs
             if ($hardened) {
                 $childIndex += self::HARDENED_OFFSET;
             }
-
             $Keys = $Keys->deriveChild($childIndex);
         }
 
@@ -236,9 +235,11 @@ class KeyPairs
         ];
 
         $string = implode('', $data);
+
         if (strlen($string) % 2 !== 0) $string = '0' . $string;
 
         $bs = @pack("H*", $string);
+
         $checksum = hash("sha256", hash("sha256", $bs, true));
         $checksum = substr($checksum, 0, 8);
 
@@ -283,7 +284,9 @@ class KeyPairs
     {
         $identifier = Encrypt::hexToRipmed160($publicKey);
 
-        return Encrypt::decodeHex(substr($identifier, 0, 8));
+        return Encrypt::decodeHex(
+            substr(ltrim($identifier, '0'), 0, 8)
+        );
     }
 
     /**

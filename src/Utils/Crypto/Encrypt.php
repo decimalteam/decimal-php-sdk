@@ -45,9 +45,10 @@ class Encrypt
      * @throws \Exception
      */
 
-    public static function createExtendedKeysFromSeed($seed, $path = "m/44'/60'/0'/0")
+    public static function createExtendedKeysFromSeed($seed, $path = "m/44'/60'/0'/0/0")
     {
         $keys = BIP44::fromMasterSeed($seed)->deriveKey($path);
+
         return [
             'privateExtended' => $keys->getPrivateExtendedKey(),
             'publicExtended' => $keys->getPublicExtendedKey()
@@ -135,6 +136,7 @@ class Encrypt
     public static function toHexEncode($number): string
     {
         $hex = gmp_strval(gmp_init($number, 10), 16);
+
         return (strlen($hex) % 2 != 0) ? '0' . $hex : $hex;
     }
 
@@ -155,7 +157,6 @@ class Encrypt
         } else {
             $num = '';
         }
-
         $pad = '';
         $n = 0;
         while (substr($hex, $n, 2) == '00') {
