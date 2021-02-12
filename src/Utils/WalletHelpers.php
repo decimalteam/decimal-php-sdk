@@ -23,7 +23,6 @@ class WalletHelpers {
 
 		$hexSeed = Encrypt::generateSeedFromMnemonics($mnemonics);
 		$extendedKeys = Encrypt::createExtendedKeysFromSeed($hexSeed, $path_key);
-        //$extendedKeys['privateExtended'] can be 111 or 110 - error from it
 		$derivedKeys = Encrypt::derivedKeysFromExtended($extendedKeys['privateExtended']);
 		$bech32Bits = Encrypt::derivedPublicToBech32Bits($derivedKeys['derivedPublicKey']);
 		$address = Encrypt::createAddressFromBech32Bits($hrp,$bech32Bits);

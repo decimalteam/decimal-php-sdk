@@ -228,7 +228,7 @@ class KeyPairs
         $data = [
             dechex($version),
             Encrypt::toHexEncode($this->data['depth']),
-            Encrypt::toHexEncode(intval($this->data['fingerprint']) !== 0 ? $this->data['parentFingerprint'] : $this->data['fingerprint']),//???? error
+            Encrypt::toHexEncode(intval($this->data['fingerprint']) !== 0 ? $this->data['parentFingerprint'] : $this->data['fingerprint']),
             $this->convertIndexToHex($this->data['index']),
             $this->data['chainCode'],
             ($version === self::BITCOIN_VERSIONS['private'] ? $this->privateKeyWithNulls($this->data['privateKey']) : $this->data['publicKey'])
