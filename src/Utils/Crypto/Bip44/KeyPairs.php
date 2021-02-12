@@ -127,7 +127,6 @@ class KeyPairs
             if ($hardened) {
                 $childIndex += self::HARDENED_OFFSET;
             }
-
             $Keys = $Keys->deriveChild($childIndex);
         }
 
@@ -226,8 +225,6 @@ class KeyPairs
      */
     protected function encode($version)
     {
-        //dump('start encode');
-// тут теряется длина
         $data = [
             dechex($version),
             Encrypt::toHexEncode($this->data['depth']),
@@ -236,28 +233,17 @@ class KeyPairs
             $this->data['chainCode'],
             ($version === self::BITCOIN_VERSIONS['private'] ? $this->privateKeyWithNulls($this->data['privateKey']) : $this->data['publicKey'])
         ];
-        //dump(Encrypt::toHexEncode($this->data['parentFingerprint']));
-        echo "this data\n";
-        dump($this->data);
-
-echo "data\n";
-dump($data);
 
         $string = implode('', $data);
-        echo "string\n";
-        dump($string);
+
         if (strlen($string) % 2 !== 0) $string = '0' . $string;
 
         $bs = @pack("H*", $string);
 
         $checksum = hash("sha256", hash("sha256", $bs, true));
         $checksum = substr($checksum, 0, 8);
-        //dump($string);
-        //dump('end encode');
-        $enc = Encrypt::fromHexToBase58($string . $checksum);
-        dump($enc);
-        return $enc;
-//        return Encrypt::fromHexToBase58($string . $checksum);
+
+        return Encrypt::fromHexToBase58($string . $checksum);
     }
 
     /**
@@ -298,7 +284,9 @@ dump($data);
     {
         $identifier = Encrypt::hexToRipmed160($publicKey);
 
-        return Encrypt::decodeHex(substr($identifier, 0, 8));
+        return Encrypt::decodeHex(
+            substr(ltrim($identifier, '0'), 0, 8)
+        );
     }
 
     /**

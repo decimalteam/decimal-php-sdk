@@ -48,9 +48,7 @@ class Encrypt
     public static function createExtendedKeysFromSeed($seed, $path = "m/44'/60'/0'/0/0")
     {
         $keys = BIP44::fromMasterSeed($seed)->deriveKey($path);
-        echo 'this with error :';
-        dump($keys->getPrivateExtendedKey());
-        echo ': this with error!!!!!!!!';
+
         return [
             'privateExtended' => $keys->getPrivateExtendedKey(),
             'publicExtended' => $keys->getPublicExtendedKey()
@@ -138,27 +136,18 @@ class Encrypt
     public static function toHexEncode($number): string
     {
         $hex = gmp_strval(gmp_init($number, 10), 16);
-        echo"\nhex\n";
-        dump($number);
-        dump($hex);
-        dump(strlen($hex));
-        echo"\nhex\n";
 
-        //return '00' . $hex;
         return (strlen($hex) % 2 != 0) ? '0' . $hex : $hex;
     }
 
     public static function fromHexToBase58(string $hex): string
     {
-        //echo "!!from hex to base58 !!!\n";
-        //dump($hex);
         if (strlen($hex) == 0) {
             return '';
         }
 
         $num = gmp_strval(gmp_init($hex, 16), 58);
-//dump('b4');
-//dump($num);
+
         if ($num != '0') {
             $num = strtr(
                 $num,
@@ -168,15 +157,13 @@ class Encrypt
         } else {
             $num = '';
         }
-//dump('after');
-//dump($num);
         $pad = '';
         $n = 0;
         while (substr($hex, $n, 2) == '00') {
             $pad .= '1';
             $n += 2;
         }
-//dump($pad . $num);
+
         return $pad . $num;
     }
 }
