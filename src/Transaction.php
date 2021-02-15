@@ -12,6 +12,8 @@ class Transaction
 {
     use TransactionHelpers;
 
+    const MAX_SPEND_LIMIT = '100000000000';
+
     private $account;
     private $wallet;
     private $requester;
@@ -91,7 +93,23 @@ class Transaction
                 ],
             ],
         ],
-        'COIN_MULTISEND' => 'coin/multi_send_coin',
+        //todo check schema multisend
+        'COIN_MULTISEND' => [
+            'fee' => 10,
+            'type' => 'coin/multi_send_coin',
+            'scheme' => [
+                'fieldTypes' => [
+                    'sends' => 'array'
+                ],
+                'requiredFields' => [
+                    'sends',
+                    //todo check it too
+                    //'to',
+                    //'amount',
+                    //'coin'
+                ],
+            ],
+        ],
         'COIN_SELL_ALL' => [
             'fee' => 100,
             'type' => 'coin/sell_all_coin',
@@ -305,7 +323,7 @@ class Transaction
     public function sendCoins($payload)
     {
         $type = $this->txSchemes['COIN_SEND']['type'];
-        $this->checkRequiredFields('COIN_SEND',$payload);
+        $this->checkRequiredFields('COIN_SEND', $payload);
         $payload['fee'] = $this->txSchemes['COIN_SEND']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
@@ -316,9 +334,51 @@ class Transaction
             ]
         ];
 
-        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
+    }
 
+    /**
+     * Multisend Coin Transaction
+     *
+     * @param $payload array
+     */
+    public function multisendCoins($payload)
+    {
+        $type = $this->txSchemes['COIN_MULTISEND']['type'];
+
+        $this->checkRequiredFields('COIN_MULTISEND', $payload);
+        $payload['fee'] = $this->txSchemes['COIN_MULTISEND']['fee'];
+        $prePayload = [
+            'sender' => $this->wallet->getAddress(),
+            'sends' => $this->getMultiplySends($payload)
+            //todo make sends from payload
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        //dd($preparedTx);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    /**
+     * get sends array for multiply send coins
+     *
+     * @param $payload
+     * @return array
+     */
+    protected function getMultiplySends($payload)
+    {
+        $out = [];
+        foreach ($payload['sends'] as $send){
+            $out[] = [
+                'receiver' => $send['to'],
+                'coin' => [
+                    'amount' => amountUNIRecalculate($send['amount']),
+                    'denom' => strtolower($send['coin']),
+                ]
+            ];
+        }
+        return $out;
     }
 
     /**
@@ -328,9 +388,9 @@ class Transaction
      */
     public function getCoin($payload)
     {
-        $maxSpendLimit = $payload['maxSpendLimit'] ?? '100000000000';
+        $maxSpendLimit = $payload['maxSpendLimit'] ?? self::MAX_SPEND_LIMIT;
         $type = $this->txSchemes['COIN_BUY']['type'];
-        $this->checkRequiredFields('COIN_BUY',$payload);
+        $this->checkRequiredFields('COIN_BUY', $payload);
         $payload['fee'] = $this->txSchemes['COIN_BUY']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
@@ -343,7 +403,7 @@ class Transaction
                 'denom' => strtolower($payload['spendCoin']),
             ],
         ];
-        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -356,7 +416,7 @@ class Transaction
     {
         $minBuyLimit = $payload['minBuyLimit'] ?? '1';
         $type = $this->txSchemes['COIN_SELL']['type'];
-        $this->checkRequiredFields('COIN_SELL',$payload);
+        $this->checkRequiredFields('COIN_SELL', $payload);
         $payload['fee'] = $this->txSchemes['COIN_SELL']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
@@ -370,7 +430,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -382,7 +442,7 @@ class Transaction
     public function sellAllCoinsData($payload)
     {
         $type = $this->txSchemes['COIN_SELL_ALL']['type'];
-        $this->checkRequiredFields('COIN_SELL_ALL',$payload);
+        $this->checkRequiredFields('COIN_SELL_ALL', $payload);
         $payload['fee'] = $this->txSchemes['COIN_SELL_ALL']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
@@ -396,9 +456,10 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
+
     public function validatorDelegate($payload)
     {
         $type = $this->txSchemes['VALIDATOR_DELEGATE']['type'];
@@ -413,7 +474,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -431,7 +492,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -461,7 +522,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -482,7 +543,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -522,7 +583,7 @@ class Transaction
             'limit_volume' => amountUNIRecalculate($payload['maxSupply'])
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -538,7 +599,7 @@ class Transaction
             'threshold' => $payload['threshold']
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -559,7 +620,7 @@ class Transaction
             ]
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -573,18 +634,23 @@ class Transaction
             'tx_id' => $payload['txId'],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
     private function checkRequiredFields($name, $payload)
     {
-        if (!$this->txSchemes[$name] || !$this->txSchemes[$name]['scheme']) throw new DecimalException('Called scheme not exists');
+        if (!$this->txSchemes[$name] || !$this->txSchemes[$name]['scheme']) {
+            throw new DecimalException('Called scheme not exists');
+        }
+
         $scheme = $this->txSchemes[$name]['scheme'];
         $errors = $this->fieldsValidation($scheme, $payload);
         if (count($scheme['requiredFields']))
             $errors = array_merge(array_fill_keys($scheme['requiredFields'], 'field is required'), $errors);
-        if (count($errors)) throw new DecimalException("payload validation fails " . json_encode($errors, JSON_UNESCAPED_SLASHES));
+        if (count($errors)) {
+            throw new DecimalException("payload validation fails " . json_encode($errors, JSON_UNESCAPED_SLASHES));
+        }
 
         return true;
     }

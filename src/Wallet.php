@@ -17,6 +17,8 @@ class Wallet
      * @param string $path_key
      * @throws \Exception
      */
+    //"m/44'/60'/0'/0/0"
+    //how it was "m/44'/60'/0'/0"
     public function __construct($mnemonics = null, $path_key = "m/44'/60'/0'/0")
     {
         if(!$mnemonics) $mnemonics = WalletHelpers::createNewMnemonics();

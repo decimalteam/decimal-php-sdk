@@ -32,7 +32,7 @@ class Encrypt
      * @throws \Exception
      */
 
-    public static function generateSeedFromMnemonics($mnemonics,$passphrase = '')
+    public static function generateSeedFromMnemonics($mnemonics, $passphrase = '')
     {
         (MnemonicFactory::bip39())->mnemonicToEntropy($mnemonics);
         return (new Bip39SeedGenerator())->getSeed($mnemonics, $passphrase)->getHex();
@@ -45,9 +45,10 @@ class Encrypt
      * @throws \Exception
      */
 
-    public static function createExtendedKeysFromSeed($seed, string $path)
+    public static function createExtendedKeysFromSeed($seed, $path = "m/44'/60'/0'/0/0")
     {
         $keys = BIP44::fromMasterSeed($seed)->deriveKey($path);
+
         return [
             'privateExtended' => $keys->getPrivateExtendedKey(),
             'publicExtended' => $keys->getPublicExtendedKey()
@@ -64,7 +65,7 @@ class Encrypt
      *
      */
 
-    public static function derivedKeysFromExtended($key,$child = 0)
+    public static function derivedKeysFromExtended($key, $child = 0)
     {
         $bip32 = (new HierarchicalKeyFactory())->fromExtended($key);
 
@@ -84,36 +85,39 @@ class Encrypt
     public static function derivedPublicToBech32Bits($key)
     {
         $uint = self::hexToUint8Array(self::hexToRipmed160($key));
-        return convertBits($uint,count($uint), 8, 5);
+        return convertBits($uint, count($uint), 8, 5);
     }
 
     public static function hexToRipmed160(string $str)
     {
-	    return hash('ripemd160', hash('sha256', hex2bin($str),true));
+        return hash('ripemd160', hash('sha256', hex2bin($str), true));
     }
 
-    public static function createAddressFromBech32Bits($hrp,$bitsArray)
+    public static function createAddressFromBech32Bits($hrp, $bitsArray)
     {
-        return encode($hrp,$bitsArray);
+        return encode($hrp, $bitsArray);
     }
 
-    public static function signTransaction($txPayload,$privateKey = null)
+    public static function signTransaction($txPayload, $privateKey = null)
     {
         $tx = json_encode(sortPayload($txPayload));
         $tx = stripcslashes($tx);
 
-        self::sepc256k1Sign($tx,$privateKey);
+        self::sepc256k1Sign($tx, $privateKey);
     }
 
     public static function hexToUint8Array($hex)
     {
         preg_match_all('/.{1,2}/', $hex, $hexPairs);
 
-        return array_map(function (&$itm) {return hexdec($itm);}, $hexPairs[0]);
+        return array_map(function (&$itm) {
+            return hexdec($itm);
+        }, $hexPairs[0]);
     }
 
-    public static function sepc256k1Sign($tx,$key){
-        $msg322 = hash('sha256',$tx, false);
+    public static function sepc256k1Sign($tx, $key)
+    {
+        $msg322 = hash('sha256', $tx, false);
 
         $secp256k1 = new Secp256k1();
         $signature = $secp256k1->sign($msg322, $key);
@@ -125,41 +129,41 @@ class Encrypt
     }
 
     public static function decodeHex(string $hex)
-	{
-		return gmp_strval(gmp_init($hex, 16), 10);
-	}
+    {
+        return gmp_strval(gmp_init($hex, 16), 10);
+    }
 
-	public static function toHexEncode($number): string
-	{
-		$hex = gmp_strval(gmp_init($number, 10), 16);
-		return (strlen($hex) % 2 != 0) ? '0' . $hex : $hex;
-	}
+    public static function toHexEncode($number): string
+    {
+        $hex = gmp_strval(gmp_init($number, 10), 16);
 
-	public static function fromHexToBase58(string $hex): string
-	{
-		if (strlen($hex) == 0) {
-			return '';
-		}
+        return (strlen($hex) % 2 != 0) ? '0' . $hex : $hex;
+    }
 
-		$num = gmp_strval(gmp_init($hex, 16), 58);
+    public static function fromHexToBase58(string $hex): string
+    {
+        if (strlen($hex) == 0) {
+            return '';
+        }
 
-		if ($num != '0') {
-			$num = strtr(
-				$num,
-				'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv',
-				'123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-			);
-		} else {
-			$num = '';
-		}
+        $num = gmp_strval(gmp_init($hex, 16), 58);
 
-		$pad = '';
-		$n = 0;
-		while (substr($hex, $n, 2) == '00') {
-			$pad .= '1';
-			$n += 2;
-		}
+        if ($num != '0') {
+            $num = strtr(
+                $num,
+                '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv',
+                '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+            );
+        } else {
+            $num = '';
+        }
+        $pad = '';
+        $n = 0;
+        while (substr($hex, $n, 2) == '00') {
+            $pad .= '1';
+            $n += 2;
+        }
 
-		return $pad . $num;
-	}
+        return $pad . $num;
+    }
 }
