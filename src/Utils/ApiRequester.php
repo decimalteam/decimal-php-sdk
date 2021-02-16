@@ -6,23 +6,23 @@ namespace DecimalSDK\Utils;
 use DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Wallet;
 use GuzzleHttp\Client as GClient;
-
 class ApiRequester
 {
-    const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api/';
-    const GET = 'get';
-    const POST = 'post';
-
     private $options;
     private $client;
-    private $validModes = ['sync', 'async', 'block'];
+    private $get = 'get';
+    private $post = 'post';
+    private $put = 'put';
+    private $delete = 'delete';
+    private $patch = 'patch';
+    private $validModes = ['sync','async','block'];
 
     public function __construct($options = [])
     {
         $this->options = $options;
         $this->client = $client = new GClient([
-            'base_uri' => $this->options['baseUrl'] ?? self::TEST_GATE_API,
-            'timeout' => 5.0,
+            'base_uri' => $this->options['baseUrl'] ?? 'https://testnet-gate.decimalchain.com/api/',
+            'timeout'  => 5.0,
         ]);
     }
 
@@ -40,90 +40,89 @@ class ApiRequester
     public function getNodeInfo()
     {
         $url = 'rpc/node_info';
-        return $this->_request($url, self::GET);
+        return $this->_request($url,$this->get);
     }
 
     public function getAccountInfo($address)
     {
         $url = "rpc/auth/accounts/$address";
-        return $this->_request($url, self::GET);
+        return $this->_request($url,$this->get);
     }
-
-    public function getCoinsList($limit = 1, $offset = 0, $query = null)
+    public function getCoinsList($limit = 1,$offset = 0,$query = null)
     {
         $url = "coin?limit=$limit&offset=$offset";
 
-        if ($query) $url += "&$query";
+        if($query) $url += "&$query";
 
-        return $this->_request($url, self::GET);
+        return $this->_request($url,$this->get);
     }
 
     public function getCoin($symbol)
     {
-        if (!$symbol) throw new DecimalException('symbol is required');
+        if(!$symbol) throw new DecimalException('symbol is required');
 
         $url = "coin/$symbol";
 
-        return $this->_request($url, self::GET);
+        return $this->_request($url,$this->get);
     }
 
-    public function getAddress($address, $txLimit = 0)
+    public function getAddress($address,$txLimit = 0)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if(!$address) throw new DecimalException('address is required');
 
         $url = "address/$address?txLimit=$txLimit";
 
-        return $this->_request($url, self::GET);
+        return $this->_request($url,$this->get);
     }
 
     public function getNonce($address)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if(!$address) throw new DecimalException('address is required');
 
         $url = "rpc/auth/accounts/$address";
 
-        $res = $this->_request($url, self::GET);
+        $res = $this->_request($url,$this->get);
         $res->result->value->sequence++;
         return $res;
     }
 
     public function getMultisigsByAdress($address)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if(!$address) throw new DecimalException('address is required');
 
         $url = "address/$address/multisigs";
 
-        $res = $this->_request($url, self::GET);
+        $res = $this->_request($url,$this->get);
         return $res->result;
     }
 
     public function getMultisig($address)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if(!$address) throw new DecimalException('address is required');
 
         $url = "multisig/$address";
 
-        $res = $this->_request($url, self::GET);
+        $res = $this->_request($url,$this->get);
         return $res->result;
     }
 
-    public function getMultisigTXs($address, $limit = 1, $offset = 0)
+    public function getMultisigTXs($address,$limit = 1, $offset = 0)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if(!$address) throw new DecimalException('address is required');
 
         $url = "multisig/$address/txs?limit=$limit&offset=$offset";
 
-        $res = $this->_request($url, self::GET);
+        $res = $this->_request($url,$this->get);
         return $res->result;
     }
 
     public function getStakesByAddress($address)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if(!$address) throw new DecimalException('address is required');
 
         $url = "address/$address/stakes";
 
-        $res = $this->_request($url, self::GET);
+        $res = $this->_request($url,$this->get);
         return $res->result;
     }
 
@@ -134,62 +133,69 @@ class ApiRequester
 
             $url = "validator/$address";
 
-            $res = $this->_request($url, self::GET);
+            $res = $this->_request($url, $this->get);
 
             return $res->result;
 
-        } catch (\Exception $e) {
+        }catch (\Exception $e){
             throw new DecimalException('Such a validator does not exist');
         }
     }
 
-    public function sendTx($tx, $options = [])
+    public function sendTx($tx,$options = [])
     {
         $url = "rpc/txs";
         $mode = isset($options['mode']) ? $options['mode'] : 'sync';
-        $tx = ['tx' => $tx, 'mode' => $mode];
+        $tx = ['tx' => $tx,'mode' => $mode];
 
-        return $this->txResult($this->_request($url, self::POST, $tx, $options));
+        return $this->txResult($this->_request($url,$this->post,$tx,$options));
     }
-
-    public function post($url, $payload)
+    public function post($url,$payload)
     {
-        return $this->_request($url, self::POST, $payload);
+        return $this->_request($url,$this->post,$payload);
     }
 
-    private function _request($url, $method, $payload = null, $optional = [])
+    private function _request($url,$method,$payload = null, $optional = [])
     {
         $options = [];
-        if ($payload) {
+        if($payload){
             $options['headers'] = [
                 'Content-Type' => 'application/json',
             ];
-            $options['body'] = json_encode($payload, JSON_UNESCAPED_SLASHES);
+            $options['body'] = json_encode($payload,JSON_UNESCAPED_SLASHES);
         }
-
-        try {
-            $res = $this->client->$method($url, $options);
+        $res = $this->client->$method($url,$options);
+        if($res->getStatusCode() === 200){
             $body = $res->getBody();
-            return json_decode($body->getContents());
-        } catch (\Exception $exception) {
-            return $this->getError(json_encode($exception->getMessage()));
+            $res = json_decode($body->getContents());
+            return $res;
+        }else{
+            pretty_p($res->getReasonPhrase());
         }
     }
 
     public function txResult($jsonResp)
     {
         $resp = $jsonResp;
-        if (property_exists('jsonResp', 'code')) {
-            if ($jsonResp->raw_log) {
+        if(property_exists('jsonResp','code')){
+            if($jsonResp->raw_log){
                 $rawLogAsString = json_encode($jsonResp->raw_log);
-                if (substr($rawLogAsString, 0) === '{' && $jsonResp->raw_log->message) {
+                if(substr($rawLogAsString,0) === '{' && $jsonResp->raw_log->message){
                     $errorMessage = $jsonResp->raw_log->message;
-                } else {
+                }else{
                     $errorMessage = $rawLogAsString;
                 }
-                $resp = $this->getError($errorMessage, $jsonResp->code, $jsonResp->txhash);
+
+                $resp = [
+                    'hash' => $jsonResp->txhash,
+                    'success' => false,
+                    'error' => [
+                        'errorCode' => $jsonResp->code,
+                        'errorMessage' => $errorMessage,
+                    ]
+                ];
             }
-        } else if (property_exists('jsonResp', 'txhash')) {
+        }else if(property_exists('jsonResp','txhash')){
             $resp = [
                 'hash' => $jsonResp->txhash,
                 'success' => true,
@@ -198,25 +204,5 @@ class ApiRequester
         }
 
         return $resp;
-    }
-
-    /**
-     *  get error body
-     *
-     * @param $exception
-     * @param null $txhash
-     * @return array
-     */
-    protected function getError($exception, $code = null, $txhash = null)
-    {
-        //todo log errors
-        return [
-            'hash' => $txhash,
-            'success' => false,
-            'error' => [
-                'errorCode' => $code,
-                'errorMessage' => json_encode($exception->getMessage()),
-            ]
-        ];
     }
 }

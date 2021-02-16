@@ -76,14 +76,6 @@ trait TransactionHelpers
     }
 
 
-    /**
-     * validate payload for transaction by scheme
-     *
-     * @param $scheme
-     * @param array $payload
-     * @return array
-     * @throws DecimalException
-     */
     public function fieldsValidation(&$scheme, $payload = [])
     {
         if (isset($scheme) && is_array($scheme)) {

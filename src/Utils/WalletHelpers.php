@@ -10,7 +10,6 @@ use DecimalSDK\Utils\Crypto\Encrypt;
 class WalletHelpers {
 
     /**
-     *
      * @param null $hrp
      * @param null $mnemonics
      * @param $path_key

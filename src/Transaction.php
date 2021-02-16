@@ -7,6 +7,9 @@ use \DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Utils\ApiRequester;
 use DecimalSDK\Utils\TransactionHelpers;
 use DecimalSDK\Wallet;
+use kornrunner\Secp256k1;
+use kornrunner\Serializer\HexSignatureSerializer;
+use Web3p\RLP\RLP;
 
 class Transaction
 {
@@ -23,7 +26,7 @@ class Transaction
     protected $txSchemes = [
         'COIN_BUY' => [
             'fee' => 100,
-            'type' => 'coin/buy_coin',
+            'type' => 'buy_coin',
             'scheme' => [
                 'fieldTypes' => [
                     'buyCoin' => 'string',
@@ -99,14 +102,18 @@ class Transaction
             'type' => 'coin/multi_send_coin',
             'scheme' => [
                 'fieldTypes' => [
-                    'sends' => 'array'
+                    'sender'=>'string',
+                    'sends' => 'array',
+//                    'to' => 'string',
+//                    'coin' => 'string',
+//                    'amount' => 'number',
                 ],
                 'requiredFields' => [
+                    'sender',
                     'sends',
-                    //todo check it too
-                    //'to',
-                    //'amount',
-                    //'coin'
+//                        'to',
+//                        'amount',
+//                        'coin'
                 ],
             ],
         ],
@@ -125,7 +132,7 @@ class Transaction
                 ],
             ],
         ],
-        'COIN_REDEEM_CHECK' => [
+        'REDEEM_CHECK' => [
             'fee' => 30,
             'type' => 'coin/redeem_check',
             'scheme' => [
@@ -139,7 +146,7 @@ class Transaction
                 ],
             ],
         ],
-        'COIN_ISSUE_CHECK' => [
+        'ISSUE_CHECK' => [
             'fee' => 0,
             'type' => 'coin/issue_check',
             'scheme' => [
@@ -297,6 +304,70 @@ class Transaction
                 ],
             ],
         ],
+        'PROPOSAL_VOTE'=>[
+            'fee' => 100,
+            'type' => 'cosmos-sdk/MsgVote',
+            'scheme' => [
+                'fieldTypes' => [
+                    'id'=>'number',
+                    'decision'=>'string'
+                ],
+                'requiredFields' => [
+                    'id',
+                    'decision'
+                ],
+            ]
+        ],
+        'SWAP_HTLT'=>[
+            'fee' => 100,
+            'type' => 'swap/msg_htlt',
+            'scheme' => [
+                'fieldTypes' => [
+                    'type'=>'string',
+                    'from'=>'string',
+                    'recipient'=>'string',
+                    'secretHash'=>'string',
+                    'amount'=>'number',
+                    'coin'=>'string'
+                ],
+                'requiredFields' => [
+                    'type',
+                    'from',
+                    'recipient',
+                    'secretHash',
+                    'amount',
+                    'coin'
+                ],
+            ]
+        ],
+        'SWAP_REDEEM'=>[
+            'fee' => 100,
+            'type' => 'swap/msg_redeem',
+            'scheme' => [
+                'fieldTypes' => [
+                    'from'=>'string',
+                    'secretHash'=>'string',
+                ],
+                'requiredFields' => [
+                    'from',
+                    'secretHash',
+                ],
+                ]
+        ],
+        'SWAP_REFUND'=>[
+            'fee' => 100,
+            'type' => 'swap/msg_refund',
+            'scheme' => [
+                'fieldTypes' => [
+                    'from'=>'string',
+                    'secretHash'=>'string',
+                ],
+                'requiredFields' => [
+                    'from',
+                    'secretHash',
+                ],
+            ]
+        ]
     ];
 
     /**
@@ -323,7 +394,7 @@ class Transaction
     public function sendCoins($payload)
     {
         $type = $this->txSchemes['COIN_SEND']['type'];
-        $this->checkRequiredFields('COIN_SEND', $payload);
+        $this->checkRequiredFields('COIN_SEND',$payload);
         $payload['fee'] = $this->txSchemes['COIN_SEND']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
@@ -334,7 +405,7 @@ class Transaction
             ]
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -356,9 +427,10 @@ class Transaction
         ];
 
         $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        //dd($preparedTx);
+
         return $this->requester->sendTx($preparedTx);
     }
+
 
     /**
      * get sends array for multiply send coins
@@ -388,9 +460,9 @@ class Transaction
      */
     public function getCoin($payload)
     {
-        $maxSpendLimit = $payload['maxSpendLimit'] ?? self::MAX_SPEND_LIMIT;
+        $maxSpendLimit = $payload['maxSpendLimit'] ?? '100000000000';
         $type = $this->txSchemes['COIN_BUY']['type'];
-        $this->checkRequiredFields('COIN_BUY', $payload);
+        $this->checkRequiredFields('COIN_BUY',$payload);
         $payload['fee'] = $this->txSchemes['COIN_BUY']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
@@ -403,7 +475,7 @@ class Transaction
                 'denom' => strtolower($payload['spendCoin']),
             ],
         ];
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -416,7 +488,7 @@ class Transaction
     {
         $minBuyLimit = $payload['minBuyLimit'] ?? '1';
         $type = $this->txSchemes['COIN_SELL']['type'];
-        $this->checkRequiredFields('COIN_SELL', $payload);
+        $this->checkRequiredFields('COIN_SELL',$payload);
         $payload['fee'] = $this->txSchemes['COIN_SELL']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
@@ -430,7 +502,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -442,7 +514,7 @@ class Transaction
     public function sellAllCoinsData($payload)
     {
         $type = $this->txSchemes['COIN_SELL_ALL']['type'];
-        $this->checkRequiredFields('COIN_SELL_ALL', $payload);
+        $this->checkRequiredFields('COIN_SELL_ALL',$payload);
         $payload['fee'] = $this->txSchemes['COIN_SELL_ALL']['fee'];
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
@@ -456,10 +528,9 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        $preparedTx = $this->prepareTransaction($type,$prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
-
     public function validatorDelegate($payload)
     {
         $type = $this->txSchemes['VALIDATOR_DELEGATE']['type'];
@@ -474,7 +545,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -492,7 +563,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -522,7 +593,7 @@ class Transaction
             ],
         ];
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload,$payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -623,7 +694,136 @@ class Transaction
         $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
+    /**
+     * Issue check
+     *
+     * @param $payload
+     * @return array
+     * @throws DecimalException
+     */
+    public function issueCheck($payload)
+    {
 
+        $type = $this->txSchemes['ISSUE_CHECK']['type'];
+
+        $this->checkRequiredFields('ISSUE_CHECK', $payload);
+        $payload['fee'] = $this->txSchemes['ISSUE_CHECK']['fee'];
+
+        $hashPass=hash('sha256',$payload['password']);
+        $chainID=$this->requester->getNodeInfo()->node_info->network;
+        $coin=strtolower($payload['coin']);
+        $amount=amountUNIRecalculate($payload['amount']);
+
+        $rlp = new RLP();
+//        $checkHash = $rlp->encode([
+//            $chainID,
+//            $coin,
+//            $amount,
+//            $payload['nonce'],
+//            $payload['dueBlock']
+//        ]);
+//        print_r($checkHash);die();
+
+
+//        $secp256k1 = (new Secp256k1());
+//        print_r($secp256k1);die();
+
+        $prePayload = [
+            'nonce' => $payload['nonce'],
+            'coin' => [
+                'amount' => amountUNIRecalculate($payload['amount']),
+                'denom' => strtolower($payload['coin']),
+            ],
+            'password'=>$payload['password'],
+            'dueBlock'=>$payload['dueBlock']
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+
+        return $preparedTx;
+    }
+    public function redeemCheck($payload)
+    {
+        $type = $this->txSchemes['REDEEM_CHECK']['type'];
+        $result = $this->checkRequiredFields('REDEEM_CHECK', $payload);
+        $payload['fee'] = $this->txSchemes['REDEEM_CHECK']['fee'];
+        $proof=hash('sha256',$payload['password']);
+        $prePayload = [
+            'sender'=>$this->wallet->getAddress(),
+            'check'=>$payload['check'],
+            'proof'=>$proof
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        return $this->requester->sendTx($preparedTx);
+    }
+    public function proposalVote($payload)
+    {
+        $type = $this->txSchemes['PROPOSAL_VOTE']['type'];
+        $result = $this->checkRequiredFields('PROPOSAL_VOTE', $payload);
+        $payload['fee'] = $this->txSchemes['PROPOSAL_VOTE']['fee'];
+
+        $prePayload = [
+            'proposal_id' => $payload['id'],
+            'option'=> $payload['decision'],
+            'voter'=>$this->wallet->getValidatorAddress()
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        return $this->requester->sendTx($preparedTx);
+    }
+    public function msgSwapHTLT($payload)
+    {
+        $type = $this->txSchemes['SWAP_HTLT']['type'];
+        $result = $this->checkRequiredFields('SWAP_HTLT', $payload);
+        $payload['fee'] = $this->txSchemes['SWAP_HTLT']['fee'];
+        if($payload['type']=='out'){
+            $transfer_type=1;
+        }else{
+            $transfer_type=0;
+        }
+        $hashed_secret=hash('sha256',$payload['secretHash']);
+        $prePayload = [
+            'amount' => [
+                [
+                'amount' => amountUNIRecalculate($payload['amount']),
+                'denom' => strtolower($payload['coin']),
+            ]
+            ],
+            'transfer_type'=>$transfer_type,
+            'from'=>$payload['from'],
+            'recipient'=>$payload['recipient'],
+            'hashed_secret'=>$hashed_secret
+        ];
+
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        return $this->requester->sendTx($preparedTx);
+    }
+    public function msgSwapRedeem($payload)
+    {
+        $type = $this->txSchemes['SWAP_REDEEM']['type'];
+        $result = $this->checkRequiredFields('SWAP_REDEEM', $payload);
+        $payload['fee'] = $this->txSchemes['SWAP_REDEEM']['fee'];
+        $hashed_secret=hash('sha256',$payload['secretHash']);
+        $prePayload = [
+            'from'=>$payload['from'],
+            'secret'=>$hashed_secret
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        return $this->requester->sendTx($preparedTx);
+    }
+    public function msgSwapRefund($payload)
+    {
+        $type = $this->txSchemes['SWAP_REFUND']['type'];
+        $result = $this->checkRequiredFields('SWAP_REFUND', $payload);
+        $payload['fee'] = $this->txSchemes['SWAP_REFUND']['fee'];
+        $hashed_secret=hash('sha256',$payload['secretHash']);
+        $prePayload = [
+            'from'=>$payload['from'],
+            'secret'=>$hashed_secret
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        return $this->requester->sendTx($preparedTx);
+    }
     public function multisigSignTX($payload)
     {
         $type = $this->txSchemes['MULTISIG_SIGN_TX']['type'];
