@@ -187,6 +187,67 @@ $txPayload = [
 
 $result = $transaction->multisigSignTX($txPayload);
 ```
+## Multisend Coins
+```php
+$txPayload = [
+    'sender'=>  $wallet->getAddress(),
+           'sends'=>[
+               [
+                    'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
+                   'coin'=>  'DEL',
+                   'amount'=> 100
+                ],
+                [
+                    'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
+                    'coin'=>  'DEL',
+                    'amount'=> 100
+                ]
+            ]
+];
+
+$result = $transaction->multisigSignTX($txPayload);
+
+```
+## Proposal vote
+```php
+$txPayload = [
+    'id' => 1,
+   'decision'=> 'Yes'//Yes or No
+];
+
+$result = $transaction->proposalVote($txPayload);
+```
+# Swap HTLT
+```php
+$txPayload = [
+    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
+    'recipient'=>  '0x767315FBd4f90d05D5169E1611C0982629ff8d22',
+    'secretHash'=>  'pass',
+    'type'=>  'out',//out or in
+    'amount'=>  '10',
+    'coin'=>  'DEL',
+];
+
+$result = $transaction->msgSwapHTLT($txPayload);
+```
+# Swap redeem
+```php
+$txPayload = [
+    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
+    'secretHash'=>  'pass',
+];
+
+$result = $transaction->msgSwapRedeem($txPayload);
+```
+# Swap refund
+```php
+$txPayload = [
+    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
+    'secretHash'=>  'pass',
+];
+
+$result = $transaction->msgSwapRefund($txPayload);
+```
 
 ## Check required fields
 ```php

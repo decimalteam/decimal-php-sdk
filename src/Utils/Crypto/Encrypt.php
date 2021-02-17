@@ -112,7 +112,8 @@ class Encrypt
         return array_map(function (&$itm) {return hexdec($itm);}, $hexPairs[0]);
     }
 
-    public static function sepc256k1Sign($tx,$key){
+    public static function sepc256k1Sign($tx,$key)
+    {
         $msg322 = hash('sha256',$tx, false);
 
         $secp256k1 = new Secp256k1();

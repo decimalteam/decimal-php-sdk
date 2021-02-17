@@ -203,4 +203,18 @@ trait TransactionHelpers
 
         return $tx;
     }
+    public function hex($string)
+    {
+        $hashed_secret='';
+        for($i=0;$i<strlen($string);$i++){
+            $number=ord($string[$i]);
+            $hashed_secret.=base_convert($number,10,16);
+        }
+        return $hashed_secret;
+    }
+    public function bs58Encode($string)
+    {
+        return Encrypt::fromHexToBase58($string);
+
+    }
 }

@@ -5,6 +5,7 @@ namespace DecimalSDK;
 
 use \DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Utils\ApiRequester;
+use DecimalSDK\Utils\Crypto\Encrypt;
 use DecimalSDK\Utils\TransactionHelpers;
 use DecimalSDK\Wallet;
 use kornrunner\Secp256k1;
@@ -704,43 +705,67 @@ class Transaction
     public function issueCheck($payload)
     {
 
-        $type = $this->txSchemes['ISSUE_CHECK']['type'];
-
-        $this->checkRequiredFields('ISSUE_CHECK', $payload);
-        $payload['fee'] = $this->txSchemes['ISSUE_CHECK']['fee'];
-
-        $hashPass=hash('sha256',$payload['password']);
-        $chainID=$this->requester->getNodeInfo()->node_info->network;
-        $coin=strtolower($payload['coin']);
-        $amount=amountUNIRecalculate($payload['amount']);
-
-        $rlp = new RLP();
-//        $checkHash = $rlp->encode([
+//        $type = $this->txSchemes['ISSUE_CHECK']['type'];
+//
+//        $this->checkRequiredFields('ISSUE_CHECK', $payload);
+//        $payload['fee'] = $this->txSchemes['ISSUE_CHECK']['fee'];
+//
+//        $chainID=$this->requester->getNodeInfo()->node_info->network;
+//        $coin=strtolower($payload['coin']);
+//        $amount=amountUNIRecalculate($payload['amount']);
+//
+//        $hashPass=hash('sha256',$payload['password']);
+//
+//        $rlp = new RLP();
+//        $checkHash = $rlp->encode(
 //            $chainID,
 //            $coin,
 //            $amount,
 //            $payload['nonce'],
 //            $payload['dueBlock']
+//        );
+//
+//        $lockObj= (new Secp256k1())->sign($checkHash,$hashPass);
+//        $signature=gmp_strval($lockObj->getR(),10);
+//        $signature=Encrypt::sepc256k1Sign($checkHash,$hashPass);
+//
+//        $recid=$lockObj->getRecoveryParam();
+//        $lockSignature=mb_substr($signature,0,64);
+//        $lockSignature.=$recid;
+//
+//        $checkLockedHash = $rlp->encode([
+//            $chainID,
+//            $coin,
+//            $amount,
+//            $payload['nonce'],
+//            $payload['dueBlock'],
+//            $lockSignature
 //        ]);
-//        print_r($checkHash);die();
-
-
-//        $secp256k1 = (new Secp256k1());
-//        print_r($secp256k1);die();
-
-        $prePayload = [
-            'nonce' => $payload['nonce'],
-            'coin' => [
-                'amount' => amountUNIRecalculate($payload['amount']),
-                'denom' => strtolower($payload['coin']),
-            ],
-            'password'=>$payload['password'],
-            'dueBlock'=>$payload['dueBlock']
-        ];
-
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-
-        return $preparedTx;
+//        $checkObj=(new Secp256k1())->sign($checkLockedHash,$this->wallet->getPrivateKey());
+//        $signature1=gmp_strval($checkObj->getR(),10);
+//
+//        $check=$rlp->encode([
+//            $chainID,
+//            $coin,
+//            $amount,
+//            $payload['nonce'],
+//            $payload['dueBlock'],
+//            $lockSignature,
+//            $checkObj->getRecoveryParam()+27,
+//            mb_substr($signature1,0,32),
+//            mb_substr($signature1,32,32)
+//        ]);
+//        print_r($this->bs58Encode($check));die();
+//        return $check;
+//        $prePayload = [
+//            'nonce' => $payload['nonce'],
+//            'coin' => [
+//                'amount' => amountUNIRecalculate($payload['amount']),
+//                'denom' => strtolower($payload['coin']),
+//            ],
+//            'password'=>$payload['password'],
+//            'dueBlock'=>$payload['dueBlock']
+//        ];
     }
     public function redeemCheck($payload)
     {
@@ -803,7 +828,7 @@ class Transaction
         $type = $this->txSchemes['SWAP_REDEEM']['type'];
         $result = $this->checkRequiredFields('SWAP_REDEEM', $payload);
         $payload['fee'] = $this->txSchemes['SWAP_REDEEM']['fee'];
-        $hashed_secret=hash('sha256',$payload['secretHash']);
+        $hashed_secret=$this->hex($payload['secretHash']);
         $prePayload = [
             'from'=>$payload['from'],
             'secret'=>$hashed_secret
@@ -819,7 +844,7 @@ class Transaction
         $hashed_secret=hash('sha256',$payload['secretHash']);
         $prePayload = [
             'from'=>$payload['from'],
-            'secret'=>$hashed_secret
+            'hashed_secret'=>$hashed_secret
         ];
         $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
