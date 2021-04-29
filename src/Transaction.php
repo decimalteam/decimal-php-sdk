@@ -759,7 +759,7 @@ class Transaction
         return true;
     }
 
-    function guidv4($data = null) {
+    private function guidv4($data = null) {
         // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
         $data = $data ?? random_bytes(16);
         assert(strlen($data) == 16);
