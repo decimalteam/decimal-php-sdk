@@ -725,6 +725,23 @@ class Transaction
         return $this->requester->sendTx($preparedTx);
     }
 
+    public function burnNft($payload)
+    {
+        $type = $this->txSchemes['NFT_BURN']['type'];
+        $result = $this->checkRequiredFields('NFT_BURN', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_BURN']['fee'];
+
+        $prePayload = [
+            'id' => $payload['id'],
+            'denom' => $payload['denom'],
+            'quantity' => $payload['quantity'],
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
     private function checkRequiredFields($name, $payload)
     {
         if (!$this->txSchemes[$name] || !$this->txSchemes[$name]['scheme']) {
