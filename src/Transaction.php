@@ -297,6 +297,76 @@ class Transaction
                 ],
             ],
         ],
+        'NFT_MINT' => [
+            'fee' => 0,
+            'type' => 'nft/msg_mint',
+            'scheme' => [
+                'fieldTypes' => [
+                    'denom' => 'string',
+                    'token_uri' => 'string',
+                    'quantity' => 'number',
+                    'reserve' => 'number',
+                    'allow_mint' => 'boolean'
+                ],
+                'requiredFields' => [
+                    'denom',
+                    'token_uri',
+                    'quantity',
+                    'reserve',
+                    'allow_mint'
+                ],
+            ],
+        ],
+        'NFT_BURN' => [
+            'fee' => 0,
+            'type' => 'nft/msg_burn',
+            'scheme' => [
+                'fieldTypes' => [
+                    'denom' => 'string',
+                    'id' => 'string',
+                    'quantity' => 'number',
+                ],
+                'requiredFields' => [
+                    'denom',
+                    'id',
+                    'quantity',
+                ],
+            ],
+        ],
+        'NFT_EDIT_METADATA' => [
+            'fee' => 0,
+            'type' => 'nft/msg_edit_metadata',
+            'scheme' => [
+                'fieldTypes' => [
+
+                ],
+                'requiredFields' => [
+/**
+ *     denom: 'TEST',
+id: 'test420',
+token_uri: 'uri',
+ */
+                ],
+            ],
+        ],
+        'NFT_TRANSFER' => [
+            'fee' => 0,
+            'type' => 'nft/msg_transfer',
+            'scheme' => [
+                'fieldTypes' => [
+
+                ],
+                'requiredFields' => [
+/**
+ *     denom: 'TEST1',
+id: 'test4201',
+recipient: 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+// sender: 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
+quantity: '100',
+ */
+                ],
+            ],
+        ],
     ];
 
     /**
@@ -638,6 +708,27 @@ class Transaction
         return $this->requester->sendTx($preparedTx);
     }
 
+    public function createNftMint($payload)
+    {
+        $type = $this->txSchemes['NFT_MINT']['type'];
+        $result = $this->checkRequiredFields('NFT_MINT', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_MINT']['fee'];
+
+        $prePayload = [
+            'id' => $this->guidv4(),
+            'denom' => $payload['denom'],
+            'token_uri' => $payload['token_uri'],
+            'quantity' => $payload['quantity'],
+            'reserve' => pow(10,18),//$payload['reserve'],
+            'sender' => $this->wallet->getAddress(),
+            'recipient' => $payload['recipient'] ?? $this->wallet->getAddress()
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload, ['allow_mint' => $payload['allow_mint']]);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
     private function checkRequiredFields($name, $payload)
     {
         if (!$this->txSchemes[$name] || !$this->txSchemes[$name]['scheme']) {
@@ -653,5 +744,19 @@ class Transaction
         }
 
         return true;
+    }
+
+    function guidv4($data = null) {
+        // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
+        $data = $data ?? random_bytes(16);
+        assert(strlen($data) == 16);
+
+        // Set version to 0100
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+        // Set bits 6-7 to 10
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+        // Output the 36 character UUID.
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 }
