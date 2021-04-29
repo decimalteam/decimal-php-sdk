@@ -338,14 +338,12 @@ class Transaction
             'type' => 'nft/msg_edit_metadata',
             'scheme' => [
                 'fieldTypes' => [
-
+                    'id' => 'string',
+                    'token_uri' => 'string',
                 ],
                 'requiredFields' => [
-/**
- *     denom: 'TEST',
-id: 'test420',
-token_uri: 'uri',
- */
+                    'id',
+                    'token_uri',
                 ],
             ],
         ],
@@ -354,16 +352,14 @@ token_uri: 'uri',
             'type' => 'nft/msg_transfer',
             'scheme' => [
                 'fieldTypes' => [
-
+                    'id' => 'string',
+                    'recipient' => 'string',
+                    'quantity' => 'number',
                 ],
                 'requiredFields' => [
-/**
- *     denom: 'TEST1',
-id: 'test4201',
-recipient: 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
-// sender: 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
-quantity: '100',
- */
+                    'id',
+                    'recipient',
+                    'quantity',
                 ],
             ],
         ],
