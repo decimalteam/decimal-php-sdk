@@ -20,7 +20,7 @@ class ApiRequester
     public function __construct($options = [])
     {
         $this->options = $options;
-        $this->client = $client = new GClient([
+        $this->client = new GClient([
             'base_uri' => $this->options['baseUrl'] ?? self::TEST_GATE_API,
             'timeout' => 5.0,
         ]);
@@ -30,6 +30,7 @@ class ApiRequester
     {
         $nodeInfo = $this->getNodeInfo();
         $accountInfo = $this->getAccountInfo($wallet->getAddress());
+
         return [
             'sequence' => $accountInfo->result->value->sequence,
             'account_number' => $accountInfo->result->value->account_number,
@@ -215,7 +216,7 @@ class ApiRequester
             'success' => false,
             'error' => [
                 'errorCode' => $code,
-                'errorMessage' => json_encode($exception->getMessage()),
+                'errorMessage' => $exception,
             ]
         ];
     }

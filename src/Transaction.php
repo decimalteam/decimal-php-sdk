@@ -297,6 +297,70 @@ class Transaction
                 ],
             ],
         ],
+        'NFT_MINT' => [
+            'fee' => 0,
+            'type' => 'nft/msg_mint',
+            'scheme' => [
+                'fieldTypes' => [
+                    'denom' => 'string',
+                    'token_uri' => 'string',
+                    'quantity' => 'number',
+                    'allow_mint' => 'boolean'
+                ],
+                'requiredFields' => [
+                    'denom',
+                    'token_uri',
+                    'quantity',
+                    'allow_mint'
+                ],
+            ],
+        ],
+        'NFT_BURN' => [
+            'fee' => 0,
+            'type' => 'nft/msg_burn',
+            'scheme' => [
+                'fieldTypes' => [
+                    'denom' => 'string',
+                    'id' => 'string',
+                    'quantity' => 'number',
+                ],
+                'requiredFields' => [
+                    'denom',
+                    'id',
+                    'quantity',
+                ],
+            ],
+        ],
+        'NFT_EDIT_METADATA' => [
+            'fee' => 0,
+            'type' => 'nft/msg_edit_metadata',
+            'scheme' => [
+                'fieldTypes' => [
+                    'id' => 'string',
+                    'token_uri' => 'string',
+                ],
+                'requiredFields' => [
+                    'id',
+                    'token_uri',
+                ],
+            ],
+        ],
+        'NFT_TRANSFER' => [
+            'fee' => 0,
+            'type' => 'nft/msg_transfer',
+            'scheme' => [
+                'fieldTypes' => [
+                    'id' => 'string',
+                    'recipient' => 'string',
+                    'quantity' => 'number',
+                ],
+                'requiredFields' => [
+                    'id',
+                    'recipient',
+                    'quantity',
+                ],
+            ],
+        ],
     ];
 
     /**
@@ -638,6 +702,77 @@ class Transaction
         return $this->requester->sendTx($preparedTx);
     }
 
+    public function createNftMint($payload)
+    {
+        $type = $this->txSchemes['NFT_MINT']['type'];
+        $result = $this->checkRequiredFields('NFT_MINT', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_MINT']['fee'];
+
+        $prePayload = [
+            'id' => $this->guidv4(),
+            'denom' => $payload['denom'],
+            'token_uri' => $payload['token_uri'],
+            'quantity' => $payload['quantity'],
+            'reserve' => pow(10,18),
+            'sender' => $this->wallet->getAddress(),
+            'recipient' => $payload['recipient'] ?? $this->wallet->getAddress()
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload, ['allow_mint' => $payload['allow_mint']]);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function burnNft($payload)
+    {
+        $type = $this->txSchemes['NFT_BURN']['type'];
+        $result = $this->checkRequiredFields('NFT_BURN', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_BURN']['fee'];
+
+        $prePayload = [
+            'id' => $payload['id'],
+            'denom' => $payload['denom'],
+            'quantity' => $payload['quantity'],
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function transferNft($payload)
+    {
+        $type = $this->txSchemes['NFT_TRANSFER']['type'];
+        $result = $this->checkRequiredFields('NFT_TRANSFER', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_TRANSFER']['fee'];
+
+        $prePayload = [
+            'id' => $payload['id'],
+            'recipient' => $payload['recipient'],
+            'quantity' => $payload['quantity'],
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function editNftMetadata($payload)
+    {
+        $type = $this->txSchemes['NFT_EDIT_METADATA']['type'];
+        $result = $this->checkRequiredFields('NFT_EDIT_METADATA', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_EDIT_METADATA']['fee'];
+
+        $prePayload = [
+            'id' => $payload['id'],
+            'token_uri' => $payload['token_uri'],
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
     private function checkRequiredFields($name, $payload)
     {
         if (!$this->txSchemes[$name] || !$this->txSchemes[$name]['scheme']) {
@@ -653,5 +788,19 @@ class Transaction
         }
 
         return true;
+    }
+
+    private function guidv4($data = null) {
+        // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
+        $data = $data ?? random_bytes(16);
+        assert(strlen($data) == 16);
+
+        // Set version to 0100
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+        // Set bits 6-7 to 10
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+        // Output the 36 character UUID.
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 }
