@@ -305,14 +305,12 @@ class Transaction
                     'denom' => 'string',
                     'token_uri' => 'string',
                     'quantity' => 'number',
-                    'reserve' => 'number',
                     'allow_mint' => 'boolean'
                 ],
                 'requiredFields' => [
                     'denom',
                     'token_uri',
                     'quantity',
-                    'reserve',
                     'allow_mint'
                 ],
             ],
@@ -716,7 +714,7 @@ class Transaction
             'denom' => $payload['denom'],
             'token_uri' => $payload['token_uri'],
             'quantity' => $payload['quantity'],
-            'reserve' => pow(10,18),//$payload['reserve'],
+            'reserve' => pow(10,18),
             'sender' => $this->wallet->getAddress(),
             'recipient' => $payload['recipient'] ?? $this->wallet->getAddress()
         ];
@@ -736,6 +734,39 @@ class Transaction
             'id' => $payload['id'],
             'denom' => $payload['denom'],
             'quantity' => $payload['quantity'],
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function transferNft($payload)
+    {
+        $type = $this->txSchemes['NFT_TRANSFER']['type'];
+        $result = $this->checkRequiredFields('NFT_TRANSFER', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_TRANSFER']['fee'];
+
+        $prePayload = [
+            'id' => $payload['id'],
+            'recipient' => $payload['recipient'],
+            'quantity' => $payload['quantity'],
+        ];
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function editNftMetadata($payload)
+    {
+        $type = $this->txSchemes['NFT_EDIT_METADATA']['type'];
+        $result = $this->checkRequiredFields('NFT_EDIT_METADATA', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_EDIT_METADATA']['fee'];
+
+        $prePayload = [
+            'id' => $payload['id'],
+            'token_uri' => $payload['token_uri'],
         ];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
 
