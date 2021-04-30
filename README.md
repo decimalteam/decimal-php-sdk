@@ -188,6 +188,47 @@ $txPayload = [
 $result = $transaction->multisigSignTX($txPayload);
 ```
 
+## Create NFT 
+```php
+$txPayload = [
+    'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
+];
+
+$result = $transaction->createNftMint($txPayload);
+```
+
+## Burn NFT
+```php
+$txPayload = [
+    'id' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
+    'denom' => 'denom',
+    'quantity' => 3,
+];
+
+$result = $transaction->burnNft($txPayload);
+```
+
+## Transfer NFT
+```php
+$txPayload = [
+    'id' => 'id',
+    'recipient' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
+    'quantity' => 10,
+];
+
+$result = $transaction->transferNft($txPayload);
+```
+
+## Edit NFT Metadata
+```php
+$txPayload = [
+    'id' => 'id',
+    'token_uri' => 'token_uri',
+];
+
+$result = $transaction->editNftMetadata($txPayload);
+```
+
 ## Check required fields
 ```php
 $result = $transaction->checkRequiredFields($data ,$txPayload);
