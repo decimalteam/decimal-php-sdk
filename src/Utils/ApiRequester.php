@@ -13,6 +13,7 @@ class ApiRequester
     const GET = 'get';
     const POST = 'post';
 
+
     private $options;
     private $client;
     private $validModes = ['sync', 'async', 'block'];
@@ -29,6 +30,7 @@ class ApiRequester
     public function getSignMeta(Wallet $wallet)
     {
         $nodeInfo = $this->getNodeInfo();
+
         $accountInfo = $this->getAccountInfo($wallet->getAddress());
 
         return [
@@ -46,7 +48,11 @@ class ApiRequester
 
     public function getAccountInfo($address)
     {
-        $url = "rpc/auth/accounts/$address";
+        if (isset($this->options['createNonce'])) {
+            $url = "rpc/auth/accounts/$address";
+        } else {
+            $url = "rpc/accounts/$address";
+        }
         return $this->_request($url, self::GET);
     }
 
@@ -149,7 +155,6 @@ class ApiRequester
         $url = "rpc/txs";
         $mode = isset($options['mode']) ? $options['mode'] : 'sync';
         $tx = ['tx' => $tx, 'mode' => $mode];
-
         return $this->txResult($this->_request($url, self::POST, $tx, $options));
     }
 
@@ -180,6 +185,7 @@ class ApiRequester
     public function txResult($jsonResp)
     {
         $resp = $jsonResp;
+
         if (property_exists('jsonResp', 'code')) {
             if ($jsonResp->raw_log) {
                 $rawLogAsString = json_encode($jsonResp->raw_log);
