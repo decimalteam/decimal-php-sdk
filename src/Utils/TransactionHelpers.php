@@ -9,11 +9,6 @@ use DecimalSDK\Utils\Crypto\Encrypt;
 
 trait TransactionHelpers
 {
-
-    protected $pubKeyType = 'tendermint/PubKeySecp256k1';
-    protected $defaultGasLimit = '9000000000000000000';
-    protected $unit = 0.001;
-    protected $additionalComission = 20;
     protected $signMeta = [
         'account_number' => null,
         'sequence' => null,
@@ -40,7 +35,7 @@ trait TransactionHelpers
         $unsignedTx['signatures'] = [[
             'signature' => $signature,
             'pub_key' => [
-                'type' => $this->pubKeyType,
+                'type' => self::PUB_KEY_TYPE,
                 'value' => base64_encode(hex2bin($this->wallet->getPublicKey())),
             ],
         ]];
@@ -168,7 +163,7 @@ trait TransactionHelpers
         $ticker = $feeCoin;
         $textSize = $this->getTxSize($tx);
         $feeForText = $textSize * 2;
-        $feeInBase = $operationFee + $feeForText + $this->additionalComission;
+        $feeInBase = $operationFee + $feeForText + self::ADDITIONAL_COMISSION;
 
         if ($tx['msg'][0]['type'] === 'coin/multi_send_coin') {
             $numberOfParticipants = count($tx['msg'][0]['value']['sends']);
@@ -181,9 +176,9 @@ trait TransactionHelpers
         }
 
         $coinPrice = $this->getCoinPrice($ticker);
-        $feeInCustom = $feeInBase / ($coinPrice / $this->unit);
+        $feeInCustom = $feeInBase / ($coinPrice / self::UNIT);
 
-        return ['coinPrice' => (string)$coinPrice, 'value' => (string)($feeInCustom / $this->unit), 'base' => (string)$feeInBase];
+        return ['coinPrice' => (string)$coinPrice, 'value' => (string)($feeInCustom / self::UNIT), 'base' => (string)$feeInBase];
 
     }
 
@@ -198,16 +193,16 @@ trait TransactionHelpers
 
         $fee = $this->getCommission($tx, $feeCoin, $options['fee'], $options);
 
-        $feeAmountSize = strlen(amountUNIRecalculate($fee['value'] * $this->unit));
+        $feeAmountSize = strlen(amountUNIRecalculate($fee['value'] * self::UNIT));
 //        $gasAmountSize = strlen(round($fee['base'],0,PHP_ROUND_HALF_DOWN));
 //        $feeForFeeAmount = ($feeAmountSize + $gasAmountSize) * 2;
         $feeForFeeAmount = $feeAmountSize * 2;
         $totalFee = '';
         if (!in_array($feeCoin, ['tdel', 'del'])) {
             $feeForFeeAmountToCustom = $feeForFeeAmount / $fee['coinPrice'];
-            $totalFee = ($fee['value'] + $feeForFeeAmountToCustom) * $this->unit;
+            $totalFee = ($fee['value'] + $feeForFeeAmountToCustom) * self::UNIT;
         } else {
-            $totalFee = ($fee['value'] + $feeForFeeAmount) * $this->unit;
+            $totalFee = ($fee['value'] + $feeForFeeAmount) * self::UNIT;
         }
 
         $tx['fee']['amount'][0]['amount'] = amountUNIRecalculate($totalFee);

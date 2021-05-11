@@ -13,13 +13,16 @@ class Transaction
     use TransactionHelpers;
 
     const MAX_SPEND_LIMIT = '100000000000';
+    const ADDITIONAL_COMISSION=20;
+    const UNIT=0.001;
+    const PUB_KEY_TYPE='tendermint/PubKeySecp256k1';
+    const DEFAULT_GAS_LIMIT='9000000000000000000';
 
     private $account;
     private $wallet;
     private $requester;
     private $nodeMeta;
 
-    protected $unit = 0.001;
     protected $txSchemes = [
         'COIN_BUY' => [
             'fee' => 100,
