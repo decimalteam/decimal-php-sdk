@@ -10,9 +10,11 @@ For detailed explanation on how things work, checkout the:
 ```bash
 $ composer require decimalteam/decimal-php-sdk
 ```
+
 # Usage
 
 ## Create wallet
+
 ```php
 use DecimalSDK\Wallet;
 
@@ -30,10 +32,11 @@ use DecimalSDK\Transaction;
 
 // Use wallet instance to init transaction
 $wallet = new Wallet();
-$transaction = new Transaction($wallet);
+$transaction = new Transaction($wallet,['createNonce'=>true]);
 ```
 
 ## Send coins
+
 ```php
 $txPayload = [
     'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', //receiver address
@@ -44,6 +47,7 @@ $result = $transaction->sendCoins($txPayload);
 ```
 
 ## Sell coins
+
 ```php
 $txPayload = [
     'sellCoin' => 'DEL',
@@ -56,6 +60,7 @@ $result = $transaction->sellCoins($txPayload);
 ```
 
 ## Buy Coins
+
 ```php
 $txPayload = [
     'buyCoin' => 'BTC',
@@ -68,6 +73,7 @@ $result = $transaction->getCoins($txPayload);
 ```
 
 ## Sell all coins
+
 ```php
 $txPayload = [
     'sellCoin' => 'BTC',
@@ -79,6 +85,7 @@ $result = $transaction->sellAllCoinsData($txPayload);
 ```
 
 ## Validator delegate
+
 ```php
 $txPayload = [
     'adress' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
@@ -90,6 +97,7 @@ $result = $transaction->validatorDelegate($txPayload);
 ```
 
 ## Validator unbound
+
 ```php
 $txPayload = [
     'address' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
@@ -101,6 +109,7 @@ $result = $transaction->validatorUnbound($txPayload);
 ```
 
 ## Validator declare
+
 ```php
 $txPayload = [
     'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
@@ -119,6 +128,7 @@ $result = $transaction->validatorDeclare($txPayload);
 ```
 
 ## Validator edit
+
 ```php
 $txPayload = [
     'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
@@ -133,16 +143,19 @@ $result = $transaction->validatorEdit($txPayload);
 ```
 
 ## Disable validator
+
 ```php
 $result = $transaction->disableValidator($txPayload);
 ```
 
 ## Enable validator
+
 ```php
 $result = $transaction->enableValidator($txPayload);
 ```
 
 ## Create coin
+
 ```php
 $txPayload = [
     'title' => 'Test coin',
@@ -156,7 +169,20 @@ $txPayload = [
 $result = $transaction->createCoin($txPayload);
 ```
 
+## Update coin
+
+```php
+$txPayload = [
+    'ticker' => 'TESTTT',
+    'maxSupply' => '1000000',
+    'identity'=>'e353b89e0de0a78974f9ecaf033721ac'
+];
+
+$result = $transaction->createCoin($txPayload);
+```
+
 ## Multisig create
+
 ```php
 $txPayload = [
     'threshold' => '2',
@@ -168,6 +194,7 @@ $result = $transaction->multisigCreate($txPayload);
 ```
 
 ## Multisig create tx
+
 ```php
 $txPayload = [
     'from' => 'dx1am6ke3l79kjzdqhwgx37em04mzg686ekf9p3pq',
@@ -180,6 +207,7 @@ $result = $transaction->multisigCreateTX($txPayload);
 ```
 
 ## Multisig Sign tx
+
 ```php
 $txPayload = [
     'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
@@ -188,48 +216,99 @@ $txPayload = [
 $result = $transaction->multisigSignTX($txPayload);
 ```
 
-## Create NFT 
+## Multisend Coins
+
 ```php
 $txPayload = [
-    'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
+    'sender'=>  $wallet->getAddress(),
+           'sends'=>[
+               [
+                    'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
+                   'coin'=>  'DEL',
+                   'amount'=> 100
+                ],
+                [
+                    'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
+                    'coin'=>  'DEL',
+                    'amount'=> 100
+                ]
+            ]
 ];
 
-$result = $transaction->createNftMint($txPayload);
+$result = $transaction->multisigSignTX($txPayload);
+
 ```
 
-## Burn NFT
+## Proposal vote
+
 ```php
 $txPayload = [
-    'id' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
-    'denom' => 'denom',
-    'quantity' => 3,
-];
+    'id' => 1,
+   'decision'=> 'Yes'//Yes or No
+    ];
 
-$result = $transaction->burnNft($txPayload);
+$result = $transaction->proposalVote($txPayload);
 ```
 
-## Transfer NFT
+## Swap HTLT
+
 ```php
 $txPayload = [
-    'id' => 'id',
-    'recipient' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
-    'quantity' => 10,
-];
+    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
+    'recipient'=>  '0x767315FBd4f90d05D5169E1611C0982629ff8d22',
+    'secretHash'=>  'pass',
+    'type'=>  'out',//out or in
+    'amount'=>  '10',
+    'coin'=>  'DEL',
+     ];
 
-$result = $transaction->transferNft($txPayload);
+$result = $transaction->msgSwapHTLT($txPayload);
 ```
 
-## Edit NFT Metadata
+## Swap redeem
+
 ```php
 $txPayload = [
-    'id' => 'id',
-    'token_uri' => 'token_uri',
-];
+    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
+    'secretHash'=>  'pass',
+     ];
 
-$result = $transaction->editNftMetadata($txPayload);
+$result = $transaction->msgSwapRedeem($txPayload);
 ```
+
+## Swap refund
+
+```php
+$txPayload = [
+    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
+    'secretHash'=>  'pass',
+     ];
+$result = $transaction->msgSwapRefund($txPayload);
+ ```
+
+## Estimate tx fee
+
+```php
+$type='coin/send_coin';
+$txPayload = [
+    'to'=>'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'coin'=>'del',
+    'amount'=>'1'
+     ];
+$options=[
+    'freeCoin'=>'del',
+    'message'=>'message from Eugene',
+    'gasLimit'=>'9000000000000000000',
+    'mode'=>'sync'
+    ];
+$transaction = new Transaction($wallet);
+$result = $transaction->estimateTxFee($type ,$txPayload,$options);
+ ```
+
+
 
 ## Check required fields
+
 ```php
 $result = $transaction->checkRequiredFields($data ,$txPayload);
 ```
