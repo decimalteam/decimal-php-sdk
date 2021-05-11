@@ -155,6 +155,16 @@ $txPayload = [
 
 $result = $transaction->createCoin($txPayload);
 ```
+## Update coin
+```php
+$txPayload = [
+    'ticker' => 'TESTTT',
+    'maxSupply' => '1000000',
+    'identity'=>'e353b89e0de0a78974f9ecaf033721ac'
+];
+
+$result = $transaction->createCoin($txPayload);
+```
 
 ## Multisig create
 ```php
@@ -188,47 +198,85 @@ $txPayload = [
 $result = $transaction->multisigSignTX($txPayload);
 ```
 
-## Create NFT 
+## Multisend Coins
 ```php
 $txPayload = [
-    'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
+    'sender'=>  $wallet->getAddress(),
+           'sends'=>[
+               [
+                    'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
+                   'coin'=>  'DEL',
+                   'amount'=> 100
+                ],
+                [
+                    'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
+                    'coin'=>  'DEL',
+                    'amount'=> 100
+                ]
+            ]
 ];
 
-$result = $transaction->createNftMint($txPayload);
-```
+$result = $transaction->multisigSignTX($txPayload);
 
-## Burn NFT
+```
+## Proposal vote
 ```php
 $txPayload = [
-    'id' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
-    'denom' => 'denom',
-    'quantity' => 3,
-];
+    'id' => 1,
+   'decision'=> 'Yes'//Yes or No
+    ];
 
-$result = $transaction->burnNft($txPayload);
+$result = $transaction->proposalVote($txPayload);
 ```
-
-## Transfer NFT
+# Swap HTLT
 ```php
 $txPayload = [
-    'id' => 'id',
-    'recipient' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
-    'quantity' => 10,
-];
+    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
+    'recipient'=>  '0x767315FBd4f90d05D5169E1611C0982629ff8d22',
+    'secretHash'=>  'pass',
+    'type'=>  'out',//out or in
+    'amount'=>  '10',
+    'coin'=>  'DEL',
+     ];
 
-$result = $transaction->transferNft($txPayload);
+$result = $transaction->msgSwapHTLT($txPayload);
 ```
-
-## Edit NFT Metadata
+# Swap redeem
 ```php
 $txPayload = [
-    'id' => 'id',
-    'token_uri' => 'token_uri',
-];
+    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
+    'secretHash'=>  'pass',
+     ];
 
-$result = $transaction->editNftMetadata($txPayload);
+$result = $transaction->msgSwapRedeem($txPayload);
 ```
+# Swap refund
+```php
+$txPayload = [
+    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
+    'secretHash'=>  'pass',
+     ];
+ ```
 
+# Estimate tx fee
+```php
+$type='coin/send_coin';
+$txPayload = [
+    'to'=>'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'coin'=>'del',
+    'amount'=>'1'
+     ];
+$options=[
+    'freeCoin'=>'del',
+    'message'=>'message from Eugene',
+    'gasLimit'=>'9000000000000000000',
+    'mode'=>'sync'
+    ];
+     
+$result = $transaction->estimateTxFee($type ,$txPayload,$options);
+ ```
+
+$result = $transaction->msgSwapRefund($txPayload);
 ## Check required fields
 ```php
 $result = $transaction->checkRequiredFields($data ,$txPayload);

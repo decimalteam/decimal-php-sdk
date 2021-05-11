@@ -13,6 +13,7 @@ class ApiRequester
     const GET = 'get';
     const POST = 'post';
 
+
     private $options;
     private $client;
     private $validModes = ['sync', 'async', 'block'];
@@ -26,10 +27,11 @@ class ApiRequester
         ]);
     }
 
-    public function getSignMeta(Wallet $wallet)
+    public function getSignMeta(Wallet $wallet,$createNonce=true)
     {
         $nodeInfo = $this->getNodeInfo();
-        $accountInfo = $this->getAccountInfo($wallet->getAddress());
+
+        $accountInfo = $this->getAccountInfo($wallet->getAddress(),$createNonce);
 
         return [
             'sequence' => $accountInfo->result->value->sequence,
@@ -44,9 +46,13 @@ class ApiRequester
         return $this->_request($url, self::GET);
     }
 
-    public function getAccountInfo($address)
+    public function getAccountInfo($address,$createNonce)
     {
-        $url = "rpc/auth/accounts/$address";
+        if($createNonce){
+            $url = "rpc/auth/accounts/$address";
+        }else{
+            $url = "rpc/accounts/$address";
+        }
         return $this->_request($url, self::GET);
     }
 
@@ -149,7 +155,6 @@ class ApiRequester
         $url = "rpc/txs";
         $mode = isset($options['mode']) ? $options['mode'] : 'sync';
         $tx = ['tx' => $tx, 'mode' => $mode];
-
         return $this->txResult($this->_request($url, self::POST, $tx, $options));
     }
 
@@ -180,6 +185,7 @@ class ApiRequester
     public function txResult($jsonResp)
     {
         $resp = $jsonResp;
+
         if (property_exists('jsonResp', 'code')) {
             if ($jsonResp->raw_log) {
                 $rawLogAsString = json_encode($jsonResp->raw_log);
@@ -190,7 +196,8 @@ class ApiRequester
                 }
                 $resp = $this->getError($errorMessage, $jsonResp->code, $jsonResp->txhash);
             }
-        } else if (property_exists('jsonResp', 'txhash')) {
+        } else if (property_exists('jsonResp', 'txhash'))
+        {
             $resp = [
                 'hash' => $jsonResp->txhash,
                 'success' => true,
