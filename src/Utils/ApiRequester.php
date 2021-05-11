@@ -27,11 +27,11 @@ class ApiRequester
         ]);
     }
 
-    public function getSignMeta(Wallet $wallet,$createNonce=true)
+    public function getSignMeta(Wallet $wallet)
     {
         $nodeInfo = $this->getNodeInfo();
 
-        $accountInfo = $this->getAccountInfo($wallet->getAddress(),$createNonce);
+        $accountInfo = $this->getAccountInfo($wallet->getAddress());
 
         return [
             'sequence' => $accountInfo->result->value->sequence,
@@ -46,11 +46,11 @@ class ApiRequester
         return $this->_request($url, self::GET);
     }
 
-    public function getAccountInfo($address,$createNonce)
+    public function getAccountInfo($address)
     {
-        if($createNonce){
+        if (isset($this->options['createNonce'])) {
             $url = "rpc/auth/accounts/$address";
-        }else{
+        } else {
             $url = "rpc/accounts/$address";
         }
         return $this->_request($url, self::GET);
@@ -196,8 +196,7 @@ class ApiRequester
                 }
                 $resp = $this->getError($errorMessage, $jsonResp->code, $jsonResp->txhash);
             }
-        } else if (property_exists('jsonResp', 'txhash'))
-        {
+        } else if (property_exists('jsonResp', 'txhash')) {
             $resp = [
                 'hash' => $jsonResp->txhash,
                 'success' => true,
