@@ -283,6 +283,7 @@ $txPayload = [
     'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
     'secretHash'=>  'pass',
      ];
+$result = $transaction->msgSwapRefund($txPayload);
  ```
 
 # Estimate tx fee
@@ -304,7 +305,7 @@ $transaction = new Transaction($wallet);
 $result = $transaction->estimateTxFee($type ,$txPayload,$options);
  ```
 
-$result = $transaction->msgSwapRefund($txPayload);
+
 
 ## Check required fields
 
