@@ -250,7 +250,7 @@ $txPayload = [
 $result = $transaction->proposalVote($txPayload);
 ```
 
-# Swap HTLT
+## Swap HTLT
 
 ```php
 $txPayload = [
@@ -265,7 +265,7 @@ $txPayload = [
 $result = $transaction->msgSwapHTLT($txPayload);
 ```
 
-# Swap redeem
+## Swap redeem
 
 ```php
 $txPayload = [
@@ -276,7 +276,7 @@ $txPayload = [
 $result = $transaction->msgSwapRedeem($txPayload);
 ```
 
-# Swap refund
+## Swap refund
 
 ```php
 $txPayload = [
@@ -286,7 +286,7 @@ $txPayload = [
 $result = $transaction->msgSwapRefund($txPayload);
  ```
 
-# Estimate tx fee
+## Estimate tx fee
 
 ```php
 $type='coin/send_coin';
