@@ -303,7 +303,7 @@ $options=[
     ];
 $transaction = new Transaction($wallet);
 $result = $transaction->estimateTxFee($type ,$txPayload,$options);
- ```
+```
 
 
 
