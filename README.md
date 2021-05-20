@@ -284,7 +284,7 @@ $txPayload = [
     'secretHash'=>  'pass',
      ];
 $result = $transaction->msgSwapRefund($txPayload);
- ```
+```
 ## NTF mint
 ```php
 $txPayload = [
@@ -296,7 +296,7 @@ $txPayload = [
     'allow_mint'=> true
      ];
 $result = $transaction->createNftMint($txPayload);
- ```
+```
 
 ## NTF burn
 ```php
@@ -306,7 +306,7 @@ $txPayload = [
     'quantity'=> '1'
      ];
 $result = $transaction->burnNft($txPayload);
- ```
+```
 ## NTF edit metadata
 ```php
 $txPayload = [
@@ -315,7 +315,7 @@ $txPayload = [
     'token_uri'=> 'uhttp://devnet.nft.decimalchain.com/api/nfts/CvavSYvudYqiGeOY67dzLmdl6NjqTdEb'
      ];
 $result = $transaction->editNftMetadata($txPayload);
- ```
+```
 ## NTF transfer
 ```php
 $txPayload = [
@@ -325,7 +325,7 @@ $txPayload = [
     'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
 $result = $transaction->transferNft($txPayload);
- ```
+```
 
 
 ## Estimate tx fee
