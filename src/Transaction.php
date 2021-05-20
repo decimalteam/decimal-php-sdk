@@ -13,10 +13,10 @@ class Transaction
     use TransactionHelpers;
 
     const MAX_SPEND_LIMIT = '100000000000';
-    const ADDITIONAL_COMISSION=20;
-    const UNIT=0.001;
-    const PUB_KEY_TYPE='tendermint/PubKeySecp256k1';
-    const DEFAULT_GAS_LIMIT='9000000000000000000';
+    const ADDITIONAL_COMISSION = 20;
+    const UNIT = 0.001;
+    const PUB_KEY_TYPE = 'tendermint/PubKeySecp256k1';
+    const DEFAULT_GAS_LIMIT = '9000000000000000000';
 
     private $account;
     private $wallet;
@@ -324,13 +324,15 @@ class Transaction
                     'denom' => 'string',
                     'token_uri' => 'string',
                     'quantity' => 'number',
-                    'allow_mint' => 'boolean'
+                    'allow_mint' => 'boolean',
+                    'reserve' => 'number'
                 ],
                 'requiredFields' => [
                     'denom',
                     'token_uri',
                     'quantity',
-                    'allow_mint'
+                    'allow_mint',
+                    'reserve'
                 ],
             ],
         ],
@@ -342,11 +344,12 @@ class Transaction
                     'denom' => 'string',
                     'id' => 'string',
                     'quantity' => 'number',
+
                 ],
                 'requiredFields' => [
                     'denom',
                     'id',
-                    'quantity',
+                    'quantity'
                 ],
             ],
         ],
@@ -357,10 +360,12 @@ class Transaction
                 'fieldTypes' => [
                     'id' => 'string',
                     'token_uri' => 'string',
+                    'denom' => 'string',
                 ],
                 'requiredFields' => [
                     'id',
                     'token_uri',
+                    'denom'
                 ],
             ],
         ],
@@ -372,11 +377,13 @@ class Transaction
                     'id' => 'string',
                     'recipient' => 'string',
                     'quantity' => 'number',
+                    'denom' => 'string'
                 ],
                 'requiredFields' => [
                     'id',
                     'recipient',
                     'quantity',
+                    'denom'
                 ],
             ],
         ],
@@ -905,8 +912,8 @@ class Transaction
         $payload['fee'] = $this->txSchemes[$typeTrans]['fee'];
 
         $prePayload = $this->formatePrepayload($type, $payload);
-        $flag=['estimateTxFee'=>true];
-        $preparedTx = $this->prepareTransaction($type, $prePayload,$flag);
+        $flag = ['estimateTxFee' => true];
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $flag);
 
         $fee = $this->getCommission($preparedTx, $options['freeCoin'], $payload['fee']);
 

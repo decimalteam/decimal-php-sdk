@@ -486,14 +486,20 @@ trait TransactionHelpers
 
     public function nftMintPayload($payload)
     {
+        if (isset($payload['id'])) {
+            $id = $payload['id'];
+        } else {
+            $id = $this->guidv4();
+        }
         return [
-            'id' => $this->guidv4(),
+            'id' => $id,
             'denom' => $payload['denom'],
             'token_uri' => $payload['token_uri'],
             'quantity' => $payload['quantity'],
-            'reserve' => pow(10, 18),
+            'reserve' => amountUNIRecalculate($payload['reserve']),
             'sender' => $this->wallet->getAddress(),
-            'recipient' => $payload['recipient'] ?? $this->wallet->getAddress()
+            'recipient' => $payload['recipient'] ?? $this->wallet->getAddress(),
+            'allow_mint' => $payload['allow_mint']
         ];
     }
 
@@ -503,6 +509,7 @@ trait TransactionHelpers
             'id' => $payload['id'],
             'denom' => $payload['denom'],
             'quantity' => $payload['quantity'],
+            'sender' => $this->wallet->getAddress()
         ];
     }
 
@@ -511,6 +518,8 @@ trait TransactionHelpers
         return [
             'id' => $payload['id'],
             'token_uri' => $payload['token_uri'],
+            'sender' => $this->wallet->getAddress(),
+            'denom' => $payload['denom']
         ];
     }
 
@@ -520,6 +529,8 @@ trait TransactionHelpers
             'id' => $payload['id'],
             'recipient' => $payload['recipient'],
             'quantity' => $payload['quantity'],
+            'denom' => $payload['denom'],
+            'sender' => $this->wallet->getAddress()
         ];
     }
 
