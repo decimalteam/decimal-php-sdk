@@ -270,7 +270,7 @@ trait TransactionHelpers
                 return $this->nftMintPayload($payload);
                 break;
             case $this->txSchemes['NFT_BURN']['type'];
-                $this->nftBurnPayload($payload);
+                return $this->nftBurnPayload($payload);
                 break;
             case $this->txSchemes['NFT_EDIT_METADATA']['type'];
                 return $this->nftEditMetadataPayload($payload);

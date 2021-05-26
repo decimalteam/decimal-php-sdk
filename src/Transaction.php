@@ -820,7 +820,6 @@ class Transaction
     {
         $type = $this->txSchemes['NFT_BURN']['type'];
         $result = $this->checkRequiredFields('NFT_BURN', $payload);
-
         $payload['fee'] = $this->txSchemes['NFT_BURN']['fee'];
         $prePayload = $this->formatePrepayload($type, $payload);
         $preparedTx = $this->prepareTransaction($type, $prePayload);
