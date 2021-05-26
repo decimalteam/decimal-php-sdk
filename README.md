@@ -327,6 +327,28 @@ $txPayload = [
 $result = $transaction->transferNft($txPayload);
 ```
 
+## NTF delegate
+```php
+$txPayload = [
+    'denom'=> 'timPhone',
+    'id'=> 'id25',
+    'sub_token_ids'=> [1,2],
+    'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+     ];
+$result = $transaction->nftDelegate($txPayload);
+```
+
+## NTF unbond
+```php
+$txPayload = [
+    'denom'=> 'timPhone',
+    'id'=> 'id25',
+    'sub_token_ids'=> [1,2],
+    'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+     ];
+$result = $transaction->nftUnbond($txPayload);
+```
+
 
 ## Estimate tx fee
 

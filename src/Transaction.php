@@ -343,13 +343,13 @@ class Transaction
                 'fieldTypes' => [
                     'denom' => 'string',
                     'id' => 'string',
-                    'quantity' => 'number',
+                    'sub_token_ids' => 'array',
 
                 ],
                 'requiredFields' => [
                     'denom',
                     'id',
-                    'quantity'
+                    'sub_token_ids'
                 ],
             ],
         ],
@@ -376,13 +376,49 @@ class Transaction
                 'fieldTypes' => [
                     'id' => 'string',
                     'recipient' => 'string',
-                    'quantity' => 'number',
+                    'sub_token_ids' => 'array',
                     'denom' => 'string'
                 ],
                 'requiredFields' => [
                     'id',
                     'recipient',
-                    'quantity',
+                    'sub_token_ids',
+                    'denom'
+                ],
+            ],
+        ],
+        'NFT_DELEGATE' => [
+            'fee' => 0,
+            'type' => 'validator/delegate_nft',
+            'scheme' => [
+                'fieldTypes' => [
+                    'id' => 'string',
+                    'validator_address' => 'string',
+                    'sub_token_ids' => 'array',
+                    'denom' => 'string'
+                ],
+                'requiredFields' => [
+                    'id',
+                    'validator_address',
+                    'sub_token_ids',
+                    'denom'
+                ],
+            ],
+        ],
+        'NFT_UNBOND' => [
+            'fee' => 0,
+            'type' => 'validator/unbond_nft',
+            'scheme' => [
+                'fieldTypes' => [
+                    'id' => 'string',
+                    'validator_address' => 'string',
+                    'sub_token_ids' => 'array',
+                    'denom' => 'string'
+                ],
+                'requiredFields' => [
+                    'id',
+                    'validator_address',
+                    'sub_token_ids',
                     'denom'
                 ],
             ],
@@ -821,6 +857,36 @@ class Transaction
         $result = $this->checkRequiredFields('NFT_EDIT_METADATA', $payload);
 
         $payload['fee'] = $this->txSchemes['NFT_EDIT_METADATA']['fee'];
+        $prePayload = $this->formatePrepayload($type, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    /**
+     * @param $payload
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    public function nftDelegate($payload)
+    {
+        $type = $this->txSchemes['NFT_DELEGATE']['type'];
+        $result = $this->checkRequiredFields('NFT_DELEGATE', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_DELEGATE']['fee'];
+        $prePayload = $this->formatePrepayload($type, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    public function nftUnbond($payload)
+    {
+        $type = $this->txSchemes['NFT_UNBOND']['type'];
+        $result = $this->checkRequiredFields('NFT_UNBOND', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_UNBOND']['fee'];
         $prePayload = $this->formatePrepayload($type, $payload);
         $preparedTx = $this->prepareTransaction($type, $prePayload);
 
