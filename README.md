@@ -284,7 +284,71 @@ $txPayload = [
     'secretHash'=>  'pass',
      ];
 $result = $transaction->msgSwapRefund($txPayload);
- ```
+```
+## NTF mint
+```php
+$txPayload = [
+    'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
+    'denom'=> 'phone',
+    'token_uri'=> 'https://develop.nft.decimalchain.com/api/nfts/pepe112',
+    'quantity'=> '1',
+    'reserve'=> '1',
+    'allow_mint'=> true
+     ];
+$result = $transaction->createNftMint($txPayload);
+```
+
+## NTF burn
+```php
+$txPayload = [
+    'denom'=> 'phone',
+    'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
+    'sub_token_ids'=> [1,2]
+     ];
+$result = $transaction->burnNft($txPayload);
+```
+## NTF edit metadata
+```php
+$txPayload = [
+    'denom'=> 'phone',
+    'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
+    'token_uri'=> 'uhttp://devnet.nft.decimalchain.com/api/nfts/CvavSYvudYqiGeOY67dzLmdl6NjqTdEb'
+     ];
+$result = $transaction->editNftMetadata($txPayload);
+```
+## NTF transfer
+```php
+$txPayload = [
+    'denom'=> 'phone',
+    'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
+    'sub_token_ids'=> [1,2],
+    'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+     ];
+$result = $transaction->transferNft($txPayload);
+```
+
+## NTF delegate
+```php
+$txPayload = [
+    'denom'=> 'timPhone',
+    'id'=> 'id25',
+    'sub_token_ids'=> [1,2],
+    'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+     ];
+$result = $transaction->nftDelegate($txPayload);
+```
+
+## NTF unbond
+```php
+$txPayload = [
+    'denom'=> 'timPhone',
+    'id'=> 'id25',
+    'sub_token_ids'=> [1,2],
+    'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+     ];
+$result = $transaction->nftUnbond($txPayload);
+```
+
 
 ## Estimate tx fee
 
