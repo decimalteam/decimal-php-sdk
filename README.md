@@ -303,7 +303,7 @@ $result = $transaction->createNftMint($txPayload);
 $txPayload = [
     'denom'=> 'phone',
     'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
-    'quantity'=> '1'
+    'sub_token_ids'=> [1,2]
      ];
 $result = $transaction->burnNft($txPayload);
 ```
@@ -321,10 +321,32 @@ $result = $transaction->editNftMetadata($txPayload);
 $txPayload = [
     'denom'=> 'phone',
     'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
-    'quantity'=> '1',
+    'sub_token_ids'=> [1,2],
     'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
 $result = $transaction->transferNft($txPayload);
+```
+
+## NTF delegate
+```php
+$txPayload = [
+    'denom'=> 'timPhone',
+    'id'=> 'id25',
+    'sub_token_ids'=> [1,2],
+    'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+     ];
+$result = $transaction->nftDelegate($txPayload);
+```
+
+## NTF unbond
+```php
+$txPayload = [
+    'denom'=> 'timPhone',
+    'id'=> 'id25',
+    'sub_token_ids'=> [1,2],
+    'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+     ];
+$result = $transaction->nftUnbond($txPayload);
 ```
 
 
