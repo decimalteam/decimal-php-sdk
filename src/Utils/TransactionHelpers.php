@@ -96,10 +96,13 @@ trait TransactionHelpers
                 }
                 $mustBe = $scheme['fieldTypes'][$key];
                 $fieldType = gettype($value);
+                if ($mustBe == 'integer') {
+                    $value *= 1;
+                }
                 if (
                     ($mustBe === 'number' && (!in_array($fieldType, ['integer', 'double']) && !is_numeric($value)))
                     || ($mustBe === 'string' && $fieldType !== 'string')
-                    || ($mustBe === 'array' && !is_array($value))
+                    || ($mustBe === 'array' && !is_array($value)) || ($mustBe == 'integer' && !is_int($value))
                 ) {
                     $errors[$key] = "field must be a $mustBe";
                     continue;
