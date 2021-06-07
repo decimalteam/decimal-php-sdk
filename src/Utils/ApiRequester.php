@@ -94,6 +94,14 @@ class ApiRequester
         return $res;
     }
 
+    public function getNftMetadata($addressNft)
+    {
+        if (!$addressNft) throw new DecimalException('address is required');
+        $url = "nfts/$addressNft";
+        $res = $this->_request($url, self::GET);
+        return $res;
+    }
+
     public function getMultisigsByAdress($address)
     {
         if (!$address) throw new DecimalException('address is required');
