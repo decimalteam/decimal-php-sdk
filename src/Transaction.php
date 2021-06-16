@@ -986,6 +986,16 @@ class Transaction
     }
 
     /**
+     * @param $addresssNft
+     * @return array|mixed
+     * @throws DecimalException
+     */
+    public function getNftMetadata($addressNft)
+    {
+        return $this->requester->getNftMetadata($addressNft);
+    }
+
+    /**
      * @param $name
      * @param $payload
      * @return bool

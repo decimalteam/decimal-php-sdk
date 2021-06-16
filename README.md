@@ -285,7 +285,7 @@ $txPayload = [
      ];
 $result = $transaction->msgSwapRefund($txPayload);
 ```
-## NTF mint
+## NFT mint
 ```php
 $txPayload = [
     'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
@@ -298,7 +298,7 @@ $txPayload = [
 $result = $transaction->createNftMint($txPayload);
 ```
 
-## NTF burn
+## NFT burn
 ```php
 $txPayload = [
     'denom'=> 'phone',
@@ -307,7 +307,7 @@ $txPayload = [
      ];
 $result = $transaction->burnNft($txPayload);
 ```
-## NTF edit metadata
+## NFT edit metadata
 ```php
 $txPayload = [
     'denom'=> 'phone',
@@ -316,7 +316,7 @@ $txPayload = [
      ];
 $result = $transaction->editNftMetadata($txPayload);
 ```
-## NTF transfer
+## NFT transfer
 ```php
 $txPayload = [
     'denom'=> 'phone',
@@ -327,7 +327,7 @@ $txPayload = [
 $result = $transaction->transferNft($txPayload);
 ```
 
-## NTF delegate
+## NFT delegate
 ```php
 $txPayload = [
     'denom'=> 'timPhone',
@@ -338,7 +338,7 @@ $txPayload = [
 $result = $transaction->nftDelegate($txPayload);
 ```
 
-## NTF unbond
+## NFT unbond
 ```php
 $txPayload = [
     'denom'=> 'timPhone',
@@ -347,6 +347,11 @@ $txPayload = [
     'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
 $result = $transaction->nftUnbond($txPayload);
+```
+
+## get NFT metadata
+```php
+$result = $transaction->getNftMetadata('ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6');
 ```
 
 
