@@ -323,7 +323,7 @@ class Transaction
                 'fieldTypes' => [
                     'denom' => 'string',
                     'token_uri' => 'string',
-                    'quantity' => 'number',
+                    'quantity' => 'integer',
                     'allow_mint' => 'boolean',
                     'reserve' => 'number'
                 ],
