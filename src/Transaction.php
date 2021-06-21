@@ -64,7 +64,7 @@ class Transaction
             ],
         ],
         'COIN_UPDATE' => [
-            'fee' => 100,
+            'fee' => 0,
             'type' => 'coin/update_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -114,7 +114,7 @@ class Transaction
         ],
         //todo check schema multisend
         'COIN_MULTISEND' => [
-            'fee' => 10,
+            'fee' => 8,
             'type' => 'coin/multi_send_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -424,7 +424,7 @@ class Transaction
             ],
         ],
         'PROPOSAL_VOTE' => [
-            'fee' => 100,
+            'fee' => 0,
             'type' => 'cosmos-sdk/MsgVote',
             'scheme' => [
                 'fieldTypes' => [
@@ -437,56 +437,56 @@ class Transaction
                 ],
             ]
         ],
-        'SWAP_HTLT' => [
-            'fee' => 100,
-            'type' => 'swap/msg_htlt',
+        'SWAP_INIT' => [
+            'fee' => 33000,
+            'type' => 'swap/msg_initialize',
             'scheme' => [
                 'fieldTypes' => [
-                    'type' => 'string',
-                    'from' => 'string',
                     'recipient' => 'string',
-                    'secretHash' => 'string',
+                    'tokenName' => 'string',
                     'amount' => 'number',
-                    'coin' => 'string'
+                    'tokenSymbol' => 'string',
+                    'destChain'=> 'number'
                 ],
                 'requiredFields' => [
-                    'type',
-                    'from',
                     'recipient',
-                    'secretHash',
+                    'tokenName',
                     'amount',
-                    'coin'
+                    'tokenSymbol',
+                    'destChain'
                 ],
             ]
         ],
         'SWAP_REDEEM' => [
-            'fee' => 100,
+            'fee' => 0,
             'type' => 'swap/msg_redeem',
             'scheme' => [
                 'fieldTypes' => [
                     'from' => 'string',
-                    'secretHash' => 'string',
+                    'amount' => 'number',
+                    'recipient' => 'string',
+                    'tokenName' => 'string',
+                    'transactionNumber' => 'string',
+                    'tokenSymbol' => 'string',
+                    'fromChain'=> 'number',
+                    'v' => 'string',
+                    'r' => 'string',
+                    's' => 'string'
                 ],
                 'requiredFields' => [
                     'from',
-                    'secretHash',
+                    'amount',
+                    'recipient',
+                    'tokenName',
+                    'transactionNumber',
+                    'tokenSymbol',
+                    'fromChain',
+                    'v',
+                    'r',
+                    's'
                 ],
             ]
         ],
-        'SWAP_REFUND' => [
-            'fee' => 100,
-            'type' => 'swap/msg_refund',
-            'scheme' => [
-                'fieldTypes' => [
-                    'from' => 'string',
-                    'secretHash' => 'string',
-                ],
-                'requiredFields' => [
-                    'from',
-                    'secretHash',
-                ],
-            ]
-        ]
     ];
 
     /**
@@ -689,7 +689,7 @@ class Transaction
     {
         $type = $this->txSchemes['VALIDATOR_SET_OFFLINE']['type'];
 
-        $prePayload = $this->formatePrepayload($type, $payload);
+        $prePayload = $this->formatePrepayload($type);
         $payload['fee'] = $this->txSchemes['VALIDATOR_SET_OFFLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
         return $this->requester->sendTx($preparedTx);
@@ -704,7 +704,7 @@ class Transaction
     {
         $type = $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
 
-        $prePayload = $this->formatePrepayload($type, $payload);
+        $prePayload = $this->formatePrepayload($type);
         $payload['fee'] = $this->txSchemes['VALIDATOR_SET_ONLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
         return $this->requester->sendTx($preparedTx);
@@ -916,11 +916,11 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function msgSwapHTLT($payload)
+    public function msgSwapInit($payload)
     {
-        $type = $this->txSchemes['SWAP_HTLT']['type'];
-        $result = $this->checkRequiredFields('SWAP_HTLT', $payload);
-        $payload['fee'] = $this->txSchemes['SWAP_HTLT']['fee'];
+        $type = $this->txSchemes['SWAP_INIT']['type'];
+        $result = $this->checkRequiredFields('SWAP_INIT', $payload);
+        $payload['fee'] = $this->txSchemes['SWAP_INIT']['fee'];
         $prePayload = $this->formatePrepayload($type, $payload);
         $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
@@ -942,21 +942,6 @@ class Transaction
         return $this->requester->sendTx($preparedTx);
     }
 
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
-    public function msgSwapRefund($payload)
-    {
-        $type = $this->txSchemes['SWAP_REFUND']['type'];
-        $result = $this->checkRequiredFields('SWAP_REFUND', $payload);
-        $payload['fee'] = $this->txSchemes['SWAP_REFUND']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
-    }
 
     /**
      * @param $type
