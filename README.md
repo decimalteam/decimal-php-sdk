@@ -250,7 +250,7 @@ $txPayload = [
 $result = $transaction->proposalVote($txPayload);
 ```
 
-## Swap HTLT
+## Swap init
 
 ```php
 $txPayload = [
@@ -262,29 +262,29 @@ $txPayload = [
     'coin'=>  'DEL',
      ];
 
-$result = $transaction->msgSwapHTLT($txPayload);
+$result = $transaction->msgSwapInit($txPayload);
 ```
 
 ## Swap redeem
 
 ```php
 $txPayload = [
-    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
-    'secretHash'=>  'pass',
+    'from'=> '0x45376AD024c767577714C7B92882578aE8B7f98C',
+            'amount'=> '1',
+            'recipient'=> 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+            'tokenName'=> 'decimal',
+            'transactionNumber'=> 'lksdnd-asvkla-SDCds',
+            'tokenSymbol'=> 'del',
+            'fromChain'=> '2',
+            'v'=> 0x1c,
+            'r'=> '0x0e0eb6089caa52794f7ad64a5ad7ab500b12cc7b640180e30b30b48a19c296e1',
+            's'=> '0x2005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3',
      ];
 
 $result = $transaction->msgSwapRedeem($txPayload);
 ```
 
-## Swap refund
 
-```php
-$txPayload = [
-    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
-    'secretHash'=>  'pass',
-     ];
-$result = $transaction->msgSwapRefund($txPayload);
-```
 ## NFT mint
 ```php
 $txPayload = [

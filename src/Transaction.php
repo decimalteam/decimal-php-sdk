@@ -469,7 +469,7 @@ class Transaction
                     'transactionNumber' => 'string',
                     'tokenSymbol' => 'string',
                     'fromChain'=> 'number',
-                    'v' => 'string',
+                    'v' => 'number',
                     'r' => 'string',
                     's' => 'string'
                 ],
