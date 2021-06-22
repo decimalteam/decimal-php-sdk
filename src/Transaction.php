@@ -12,6 +12,36 @@ class Transaction
 {
     use TransactionHelpers;
 
+    //constants for fee
+    const COIN_SEND = 10;
+    const COIN_BUY = 100;
+    const COIN_CREATE = 100;
+    const COIN_SELL = 100;
+    const COIN_MULTISEND = 8;
+    const COIN_SELL_ALL = 100;
+    const COIN_REDEEM_CHECK = 30;
+    const COIN_ISSUE_CHECK = 0;
+    const VALIDATOR_CANDIDATE = 10000;
+    const VALIDATOR_DELEGATE = 200;
+    const VALIDATOR_SET_ONLINE = 100;
+    const VALIDATOR_SET_OFFLINE = 100;
+    const VALIDATOR_UNBOND = 200;
+    const VALIDATOR_CANDIDATE_EDIT = 10000;
+    const MULTISIG_CREATE_WALLET = 100;
+    const MULTISIG_CREATE_TX = 100;
+    const MULTISIG_SIGN_TX = 100;
+    const PROPOSAL_SUBMIT = 0;
+    const PROPOSAL_VOTE = 0;
+    const SWAP_INIT = 33000;
+    const SWAP_REDEEM = 0;
+    const COIN_UPDATE = 0;
+    const NFT_MINT = 0;
+    const NFT_BURN = 0;
+    const NFT_EDIT_METADATA = 0;
+    const NFT_TRANSFER = 0;
+    const NFT_DELEGATE = 0;
+    const NFT_UNBOND = 0;
+
     const MAX_SPEND_LIMIT = '100000000000';
     const ADDITIONAL_COMISSION = 20;
     const UNIT = 0.001;
@@ -25,7 +55,7 @@ class Transaction
 
     protected $txSchemes = [
         'COIN_BUY' => [
-            'fee' => 100,
+            'fee' => self::COIN_BUY,
             'type' => 'coin/buy_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -42,7 +72,7 @@ class Transaction
             ],
         ],
         'COIN_CREATE' => [
-            'fee' => 100,
+            'fee' => self::COIN_CREATE,
             'type' => 'coin/create_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -64,7 +94,7 @@ class Transaction
             ],
         ],
         'COIN_UPDATE' => [
-            'fee' => 100,
+            'fee' => self::COIN_UPDATE,
             'type' => 'coin/update_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -80,7 +110,7 @@ class Transaction
             ]
         ],
         'COIN_SELL' => [
-            'fee' => 100,
+            'fee' => self::COIN_SELL,
             'type' => 'coin/sell_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -97,7 +127,7 @@ class Transaction
             ],
         ],
         'COIN_SEND' => [
-            'fee' => 10,
+            'fee' => self::COIN_SEND,
             'type' => 'coin/send_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -114,7 +144,7 @@ class Transaction
         ],
         //todo check schema multisend
         'COIN_MULTISEND' => [
-            'fee' => 10,
+            'fee' => self::COIN_MULTISEND,
             'type' => 'coin/multi_send_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -130,7 +160,7 @@ class Transaction
             ],
         ],
         'COIN_SELL_ALL' => [
-            'fee' => 100,
+            'fee' => self::COIN_SELL_ALL,
             'type' => 'coin/sell_all_coin',
             'scheme' => [
                 'fieldTypes' => [
@@ -145,7 +175,7 @@ class Transaction
             ],
         ],
         'COIN_REDEEM_CHECK' => [
-            'fee' => 30,
+            'fee' => self::COIN_REDEEM_CHECK,
             'type' => 'coin/redeem_check',
             'scheme' => [
                 'fieldTypes' => [
@@ -159,7 +189,7 @@ class Transaction
             ],
         ],
         'COIN_ISSUE_CHECK' => [
-            'fee' => 0,
+            'fee' => self::COIN_ISSUE_CHECK,
             'type' => 'coin/issue_check',
             'scheme' => [
                 'fieldTypes' => [
@@ -179,7 +209,7 @@ class Transaction
             ],
         ],
         'VALIDATOR_CANDIDATE' => [
-            'fee' => 10000,
+            'fee' => self::VALIDATOR_CANDIDATE,
             'type' => 'validator/declare_candidate',
             'scheme' => [
                 'fieldTypes' => [
@@ -209,7 +239,7 @@ class Transaction
             ],
         ],
         'VALIDATOR_DELEGATE' => [
-            'fee' => 200,
+            'fee' => self::VALIDATOR_DELEGATE,
             'type' => 'validator/delegate',
             'scheme' => [
                 'fieldTypes' => [
@@ -225,15 +255,15 @@ class Transaction
             ],
         ],
         'VALIDATOR_SET_ONLINE' => [
-            'fee' => 100,
+            'fee' => self::VALIDATOR_SET_ONLINE,
             'type' => 'validator/set_online'
         ],
         'VALIDATOR_SET_OFFLINE' => [
-            'fee' => 100,
+            'fee' => self::VALIDATOR_SET_OFFLINE,
             'type' => 'validator/set_offline'
         ],
         'VALIDATOR_UNBOND' => [
-            'fee' => 200,
+            'fee' => self::VALIDATOR_UNBOND,
             'type' => 'validator/unbond',
             'scheme' => [
                 'fieldTypes' => [
@@ -249,7 +279,7 @@ class Transaction
             ],
         ],
         'VALIDATOR_CANDIDATE_EDIT' => [
-            'fee' => 10000,
+            'fee' => self::VALIDATOR_CANDIDATE_EDIT,
             'type' => 'validator/edit_candidate',
             'scheme' => [
                 'fieldTypes' => [
@@ -271,7 +301,7 @@ class Transaction
             ],
         ],
         'MULTISIG_CREATE_WALLET' => [
-            'fee' => 100,
+            'fee' => self::MULTISIG_CREATE_WALLET,
             'type' => 'multisig/create_wallet',
             'scheme' => [
                 'fieldTypes' => [
@@ -287,7 +317,7 @@ class Transaction
             ],
         ],
         'MULTISIG_CREATE_TX' => [
-            'fee' => 100,
+            'fee' => self::MULTISIG_CREATE_TX,
             'type' => 'multisig/create_transaction',
             'scheme' => [
                 'fieldTypes' => [
@@ -305,7 +335,7 @@ class Transaction
             ],
         ],
         'MULTISIG_SIGN_TX' => [
-            'fee' => 100,
+            'fee' => self::MULTISIG_SIGN_TX,
             'type' => 'multisig/sign_transaction',
             'scheme' => [
                 'fieldTypes' => [
@@ -317,7 +347,7 @@ class Transaction
             ],
         ],
         'NFT_MINT' => [
-            'fee' => 0,
+            'fee' => self::NFT_MINT,
             'type' => 'nft/msg_mint',
             'scheme' => [
                 'fieldTypes' => [
@@ -337,7 +367,7 @@ class Transaction
             ],
         ],
         'NFT_BURN' => [
-            'fee' => 0,
+            'fee' => self::NFT_BURN,
             'type' => 'nft/msg_burn',
             'scheme' => [
                 'fieldTypes' => [
@@ -354,7 +384,7 @@ class Transaction
             ],
         ],
         'NFT_EDIT_METADATA' => [
-            'fee' => 0,
+            'fee' => self::NFT_EDIT_METADATA,
             'type' => 'nft/msg_edit_metadata',
             'scheme' => [
                 'fieldTypes' => [
@@ -370,7 +400,7 @@ class Transaction
             ],
         ],
         'NFT_TRANSFER' => [
-            'fee' => 0,
+            'fee' => self::NFT_TRANSFER,
             'type' => 'nft/msg_transfer',
             'scheme' => [
                 'fieldTypes' => [
@@ -388,7 +418,7 @@ class Transaction
             ],
         ],
         'NFT_DELEGATE' => [
-            'fee' => 0,
+            'fee' => self::NFT_DELEGATE,
             'type' => 'validator/delegate_nft',
             'scheme' => [
                 'fieldTypes' => [
@@ -406,7 +436,7 @@ class Transaction
             ],
         ],
         'NFT_UNBOND' => [
-            'fee' => 0,
+            'fee' => self::NFT_UNBOND,
             'type' => 'validator/unbond_nft',
             'scheme' => [
                 'fieldTypes' => [
@@ -424,7 +454,7 @@ class Transaction
             ],
         ],
         'PROPOSAL_VOTE' => [
-            'fee' => 100,
+            'fee' => self::PROPOSAL_VOTE,
             'type' => 'cosmos-sdk/MsgVote',
             'scheme' => [
                 'fieldTypes' => [
@@ -437,56 +467,56 @@ class Transaction
                 ],
             ]
         ],
-        'SWAP_HTLT' => [
-            'fee' => 100,
-            'type' => 'swap/msg_htlt',
+        'SWAP_INIT' => [
+            'fee' => self::SWAP_INIT,
+            'type' => 'swap/msg_initialize',
             'scheme' => [
                 'fieldTypes' => [
-                    'type' => 'string',
-                    'from' => 'string',
                     'recipient' => 'string',
-                    'secretHash' => 'string',
+                    'tokenName' => 'string',
                     'amount' => 'number',
-                    'coin' => 'string'
+                    'tokenSymbol' => 'string',
+                    'destChain' => 'number'
                 ],
                 'requiredFields' => [
-                    'type',
-                    'from',
                     'recipient',
-                    'secretHash',
+                    'tokenName',
                     'amount',
-                    'coin'
+                    'tokenSymbol',
+                    'destChain'
                 ],
             ]
         ],
         'SWAP_REDEEM' => [
-            'fee' => 100,
+            'fee' => self::SWAP_REDEEM,
             'type' => 'swap/msg_redeem',
             'scheme' => [
                 'fieldTypes' => [
                     'from' => 'string',
-                    'secretHash' => 'string',
+                    'amount' => 'number',
+                    'recipient' => 'string',
+                    'tokenName' => 'string',
+                    'transactionNumber' => 'string',
+                    'tokenSymbol' => 'string',
+                    'fromChain' => 'number',
+                    'v' => 'number',
+                    'r' => 'string',
+                    's' => 'string'
                 ],
                 'requiredFields' => [
                     'from',
-                    'secretHash',
+                    'amount',
+                    'recipient',
+                    'tokenName',
+                    'transactionNumber',
+                    'tokenSymbol',
+                    'fromChain',
+                    'v',
+                    'r',
+                    's'
                 ],
             ]
         ],
-        'SWAP_REFUND' => [
-            'fee' => 100,
-            'type' => 'swap/msg_refund',
-            'scheme' => [
-                'fieldTypes' => [
-                    'from' => 'string',
-                    'secretHash' => 'string',
-                ],
-                'requiredFields' => [
-                    'from',
-                    'secretHash',
-                ],
-            ]
-        ]
     ];
 
     /**
@@ -689,7 +719,7 @@ class Transaction
     {
         $type = $this->txSchemes['VALIDATOR_SET_OFFLINE']['type'];
 
-        $prePayload = $this->formatePrepayload($type, $payload);
+        $prePayload = $this->formatePrepayload($type);
         $payload['fee'] = $this->txSchemes['VALIDATOR_SET_OFFLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
         return $this->requester->sendTx($preparedTx);
@@ -704,7 +734,7 @@ class Transaction
     {
         $type = $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
 
-        $prePayload = $this->formatePrepayload($type, $payload);
+        $prePayload = $this->formatePrepayload($type);
         $payload['fee'] = $this->txSchemes['VALIDATOR_SET_ONLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
         return $this->requester->sendTx($preparedTx);
@@ -916,11 +946,11 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function msgSwapHTLT($payload)
+    public function msgSwapInit($payload)
     {
-        $type = $this->txSchemes['SWAP_HTLT']['type'];
-        $result = $this->checkRequiredFields('SWAP_HTLT', $payload);
-        $payload['fee'] = $this->txSchemes['SWAP_HTLT']['fee'];
+        $type = $this->txSchemes['SWAP_INIT']['type'];
+        $result = $this->checkRequiredFields('SWAP_INIT', $payload);
+        $payload['fee'] = $this->txSchemes['SWAP_INIT']['fee'];
         $prePayload = $this->formatePrepayload($type, $payload);
         $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
@@ -942,21 +972,6 @@ class Transaction
         return $this->requester->sendTx($preparedTx);
     }
 
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
-    public function msgSwapRefund($payload)
-    {
-        $type = $this->txSchemes['SWAP_REFUND']['type'];
-        $result = $this->checkRequiredFields('SWAP_REFUND', $payload);
-        $payload['fee'] = $this->txSchemes['SWAP_REFUND']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
-    }
 
     /**
      * @param $type

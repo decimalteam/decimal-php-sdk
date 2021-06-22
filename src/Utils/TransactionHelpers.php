@@ -284,20 +284,17 @@ trait TransactionHelpers
             case $this->txSchemes['NFT_DELEGATE']['type'];
                 return $this->nftDelegatePayload($payload);
                 break;
-            case $this->txSchemes['NFT_UNDOND']['type'];
+            case $this->txSchemes['NFT_UNBOND']['type'];
                 return $this->nftUnbondPayload($payload);
                 break;
             case  $this->txSchemes['PROPOSAL_VOTE']['type'];
                 return $this->proposalVotePayload($payload);
                 break;
-            case $this->txSchemes['SWAP_HTLT']['type'];
-                return $this->msgSwapHTLTPayload($payload);
+            case $this->txSchemes['SWAP_INIT']['type'];
+                return $this->msgSwapInitPayload($payload);
                 break;
             case $this->txSchemes['SWAP_REDEEM']['type'];
                 return $this->msgSwapRedeemPayload($payload);
-                break;
-            case $this->txSchemes['SWAP_REFUND']['type'];
-                return $this->msgSwapRefundPayload($payload);
                 break;
             default:
                 throw new DecimalException('Invalid type of transaction');
@@ -572,44 +569,38 @@ trait TransactionHelpers
         ];
     }
 
-    public function msgSwapHTLTPayload($payload)
+    public function msgSwapInitPayload($payload)
     {
-        if ($payload['type'] == 'out') {
-            $transfer_type = 1;
-        } else {
-            $transfer_type = 0;
-        }
-        $hashed_secret = hash('sha256', $payload['secretHash']);
         return [
-            'amount' => [
-                [
-                    'amount' => amountUNIRecalculate($payload['amount']),
-                    'denom' => strtolower($payload['coin']),
-                ]
-            ],
-            'transfer_type' => $transfer_type,
-            'from' => $payload['from'],
+            'from' => $this->wallet->getAddress(),
             'recipient' => $payload['recipient'],
-            'hashed_secret' => $hashed_secret
+            'amount' => amountUNIRecalculate($payload['amount']),
+            'token_name' => $payload['tokenName'],
+            'token_symbol' => $payload['tokenSymbol'],
+            'transaction_number' => $this->guidv4(),
+            'from_chain' => '1',
+            'dest_chain' => $payload['destChain']
+
         ];
     }
 
     public function msgSwapRedeemPayload($payload)
     {
-        $hashed_secret = hash('sha256', $payload['secretHash']);
         return [
+            'sender' => $this->wallet->getAddress(),
             'from' => $payload['from'],
-            'secret' => $hashed_secret
+            'recipient' => $payload['recipient'],
+            'amount' => amountUNIRecalculate($payload['amount']),
+            'token_name' => $payload['tokenName'],
+            'token_symbol' => $payload['tokenSymbol'],
+            'transaction_number' => $payload['transactionNumber'],
+            'from_chain' => $payload['fromChain'],
+            'dest_chain' => '1',
+            'v' => $payload['v'],
+            'r' => $payload['r'],
+            's' => $payload['s']
         ];
     }
 
-    public function msgSwapRefundPayload($payload)
-    {
-        $hashed_secret = hash('sha256', $payload['secretHash']);
-        return [
-            'from' => $payload['from'],
-            'secret' => $hashed_secret
-        ];
-    }
 
 }
