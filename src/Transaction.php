@@ -32,7 +32,7 @@ class Transaction
     const MULTISIG_SIGN_TX = 100;
     const PROPOSAL_SUBMIT = 0;
     const PROPOSAL_VOTE = 0;
-    const SWAP_INIT = 33000;
+    const SWAP_INIT = 0;
     const SWAP_REDEEM = 0;
     const COIN_UPDATE = 0;
     const NFT_MINT = 0;

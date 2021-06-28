@@ -577,7 +577,7 @@ trait TransactionHelpers
             'amount' => amountUNIRecalculate($payload['amount']),
             'token_name' => $payload['tokenName'],
             'token_symbol' => $payload['tokenSymbol'],
-            'transaction_number' => $this->guidv4(),
+            'transaction_number' => date('U'),
             'from_chain' => '1',
             'dest_chain' => $payload['destChain']
 
@@ -597,8 +597,8 @@ trait TransactionHelpers
             'from_chain' => $payload['fromChain'],
             'dest_chain' => '1',
             'v' => $payload['v'],
-            'r' => $payload['r'],
-            's' => $payload['s']
+            'r' => substr($payload['r'],2),
+            's' => substr($payload['s'],2)
         ];
     }
 

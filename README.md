@@ -254,12 +254,11 @@ $result = $transaction->proposalVote($txPayload);
 
 ```php
 $txPayload = [
-    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
-    'recipient'=>  '0x767315FBd4f90d05D5169E1611C0982629ff8d22',
-    'secretHash'=>  'pass',
-    'type'=>  'out',//out or in
-    'amount'=>  '10',
-    'coin'=>  'DEL',
+      'recipient'=> '0x45376AD024c767577714C7B92882578aE8B7f98C',
+      'amount'=> '1',
+      'tokenName'=> 'decimal',
+      'tokenSymbol'=> 'del',
+      'destChain'=> '2'
      ];
 
 $result = $transaction->msgSwapInit($txPayload);
