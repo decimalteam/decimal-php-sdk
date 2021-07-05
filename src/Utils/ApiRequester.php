@@ -142,6 +142,17 @@ class ApiRequester
         return $res->result;
     }
 
+    public function getNftStakesByAddress($address)
+    {
+        if (!$address) throw new DecimalException('address is required');
+
+        $url = "address/$address/nfts/stakes";
+
+        $res = $this->_request($url, self::GET);
+
+        return $res->result;
+    }
+
     public function getValidator($address)
     {
         try {

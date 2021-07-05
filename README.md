@@ -254,12 +254,10 @@ $result = $transaction->proposalVote($txPayload);
 
 ```php
 $txPayload = [
-    'from'=>  'dx1gtlgwrnads2xh7uydlg6pa5htjmqgf69xjfgcf',
-    'recipient'=>  '0x767315FBd4f90d05D5169E1611C0982629ff8d22',
-    'secretHash'=>  'pass',
-    'type'=>  'out',//out or in
-    'amount'=>  '10',
-    'coin'=>  'DEL',
+      'recipient'=> '0x45376AD024c767577714C7B92882578aE8B7f98C',
+      'amount'=> '1',
+      'tokenSymbol'=> 'DEL',
+      'destChain'=> '2'
      ];
 
 $result = $transaction->msgSwapInit($txPayload);
@@ -270,20 +268,19 @@ $result = $transaction->msgSwapInit($txPayload);
 ```php
 $txPayload = [
     'from'=> '0x45376AD024c767577714C7B92882578aE8B7f98C',
-            'amount'=> '1',
-            'recipient'=> 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
-            'tokenName'=> 'decimal',
-            'transactionNumber'=> 'lksdnd-asvkla-SDCds',
-            'tokenSymbol'=> 'del',
-            'fromChain'=> '2',
-            'v'=> 0x1c,
-            'r'=> '0x0e0eb6089caa52794f7ad64a5ad7ab500b12cc7b640180e30b30b48a19c296e1',
-            's'=> '0x2005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3',
+    'amount'=> '1',
+    'recipient'=> 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'tokenName'=> 'decimal',
+    'transactionNumber'=> 'lksdnd-asvkla-SDCds',
+    'tokenSymbol'=> 'del',
+    'fromChain'=> '2',
+     'v'=> 0x1c,
+     'r'=> '0x0e0eb6089caa52794f7ad64a5ad7ab500b12cc7b640180e30b30b48a19c296e1',
+     's'=> '0x2005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3',
      ];
 
 $result = $transaction->msgSwapRedeem($txPayload);
 ```
-
 
 ## NFT mint
 ```php
@@ -354,6 +351,18 @@ $result = $transaction->nftUnbond($txPayload);
 $result = $transaction->getNftMetadata('ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6');
 ```
 
+## get NFT stakes
+```php
+$result = $transaction->getNftStakesByAddress('ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6');
+```
+
+## get coin list
+```php
+const LIMIT = 10;
+const OFFSET = 0;
+const QUERY = '';
+$result = $transaction->getCoinsList(LIMIT,OFFSET,QUERY);
+```
 
 ## Estimate tx fee
 
