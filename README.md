@@ -32,7 +32,8 @@ use DecimalSDK\Transaction;
 
 // Use wallet instance to init transaction
 $wallet = new Wallet();
-$transaction = new Transaction($wallet,['createNonce'=>true]);
+// Enter your address node http://your-address.node/api
+$transaction = new Transaction($wallet, ['baseUrl' => 'http://your-address.node/api','createNonce' => true]);
 ```
 
 ## Send coins
