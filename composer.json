@@ -1,7 +1,7 @@
 {
     "name": "decimalteam/decimal-php-sdk",
     "description": "",
-    "version": "0.9.35",
+    "version": "0.9.36",
     "license": "MIT",
     "authors": [
         {
@@ -17,7 +17,7 @@
         "guzzlehttp/guzzle": "~6.5",
         "kornrunner/secp256k1": "^0.1.2",
         "simplito/elliptic-php": "^1.0",
-        "php": "7.*"
+        "php": ">=7.0"
     },
     "autoload": {
         "psr-4": {

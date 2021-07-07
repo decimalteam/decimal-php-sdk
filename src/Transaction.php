@@ -32,7 +32,7 @@ class Transaction
     const MULTISIG_SIGN_TX = 100;
     const PROPOSAL_SUBMIT = 0;
     const PROPOSAL_VOTE = 0;
-    const SWAP_INIT = 33000;
+    const SWAP_INIT = 0;
     const SWAP_REDEEM = 0;
     const COIN_UPDATE = 0;
     const NFT_MINT = 0;
@@ -473,14 +473,12 @@ class Transaction
             'scheme' => [
                 'fieldTypes' => [
                     'recipient' => 'string',
-                    'tokenName' => 'string',
                     'amount' => 'number',
                     'tokenSymbol' => 'string',
                     'destChain' => 'number'
                 ],
                 'requiredFields' => [
                     'recipient',
-                    'tokenName',
                     'amount',
                     'tokenSymbol',
                     'destChain'
@@ -600,6 +598,11 @@ class Transaction
         $type = $this->txSchemes['COIN_BUY']['type'];
         $this->checkRequiredFields('COIN_BUY', $payload);
         $payload['fee'] = $this->txSchemes['COIN_BUY']['fee'];
+        if (isset($payload['maxSpendLimit'])) {
+            $maxSpendLimit = amountUNIRecalculate($payload['maxSpendLimit']);
+        }else{
+            $maxSpendLimit = amountUNIRecalculate(100000000000);
+        }
         $prePayload = [
             'sender' => $this->wallet->getAddress(),
             'coin_to_buy' => [
@@ -607,7 +610,7 @@ class Transaction
                 'denom' => strtolower($payload['buyCoin']),
             ],
             'max_coin_to_sell' => [
-                'amount' => amountUNIRecalculate($maxSpendLimit),
+                'amount' => $maxSpendLimit,
                 'denom' => strtolower($payload['spendCoin']),
             ],
         ];
@@ -1005,9 +1008,37 @@ class Transaction
      * @return array|mixed
      * @throws DecimalException
      */
+
     public function getNftMetadata($addressNft)
     {
         return $this->requester->getNftMetadata($addressNft);
+    }
+
+    /**
+     * @param $addressNft
+     * @return mixed
+     * @throws DecimalException
+     */
+
+    public function getNftStakesByAddress($addressNft)
+    {
+        return $this->requester->getNftStakesByAddress($addressNft);
+    }
+
+    /**
+     * @param $addressNft
+     * @return mixed
+     * @throws DecimalException
+     */
+
+    public function getStakesByAddress($addressNft)
+    {
+        return $this->requester->getStakesByAddress($addressNft);
+    }
+
+    public function getCoinsList($limit = 1, $offset = 0, $query = null)
+    {
+        return $this->requester->getCoinsList($limit, $offset, $query);
     }
 
     /**
