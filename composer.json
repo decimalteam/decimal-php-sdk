@@ -1,7 +1,7 @@
 {
     "name": "decimalteam/decimal-php-sdk",
     "description": "",
-    "version": "0.9.37",
+    "version": "0.9.38",
     "license": "MIT",
     "authors": [
         {
@@ -14,7 +14,7 @@
         "fgrosse/phpasn1": "^2.1",
         "bitwasp/bitcoin": "^1.0",
         "bitwasp/bech32": "^0.0.1",
-        "guzzlehttp/guzzle": "~6.5",
+        "guzzlehttp/guzzle": "~6.5|^7",
         "kornrunner/secp256k1": "^0.1.2",
         "simplito/elliptic-php": "^1.0",
         "php": "^7.3|^8.0"
