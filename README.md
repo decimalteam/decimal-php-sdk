@@ -31,9 +31,17 @@ use DecimalSDK\Wallet;
 use DecimalSDK\Transaction;
 
 // Use wallet instance to init transaction
+// gateUrl - mainnet/devnet
+// nodeUrl - if not set using http://localhost
+// rpcPort - default 26657 
+// restPort - default 1317
 $wallet = new Wallet();
 // Enter your address node http://your-address.node/api
-$transaction = new Transaction($wallet, ['baseUrl' => 'http://your-address.node/api','createNonce' => true]);
+$transaction = new Transaction($wallet, [
+    'baseUrl' => 'http://your-address.node/api',
+    'useGate' => true/false,
+    'createNonce' => true
+]);
 ```
 
 ## Send coins

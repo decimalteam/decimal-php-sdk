@@ -9,74 +9,150 @@ use GuzzleHttp\Client as GClient;
 
 class ApiRequester
 {
-    const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api/';
+    const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api';
     const GET = 'get';
     const POST = 'post';
+    const TIMEOUT = 5.0;
+    const DEFAULT_NODE_URL = 'http://localhost';
+    const DEFAULT_DEFAULT_NODE_RPC_PORT = '26657';
+    const DEFAULT_DEFAULT_NODE_REST_PORT = '1317';
 
 
     private $options;
     private $client;
+    private $clientRpc;
+    private $useGate;
+    private $gateUrl;
+    private $nodeUrl;
+    private $rpcPort;
+    private $restPort;
     private $validModes = ['sync', 'async', 'block'];
 
+    /**
+     * ApiRequester constructor.
+     *
+     * awailable options
+     * useGate = true/false
+     * gateUrl
+     * nodeUrl
+     * rpcPort
+     * restPort
+     *
+     *
+     * @param  array  $options
+     *
+     *
+     */
     public function __construct($options = [])
     {
+        $this->validateOptions($options);
+        $this->setClient();
+    }
+
+    protected function validateOptions($options)
+    {
         $this->options = $options;
-        $this->client = new GClient([
-            'base_uri' => $this->options['baseUrl'] ?? self::TEST_GATE_API,
-            'timeout' => 5.0,
-        ]);
+        if (!array_key_exists('useGate', $this->options)) {
+            $this->options['useGate'] = true;
+        }
+        if ($this->options['useGate']) {
+            $this->options['baseUrl'] = $this->options['gateUrl'] ?? self::TEST_GATE_API;
+        } elseif (!$this->options['useGate']) {
+            $this->options['baseUrl'] = $this->options['nodeUrl'] ?? self::DEFAULT_NODE_URL;
+            $this->options['rpcPort'] = ':'.($this->options['rpcPort'] ?? self::DEFAULT_DEFAULT_NODE_RPC_PORT);
+            $this->options['restPort'] = ':'.($this->options['restPort'] ?? self::DEFAULT_DEFAULT_NODE_REST_PORT);
+        }
+    }
+
+    protected function setClient()
+    {
+        if ($this->options['useGate']) {
+            $params = [
+                'base_uri' => $this->options['baseUrl'],
+                'timeout' => self::TIMEOUT,
+            ];
+        } elseif (!$this->options['useGate']) {
+            $params = [
+                'base_uri' => $this->options['baseUrl'].$this->options['restPort'],
+                'timeout' => self::TIMEOUT,
+            ];
+            $paramsRpc = [
+                'base_uri' => $this->options['baseUrl'].$this->options['rpcPort'],
+                'timeout' => self::TIMEOUT,
+            ];
+            $this->clientRpc = new GClient($paramsRpc);
+        }
+        $this->client = new GClient($params);
+        dump($this->client);
+        dump($this->clientRpc);
+    }
+
+    protected function getRpcPrefix()
+    {
+        return $this->options['useGate'] ? 'rpc/' : '';
     }
 
     public function getSignMeta(Wallet $wallet)
     {
         $nodeInfo = $this->getNodeInfo();
 
-        $accountInfo = $this->getAccountInfo($wallet->getAddress());
+        $accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
 
         return [
-            'sequence' => $accountInfo->result->value->sequence,
-            'account_number' => $accountInfo->result->value->account_number,
-            'chain_id' => $nodeInfo->node_info->network,
+            'sequence' => $accountInfo->result->value->sequence ?? 0,
+            'account_number' => $accountInfo->result->value->account_number ?? 0,
+            'chain_id' => $nodeInfo->node_info->network ?? 0,
         ];
     }
 
     public function getNodeInfo()
     {
-        $url = 'rpc/node_info';
-        return $this->_request($url, self::GET);
+        $url = $this->getRpcPrefix().'node_info';
+        return $this->_request($url, self::GET, false);
     }
 
     public function getAccountInfo($address)
     {
+        //todo check it
         if (isset($this->options['createNonce'])) {
-            $url = "rpc/auth/accounts/$address";
+            $url = $this->getRpcPrefix()."auth/accounts/$address";
         } else {
-            $url = "rpc/accounts/$address";
+            $url = $this->getRpcPrefix()."accounts/$address";
         }
-        return $this->_request($url, self::GET);
+        //todo temp fix
+        $url = $this->getRpcPrefix()."auth/accounts/$address";
+        return $this->_request($url, self::GET, false);
     }
 
     public function getCoinsList($limit = 1, $offset = 0, $query = null)
     {
-        $url = "coin?limit=$limit&offset=$offset";
+        //todo this coin to coins
+        $url = "coins?limit=$limit&offset=$offset";
 
-        if ($query) $url += "&$query";
+        if ($query) {
+            $url += "&$query";
+        }
 
-        return $this->_request($url, self::GET);
+        return $this->_request($url, self::GET, false);
     }
 
     public function getCoin($symbol)
     {
-        if (!$symbol) throw new DecimalException('symbol is required');
+        if (!$symbol) {
+            throw new DecimalException('symbol is required');
+        }
 
         $url = "coin/$symbol";
 
-        return $this->_request($url, self::GET);
+        return $this->_request($url, self::GET, false);
     }
 
+    //todo check it
     public function getAddress($address, $txLimit = 0)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
         $url = "address/$address?txLimit=$txLimit";
 
@@ -85,36 +161,45 @@ class ApiRequester
 
     public function getNonce($address)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
-        $url = "rpc/auth/accounts/$address";
+        $url = $this->getRpcPrefix()."auth/accounts/$address";
 
-        $res = $this->_request($url, self::GET);
+        $res = $this->_request($url, self::GET, false);
         $res->result->value->sequence++;
         return $res;
     }
 
+    //todo check it
     public function getNftMetadata($addressNft)
     {
-        if (!$addressNft) throw new DecimalException('address is required');
+        if (!$addressNft) {
+            throw new DecimalException('address is required');
+        }
         $url = "nfts/$addressNft";
-        $res = $this->_request($url, self::GET);
+        $res = $this->_request($url, self::GET, false);
         return $res;
     }
 
     public function getMultisigsByAdress($address)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
         $url = "address/$address/multisigs";
 
-        $res = $this->_request($url, self::GET);
+        $res = $this->_request($url, self::GET, false);
         return $res->result;
     }
 
     public function getMultisig($address)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
         $url = "multisig/$address";
 
@@ -124,7 +209,9 @@ class ApiRequester
 
     public function getMultisigTXs($address, $limit = 1, $offset = 0)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
         $url = "multisig/$address/txs?limit=$limit&offset=$offset";
 
@@ -134,7 +221,9 @@ class ApiRequester
 
     public function getStakesByAddress($address)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
         $url = "address/$address/stakes";
 
@@ -144,7 +233,9 @@ class ApiRequester
 
     public function getNftStakesByAddress($address)
     {
-        if (!$address) throw new DecimalException('address is required');
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
         $url = "address/$address/nfts/stakes";
 
@@ -156,7 +247,9 @@ class ApiRequester
     public function getValidator($address)
     {
         try {
-            if (!$address) throw new DecimalException('address is required');
+            if (!$address) {
+                throw new DecimalException('address is required');
+            }
 
             $url = "validator/$address";
 
@@ -171,18 +264,21 @@ class ApiRequester
 
     public function sendTx($tx, $options = [])
     {
-        $url = "rpc/txs";
+        $url = $this->getRpcPrefix()."txs";
+
         $mode = isset($options['mode']) ? $options['mode'] : 'sync';
         $tx = ['tx' => $tx, 'mode' => $mode];
-        return $this->txResult($this->_request($url, self::POST, $tx, $options));
+
+        return $this->txResult($this->_request($url, self::POST, true, $tx, $options));
     }
 
-    public function post($url, $payload)
+
+    public function post($url, $payload, $rpc = false)
     {
         return $this->_request($url, self::POST, $payload);
     }
 
-    private function _request($url, $method, $payload = null, $optional = [])
+    private function _request($url, $method, $rpc = false, $payload = null, $optional = [])
     {
         $options = [];
         if ($payload) {
@@ -191,12 +287,17 @@ class ApiRequester
             ];
             $options['body'] = json_encode($payload, JSON_UNESCAPED_SLASHES);
         }
-
+        if ($rpc) {
+            $client = $this->clientRpc;
+        } else {
+            $client = $this->client;
+        }
         try {
-            $res = $this->client->$method($url, $options);
+            $res = $client->$method($url, $options);
             $body = $res->getBody();
             return json_decode($body->getContents());
         } catch (\Exception $exception) {
+            dump($exception->getMessage());
             return $this->getError(json_encode($exception->getMessage()));
         }
     }
@@ -215,12 +316,14 @@ class ApiRequester
                 }
                 $resp = $this->getError($errorMessage, $jsonResp->code, $jsonResp->txhash);
             }
-        } else if (property_exists('jsonResp', 'txhash')) {
-            $resp = [
-                'hash' => $jsonResp->txhash,
-                'success' => true,
-                'error' => null
-            ];
+        } else {
+            if (property_exists('jsonResp', 'txhash')) {
+                $resp = [
+                    'hash' => $jsonResp->txhash,
+                    'success' => true,
+                    'error' => null
+                ];
+            }
         }
 
         return $resp;
@@ -230,7 +333,7 @@ class ApiRequester
      *  get error body
      *
      * @param $exception
-     * @param null $txhash
+     * @param  null  $txhash
      * @return array
      */
     protected function getError($exception, $code = null, $txhash = null)
