@@ -563,7 +563,7 @@ class Transaction
         $prePayload = $this->formatePrepayload($type, $payload);
 
         $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        //dd($preparedTx);
+        
         return $this->requester->sendTx($preparedTx);
     }
 
