@@ -155,7 +155,8 @@ trait TransactionHelpers
             'value' => $tx
         ];
         $signatureSize = 109;
-        $encodedTxResp = $this->requester->post('rpc/txs/encode', $preparedTx);
+        $url = $this->requester->getRpcPrefix().'rpc/txs/encode';
+        $encodedTxResp = $this->requester->post($url, $preparedTx, true);
 
         return strlen(base64_decode($encodedTxResp->tx)) + $signatureSize;
 
