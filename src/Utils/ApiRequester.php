@@ -9,7 +9,7 @@ use GuzzleHttp\Client as GClient;
 
 class ApiRequester
 {
-	const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api';
+	const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api/';
 	const GET = 'get';
 	const POST = 'post';
 	const TIMEOUT = 5.0;
@@ -83,8 +83,6 @@ class ApiRequester
 			$this->clientRpc = new GClient($paramsRpc);
 		}
 		$this->client = new GClient($params);
-		dump($this->client);
-		dump($this->clientRpc);
 	}
 
 	protected function getRpcPrefix()
@@ -98,11 +96,13 @@ class ApiRequester
 
 		$accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
 
-		return [
+		$meta = [
 			'sequence' => $accountInfo->result->value->sequence ?? 0,
 			'account_number' => $accountInfo->result->value->account_number ?? 0,
 			'chain_id' => $nodeInfo->node_info->network ?? 0,
 		];
+
+		return $meta;
 	}
 
 	public function getNodeInfo()
@@ -119,6 +119,7 @@ class ApiRequester
 		} else {
 			$url = $this->getRpcPrefix()."accounts/$address";
 		}
+
 		//todo temp fix
 		$url = $this->getRpcPrefix()."auth/accounts/$address";
 		return $this->_request($url, self::GET, false);
@@ -297,7 +298,6 @@ class ApiRequester
 			$body = $res->getBody();
 			return json_decode($body->getContents());
 		} catch (\Exception $exception) {
-			dump($exception->getMessage());
 			return $this->getError(json_encode($exception->getMessage()));
 		}
 	}
