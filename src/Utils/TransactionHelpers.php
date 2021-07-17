@@ -28,7 +28,7 @@ trait TransactionHelpers
             'sequence' => $this->signMeta['sequence'],
         ];
 
-        $toSignPayload = sortPayload($toSignPayload);
+        $toSignPayload = $this->sortPayload($toSignPayload);
 
         $signature = Encrypt::sepc256k1Sign(json_encode($toSignPayload, JSON_UNESCAPED_SLASHES), $this->wallet->getPrivateKey());
 
@@ -45,12 +45,31 @@ trait TransactionHelpers
 
     public function prepareTransaction($type, $txValue, $options = [])
     {
-        $sortedValue = sortPayload($txValue);
+        $sortedValue = $this->sortPayload($txValue);
         $wrappedTx = $this->wrapTx($type, $sortedValue, $options);
         if (isset($options['estimateTxFee'])) {
             return $wrappedTx;
         }
         return $this->makeSignature($wrappedTx);
+    }
+
+    public function sortPayload($payload)
+    {
+        $sorted = [];
+        if (is_object($payload))
+            $payload = (array)$payload;
+        $keys = array_keys($payload);
+        sort($keys);
+
+        foreach ($keys as $key)
+        $sorted[$key] = is_array($payload[$key]) ? $this->sortPayload($payload[$key]) : $this->isBool($payload[$key]);
+
+        return $sorted;
+    }
+
+    public function isBool($value)
+    {
+        return is_bool($value) ? $value : (string)$value;
     }
 
     public function wrapTx($type, $txValue, $options = [])
@@ -221,7 +240,7 @@ trait TransactionHelpers
      * @return array
      * @throws DecimalException
      */
-    public function formatePrepayload($type, $payload)
+    public function formatePrepayload($type, $payload = [])
     {
         switch ($type) {
             case $this->txSchemes['COIN_SEND']['type'];
@@ -249,6 +268,8 @@ trait TransactionHelpers
                 return $this->validatorCandidateEditPayload($payload);
                 break;
             case $this->txSchemes['VALIDATOR_SET_OFFLINE']['type'];
+                return ['validator_address' => $this->wallet->getValidatorAddress()];
+                break;
             case $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
                 return ['validator_address' => $this->wallet->getValidatorAddress()];
                 break;
@@ -496,10 +517,12 @@ trait TransactionHelpers
         if (isset($payload['id'])) {
             $id = $payload['id'];
         } else {
-            $id = $this->guidv4();
+            $id = str_replace("-", "", $this->gen_uuid());
+            //$id = $this->guidv4();
         }
         return [
             'id' => $id,
+            //'nftid' => $id,
             'denom' => $payload['denom'],
             'token_uri' => $payload['token_uri'],
             'quantity' => $payload['quantity'],
