@@ -38,7 +38,7 @@ use DecimalSDK\Transaction;
 $wallet = new Wallet();
 // Enter your address node http://your-address.node/api
 $transaction = new Transaction($wallet, [
-    'baseUrl' => 'http://your-address.node/api',
+    'gateUrl' => 'http://your-address.node/api',
     'useGate' => true/false,
     'createNonce' => true
 ]);
