@@ -1,7 +1,7 @@
 {
     "name": "decimalteam/decimal-php-sdk",
-    "description": "",
-    "version": "0.9.47",
+    "description": "decimal sdk",
+
     "license": "MIT",
     "authors": [
         {
