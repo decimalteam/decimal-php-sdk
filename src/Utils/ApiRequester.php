@@ -298,6 +298,7 @@ class ApiRequester
 			$body = $res->getBody();
 			return json_decode($body->getContents());
 		} catch (\Exception $exception) {
+
 			return $this->getError(json_encode($exception->getMessage()));
 		}
 	}

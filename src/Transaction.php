@@ -725,7 +725,7 @@ class Transaction
         $prePayload = $this->formatePrepayload($type);
         $payload['fee'] = $this->txSchemes['VALIDATOR_SET_OFFLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
-
+        //dd($preparedTx);
         return $this->requester->sendTx($preparedTx);
     }
 
