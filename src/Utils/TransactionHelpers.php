@@ -412,7 +412,7 @@ trait TransactionHelpers
     public function validatorCandidatePayload($payload)
     {
         return [
-            'commission' => ($payload['commission'] / 100) . '00000000000000000',
+            'commission' => ($payload['commission'] / 100) . '.000000000000000000',
             'validator_addr' => $this->wallet->getValidatorAddress(),
             'reward_addr' => $payload['rewardAddress'],
             'pub_key' => [
