@@ -85,7 +85,7 @@ class ApiRequester
 		$this->client = new GClient($params);
 	}
 
-	protected function getRpcPrefix()
+	public function getRpcPrefix()
 	{
 		return $this->options['useGate'] ? 'rpc/' : '';
 	}
@@ -276,7 +276,7 @@ class ApiRequester
 
 	public function post($url, $payload, $rpc = false)
 	{
-		return $this->_request($url, self::POST, $payload);
+		return $this->_request($url, self::POST, $rpc, $payload);
 	}
 
 	private function _request($url, $method, $rpc = false, $payload = null, $optional = [])

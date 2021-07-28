@@ -167,7 +167,7 @@ trait TransactionHelpers
         return $result;
     }
 
-    public function getTxSize($tx)
+    public function getTxSize($tx, $rpc = false)
     {
         $preparedTx = [
             'type' => 'cosmos-sdk/StdTx',
@@ -175,10 +175,9 @@ trait TransactionHelpers
         ];
         $signatureSize = 109;
         $url = $this->requester->getRpcPrefix().'txs/encode';
-        $encodedTxResp = $this->requester->post($url, $preparedTx, true);
+        $encodedTxResp = $this->requester->post($url, $preparedTx, $rpc);
 
         return strlen(base64_decode($encodedTxResp->tx)) + $signatureSize;
-
     }
 
     public function getCommission($tx, $feeCoin, $operationFee = 0, $options = [])
