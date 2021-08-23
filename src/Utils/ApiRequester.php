@@ -111,6 +111,11 @@ class ApiRequester
 		return $this->_request($url, self::GET, false);
 	}
 
+	public function getAddressCount()
+	{
+		return $this->_request('address/count', 'GET');
+	}
+
 	public function getAccountInfo($address)
 	{
 		//todo check it

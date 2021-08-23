@@ -13,6 +13,14 @@ $ composer require decimalteam/decimal-php-sdk
 
 # Usage
 
+## Get Address count
+
+```php
+$api = new ApiRequester();
+$result = $api->getAddressCount();
+return $result->result;
+```
+
 ## Create wallet
 
 ```php
