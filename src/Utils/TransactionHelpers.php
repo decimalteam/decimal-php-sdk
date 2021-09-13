@@ -82,7 +82,7 @@ trait TransactionHelpers
                 'amount' => [],
                 'gas' => '0'
             ],
-            'memo' => $options['memo'] ?? 'sdk test'
+            'memo' => $options['memo'] ?? ''
         ];
 
         if (!isset($options['feeCoin']) || $type === 'coin/redeem_check') {

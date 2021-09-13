@@ -709,7 +709,7 @@ class Transaction
         $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE_EDIT', $payload);
         $payload['fee'] = $this->txSchemes['VALIDATOR_CANDIDATE_EDIT']['fee'];
         $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
