@@ -11,7 +11,15 @@ For detailed explanation on how things work, checkout the:
 $ composer require decimalteam/decimal-php-sdk
 ```
 
+
 # Usage
+
+## Verify Address
+
+```php
+$wHelper = new WalletHelpers();
+return $wHelper->checkAddress('address'); // dx.....
+```
 
 ## Get Address count
 

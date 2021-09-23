@@ -9,6 +9,19 @@ use DecimalSDK\Utils\Crypto\Encrypt;
 
 class WalletHelpers {
 
+	/**
+	 * verify address
+	 *
+	 * @param $string
+	 * @param  string  $prefix
+	 * @return bool
+	 */
+	public function checkAddress($string, $prefix = 'dx') : bool
+	{
+		$decoded = Encrypt::decodeBech32($string);
+		return $decoded[0] === $prefix && count($decoded[1]);
+	}
+
     /**
      *
      * @param null $hrp

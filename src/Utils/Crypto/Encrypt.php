@@ -9,6 +9,7 @@ use BitWasp\Bitcoin\Mnemonic\MnemonicFactory;
 use DecimalSDK\Utils\Crypto\Bip44\BIP44;
 use function BitWasp\Bech32\convertBits;
 use function BitWasp\Bech32\encode;
+use function BitWasp\Bech32\decode;
 use kornrunner\Secp256k1;
 use kornrunner\Serializer\HexSignatureSerializer;
 
@@ -166,4 +167,13 @@ class Encrypt
 
         return $pad . $num;
     }
+
+	/**
+	 * @param $sBech
+	 * @return mixed
+	 */
+	public static function decodeBech32($sBech)
+	{
+		return decode($sBech);
+	}
 }
