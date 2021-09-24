@@ -5,10 +5,13 @@ namespace DecimalSDK\Utils;
 
 
 
+use DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Utils\Crypto\Encrypt;
 
 class WalletHelpers {
 
+    const DXVALOPER = 'dxvaloper';
+    const DX = 'dx';
 	/**
 	 * verify address
 	 *
@@ -16,10 +19,17 @@ class WalletHelpers {
 	 * @param  string  $prefix
 	 * @return bool
 	 */
-	public function checkAddress($string, $prefix = 'dx') : bool
+	public static function checkAddress($string, $prefix = 'dx')
 	{
-		$decoded = Encrypt::decodeBech32($string);
-		return $decoded[0] === $prefix && count($decoded[1]);
+	    try{
+            $decoded = Encrypt::decodeBech32($string);
+            if($decoded[0] === $prefix && count($decoded[1])){
+                return $string;
+            }
+        }
+        catch (\Exception $e){
+            throw new DecimalException("address validation fails for ".$string." ".$e->getMessage());
+        }
 	}
 
     /**

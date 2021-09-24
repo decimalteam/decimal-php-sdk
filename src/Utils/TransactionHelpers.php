@@ -331,7 +331,7 @@ trait TransactionHelpers
     {
         return [
             'sender' => $this->wallet->getAddress(),
-            'receiver' => $payload['to'],
+            'receiver' => WalletHelpers::checkAddress($payload['to'], WalletHelpers::DX),
             'coin' => [
                 'amount' => amountUNIRecalculate($payload['amount']),
                 'denom' => strtolower($payload['coin']),
@@ -388,7 +388,7 @@ trait TransactionHelpers
     {
         return [
             'delegator_address' => $this->wallet->getAddress(),
-            'validator_address' => $payload['address'],
+            'validator_address' => WalletHelpers::checkAddress($payload['address'], WalletHelpers::DXVALOPER),
             'coin' => [
                 'amount' => amountUNIRecalculate($payload['stake']),
                 'denom' => strtolower($payload['coin']),
@@ -413,7 +413,7 @@ trait TransactionHelpers
         return [
             'commission' => ($payload['commission'] / 100) . '.000000000000000000',
             'validator_addr' => $this->wallet->getValidatorAddress(),
-            'reward_addr' => $payload['rewardAddress'],
+            'reward_addr' => WalletHelpers::checkAddress($payload['rewardAddress'], WalletHelpers::DX),
             'pub_key' => [
                 'type' => 'tendermint/PubKeyEd25519',
                 'value' => $payload['pubKey'],
@@ -436,7 +436,7 @@ trait TransactionHelpers
     {
         return [
             'validator_address' => $this->wallet->getValidatorAddress(),
-            'reward_address' => $payload['rewardAddress'],
+            'reward_address' => WalletHelpers::checkAddress($payload['rewardAddress'], WalletHelpers::DX),
             'description' => [
                 'moniker' => $payload['moniker'],
                 'identity' => $payload['identity'],
@@ -472,6 +472,9 @@ trait TransactionHelpers
 
     public function multisigCreateWalletPayload($payload)
     {
+        foreach ($payload['owners'] as $owner){
+            WalletHelpers::checkAddress($owner, WalletHelpers::DX);
+        }
         return [
             'sender' => $this->wallet->getAddress(),
             'owners' => $payload['owners'],
@@ -485,7 +488,7 @@ trait TransactionHelpers
         return [
             'sender' => $this->wallet->getAddress(),
             'wallet' => $payload['from'],
-            'receiver' => $payload['to'],
+            'receiver' => WalletHelpers::checkAddress($payload['to'], WalletHelpers::DX),
             'coins' => [
                 [
                     'denom' => strtolower($payload['coin']),
@@ -527,7 +530,7 @@ trait TransactionHelpers
             'quantity' => $payload['quantity'],
             'reserve' => amountUNIRecalculate($payload['reserve']),
             'sender' => $this->wallet->getAddress(),
-            'recipient' => $payload['recipient'] ?? $this->wallet->getAddress(),
+            'recipient' => WalletHelpers::checkAddress($payload['recipient'], WalletHelpers::DX) ?? $this->wallet->getAddress(),
             'allow_mint' => $payload['allow_mint']
         ];
     }
@@ -556,7 +559,7 @@ trait TransactionHelpers
     {
         return [
             'id' => $payload['id'],
-            'recipient' => $payload['recipient'],
+            'recipient' => WalletHelpers::checkAddress($payload['recipient'], WalletHelpers::DX),
             'sub_token_ids' => $payload['sub_token_ids'],
             'denom' => $payload['denom'],
             'sender' => $this->wallet->getAddress()
@@ -566,7 +569,7 @@ trait TransactionHelpers
     {
         return [
             'id' => $payload['id'],
-            'validator_address' => $payload['validator_address'],
+            'validator_address' => WalletHelpers::checkAddress($payload['validator_address'], WalletHelpers::DX),
             'sub_token_ids' => $payload['sub_token_ids'],
             'denom' => $payload['denom'],
             'delegator_address' => $this->wallet->getAddress()
@@ -576,7 +579,7 @@ trait TransactionHelpers
     {
         return [
             'id' => $payload['id'],
-            'validator_address' => $payload['validator_address'],
+            'validator_address' => WalletHelpers::checkAddress($payload['validator_address'], WalletHelpers::DX),
             'sub_token_ids' => $payload['sub_token_ids'],
             'denom' => $payload['denom'],
             'delegator_address' => $this->wallet->getAddress()
@@ -596,7 +599,7 @@ trait TransactionHelpers
     {
         return [
             'from' => $this->wallet->getAddress(),
-            'recipient' => $payload['recipient'],
+            'recipient' => WalletHelpers::checkAddress($payload['recipient'], WalletHelpers::DX),
             'amount' => amountUNIRecalculate($payload['amount']),
             'token_symbol' => $payload['tokenSymbol'],
             'transaction_number' => date('U'),

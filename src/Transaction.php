@@ -6,11 +6,14 @@ namespace DecimalSDK;
 use \DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Utils\ApiRequester;
 use DecimalSDK\Utils\TransactionHelpers;
+use DecimalSDK\Utils\WalletHelpers;
 use DecimalSDK\Wallet;
 
 class Transaction
 {
     use TransactionHelpers;
+
+    const DXVALOPER = 'dxvaloper';
 
     //constants for fee
     const COIN_SEND = 10;
@@ -142,6 +145,7 @@ class Transaction
                 ],
             ],
         ],
+
         //todo check schema multisend
         'COIN_MULTISEND' => [
             'fee' => self::COIN_MULTISEND,
@@ -519,14 +523,16 @@ class Transaction
 
     /**
      * Transaction constructor.
-     * @param \DecimalSDK\Wallet $wallet
-     * @param array $options
+     * @param  \DecimalSDK\Wallet  $wallet
+     * @param  array  $options
      * @throws DecimalException
      */
 
     public function __construct(Wallet $wallet, $options = [])
     {
-        if (!$wallet) throw new DecimalException('Wrong wallet');
+        if (!$wallet) {
+            throw new DecimalException('Wrong wallet');
+        }
 
         $this->wallet = $wallet;
         $this->requester = new ApiRequester($options);
@@ -578,7 +584,7 @@ class Transaction
         $out = [];
         foreach ($payload['sends'] as $send) {
             $out[] = [
-                'receiver' => $send['to'],
+                'receiver' => WalletHelpers::checkAddress($send['to'], WalletHelpers::DX),
                 'coin' => [
                     'amount' => amountUNIRecalculate($send['amount']),
                     'denom' => strtolower($send['coin']),
@@ -600,7 +606,7 @@ class Transaction
         $payload['fee'] = $this->txSchemes['COIN_BUY']['fee'];
         if (isset($payload['maxSpendLimit'])) {
             $maxSpendLimit = amountUNIRecalculate($payload['maxSpendLimit']);
-        }else{
+        } else {
             $maxSpendLimit = amountUNIRecalculate(100000000000);
         }
         $prePayload = [
@@ -725,7 +731,6 @@ class Transaction
         $prePayload = $this->formatePrepayload($type);
         $payload['fee'] = $this->txSchemes['VALIDATOR_SET_OFFLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
-        //dd($preparedTx);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -737,7 +742,6 @@ class Transaction
     public function enableValidator()
     {
         $type = $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
-
         $prePayload = $this->formatePrepayload($type);
         $payload['fee'] = $this->txSchemes['VALIDATOR_SET_ONLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
@@ -1054,17 +1058,18 @@ class Transaction
 
         $scheme = $this->txSchemes[$name]['scheme'];
         $errors = $this->fieldsValidation($scheme, $payload);
-        if (count($scheme['requiredFields']))
+        if (count($scheme['requiredFields'])) {
             $errors = array_merge(array_fill_keys($scheme['requiredFields'], 'field is required'), $errors);
+        }
         if (count($errors)) {
-            throw new DecimalException("payload validation fails " . json_encode($errors, JSON_UNESCAPED_SLASHES));
+            throw new DecimalException("payload validation fails ".json_encode($errors, JSON_UNESCAPED_SLASHES));
         }
 
         return true;
     }
 
     /**
-     * @param null $data
+     * @param  null  $data
      * @return string
      * @throws \Exception
      */
@@ -1084,25 +1089,26 @@ class Transaction
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
-    function gen_uuid() {
-        return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+    function gen_uuid()
+    {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"
-            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
 
             // 16 bits for "time_mid"
-            mt_rand( 0, 0xffff ),
+            mt_rand(0, 0xffff),
 
             // 16 bits for "time_hi_and_version",
             // four most significant bits holds version number 4
-            mt_rand( 0, 0x0fff ) | 0x4000,
+            mt_rand(0, 0x0fff) | 0x4000,
 
             // 16 bits, 8 bits for "clk_seq_hi_res",
             // 8 bits for "clk_seq_low",
             // two most significant bits holds zero and one for variant DCE1.1
-            mt_rand( 0, 0x3fff ) | 0x8000,
+            mt_rand(0, 0x3fff) | 0x8000,
 
             // 48 bits for "node"
-            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
         );
     }
 }

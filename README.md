@@ -11,6 +11,8 @@ For detailed explanation on how things work, checkout the:
 $ composer require decimalteam/decimal-php-sdk
 ```
 
+## Pacagist decimalteam/decimal-php-sdk
+https://packagist.org/packages/decimalteam/decimal-php-sdk
 
 # Usage
 
@@ -18,7 +20,7 @@ $ composer require decimalteam/decimal-php-sdk
 
 ```php
 $wHelper = new WalletHelpers();
-return $wHelper->checkAddress('address'); // dx.....
+return $wHelper->checkAddress('address', 'dx'); // dx || dxvaloper
 ```
 
 ## Get Address count
@@ -246,18 +248,18 @@ $result = $transaction->multisigSignTX($txPayload);
 ```php
 $txPayload = [
     'sender'=>  $wallet->getAddress(),
-           'sends'=>[
-               [
-                    'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
-                   'coin'=>  'DEL',
-                   'amount'=> 100
-                ],
-                [
-                    'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
-                    'coin'=>  'DEL',
-                    'amount'=> 100
-                ]
-            ]
+    'sends'=>[
+        [
+            'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
+           'coin'=>  'DEL',
+           'amount'=> 100
+        ],
+        [
+            'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
+            'coin'=>  'DEL',
+            'amount'=> 100
+        ]
+    ]
 ];
 
 $result = $transaction->multisigSignTX($txPayload);
@@ -308,6 +310,7 @@ $result = $transaction->msgSwapRedeem($txPayload);
 ```
 
 ## NFT mint
+
 ```php
 $txPayload = [
     'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
@@ -321,6 +324,7 @@ $result = $transaction->createNftMint($txPayload);
 ```
 
 ## NFT burn
+
 ```php
 $txPayload = [
     'denom'=> 'phone',
@@ -329,7 +333,9 @@ $txPayload = [
      ];
 $result = $transaction->burnNft($txPayload);
 ```
+
 ## NFT edit metadata
+
 ```php
 $txPayload = [
     'denom'=> 'phone',
@@ -338,7 +344,9 @@ $txPayload = [
      ];
 $result = $transaction->editNftMetadata($txPayload);
 ```
+
 ## NFT transfer
+
 ```php
 $txPayload = [
     'denom'=> 'phone',
@@ -350,6 +358,7 @@ $result = $transaction->transferNft($txPayload);
 ```
 
 ## NFT delegate
+
 ```php
 $txPayload = [
     'denom'=> 'timPhone',
@@ -361,6 +370,7 @@ $result = $transaction->nftDelegate($txPayload);
 ```
 
 ## NFT unbond
+
 ```php
 $txPayload = [
     'denom'=> 'timPhone',
@@ -372,16 +382,19 @@ $result = $transaction->nftUnbond($txPayload);
 ```
 
 ## get NFT metadata
+
 ```php
 $result = $transaction->getNftMetadata('ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6');
 ```
 
 ## get NFT stakes
+
 ```php
 $result = $transaction->getNftStakesByAddress('ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6');
 ```
 
 ## get coin list
+
 ```php
 const LIMIT = 10;
 const OFFSET = 0;
@@ -399,16 +412,14 @@ $txPayload = [
     'amount'=>'1'
      ];
 $options=[
-    'freeCoin'=>'del',
-    'message'=>'message from Eugene',
-    'gasLimit'=>'9000000000000000000',
-    'mode'=>'sync'
+    'freeCoin'=> 'del',
+    'message'=> 'message text',
+    'gasLimit'=> '9000000000000000000',
+    'mode' => 'sync'
     ];
 $transaction = new Transaction($wallet);
 $result = $transaction->estimateTxFee($type ,$txPayload,$options);
 ```
-
-
 
 ## Check required fields
 
