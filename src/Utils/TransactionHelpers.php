@@ -279,7 +279,7 @@ trait TransactionHelpers
 				return $this->validatorDelegatePayload($payload);
 				break;
 			case $this->txSchemes['VALIDATOR_UNBOND']['type'];
-				return $this->validatorUndondPayload($payload);
+				return $this->validatorUnbondPayload($payload);
 				break;
 			case $this->txSchemes['VALIDATOR_CANDIDATE']['type'];
 				return $this->validatorCandidatePayload($payload);
@@ -421,7 +421,7 @@ trait TransactionHelpers
 	{
 		return [
 			'delegator_address' => $this->wallet->getAddress(),
-			'validator_address' => $payload['address'],
+			'validator_address' => WalletHelpers::checkAddress($payload['address'], WalletHelpers::DXVALOPER),
 			'coin' => [
 				'amount' => amountUNIRecalculate($payload['stake']),
 				'denom' => strtolower($payload['coin']),
