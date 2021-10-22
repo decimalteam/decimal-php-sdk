@@ -381,6 +381,16 @@ $txPayload = [
 $result = $transaction->nftUnbond($txPayload);
 ```
 
+## NFT reserve update
+
+```php
+$txPayload = [
+            'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
+            'reserve'=> '6'
+        ];
+        $result = $transaction->nftUpdateReserve($txPayload);
+```
+
 ## get NFT metadata
 
 ```php
