@@ -178,14 +178,11 @@ class ApiRequester
 		return $res;
 	}
 
-	//todo check it
-	public function getNftMetadata($addressNft)
+	public function getNftMetadata($addressNft, $address, $payload)
 	{
-		if (!$addressNft) {
-			throw new DecimalException('address is required');
-		}
-		$url = "nfts/$addressNft";
-		$res = $this->_request($url, self::GET, false);
+		$url = "nfts/$addressNft?walletAddress=".$address;
+
+		$res = $this->_request($url, self::GET, false, $payload);
 		return $res;
 	}
 
@@ -268,14 +265,14 @@ class ApiRequester
 		}
 	}
 
-	public function sendTx($tx, $rpc = false, $options = [])
+	public function sendTx($tx, $rpc = false, $options = [], $method = self::POST)
 	{
 		$url = $this->getRpcPrefix()."txs";
 
 		$mode = isset($options['mode']) ? $options['mode'] : 'sync';
 		$tx = ['tx' => $tx, 'mode' => $mode];
 
-		return $this->txResult($this->_request($url, self::POST, $rpc, $tx, $options));
+		return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
 	}
 
 

@@ -41,6 +41,7 @@ class Transaction
     const NFT_MINT = 0;
     const NFT_BURN = 0;
     const NFT_EDIT_METADATA = 0;
+    const NFT_UPDATE_RESERVE = 0;
     const NFT_TRANSFER = 0;
     const NFT_DELEGATE = 0;
     const NFT_UNBOND = 0;
@@ -403,6 +404,22 @@ class Transaction
                 ],
             ],
         ],
+        'NFT_UPDATE_RESERVE' => [
+            'fee' => self::NFT_UPDATE_RESERVE,
+            'type' => 'nft/update_reserve',
+            'scheme' => [
+                'fieldTypes' => [
+                    'id' => 'string',
+                    'reserve' => 'string',
+                    'sub_token_ids' => 'array',
+                    'denom' => 'string'
+                ],
+                'requiredFields' => [
+                    'id',
+                    'reserve',
+                ],
+            ],
+        ],
         'NFT_TRANSFER' => [
             'fee' => self::NFT_TRANSFER,
             'type' => 'nft/msg_transfer',
@@ -455,6 +472,14 @@ class Transaction
                     'sub_token_ids',
                     'denom'
                 ],
+            ],
+        ],
+        'NFT_METADATA' => [
+            'fee' => 0,
+            'type' => 'nfts/',
+            'scheme' => [
+                'fieldTypes' => [],
+                'requiredFields' => [],
             ],
         ],
         'PROPOSAL_VOTE' => [
@@ -897,6 +922,18 @@ class Transaction
         return $this->requester->sendTx($preparedTx);
     }
 
+    public function nftUpdateReserve($payload)
+    {
+        $type = $this->txSchemes['NFT_UPDATE_RESERVE']['type'];
+        $result = $this->checkRequiredFields('NFT_UPDATE_RESERVE', $payload);
+
+        $payload['fee'] = $this->txSchemes['NFT_UPDATE_RESERVE']['fee'];
+        $prePayload = $this->formatePrepayload($type, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload);
+
+        return $this->requester->sendTx($preparedTx);
+    }
+
     /**
      * @param $payload
      * @return array|mixed
@@ -1013,7 +1050,17 @@ class Transaction
 
     public function getNftMetadata($addressNft)
     {
-        return $this->requester->getNftMetadata($addressNft);
+        $url = $this->txSchemes['NFT_METADATA']['type'].$addressNft."??walletAddress=".$this->wallet->getAddress();
+        $payload['fee'] = $this->txSchemes['NFT_METADATA']['fee'];
+
+        $wrappedTx = $this->wrapTx($url, $payload, [], false);
+        $preparedTx = $this->makeSignature($payload);
+
+        return $this->requester->getNftMetadata(
+            $addressNft,
+            $this->wallet->getAddress(),
+            $preparedTx
+        );
     }
 
     /**
