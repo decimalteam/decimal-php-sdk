@@ -35,7 +35,7 @@ trait TransactionHelpers
 
         $toSignPayload = $this->sortPayload($toSignPayload);
 
-        $signature = Encrypt::sepc256k1Sign(json_encode($toSignPayload, JSON_UNESCAPED_SLASHES),
+        $signature = Encrypt::sepc256k1Sign(json_encode($toSignPayload, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),
             $this->wallet->getPrivateKey());
 
         $unsignedTx['signatures'] = [
