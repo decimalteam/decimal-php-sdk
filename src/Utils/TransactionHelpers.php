@@ -189,7 +189,13 @@ trait TransactionHelpers
         $url = $this->requester->getRpcPrefix().'txs/encode';
         $encodedTxResp = $this->requester->post($url, $preparedTx, $rpc);
 
-        return strlen(base64_decode($encodedTxResp->tx)) + $signatureSize;
+        try {
+			$tx_len = strlen(base64_decode($encodedTxResp->tx));
+		}
+		catch (\Exception $e){
+        	$tx_len = 0;
+		}
+		return  $tx_len + $signatureSize;
     }
 
     public function getCommission($tx, $feeCoin, $operationFee = 0, $options = [])
