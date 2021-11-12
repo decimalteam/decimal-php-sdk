@@ -288,7 +288,7 @@ class ApiRequester
 			$options['headers'] = [
 				'Content-Type' => 'application/json',
 			];
-			$options['body'] = json_encode($payload, JSON_UNESCAPED_SLASHES);
+			$options['body'] = json_encode($payload, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 		}
 		if ($rpc) {
 			$client = $this->clientRpc;
