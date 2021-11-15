@@ -8,6 +8,8 @@ use DecimalSDK\Utils\ApiRequester;
 use DecimalSDK\Utils\TransactionHelpers;
 use DecimalSDK\Utils\WalletHelpers;
 use DecimalSDK\Wallet;
+use Elliptic\EC;
+use kornrunner\Keccak;
 
 class Transaction
 {
@@ -1061,6 +1063,25 @@ class Transaction
             $this->wallet->getAddress(),
             $preparedTx
         );
+    }
+
+    /**
+     * @param $addressNft
+     * @return mixed
+     * @throws DecimalException
+     */
+
+    public function getNft($addressNft)
+    {
+        $timestamp = time();
+        $privateKey = $this->wallet->getPrivateKey();
+        $hash = Keccak::hash(json_encode([
+            'nftId' => $addressNft,
+            'timestamp' => $timestamp
+        ]), '256');
+        $ec = new EC('secp256k1');
+        $signature = $ec->sign($hash, $privateKey, 'hex', ['canonical' => true]);
+        return $this->requester->getNftById($addressNft, $timestamp, $signature);
     }
 
     /**

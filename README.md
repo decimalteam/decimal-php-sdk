@@ -397,6 +397,12 @@ $txPayload = [
 $result = $transaction->getNftMetadata('ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6');
 ```
 
+## get info about NFT
+
+```php
+$result = $transaction->getNft('49501d55a30944bf7b3b72e618c1cc564cdeaeee');
+```
+
 ## get NFT stakes
 
 ```php
