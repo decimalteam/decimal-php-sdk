@@ -73,6 +73,17 @@ $txPayload = [
 $result = $transaction->sendCoins($txPayload);
 ```
 
+## If you want to pay for transaction by custom coin, you need add feeCoin to $txPayload
+
+```php
+$txPayload = [
+    'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', //receiver address
+    'coin' => 'tDEL', //coin
+    'amount' => '100', // 100 tDEL
+    'feeCoin' => 'customCoin'
+];
+```
+
 ## Sell coins
 
 ```php
