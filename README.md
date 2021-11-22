@@ -40,6 +40,27 @@ use DecimalSDK\Wallet;
 $wallet = new Wallet(/*your mnemonics*/);
 
 echo $wallet->getAddress();
+//dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g
+```
+
+## Get public key wallet
+
+Return the public key string of 64 hex characters
+```php
+use DecimalSDK\Wallet;
+
+echo $wallet->getPublicKey();
+// 02f85bb9b5d87cda4197b09d0cd0ef5a1fb97f74f261f508f48a26d7dba2d0ed12
+```
+
+## Get private key wallet
+
+Return the private key string of 64 hex characters
+```php
+use DecimalSDK\Wallet;
+
+echo $wallet->getPrivateKey();
+// 8f7370936a728ff3d2306cbf2422382a4297f9059aecb5703fe83eef49d3e828
 ```
 
 ## Coins operations
@@ -71,6 +92,7 @@ $txPayload = [
     'amount' => '100', // 100 tDEL
 ];
 $result = $transaction->sendCoins($txPayload);
+// => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
 ```
 
 ## If you want to pay for transaction by custom coin, you need add feeCoin to $txPayload
@@ -107,7 +129,7 @@ $txPayload = [
     'maxSpendLimit' => '20', //Optionally
 ];
 
-$result = $transaction->getCoins($txPayload);
+$result = $transaction->getCoin($txPayload);
 ```
 
 ## Sell all coins
@@ -412,12 +434,149 @@ $result = $transaction->getNftMetadata('ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6
 
 ```php
 $result = $transaction->getNft('49501d55a30944bf7b3b72e618c1cc564cdeaeee');
+/*
+
+common fields for all users 
+
+{
+  allowMint: false
+  blockId: 17187
+  cover: "data:image/png;base64,iVBORw0KGgo..."
+  createdAt: "2021-09-28T06:43:48.378Z"
+  creator: "dx1wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8"
+  description: "token"
+  headline: "tok"
+  id: 422
+  misc: {coverHash: '307a3e7ccac8dfbd522805d980e199e5e5dc1541', coverPath: 'cSWF9hjezHlgxCPvAj4DtjpIstBnvHHo_cover_93b28.png', coverExtension: 'png'}
+  nftCollection: "tok"
+  nftId: "2ff8d64694c057777707739910f83f8bda53aa37"
+  nftReserve: (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+  nonFungible: false
+  owners: (3) [{…}, {…}, {…}]
+  quantity: "10"
+  slug: "cSWF9hjezHlgxCPvAj4DtjpIstBnvHHo"
+  startReserve: "100000000000000000000"
+  status: "active"
+  tokenUri: "https://devnet-nft.decimalchain.com/api/nfts/cSWF9hjezHlgxCPvAj4DtjpIstBnvHHo"
+  totalReserve: "1000000000000000000000"
+  txHash: "33A41B8C910F7BCB03958448F9F59401EC9D3089F5CF7C621248F2CE2E168063"
+  updatedAt: "2021-09-28T06:43:58.071Z
+}
+
+if user is owner of requested nft then response is
+
+{
+  asset: 'assets/JeqShgz5ySuYgrDr2f5Cz8MrKTSP2pyk_0299a.png',
+  ...commonFields,
+}
+
+if user is not owner of requested nft then response is
+
+{
+  asset: null,
+  ...commonFields,
+}
+
+*/
 ```
+
+## get stakes
+
+```php
+$id = 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g';
+$result = $transaction->getStakesByAddress($id);
+/*
+{
+  "validators": [
+    {
+      "validatorId": "dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
+      "stakesNfts": [
+        {
+           "baseQuantity": "1000",
+           "nftCollection": "denom1",
+           "quantity": "10",
+           "unbondQuantity": "10"
+        }
+      ],
+      "totalStake": "500000000000000000000",
+      "validator": {
+        "address": "dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
+        "consensusAddress": "dxvalcons17ntss5hyuutk5w4a4upptz3xc9f3f0tgwwmfw8",
+        "rewardAddress": "dx1ajytg8jg8ypx0rj9p792x32fuxyezga43jd3ry",
+        "moniker": "test-node-fra1-02",
+        "website": "decimalchain.com",
+        "details": "Declaring validator on test-node-fra1-02",
+        "identity": null,
+        "security_contact": null,
+        "blockId": 0,
+        "skippedBlocks": 0,
+        "delegators": 2,
+        "fee": "0.100000000000000000",
+        "slots": 2,
+        "mins": "0",
+        "stake": "40000500000000000000000000",
+        "power": "40000500",
+        "rating": null,
+        "status": "online",
+        "kind": "Validator",
+        "createdAt": "2020-07-28T11:48:06.658Z",
+        "updatedAt": "2020-07-29T12:51:33.002Z"
+      }
+    }
+  ],
+  "total": "1000"
+}
+*/
+```
+
 
 ## get NFT stakes
 
 ```php
-$result = $transaction->getNftStakesByAddress('ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6');
+$id = 'ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6'; // id of requested nft
+$result = $transaction->getNftStakesByAddress($id);
+/*
+{
+  "validators": [
+    {
+      "validatorId": "dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
+      "stakes": [
+        {
+          "coin": "tdel",
+          "amount": "500000000000000000000",
+          "baseAmount": "500000000000000000000",
+          "unbondAmount": null
+        }
+      ],
+      "totalStake": "500000000000000000000",
+      "validator": {
+        "address": "dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
+        "consensusAddress": "dxvalcons17ntss5hyuutk5w4a4upptz3xc9f3f0tgwwmfw8",
+        "rewardAddress": "dx1ajytg8jg8ypx0rj9p792x32fuxyezga43jd3ry",
+        "moniker": "test-node-fra1-02",
+        "website": "decimalchain.com",
+        "details": "Declaring validator on test-node-fra1-02",
+        "identity": null,
+        "security_contact": null,
+        "blockId": 0,
+        "skippedBlocks": 0,
+        "delegators": 2,
+        "fee": "0.100000000000000000",
+        "slots": 2,
+        "mins": "0",
+        "stake": "40000500000000000000000000",
+        "power": "40000500",
+        "rating": null,
+        "status": "online",
+        "kind": "Validator",
+        "createdAt": "2020-07-28T11:48:06.658Z",
+        "updatedAt": "2020-07-29T12:51:33.002Z"
+      }
+    }
+  ],
+  "total": "500000000000000000000"
+}
+*/
 ```
 
 ## get coin list
@@ -427,6 +586,28 @@ const LIMIT = 10;
 const OFFSET = 0;
 const QUERY = '';
 $result = $transaction->getCoinsList(LIMIT,OFFSET,QUERY);
+/*
+{
+  "count": 5,
+  "coins": [
+    {
+      "symbol": "mycoin",
+      "title": "MYCOIN",
+      "volume": "1023454326378015905553",
+      "reserve": "12609116636032889229477",
+      "crr": 10,
+      "limitVolume": "2000000000000000000000",
+      "creator": "dx1vkn4lje42gjmyghc3vneg0yqa39wfgqvh4f8zg",
+      "txHash": "93AC6D86FF12BD9594889FEF4092542CBA6FEFA09F5E4A710D9E6CF12C1006A7",
+      "blockId": 1529,
+      "avatar": "data:image/png;base64...",
+      "createdAt": "2020-07-28T14:09:38.852Z",
+      "updatedAt": "2020-07-29T12:25:56.512Z"
+    },
+    // ...
+  ]
+}
+*/
 ```
 
 ## Estimate tx fee
@@ -445,7 +626,7 @@ $options=[
     'mode' => 'sync'
     ];
 $transaction = new Transaction($wallet);
-$result = $transaction->estimateTxFee($type ,$txPayload,$options);
+$result = $transaction->estimateTxFee($type ,$txPayload,$options); //0.44
 ```
 
 ## Check required fields
