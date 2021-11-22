@@ -133,7 +133,7 @@ class ApiRequester
 	public function getCoinsList($limit = 1, $offset = 0, $query = null)
 	{
 		//todo this coin to coins
-		$url = "coins?limit=$limit&offset=$offset";
+		$url = "coin?limit=$limit&offset=$offset";
 
 		if ($query) {
 			$url += "&$query";
