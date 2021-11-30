@@ -199,6 +199,20 @@ class ApiRequester
         }
     }
 
+    public function getNfts($address, $timestamp, $signature, $limit = 10, $offset = 0, $query = null)
+    {
+        $signature = json_encode($signature);
+        $query = $query ? '&query='.$query : '';
+        $url = "address/$address/nfts?limit=$limit&offset=$offset&timestamp=$timestamp&signature=$signature$query";
+        try {
+            $res = $this->client->get($url);
+            $body = $res->getBody();
+            return json_decode($body->getContents(), true);
+        } catch (\Exception $exception) {
+            return $this->getError(json_encode($exception->getMessage()));
+        }
+    }
+
 	public function getMultisigsByAdress($address)
 	{
 		if (!$address) {

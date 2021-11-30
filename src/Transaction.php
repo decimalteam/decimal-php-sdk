@@ -1074,14 +1074,29 @@ class Transaction
     public function getNft($addressNft)
     {
         $timestamp = time();
-        $privateKey = $this->wallet->getPrivateKey();
-        $hash = Keccak::hash(json_encode([
+        $signature = $this->signWithElliptic([
             'nftId' => $addressNft,
             'timestamp' => $timestamp
-        ]), '256');
-        $ec = new EC('secp256k1');
-        $signature = $ec->sign($hash, $privateKey, 'hex', ['canonical' => true]);
+        ]);
         return $this->requester->getNftById($addressNft, $timestamp, $signature);
+    }
+
+    /**
+     * @param $address
+     * @param int $limit
+     * @param int $offset
+     * @param null $query
+     * @return null
+     */
+    public function getNfts($address, $limit = 10, $offset = 0, $query = null)
+    {
+        if ($address == $this->wallet->getAddress()) {
+            $timestamp = time();
+            $signature = $this->signWithElliptic(['timestamp' => $timestamp]);
+            return  $this->requester->getNfts($address, $timestamp, $signature, $limit, $offset, $query);
+        }else{
+            return  null;
+        }
     }
 
     /**
@@ -1155,6 +1170,20 @@ class Transaction
 
         // Output the 36 character UUID.
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+    }
+
+    /**
+     * @param $object
+     * @return mixed
+     */
+    
+    private function signWithElliptic($object)
+    {
+        $privateKey = $this->wallet->getPrivateKey();
+        $hash = Keccak::hash(json_encode($object), '256');
+        $ec = new EC('secp256k1');
+        $signature = $ec->sign($hash, $privateKey, 'hex', ['canonical' => true]);
+        return $signature;
     }
 
     function gen_uuid()
