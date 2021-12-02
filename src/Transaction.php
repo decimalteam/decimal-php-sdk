@@ -53,6 +53,9 @@ class Transaction
     const UNIT = 0.001;
     const PUB_KEY_TYPE = 'tendermint/PubKeySecp256k1';
     const DEFAULT_GAS_LIMIT = '9000000000000000000';
+    const DEFAULT_ORDER_FIELD = 'createdAt';
+    const DEFAULT_ORDER_DIRECTION = 'DESC';
+    const DEFAULT_ORDER = 'order['.self::DEFAULT_ORDER_FIELD.']='.self::DEFAULT_ORDER_DIRECTION;
 
     private $account;
     private $wallet;
