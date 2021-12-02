@@ -153,17 +153,31 @@ class ApiRequester
 		return $this->_request($url, self::GET, false);
 	}
 
-	//todo check it
-	public function getAddress($address, $txLimit = 0)
-	{
-		if (!$address) {
-			throw new DecimalException('address is required');
-		}
+    //todo check it
+    public function getAddress($address, $txLimit = 0, $params =[])
+    {
+        $signature = isset($params['signature']) ? '&signature='.json_encode($params['signature']) : '';
+        $timestamp = isset($params['timestamp']) ? '&timestamp='.$params['timestamp'] : '';
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
-		$url = "address/$address?txLimit=$txLimit";
+        $url = "address/$address?txLimit=$txLimit$timestamp$signature";
 
-		return $this->_request($url, self::GET);
-	}
+        return $this->_request($url, self::GET);
+    }
+
+    public function getNftTxes($address, $limit, $offset, $order, $params = [])
+    {
+        $signature = isset($params['signature']) ? '&signature='.json_encode($params['signature']) : '';
+        $timestamp = isset($params['timestamp']) ? '&timestamp='.$params['timestamp'] : '';
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
+        $url = "address/$address/nfts/txs?$order&limit=$limit&offset=$offset$timestamp$signature";
+
+        return $this->_request($url, self::GET);
+    }
 
 	public function getNonce($address)
 	{
