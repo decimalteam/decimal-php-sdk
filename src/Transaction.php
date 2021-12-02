@@ -55,7 +55,7 @@ class Transaction
     const DEFAULT_GAS_LIMIT = '9000000000000000000';
     const DEFAULT_ORDER_FIELD = 'createdAt';
     const DEFAULT_ORDER_DIRECTION = 'DESC';
-    const DEFAULT_ORDER = 'order['.self::DEFAULT_ORDER_FIELD.']='.self::DEFAULT_ORDER_DIRECTION;
+    const DEFAULT_ORDER = 'order[' . self::DEFAULT_ORDER_FIELD . ']=' . self::DEFAULT_ORDER_DIRECTION;
 
     private $account;
     private $wallet;
@@ -553,8 +553,8 @@ class Transaction
 
     /**
      * Transaction constructor.
-     * @param  \DecimalSDK\Wallet  $wallet
-     * @param  array  $options
+     * @param \DecimalSDK\Wallet $wallet
+     * @param array $options
      * @throws DecimalException
      */
 
@@ -1055,7 +1055,7 @@ class Transaction
 
     public function getNftMetadata($addressNft)
     {
-        $url = $this->txSchemes['NFT_METADATA']['type'].$addressNft."??walletAddress=".$this->wallet->getAddress();
+        $url = $this->txSchemes['NFT_METADATA']['type'] . $addressNft . "??walletAddress=" . $this->wallet->getAddress();
         $payload['fee'] = $this->txSchemes['NFT_METADATA']['fee'];
 
         $wrappedTx = $this->wrapTx($url, $payload, [], false);
@@ -1096,9 +1096,9 @@ class Transaction
         if ($address == $this->wallet->getAddress()) {
             $timestamp = time();
             $signature = $this->signWithElliptic(['timestamp' => $timestamp]);
-            return  $this->requester->getNfts($address, $timestamp, $signature, $limit, $offset, $query);
-        }else{
-            return  null;
+            return $this->requester->getNfts($address, $timestamp, $signature, $limit, $offset, $query);
+        } else {
+            return null;
         }
     }
 
@@ -1111,11 +1111,7 @@ class Transaction
 
     public function getAddress($address, $txLimit = 0)
     {
-        $params = [];
-        if($address == $this->wallet->getAddress()){
-            $params['timestamp'] = time();
-            $params['signature'] = $this->signWithElliptic(['timestamp' => $params['timestamp']]);
-        }
+        $params = $this->checkWalletAddressNft($address);
         return $this->requester->getAddress($address, $txLimit, $params);
     }
 
@@ -1128,25 +1124,42 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function getNftTxes($address, $limit = 10, $offset = 0, $order = self::DEFAULT_ORDER)
+    public function getNftsTxes($address, $limit = 10, $offset = 0, $order = self::DEFAULT_ORDER)
     {
-        $params = [];
-        if($address == $this->wallet->getAddress()){
-            $params['timestamp'] = time();
-            $params['signature'] = $this->signWithElliptic(['timestamp' => $params['timestamp']]);
-        }
-        return $this->requester->getNftTxes($address, $limit, $offset, $order, $params);
+        $params = $this->checkWalletAddressNft($address);
+        return $this->requester->getNftsTxes($address, $limit, $offset, $order, $params);
     }
 
     /**
      * @param $addressNft
+     * @param int $limit
+     * @param int $offset
+     * @param string $order
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    public function getNftTxes($addressNft, $limit = 10, $offset = 0, $order = self::DEFAULT_ORDER)
+    {
+        $timestamp = time();
+        $signature = $this->signWithElliptic([
+            'nftId' => $addressNft,
+            'timestamp' => $timestamp
+        ]);
+
+        return $this->requester->getNftTxes($addressNft, $timestamp, $signature, $limit, $offset, $order);
+    }
+
+    /**
+     * @param $address
      * @return mixed
      * @throws DecimalException
      */
 
-    public function getNftStakesByAddress($addressNft)
+    public function getNftStakesByAddress($address)
     {
-        return $this->requester->getNftStakesByAddress($addressNft);
+        $params = $this->checkWalletAddressNft($address);
+        return $this->requester->getNftStakesByAddress($address, $params);
     }
 
     /**
@@ -1184,14 +1197,14 @@ class Transaction
             $errors = array_merge(array_fill_keys($scheme['requiredFields'], 'field is required'), $errors);
         }
         if (count($errors)) {
-            throw new DecimalException("payload validation fails ".json_encode($errors, JSON_UNESCAPED_SLASHES));
+            throw new DecimalException("payload validation fails " . json_encode($errors, JSON_UNESCAPED_SLASHES));
         }
 
         return true;
     }
 
     /**
-     * @param  null  $data
+     * @param null $data
      * @return string
      * @throws \Exception
      */
@@ -1223,6 +1236,22 @@ class Transaction
         $ec = new EC('secp256k1');
         $signature = $ec->sign($hash, $privateKey, 'hex', ['canonical' => true]);
         return $signature;
+    }
+
+    /**
+     * @param $address
+     * @return array
+     */
+
+    private function checkWalletAddressNft($address)
+    {
+        if ($address == $this->wallet->getAddress()) {
+            $params['timestamp'] = time();
+            $params['signature'] = $this->signWithElliptic(['timestamp' => $params['timestamp']]);
+            return $params;
+        } else {
+            return [];
+        }
     }
 
     function gen_uuid()
