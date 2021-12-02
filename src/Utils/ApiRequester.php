@@ -178,8 +178,17 @@ class ApiRequester
 
         return $this->_request($url, self::GET);
     }
-    
-    
+
+    public function getNftTxes($addressNft, $timestamp, $signature, $limit, $offset, $order)
+    {
+        $signature = json_encode($signature);
+        if (!$addressNft) {
+            throw new DecimalException('Nft id is required');
+        }
+        $url = "nfts/$addressNft/txs?$order&limit=$limit&offset=$offset&timestamp=$timestamp&signature=$signature";
+
+        return $this->_request($url, self::GET);
+    }
 
     public function getNonce($address)
     {
