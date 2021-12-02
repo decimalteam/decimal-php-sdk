@@ -1100,6 +1100,42 @@ class Transaction
     }
 
     /**
+     * @param $address
+     * @param int $txLimit
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    public function getAddress($address, $txLimit = 0)
+    {
+        $params = [];
+        if($address == $this->wallet->getAddress()){
+            $params['timestamp'] = time();
+            $params['signature'] = $this->signWithElliptic(['timestamp' => $params['timestamp']]);
+        }
+        return $this->requester->getAddress($address, $txLimit, $params);
+    }
+
+    /**
+     * @param $address
+     * @param int $limit
+     * @param int $offset
+     * @param string $order
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    public function getNftTxes($address, $limit = 10, $offset = 0, $order = self::DEFAULT_ORDER)
+    {
+        $params = [];
+        if($address == $this->wallet->getAddress()){
+            $params['timestamp'] = time();
+            $params['signature'] = $this->signWithElliptic(['timestamp' => $params['timestamp']]);
+        }
+        return $this->requester->getNftTxes($address, $limit, $offset, $order, $params);
+    }
+
+    /**
      * @param $addressNft
      * @return mixed
      * @throws DecimalException
@@ -1176,7 +1212,7 @@ class Transaction
      * @param $object
      * @return mixed
      */
-    
+
     private function signWithElliptic($object)
     {
         $privateKey = $this->wallet->getPrivateKey();
