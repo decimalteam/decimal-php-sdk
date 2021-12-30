@@ -196,7 +196,7 @@ class ApiRequester
             throw new DecimalException('address is required');
         }
 
-        $url = $this->getRpcPrefix() . "auth/accounts/$address";
+        $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
 
         $res = $this->_request($url, self::GET, false);
         $res->result->value->sequence++;
