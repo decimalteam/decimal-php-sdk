@@ -10,6 +10,7 @@ use GuzzleHttp\Client as GClient;
 class ApiRequester
 {
     const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api/';
+    const MAINNET_GATE_API = 'https://mainnet-gate.decimalchain.com/api/';
     const GET = 'get';
     const POST = 'post';
     const TIMEOUT = 5.0;
@@ -197,6 +198,10 @@ class ApiRequester
         }
 
         $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
+
+        if($this->options['baseUrl'] == self::MAINNET_GATE_API){
+            $url = $this->getRpcPrefix()."auth/accounts/$address";
+        }
 
         $res = $this->_request($url, self::GET, false);
         $res->result->value->sequence++;
