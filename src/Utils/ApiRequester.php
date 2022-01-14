@@ -197,11 +197,11 @@ class ApiRequester
             throw new DecimalException('address is required');
         }
 
-        $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
+        //$url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
 
-        if($this->options['baseUrl'] == self::MAINNET_GATE_API){
-            $url = $this->getRpcPrefix()."auth/accounts/$address";
-        }
+//        if($this->options['baseUrl'] == self::MAINNET_GATE_API){
+        $url = $this->getRpcPrefix() . "auth/accounts/$address";
+//        }
 
         $res = $this->_request($url, self::GET, false);
         $res->result->value->sequence++;
