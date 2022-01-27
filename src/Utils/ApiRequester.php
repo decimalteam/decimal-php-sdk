@@ -13,7 +13,7 @@ class ApiRequester
     const MAINNET_GATE_API = 'https://mainnet-gate.decimalchain.com/api/';
     const GET = 'get';
     const POST = 'post';
-    const TIMEOUT = 5.0;
+    const TIMEOUT = 15.0;
     const DEFAULT_NODE_URL = 'http://localhost';
     const DEFAULT_DEFAULT_NODE_RPC_PORT = '26657';
     const DEFAULT_DEFAULT_NODE_REST_PORT = '1317';
@@ -324,7 +324,12 @@ class ApiRequester
 
     public function sendTx($tx, $rpc = false, $options = [], $method = self::POST)
     {
-        $url = $this->getRpcPrefix() . "txs";
+        if (isset($this->options['sendTxDirectly'])) {
+            $url = $this->getRpcPrefix() . 'txs-directly';
+            $options['mode'] = 'block';
+        } else {
+            $url = $this->getRpcPrefix() . 'txs';
+        }
 
         $mode = isset($options['mode']) ? $options['mode'] : 'sync';
         $tx = ['tx' => $tx, 'mode' => $mode];

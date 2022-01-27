@@ -76,10 +76,12 @@ use DecimalSDK\Transaction;
 // restPort - default 1317
 $wallet = new Wallet();
 // Enter your address node http://your-address.node/api
+// if send trx directly to BC set sendTxDirectly = true
 $transaction = new Transaction($wallet, [
     'gateUrl' => 'http://your-address.node/api',
     'useGate' => true/false,
-    'createNonce' => true
+    'createNonce' => true,
+    'sendTxDirectly' => true
 ]);
 ```
 
