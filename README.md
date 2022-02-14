@@ -585,6 +585,13 @@ $result = $transaction->getAddress($address, $txLimit);
 */
 ```
 
+## get info about transaction
+
+```php
+$hash = '90EFE7E117B9C27355AB0885077E0B22C343594280ED8CBC4100D516FC228BFD'; // transaction hash
+$transaction->checkTransaction($hash);
+```
+
 ## getNftsTxes
 
 ```php

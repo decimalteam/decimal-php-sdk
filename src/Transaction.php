@@ -1069,6 +1069,15 @@ class Transaction
     }
 
     /**
+     * @param $hash
+     * @return mixed
+     */
+    public function checkTransaction($hash)
+    {
+        return $this->requester->checkTransaction($hash);
+    }
+
+    /**
      * @param $addressNft
      * @return mixed
      * @throws DecimalException
