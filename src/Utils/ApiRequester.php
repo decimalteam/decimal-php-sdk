@@ -322,6 +322,18 @@ class ApiRequester
         }
     }
 
+    public function checkTransaction($hash)
+    {
+        try {
+            $url = 'tx/'.$hash;
+            $res = $this->client->get($url);
+            $body = $res->getBody();
+            return json_decode($body->getContents(), true);
+        } catch (\Exception $exception) {
+            return $this->getError(json_encode($exception->getMessage()));
+        }
+    }
+
     public function sendTx($tx, $rpc = false, $options = [], $method = self::POST)
     {
         if (isset($this->options['sendTxDirectly'])) {
