@@ -548,15 +548,8 @@ trait TransactionHelpers
 
     public function nftMintPayload($payload)
     {
-        if (isset($payload['id'])) {
-            $id = $payload['id'];
-        } else {
-            $id = str_replace("-", "", $this->gen_uuid());
-            //$id = $this->guidv4();
-        }
         return [
-            'id' => $id,
-            //'nftid' => $id,
+            'id' => $payload['id'],
             'denom' => $payload['denom'],
             'token_uri' => $payload['token_uri'],
             'quantity' => $payload['quantity'],
@@ -676,6 +669,25 @@ trait TransactionHelpers
             'r' => substr($payload['r'], 2),
             's' => substr($payload['s'], 2)
         ];
+    }
+
+    public function generateNftId($headline, $description, $slug, $coverHash = null, $assetHash = null)
+    {
+        try {
+            $hashes = [
+                sha1($headline),
+                sha1($description),
+                sha1($slug),
+                $coverHash,
+                $assetHash
+            ];
+            $id = implode('', $hashes);
+
+            return sha1($id);
+        } catch (\Exception $error) {
+            throw new DecimalException('Error wher trying to get hash ' . $error->getMessage());
+        }
+
     }
 
     private function checkInt(string $int): string

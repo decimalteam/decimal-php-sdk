@@ -347,7 +347,17 @@ $result = $transaction->msgSwapRedeem($txPayload);
 ## NFT mint
 
 ```php
+// create nft id
+$headline = 'headline_example';
+$description = 'description_example';
+$slug = 'cXDmENDo1p6knhdozI2k9aQO4fkobIJ7';
+$coverHash = '005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3';
+$assetHash = '005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3';
+
+$id = $transaction->generateNftId($headline, $description, $slug, $coverHash, $assetHash);
+
 $txPayload = [
+    'id' => $id,
     'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
     'denom'=> 'phone',
     'token_uri'=> 'https://develop.nft.decimalchain.com/api/nfts/pepe112',
@@ -590,7 +600,142 @@ $result = $transaction->getAddress($address, $txLimit);
 ```php
 $hash = '90EFE7E117B9C27355AB0885077E0B22C343594280ED8CBC4100D516FC228BFD'; // transaction hash
 $transaction->checkTransaction($hash);
+
+/*
+[ "ok" => true
+  "result" => array:15 [
+    "id" => 52510
+    "hash" => "90EFE7E117B9C27355AB0885077E0B22C343594280ED8CBC4100D516FC228BFD"
+    "timestamp" => "2022-02-14T07:01:01.964Z"
+    "status" => "Success"
+    "type" => "multi_send_coin"
+    "fee" => array:4 [
+      "gas_coin" => null
+      "gas_used" => "1059000000000000000"
+      "gas_amount" => null
+      "gas_used_number" => 1059000000000000000
+    ]
+    "data" => array:48 [
+      "log" => ""
+      "nft" => array:8 [
+        "nftId" => ""
+        "creator" => ""
+        "reserve" => ""
+        "quantity" => ""
+        "tokenUri" => ""
+        "recipient" => ""
+        "nftCollection" => ""
+        "sub_token_ids" => []
+      ]
+      "coin" => ""
+      "check" => ""
+      "coins" => ""
+      "proof" => ""
+      "title" => ""
+      "amount" => ""
+      "issuer" => ""
+      "owners" => ""
+      "sender" => "dx19uw05epj00fctthnv6y8tnayf9k8rnsqr46au3"
+      "symbol" => ""
+      "wallet" => ""
+      "weights" => ""
+      "identity" => ""
+      "coin_base" => ""
+      "confirmed" => null
+      "due_block" => ""
+      "recipient" => ""
+      "threshold" => ""
+      "coin_check" => ""
+      "commission" => ""
+      "amount_base" => ""
+      "atomic_swap" => array:7 [
+        "from" => ""
+        "amount" => ""
+        "secret" => ""
+        "recipient" => ""
+        "time_locked" => ""
+        "hashed_secret" => ""
+        "transfer_type" => ""
+      ]
+      "coin_to_buy" => ""
+      "nonce_check" => null
+      "transaction" => ""
+      "amount_check" => ""
+      "coin_to_sell" => ""
+      "limit_volume" => ""
+      "amount_to_buy" => ""
+      "confirmations" => null
+      "signer_weight" => null
+      "swap_multiple" => array:16 [
+        "r" => ""
+        "s" => ""
+        "v" => ""
+        "from" => ""
+        "amount" => ""
+        "sender" => ""
+        "chainTo" => ""
+        "chainFrom" => ""
+        "chainName" => ""
+        "recipient" => ""
+        "tokenName" => ""
+        "chainNameTo" => ""
+        "chainNumber" => ""
+        "tokenSymbol" => ""
+        "chainNameFrom" => ""
+        "transactionNumber" => ""
+      ]
+      "amount_to_sell" => ""
+      "initial_volume" => ""
+      "reward_address" => ""
+      "validator_desc" => array:5 [
+        "details" => ""
+        "moniker" => ""
+        "website" => ""
+        "identity" => ""
+        "security_contact" => ""
+      ]
+      "completion_time" => ""
+      "initial_reserve" => ""
+      "softwareUpgrade" => array:4 [
+        "plan" => array:3 [
+          "name" => ""
+          "time" => ""
+          "height" => ""
+        ]
+        "title" => ""
+        "proposer" => ""
+        "description" => ""
+      ]
+      "submit_proposal" => array:8 [
+        "vote" => ""
+        "title" => ""
+        "proposer" => ""
+        "description" => ""
+        "proposal_id" => null
+        "validator_id" => ""
+        "voting_end_block" => ""
+        "voting_start_block" => ""
+      ]
+      "delegator_address" => ""
+      "min_amount_to_buy" => ""
+      "validator_address" => ""
+      "max_amount_to_sell" => ""
+      "multisend_receivers" => "[{"dx17uvraxkrlvuwfwwgz7yqe0kdzv4dttze4394vq":{"amount":"182963397998034976768","coin":"tdel"}},{"dx1xc0x5zemdyu29m0yufyxldm68fwqx39vy6twkk":{"amount":"231753637464179015680","coin":"tdel"}},{"dx1hmk05dlv7npzmy3q7hsj7yvds8yr3ff6fa6mkr":{"amount":"48790239466142703616","coin":"tdel"}},{"dx1ptj8fcf7df8nczdgwnhsszmzm5xyv6x0k2vqfq":{"amount":"176102270573110001664","coin":"tdel"}},{"dx1lzs6psv3u6vzgm5qnrz49ugvtmnd4hx09c6l5d":{"amount":"176102270573110001664","coin":"tdel"}},{"dx1wgrgknfdcft06e3604alec2a50d8gcm7w2kfem":{"amount":"6098779933267869696","coin":"tdel"}}]"
+      "constant_reserve_ratio" => null
+    ]
+    "nonce" => 21
+    "code" => 0
+    "message" => ""
+    "blockId" => 2499678
+    "from" => "dx19uw05epj00fctthnv6y8tnayf9k8rnsqr46au3"
+    "to" => null
+    "createdAt" => "2022-02-14T07:01:09.242Z"
+    "updatedAt" => "2022-02-14T07:01:09.245Z"
+  ]
+]
+*/
 ```
+
 
 ## getNftsTxes
 

@@ -361,6 +361,7 @@ class Transaction
             'type' => 'nft/msg_mint',
             'scheme' => [
                 'fieldTypes' => [
+                    'id' => 'string',
                     'denom' => 'string',
                     'token_uri' => 'string',
                     'quantity' => 'integer',
@@ -368,6 +369,7 @@ class Transaction
                     'reserve' => 'number'
                 ],
                 'requiredFields' => [
+                    'id',
                     'denom',
                     'token_uri',
                     'quantity',
