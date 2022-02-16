@@ -347,20 +347,53 @@ $result = $transaction->msgSwapRedeem($txPayload);
 ## NFT mint
 
 ```php
+// response after creating nft
+/*
+ * {
+    "ok": true,
+    "result": {
+        "token": {
+            "isPrivate": false,
+            "id": 553,
+            "headline": "headline_example",
+            "description": "description_example",
+            "slug": "CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ",
+            "asset": "assets/CadgWIHKcOkPzn1X0Eji96F7RLiLAxPN_67acc.jpg",
+            "cover": "",
+            "misc": {
+                "coverHash": "4e48fea99881386372c8edf93736a91684ed6a46",
+                "coverPath": "CadgWIHKcOkPzn1X0Eji96F7RLiLAxPN_cover_1d223.jpg",
+                "coverExtension": "jpg"
+            },
+            "status": "inactive",
+            "updatedAt": "2022-02-16T07:57:49.883Z",
+            "createdAt": "2022-02-16T07:57:49.883Z"
+        }
+    }
+}
+ * */
+
 // create nft id
+// put $headline, $description, $slug from response
 $headline = 'headline_example';
 $description = 'description_example';
-$slug = 'cXDmENDo1p6knhdozI2k9aQO4fkobIJ7';
-$coverHash = '005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3';
-$assetHash = '005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3';
+$slug = 'CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ';
+
+//get hash (sha1) from upload file nft
+$asset = Request::file('asset');
+$cover = Request::file('cover');
+
+$assetHash = hash_file('sha1',$asset,false);
+$coverHash = hash_file('sha1',$cover,false);
 
 $id = $transaction->generateNftId($headline, $description, $slug, $coverHash, $assetHash);
 
+// denom - name of nft collection
 $txPayload = [
     'id' => $id,
     'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
     'denom'=> 'phone',
-    'token_uri'=> 'https://develop.nft.decimalchain.com/api/nfts/pepe112',
+    'token_uri'=> 'https://develop.nft.decimalchain.com/api/nfts/CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ',
     'quantity'=> '1',
     'reserve'=> '1',
     'allow_mint'=> true
