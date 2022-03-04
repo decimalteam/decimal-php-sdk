@@ -92,7 +92,7 @@ trait TransactionHelpers
                 'amount' => [],
                 'gas' => '0'
             ],
-            'memo' => utf8_encode($options['memo'] ?? '')
+            'memo' => $options['memo'] ?? ''
         ];
 
         if (!isset($options['feeCoin']) || $type === 'coin/redeem_check' || !$commision) {
