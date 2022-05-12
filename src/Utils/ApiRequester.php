@@ -127,8 +127,12 @@ class ApiRequester
         }
 
         //todo temp fix
-        $url = $this->getRpcPrefix() . "auth/accounts/$address";
-        return $this->_request($url, self::GET, false);
+        //$url = $this->getRpcPrefix() . "auth/accounts/$address";
+        $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
+        $url = "rpc/auth/accounts-with-unconfirmed-nonce/$address";
+        $info = $this->_request($url, self::GET, false);
+        return $info;
+        //return $this->_request($url, self::GET, false);
     }
 
     public function getCoinsList($limit = 1, $offset = 0, $query = null)
@@ -325,7 +329,7 @@ class ApiRequester
     public function checkTransaction($hash)
     {
         try {
-            $url = 'tx/'.$hash;
+            $url = 'tx/' . $hash;
             $res = $this->client->get($url);
             $body = $res->getBody();
             return json_decode($body->getContents(), true);
@@ -338,12 +342,16 @@ class ApiRequester
     {
         if (isset($this->options['sendTxDirectly'])) {
             $url = $this->getRpcPrefix() . 'txs-directly';
-            $options['mode'] = 'block';
+            $options['mode'] = 'sync';
         } else {
             $url = $this->getRpcPrefix() . 'txs';
         }
 
         $mode = isset($options['mode']) ? $options['mode'] : 'sync';
+
+        $url = $this->getRpcPrefix() . 'txs-directly';
+        $options['mode'] = 'sync';
+
         $tx = ['tx' => $tx, 'mode' => $mode];
 
         return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
@@ -369,10 +377,12 @@ class ApiRequester
         } else {
             $client = $this->client;
         }
+
+        $res = $client->$method($url, $options);
+        $body = $res->getBody();
+        $decoded = json_decode($body);
+        return $decoded;
         try {
-            $res = $client->$method($url, $options);
-            $body = $res->getBody();
-            return json_decode($body->getContents());
         } catch (\Exception $exception) {
 
             return $this->getError(json_encode($exception->getMessage()));

@@ -35,7 +35,7 @@ trait TransactionHelpers
 
         $toSignPayload = $this->sortPayload($toSignPayload);
 
-        $signature = Encrypt::sepc256k1Sign(json_encode($toSignPayload, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),
+        $signature = Encrypt::sepc256k1Sign(json_encode($toSignPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             $this->wallet->getPrivateKey());
 
         $unsignedTx['signatures'] = [
@@ -107,7 +107,7 @@ trait TransactionHelpers
      * validate payload for transaction by scheme
      *
      * @param $scheme
-     * @param  array  $payload
+     * @param array $payload
      * @return array
      * @throws DecimalException
      */
@@ -186,16 +186,15 @@ trait TransactionHelpers
             'value' => $tx
         ];
         $signatureSize = 109;
-        $url = $this->requester->getRpcPrefix().'txs/encode';
+        $url = $this->requester->getRpcPrefix() . 'txs/encode';
         $encodedTxResp = $this->requester->post($url, $preparedTx, $rpc);
 
         try {
-			$tx_len = strlen(base64_decode($encodedTxResp->tx));
-		}
-		catch (\Exception $e){
-        	$tx_len = 0;
-		}
-		return  $tx_len + $signatureSize;
+            $tx_len = strlen(base64_decode($encodedTxResp->tx));
+        } catch (\Exception $e) {
+            $tx_len = 0;
+        }
+        return $tx_len + $signatureSize;
     }
 
     public function getCommission($tx, $feeCoin, $operationFee = 0, $options = [])
@@ -440,7 +439,7 @@ trait TransactionHelpers
     public function validatorCandidatePayload($payload)
     {
         return [
-            'commission' => ($payload['commission'] / 100).'.000000000000000000',
+            'commission' => ($payload['commission'] / 100) . '.000000000000000000',
             'validator_addr' => $this->wallet->getValidatorAddress(),
             'reward_addr' => WalletHelpers::checkAddress($payload['rewardAddress'], WalletHelpers::DX),
             'pub_key' => [
@@ -695,7 +694,7 @@ trait TransactionHelpers
         if (intval($int) > 0) {
             return $int;
         } else {
-            throw new DecimalException("reserve should be integer > 0, as string, we have \"".$int."\"");
+            throw new DecimalException("reserve should be integer > 0, as string, we have \"" . $int . "\"");
         }
     }
 
