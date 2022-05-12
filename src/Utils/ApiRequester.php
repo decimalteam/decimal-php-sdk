@@ -124,13 +124,9 @@ class ApiRequester
         } else {
             $url = $this->getRpcPrefix() . "accounts/$address";
         }
-
         //$url = $this->getRpcPrefix() . "auth/accounts/$address";
         $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
-        $url = "rpc/auth/accounts-with-unconfirmed-nonce/$address";
-        $info = $this->_request($url, self::GET, false);
-        return $info;
-        //return $this->_request($url, self::GET, false);
+        return $this->_request($url, self::GET, false);
     }
 
     public function getCoinsList($limit = 1, $offset = 0, $query = null)
