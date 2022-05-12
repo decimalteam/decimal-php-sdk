@@ -80,7 +80,6 @@ $wallet = new Wallet();
 $transaction = new Transaction($wallet, [
     'gateUrl' => 'http://your-address.node/api',
     'useGate' => true/false,
-    'createNonce' => true,
     'sendTxDirectly' => true
 ]);
 ```
