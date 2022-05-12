@@ -119,14 +119,12 @@ class ApiRequester
 
     public function getAccountInfo($address)
     {
-        //todo check it
         if (isset($this->options['createNonce'])) {
             $url = $this->getRpcPrefix() . "auth/accounts/$address";
         } else {
             $url = $this->getRpcPrefix() . "accounts/$address";
         }
 
-        //todo temp fix
         //$url = $this->getRpcPrefix() . "auth/accounts/$address";
         $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
         $url = "rpc/auth/accounts-with-unconfirmed-nonce/$address";
@@ -137,7 +135,6 @@ class ApiRequester
 
     public function getCoinsList($limit = 1, $offset = 0, $query = null)
     {
-        //todo this coin to coins
         $url = "coin?limit=$limit&offset=$offset";
 
         if ($query) {
@@ -158,7 +155,7 @@ class ApiRequester
         return $this->_request($url, self::GET, false);
     }
 
-    //todo check it
+
     public function getAddress($address, $txLimit = 0, $params = [])
     {
         $signature = isset($params['signature']) ? '&signature=' . json_encode($params['signature']) : '';
@@ -201,7 +198,7 @@ class ApiRequester
             throw new DecimalException('address is required');
         }
 
-        //$url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
+//        $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
 
 //        if($this->options['baseUrl'] == self::MAINNET_GATE_API){
         $url = $this->getRpcPrefix() . "auth/accounts/$address";
@@ -365,24 +362,26 @@ class ApiRequester
 
     private function _request($url, $method, $rpc = false, $payload = null, $optional = [])
     {
-        $options = [];
-        if ($payload) {
-            $options['headers'] = [
-                'Content-Type' => 'application/json',
-            ];
-            $options['body'] = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        }
-        if ($rpc) {
-            $client = $this->clientRpc;
-        } else {
-            $client = $this->client;
-        }
-
-        $res = $client->$method($url, $options);
-        $body = $res->getBody();
-        $decoded = json_decode($body);
-        return $decoded;
         try {
+            $options = [];
+            if ($payload) {
+                $options['headers'] = [
+                    'Content-Type' => 'application/json',
+                ];
+                $options['body'] = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            }
+            if ($rpc) {
+                $client = $this->clientRpc;
+            } else {
+                $client = $this->client;
+            }
+
+            $res = $client->$method($url, $options);
+            $body = $res->getBody();
+            $decoded = json_decode($body);
+
+            return $decoded;
+
         } catch (\Exception $exception) {
 
             return $this->getError(json_encode($exception->getMessage()));
@@ -425,7 +424,6 @@ class ApiRequester
      */
     protected function getError($exception, $code = null, $txhash = null)
     {
-        //todo log errors
         return [
             'hash' => $txhash,
             'success' => false,
