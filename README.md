@@ -86,6 +86,18 @@ $transaction = new Transaction($wallet, [
     'sendTxDirectly' => true
 ]);
 ```
+## Start tests 
+
+```php
+use DecimalSDK\Tests;
+
+Test::runTest($wallet, [
+                'gateUrl' => 'http://your-address.node/api',
+                'useGate' => true/false,
+                'mode' => 'sync'
+            ]);
+```
+
 
 ## Send coins
 
