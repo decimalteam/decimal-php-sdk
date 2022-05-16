@@ -492,13 +492,16 @@ trait TransactionHelpers
 
     public function coinUpdatePayload($payload)
     {
-        return [
-            'sender' => $this->wallet->getAddress(),
-            //todo check
-            'symbol' => $payload['ticker'],
-            'identity' => $payload['identity'],
-            'limit_volume' => amountUNIRecalculate($payload['maxSupply'])
-        ];
+        $data = [];
+        $data['sender'] = $this->wallet->getAddress();
+        $data['symbol'] =  $payload['ticker'];
+        if(isset($payload['identity'])){
+            $data['identity'] = $payload['identity'];
+        }
+        if(isset($payload['maxSupply'])){
+            $data['limit_volume'] = amountUNIRecalculate($payload['maxSupply']);
+        }
+        return $data;
     }
 
     public function multisigCreateWalletPayload($payload)

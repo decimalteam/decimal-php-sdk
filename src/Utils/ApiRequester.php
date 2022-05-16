@@ -93,6 +93,7 @@ class ApiRequester
 
     public function getSignMeta(Wallet $wallet)
     {
+
         $nodeInfo = $this->getNodeInfo();
 
         $accountInfo = (object)$this->getAccountInfo($wallet->getAddress());

@@ -12,6 +12,7 @@ $ composer require decimalteam/decimal-php-sdk
 ```
 
 ## Pacagist decimalteam/decimal-php-sdk
+
 https://packagist.org/packages/decimalteam/decimal-php-sdk
 
 # Usage
@@ -46,6 +47,7 @@ echo $wallet->getAddress();
 ## Get public key wallet
 
 Return the public key string of 64 hex characters
+
 ```php
 use DecimalSDK\Wallet;
 
@@ -56,6 +58,7 @@ echo $wallet->getPublicKey();
 ## Get private key wallet
 
 Return the private key string of 64 hex characters
+
 ```php
 use DecimalSDK\Wallet;
 
@@ -101,7 +104,7 @@ $result = $transaction->sendCoins($txPayload);
 ```php
 $txPayload = [
     'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', //receiver address
-    'coin' => 'tDEL', //coin
+    'coin' => 'tDEL', //coinF
     'amount' => '100', // 100 tDEL
     'feeCoin' => 'customCoin'
 ];
@@ -117,7 +120,7 @@ $txPayload = [
     'minBuyLimit' => '2', //Optionally
 ];
 
-$result = $transaction->sellCoins($txPayload);
+$result = $transaction->sellCoin($txPayload);
 ```
 
 ## Buy Coins
@@ -149,7 +152,7 @@ $result = $transaction->sellAllCoinsData($txPayload);
 
 ```php
 $txPayload = [
-    'adress' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
+    'address' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
     'stake' => '10',
     'coin' => 'tdel',
 ];
@@ -239,7 +242,7 @@ $txPayload = [
     'identity'=>'e353b89e0de0a78974f9ecaf033721ac'
 ];
 
-$result = $transaction->createCoin($txPayload);
+$result = $transaction->updateCoin($txPayload);
 ```
 
 ## Multisig create
@@ -281,8 +284,6 @@ $result = $transaction->multisigSignTX($txPayload);
 
 ```php
 $txPayload = [
-    'sender'=>  $wallet->getAddress(),
-    'sends'=>[
         [
             'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
            'coin'=>  'DEL',
@@ -293,10 +294,9 @@ $txPayload = [
             'coin'=>  'DEL',
             'amount'=> 100
         ]
-    ]
 ];
 
-$result = $transaction->multisigSignTX($txPayload);
+$result = $transaction->multisendCoins($txPayload);
 
 ```
 
@@ -392,7 +392,7 @@ $txPayload = [
     'id' => $id,
     'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
     'denom'=> 'phone',
-    'token_uri'=> 'https://develop.nft.decimalchain.com/api/nfts/CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ',
+    'token_uri'=> 'https://devnet-nft.decimalchain.com//api/nfts/CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ',
     'quantity'=> '1',
     'reserve'=> '1',
     'allow_mint'=> true
@@ -417,7 +417,7 @@ $result = $transaction->burnNft($txPayload);
 $txPayload = [
     'denom'=> 'phone',
     'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
-    'token_uri'=> 'uhttp://devnet.nft.decimalchain.com/api/nfts/CvavSYvudYqiGeOY67dzLmdl6NjqTdEb'
+    'token_uri'=> 'http://devnet.nft.decimalchain.com/api/nfts/CvavSYvudYqiGeOY67dzLmdl6NjqTdEb'
      ];
 $result = $transaction->editNftMetadata($txPayload);
 ```
@@ -465,7 +465,7 @@ $txPayload = [
             'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
             'reserve'=> '6'
         ];
-        $result = $transaction->nftUpdateReserve($txPayload);
+$result = $transaction->nftUpdateReserve($txPayload);
 ```
 
 ## get NFT metadata
@@ -768,7 +768,6 @@ $transaction->checkTransaction($hash);
 */
 ```
 
-
 ## getNftsTxes
 
 ```php
@@ -889,6 +888,7 @@ if not user's nft
 
 */
 ````
+
 ## get stakes
 
 ```php
@@ -937,7 +937,6 @@ $result = $transaction->getStakesByAddress($id);
 }
 */
 ```
-
 
 ## get NFT stakes
 
