@@ -158,8 +158,10 @@ class Transaction
             'type' => 'coin/multi_send_coin',
             'scheme' => [
                 'fieldTypes' => [
+                    'sends' => 'array'
                 ],
                 'requiredFields' => [
+                    'sends',
                     //todo check it too
                     //'to',
                     //'amount',
@@ -593,9 +595,7 @@ class Transaction
     {
         $type = $this->txSchemes['COIN_MULTISEND']['type'];
 
-        foreach ($payload as $data){
-            $this->checkRequiredFields('COIN_SEND', $data);
-        }
+        $this->checkRequiredFields('COIN_MULTISEND', $payload);
 
         $payload['fee'] = $this->txSchemes['COIN_MULTISEND']['fee'];
 
@@ -615,16 +615,14 @@ class Transaction
     protected function getMultiplySends($payload)
     {
         $out = [];
-        foreach ($payload as $key => $send) {
-            if($key != 'fee'){
-                $out[] = [
-                    'receiver' => WalletHelpers::checkAddress($send['to'], WalletHelpers::DX),
-                    'coin' => [
-                        'amount' => amountUNIRecalculate($send['amount']),
-                        'denom' => strtolower($send['coin']),
-                    ]
-                ];
-            }
+        foreach ($payload['sends'] as $send) {
+            $out[] = [
+                'receiver' => WalletHelpers::checkAddress($send['to'], WalletHelpers::DX),
+                'coin' => [
+                    'amount' => amountUNIRecalculate($send['amount']),
+                    'denom' => strtolower($send['coin']),
+                ]
+            ];
         }
         return $out;
     }
