@@ -23,7 +23,6 @@ class Test
             if(str_contains($transactionPayload['gateUrl'], 'testnet')){
                 $test_data = TESTNET_DATA;
             }
-            $test_data = self::getTestData();
             // check transaction methods
             $transactionHashes = [];
             foreach ($test_data['transaction'] as $func_name => $data) {
