@@ -107,16 +107,20 @@ const DEVNET_DATA = [
             'sub_token_ids' => [1],
         ],
         'multisendCoins' => [
-            [
-                'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
-                'coin'=>  'DEL',
-                'amount'=> 1
-            ],
-            [
-                'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
-                'coin'=>  'DEL',
-                'amount'=> 1
+            'sender' => 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
+            'sends' => [
+                [
+                    'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
+                    'coin'=>  'DEL',
+                    'amount'=> 1
+                ],
+                [
+                    'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
+                    'coin'=>  'DEL',
+                    'amount'=> 1
+                ]
             ]
+
         ]
     ]
 ];

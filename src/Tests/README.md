@@ -1056,3 +1056,57 @@ $result = $transaction->estimateTxFee($type ,$txPayload,$options); //0.44
 ```php
 $result = $transaction->checkRequiredFields($data ,$txPayload);
 ```
+# Start test for all methods sdk
+
+For start test use class Test with static method runTest 
+
+Method runTest uses testing data for devnet or testnet from folder /test_data (it depends on gateUrl).
+
+```php
+Test::runTest($wallet, [
+  'gateUrl' => 'https://devnet-gate.decimalchain.com/api/',
+  'useGate' => true,
+  'mode' => 'sync'
+  ]);
+```
+
+Testing data has to be edited according to your wallet, coin type, amount of coins and so on
+
+```php
+const DEVNET_DATA = [
+    'wallet' => [
+        'getAddress',
+        'getPublicKey',
+        'getPrivateKey',
+        'getMnemonics',
+        'getArguments'
+    ],
+    'transaction' => [
+        'sendCoins' => [
+            'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+            'coin' => 'DEL',
+            'amount' => '0.1'
+        ],
+        'getCoin' => [
+            'buyCoin' => 'ETH',
+            'spendCoin' => 'DEL',
+            'amount' => '1',
+            'maxSpendLimit' => '20'
+        ],
+        'sellCoin' => [
+            'sellCoin' => 'DEL',
+            'getCoin' => 'ETH',
+            'amount' => '1',
+            'minBuyLimit' => '2',
+        ],
+        ....
+```
+
+Method names store in variable DEVNET_DATA with keys wallet and transaction
+You can comment some method if you don't need test it
+
+Test response example
+
+```php
+
+```

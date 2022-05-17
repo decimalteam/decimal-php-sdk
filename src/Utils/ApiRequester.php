@@ -338,8 +338,8 @@ class ApiRequester
         $mode = isset($options['mode']) ? $options['mode'] : 'sync';
 
         $url = $this->getRpcPrefix() . 'txs-directly';
-        $options['mode'] = 'sync';
-
+        $options['mode'] = 'block';
+        $mode = 'sync';
         $tx = ['tx' => $tx, 'mode' => $mode];
 
         return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
