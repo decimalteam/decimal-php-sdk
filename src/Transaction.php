@@ -113,8 +113,8 @@ class Transaction
                 ],
                 'requiredFields' => [
                     'ticker',
-                    'maxSupply',
-                    'identity'
+//                    'maxSupply',
+//                    'identity'
                 ]
             ]
         ],
@@ -596,6 +596,7 @@ class Transaction
         $type = $this->txSchemes['COIN_MULTISEND']['type'];
 
         $this->checkRequiredFields('COIN_MULTISEND', $payload);
+
         $payload['fee'] = $this->txSchemes['COIN_MULTISEND']['fee'];
 
         $prePayload = $this->formatePrepayload($type, $payload);
