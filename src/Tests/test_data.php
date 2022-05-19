@@ -1,6 +1,6 @@
 <?php
 
-const DEVNET_DATA = [
+$test_data = [
     'wallet' => [
         'getAddress',
         'getPublicKey',
@@ -10,42 +10,42 @@ const DEVNET_DATA = [
     ],
     'transaction' => [
         'sendCoins' => [
-            'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
-            'coin' => 'DEL',
-            'amount' => '0.1'
+            'to' => $_ENV['WALLET_RECIEVER'],
+            'coin' => $_ENV['COIN'],
+            'amount' => $_ENV['AMOUNT']
         ],
         'getCoin' => [
-            'buyCoin' => 'ETH',
-            'spendCoin' => 'DEL',
-            'amount' => '1',
-            'maxSpendLimit' => '20'
+            'buyCoin' => $_ENV['BUY_COIN'],
+            'spendCoin' => $_ENV['SPEND_COIN'],
+            'amount' => $_ENV['AMOUNT'],
+            'maxSpendLimit' => $_ENV['MAX_SPEND_LIMIT']
         ],
         'sellCoin' => [
-            'sellCoin' => 'DEL',
-            'getCoin' => 'ETH',
-            'amount' => '1',
-            'minBuyLimit' => '2',
+            'sellCoin' => $_ENV['SELL_COIN'],
+            'getCoin' => $_ENV['GET_COIN'],
+            'amount' => $_ENV['AMOUNT'],
+            'minBuyLimit' => $_ENV['MIN_BUY_LIMIT'],
         ],
         'validatorDelegate' => [
-            'address' => 'dxvaloper1lx4lvt8sjuxj8vw5dcf6knnq0pacre4wx926l8',
-            'stake' => '1',
-            'coin' => 'del',
+            'address' => $_ENV['VALIDATOR_ADDRESS'],
+            'stake' => $_ENV['STAKE'],
+            'coin' => $_ENV['COIN'],
         ],
         'validatorUnbound' => [
-            'address' => 'dxvaloper1lx4lvt8sjuxj8vw5dcf6knnq0pacre4wx926l8',
-            'stake' => '1',
-            'coin' => 'del',
+            'address' => $_ENV['VALIDATOR_ADDRESS'],
+            'stake' => $_ENV['STAKE'],
+            'coin' => $_ENV['COIN'],
         ],
         'createCoin' => [
-            'title' => 'Test coin',
-            'ticker' => 'TESTCOIN1',
+            'title' => $_ENV['TITLE_COIN'],
+            'ticker' => $_ENV['TICKER_COIN'],
             'initSupply' => '100',
             'maxSupply' => '100',
             'reserve' => '1000',
             'crr' => '45'
         ],
         'updateCoin' => [
-            'ticker' => 'TESTCOIN',
+            'ticker' => $_ENV['TICKER_COIN'],
             'maxSupply' => '100',
             'identity' => 'e353b89e0de0a78974f9ecaf033721ac'
         ],
@@ -55,73 +55,74 @@ const DEVNET_DATA = [
             'weights' => ['1', '1']
         ],
         'multisigCreateTX' => [
-            'from' => 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
-            'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
-            'coin' => 'del',
-            'amount' => '10',
+            'from' => $_ENV['WALLER_SENDER'],
+            'to' => $_ENV['WALLET_RECIEVER'],
+            'coin' => $_ENV['COIN'],
+            'amount' => $_ENV['AMOUNT'],
         ],
         'proposalVote' => [
             'id' => 1,
             'decision' => 'Yes'
         ],
         'createNftMint' => [
-            'recipient' => 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
-            'denom' => 'phone',
-            'token_uri' => 'https://devnet-nft.decimalchain.com/api/nfts/',
+            'recipient' => $_ENV['WALLET_RECIEVER'],
+            'denom' => $_ENV['DENOM'],
+            'token_uri' => $_ENV['TOKEN_URI'],
             'quantity' => '1',
             'reserve' => '1',
             'allow_mint' => true
         ],
         'burnNft' => [
-            'denom' => 'phone',
+            'denom' => $_ENV['DENOM'],
             'id' => 'd365ab32a23117c2ad1c001633f89673d4790bf6',
             'sub_token_ids' => [1]
         ],
         'editNftMetadata' => [
-            'denom' => 'phone',
-            'id' => 'd365ab32a23117c2ad1c001633f89673d4790bf6',
+            'denom' => $_ENV['DENOM'],
+            'id' => $_ENV['NFT_ID'],
             'token_uri' => 'https://devnet-nft.decimalchain.com/api/nfts//CvavSYvudYqiGeOY67dzLmdl6NjqTdEb'
         ],
         'transferNft' => [
-            'denom' => 'phone',
-            'id' => 'd365ab32a23117c2ad1c001633f89673d4790bf6',
+            'denom' => $_ENV['DENOM'],
+            'id' => $_ENV['NFT_ID'],
             'sub_token_ids' => [1],
             'recipient' => 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
         ],
         'nftDelegate' => [
-            'denom' => 'phone',
-            'id' => 'd365ab32a23117c2ad1c001633f89673d4790bf6',
+            'denom' => $_ENV['DENOM'],
+            'id' => $_ENV['NFT_ID'],
             'sub_token_ids' => [1],
             'validator_address' => 'dxvaloper1lx4lvt8sjuxj8vw5dcf6knnq0pacre4wx926l8'
         ],
         'nftUnbond' => [
-            'denom' => 'phone',
-            'id' => 'd365ab32a23117c2ad1c001633f89673d4790bf6',
+            'denom' => $_ENV['DENOM'],
+            'id' => $_ENV['NFT_ID'],
             'sub_token_ids' => [1],
             'validator_address' => 'dxvaloper1lx4lvt8sjuxj8vw5dcf6knnq0pacre4wx926l8'
         ],
         'nftUpdateReserve' => [
-            'denom' => 'phone',
-            'id' => 'd365ab32a23117c2ad1c001633f89673d4790bf6',
+            'denom' => $_ENV['DENOM'],
+            'id' => $_ENV['NFT_ID'],
             'reserve' => '2',
             'sub_token_ids' => [1],
         ],
         'multisendCoins' => [
-            'sender' => 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
+            'sender' => $_ENV['WALLER_SENDER'],
             'sends' => [
                 [
-                    'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
-                    'coin'=>  'DEL',
-                    'amount'=> 1
+                    'to' => 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
+                    'coin' => $_ENV['COIN'],
+                    'amount' => $_ENV['AMOUNT']
                 ],
                 [
-                    'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
-                    'coin'=>  'DEL',
-                    'amount'=> 1
+                    'to' => 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
+                    'coin' => $_ENV['COIN'],
+                    'amount' => $_ENV['AMOUNT']
                 ]
             ]
 
         ]
     ]
 ];
+
 
