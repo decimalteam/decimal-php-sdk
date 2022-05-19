@@ -24,3 +24,6 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 /.idea
+/src/Tests/images_nft
+/src/Tests/test_data.php
+/src/Tests/.env

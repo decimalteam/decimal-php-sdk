@@ -1,9 +1,9 @@
 
-# Start test for all methods sdk
+# Start test for all sdk methods
 
-### This functionalities is not autotests. Method runTest is for testing methods of classes Wallet and Transaction
+### This functionality is not autotest. Method runTest is for testing methods of classes Wallet and Transaction
 
-For start test use class Test with static method runTest 
+For start test, use class Test with static method runTest 
 
 Method runTest uses testing data for devnet or testnet from file test_data.php (it depends on gateUrl).
 
@@ -17,7 +17,7 @@ Test::runTest($wallet, [
 
 Testing data in file env. has to be edited according to your wallet, coin type, amount of coins and so on
 You could look at example env.example
-Don't forget create file .env
+Don't forget to  create file .env
 
 ```dotenv
 YOUR_WALLET=dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g
