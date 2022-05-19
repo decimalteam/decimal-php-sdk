@@ -21,7 +21,7 @@
 * created file CHANGELOG.md
 
 # [0.10.02](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.02/) (2022-05-17)
-* [586939e](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/586939ef2ef5562ad336ded060d5df4c3dafb8fe)
+* [50121fa](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/50121fa06f5a7d521ed0a97491d8a5965f79c1d7)
 
 
 ### Added
