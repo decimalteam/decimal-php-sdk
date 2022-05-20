@@ -29,3 +29,13 @@
 * created class Test for testing all sdk methods
 * created test data for testing sdk in devnet and testnet
 
+# [0.10.03](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.03/) (2022-05-20)
+* [50121fa](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/50121fa06f5a7d521ed0a97491d8a5965f79c1d7)
+
+
+### Fixed
+
+*  method nftUpdateReserve was updated
+
+
+

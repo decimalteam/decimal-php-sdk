@@ -586,17 +586,14 @@ trait TransactionHelpers
 
     public function nftUpdateReservePayload($payload)
     {
-        $out = [
+        $this->checkInt($payload['reserve']);
+        return [
             'id' => $payload['id'],
-            //'sender' => $this->wallet->getAddress(),
+            'sender' => $this->wallet->getAddress(),
             'denom' => $payload['denom'],
-            'reserve' => $this->checkInt($payload['reserve'])
+            'reserve' => amountUNIRecalculate($payload['reserve']),
+            'sub_token_ids' => $payload['sub_token_ids']
         ];
-        if (isset($payload['sub_token_ids']) && is_array($payload['sub_token_ids'])) {
-            $out['sub_token_ids'] = $payload['sub_token_ids'];
-        }
-
-        return $out;
     }
 
     public function ntfTransferPayload($payload)

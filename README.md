@@ -454,7 +454,7 @@ $result = $transaction->transferNft($txPayload);
 ```php
 $txPayload = [
     'denom'=> 'timPhone',
-    'id'=> 'id25',
+    'id'=> '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
     'sub_token_ids'=> [1,2],
     'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
@@ -466,7 +466,7 @@ $result = $transaction->nftDelegate($txPayload);
 ```php
 $txPayload = [
     'denom'=> 'timPhone',
-    'id'=> 'id25',
+    'id'=> '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
     'sub_token_ids'=> [1,2],
     'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
@@ -477,9 +477,11 @@ $result = $transaction->nftUnbond($txPayload);
 
 ```php
 $txPayload = [
-            'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
-            'reserve'=> '6'
-        ];
+    'id' => '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
+    'reserve' => '1',
+    'denom' => 'timPhone',
+    'sub_token_ids' => ['1']
+     ];
 $result = $transaction->nftUpdateReserve($txPayload);
 ```
 
