@@ -424,6 +424,8 @@ class Transaction
                 'requiredFields' => [
                     'id',
                     'reserve',
+                    'sub_token_ids',
+                    'denom'
                 ],
             ],
         ],
