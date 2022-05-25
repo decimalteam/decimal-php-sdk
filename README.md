@@ -5,7 +5,6 @@ For detailed explanation on how things work, checkout the:
 - [Decimal SDK docs](https://help.decimalchain.com/api-sdk/).
 - [Decimal Console site](https://console.decimalchain.com/).
 
-
 # Install
 
 ```bash
@@ -80,14 +79,15 @@ use DecimalSDK\Transaction;
 // restPort - default 1317
 $wallet = new Wallet();
 // Enter your address node http://your-address.node/api
-// if send trx directly to BC set sendTxDirectly = true
 $transaction = new Transaction($wallet, [
     'gateUrl' => 'http://your-address.node/api',
     'useGate' => true/false,
-    'sendTxDirectly' => true
+    'setNonceAutomatically' => true, //Automatically calculate nonce within a small transaction pool, after getting the first one from blockchain
+     'nonce' => '100' // Custom nonce for the transaction {valid number string}
 ]);
 ```
-## Start tests 
+
+## Start tests
 
 ```php
 use DecimalSDK\Tests;
@@ -98,7 +98,6 @@ Test::runTest($wallet, [
                 'mode' => 'sync'
             ]);
 ```
-
 
 ## Send coins
 
@@ -298,15 +297,18 @@ $result = $transaction->multisigSignTX($txPayload);
 
 ```php
 $txPayload = [
-        [
-            'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
-           'coin'=>  'DEL',
-           'amount'=> 100
-        ],
-        [
-            'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
-            'coin'=>  'DEL',
-            'amount'=> 100
+        'sender' => $wallet->getAddress(),
+        'sends' => [
+             [
+                'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
+               'coin'=>  'DEL',
+               'amount'=> 100
+            ],
+            [
+                'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
+                'coin'=>  'DEL',
+                'amount'=> 100
+            ],
         ],
         'memo' => 'message' // optional
 ];
@@ -393,12 +395,9 @@ $headline = 'headline_example';
 $description = 'description_example';
 $slug = 'CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ';
 
-//get hash (sha1) from upload file nft
-$asset = Request::file('asset');
-$cover = Request::file('cover');
-
-$assetHash = hash_file('sha1',$asset,false);
-$coverHash = hash_file('sha1',$cover,false);
+//get hash (sha1) from file
+$assetHash = hash_file('sha1', $path_to_file_asset , false);
+$coverHash = hash_file('sha1', $path_to_file_cover , false);
 
 $id = $transaction->generateNftId($headline, $description, $slug, $coverHash, $assetHash);
 
@@ -407,7 +406,7 @@ $txPayload = [
     'id' => $id,
     'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
     'denom'=> 'phone',
-    'token_uri'=> 'https://devnet-nft.decimalchain.com//api/nfts/CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ',
+    'token_uri'=> 'https://devnet-nft.decimalchain.com/api/nfts/CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ',
     'quantity'=> '1',
     'reserve'=> '1',
     'allow_mint'=> true

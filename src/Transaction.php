@@ -569,7 +569,7 @@ class Transaction
         }
 
         $this->wallet = $wallet;
-        $this->requester = new ApiRequester($options);
+        $this->requester = new ApiRequester($wallet, $options);
         $this->signMeta = $this->requester->getSignMeta($this->wallet);
     }
 

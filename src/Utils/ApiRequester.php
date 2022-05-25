@@ -28,6 +28,7 @@ class ApiRequester
     private $rpcPort;
     private $restPort;
     private $validModes = ['sync', 'async', 'block'];
+    private $wallet;
 
     /**
      * ApiRequester constructor.
@@ -44,10 +45,11 @@ class ApiRequester
      *
      *
      */
-    public function __construct($options = [])
+    public function __construct(Wallet $wallet, $options = [])
     {
         $this->validateOptions($options);
         $this->setClient();
+        $this->wallet = $wallet;
     }
 
     protected function validateOptions($options)
@@ -62,6 +64,10 @@ class ApiRequester
             $this->options['baseUrl'] = $this->options['nodeUrl'] ?? self::DEFAULT_NODE_URL;
             $this->options['rpcPort'] = ':' . ($this->options['rpcPort'] ?? self::DEFAULT_DEFAULT_NODE_RPC_PORT);
             $this->options['restPort'] = ':' . ($this->options['restPort'] ?? self::DEFAULT_DEFAULT_NODE_REST_PORT);
+        }
+
+        if (!isset($options['setNonceAutomatically']) || !is_bool($options['setNonceAutomatically'])) {
+            throw new DecimalException('Set nonce automatically should be a boolean');
         }
     }
 
@@ -98,11 +104,24 @@ class ApiRequester
 
         $accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
 
+        $sequece = $accountInfo->result->value->sequence ?? 0;
+
+        if (isset($this->options['nonce'])) {
+            $sequece = $this->options['nonce'];
+        }
+
+        $nonce = WalletHelpers::isNonceSetAutomatically($wallet, $this->options) ? $wallet->currentNonce : $sequece;
+
+        if (isset($this->options['setNonceAutomatically']) && $this->options['setNonceAutomatically'] == true) {
+            WalletHelpers::updateNonce($wallet, $nonce);
+        }
+
         $meta = [
-            'sequence' => $accountInfo->result->value->sequence ?? 0,
             'account_number' => $accountInfo->result->value->account_number ?? 0,
+            'sequence' => $nonce,
             'chain_id' => $nodeInfo->node_info->network ?? 0,
         ];
+
 
         return $meta;
     }
@@ -328,20 +347,9 @@ class ApiRequester
 
     public function sendTx($tx, $rpc = false, $options = [], $method = self::POST)
     {
-        if (isset($this->options['sendTxDirectly'])) {
-            $url = $this->getRpcPrefix() . 'txs-directly';
-            $options['mode'] = 'sync';
-        } else {
-            $url = $this->getRpcPrefix() . 'txs';
-        }
-
-        $mode = isset($options['mode']) ? $options['mode'] : 'sync';
-
-        $url = $this->getRpcPrefix() . 'txs-directly';
+        $url = $this->getRpcPrefix() . 'txs';
         $options['mode'] = 'sync';
-
-        $tx = ['tx' => $tx, 'mode' => $mode];
-
+        $tx = ['tx' => $tx, 'mode' => 'sync'];
         return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
     }
 
@@ -382,8 +390,8 @@ class ApiRequester
     public function txResult($jsonResp)
     {
         $resp = $jsonResp;
-
-        if (property_exists('jsonResp', 'code')) {
+        $errorMessage = null;
+        if (property_exists($jsonResp, 'code') && property_exists($jsonResp, 'raw_log')) {
             if ($jsonResp->raw_log) {
                 $rawLogAsString = json_encode($jsonResp->raw_log);
                 if (substr($rawLogAsString, 0) === '{' && $jsonResp->raw_log->message) {
@@ -391,19 +399,32 @@ class ApiRequester
                 } else {
                     $errorMessage = $rawLogAsString;
                 }
-                $resp = $this->getError($errorMessage, $jsonResp->code, $jsonResp->txhash);
-            }
-        } else {
-            if (property_exists('jsonResp', 'txhash')) {
-                $resp = [
-                    'hash' => $jsonResp->txhash,
-                    'success' => true,
-                    'error' => null
-                ];
             }
         }
 
+        if (property_exists($jsonResp, 'code') && !empty($jsonResp->code)) {
+            $error = [
+                'errorCode' => $resp->code,
+                'errorMessage' => $errorMessage
+            ];
+        } else {
+            $error = null;
+        }
+
+        $resp = [
+            'hash' => $resp->txhash,
+            'height' => $resp->height,
+            'success' => !$resp->code,
+            'pending' => $resp->pending,
+            'error' => $error,
+        ];
+
+        if ($this->wallet->currentNonce == null) {
+            WalletHelpers::updateNonce($this->wallet, isset($jsonResp->code) ? null : (int)$this->wallet->currentNonce + 1);
+        }
+       
         return $resp;
+
     }
 
     /**
@@ -423,5 +444,10 @@ class ApiRequester
                 'errorMessage' => $exception,
             ]
         ];
+    }
+
+    protected function updateNonce($nonce)
+    {
+
     }
 }
