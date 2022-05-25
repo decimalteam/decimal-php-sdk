@@ -38,7 +38,7 @@
 *  method nftUpdateReserve was updated
 
 # [0.10.04](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.04/) (2022-05-25)
-* [50fbf40](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/50fbf407bc6e003b53b76d9df074af14ad29bd1a)
+* [604734e](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/604734eaaf7691fc4bf809fd2d6b1d4397f3bbb2)
 
 
 ### Added
