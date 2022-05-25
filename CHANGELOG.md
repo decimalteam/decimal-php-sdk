@@ -37,5 +37,22 @@
 
 *  method nftUpdateReserve was updated
 
+# [0.10.04](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.04/) (2022-05-25)
+* [604734e](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/604734eaaf7691fc4bf809fd2d6b1d4397f3bbb2)
+
+
+### Added
+
+*  created options 'setNonceAutomatically', 'nonce' for class Transaction
+*  added way to automatically set nonce within a small transaction pool
+
+### Edited
+
+*  changed responce form payload
+
+### Removed
+
+* removed unused options from README.md
+
 
 

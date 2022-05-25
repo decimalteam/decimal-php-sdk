@@ -7,11 +7,13 @@ namespace DecimalSDK\Utils;
 
 use DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Utils\Crypto\Encrypt;
+use DecimalSDK\Wallet;
 
 class WalletHelpers {
 
     const DXVALOPER = 'dxvaloper';
     const DX = 'dx';
+    const MAX_AUTOMATICALLY_NONCE_VALID_UNTIL = 6000;
 	/**
 	 * verify address
 	 *
@@ -22,10 +24,10 @@ class WalletHelpers {
 	public static function checkAddress($string, $prefix = 'dx')
 	{
 	    try{
-            $decoded = Encrypt::decodeBech32($string);
-            if($decoded[0] === $prefix && count($decoded[1])){
+//            $decoded = Encrypt::decodeBech32($string);
+//            if($decoded[0] === $prefix && count($decoded[1])){
                 return $string;
-            }
+//            }
         }
         catch (\Exception $e){
             throw new DecimalException("address validation fails for ".$string." ".$e->getMessage());
@@ -64,5 +66,16 @@ class WalletHelpers {
 
 	public static function createNewMnemonics($size = 128){
 	    return Encrypt::createMnemonics($size);
+    }
+
+    public static function updateNonce(Wallet $wallet, $nonce)
+    {
+        $wallet->updateNonce((int)$nonce);
+    }
+
+    public static function isNonceSetAutomatically(Wallet $wallet, $options)
+    {
+        $setNonceAutomatically = isset($options['setNonceAutomatically']) && $options['setNonceAutomatically'] == true;
+        return $setNonceAutomatically && $wallet->currentNonce != null && ((time() - $wallet->currentNonceValidUntil) < self::MAX_AUTOMATICALLY_NONCE_VALID_UNTIL);
     }
 }
