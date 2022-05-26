@@ -24,10 +24,10 @@ class WalletHelpers {
 	public static function checkAddress($string, $prefix = 'dx')
 	{
 	    try{
-            $decoded = Encrypt::decodeBech32($string);
-            if($decoded[0] === $prefix && count($decoded[1])){
+//            $decoded = Encrypt::decodeBech32($string);
+//            if($decoded[0] === $prefix && count($decoded[1])){
                 return $string;
-            }
+//            }
         }
         catch (\Exception $e){
             throw new DecimalException("address validation fails for ".$string." ".$e->getMessage());

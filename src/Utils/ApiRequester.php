@@ -102,17 +102,14 @@ class ApiRequester
 
     public function getSignMeta(Wallet $wallet)
     {
-
         $nodeInfo = $this->getNodeInfo();
-
         $accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
-
         $sequece = $accountInfo->result->value->sequence ?? 0;
 
         if (isset($this->options['nonce'])) {
             $sequece = $this->options['nonce'];
         }
-
+     
         $nonce = WalletHelpers::isNonceSetAutomatically($wallet, $this->options) ? $wallet->currentNonce : $sequece;
 
         if (isset($this->options['setNonceAutomatically']) && $this->options['setNonceAutomatically'] == true) {
@@ -381,7 +378,6 @@ class ApiRequester
             $res = $client->$method($url, $options);
             $body = $res->getBody();
             $decoded = json_decode($body);
-
             return $decoded;
 
         } catch (\Exception $exception) {
@@ -422,7 +418,7 @@ class ApiRequester
             'error' => $error,
         ];
 
-        if ($this->wallet->currentNonce == null) {
+        if (isset($this->options['setNonceAutomatically']) && $this->options['setNonceAutomatically'] == true) {
             WalletHelpers::updateNonce($this->wallet, isset($jsonResp->code) ? null : (int)$this->wallet->currentNonce + 1);
         }
 
