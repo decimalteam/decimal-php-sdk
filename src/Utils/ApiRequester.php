@@ -66,7 +66,10 @@ class ApiRequester
             $this->options['restPort'] = ':' . ($this->options['restPort'] ?? self::DEFAULT_DEFAULT_NODE_REST_PORT);
         }
 
-        if (!isset($options['setNonceAutomatically']) || !is_bool($options['setNonceAutomatically'])) {
+        if(!isset($options['setNonceAutomatically'])){
+            $options['setNonceAutomatically'] = true;
+        }
+        if (!is_bool($options['setNonceAutomatically'])) {
             throw new DecimalException('Set nonce automatically should be a boolean');
         }
     }
@@ -422,7 +425,7 @@ class ApiRequester
         if ($this->wallet->currentNonce == null) {
             WalletHelpers::updateNonce($this->wallet, isset($jsonResp->code) ? null : (int)$this->wallet->currentNonce + 1);
         }
-       
+
         return $resp;
 
     }
