@@ -13,7 +13,7 @@ class WalletHelpers {
 
     const DXVALOPER = 'dxvaloper';
     const DX = 'dx';
-    const MAX_AUTOMATICALLY_NONCE_VALID_UNTIL = 6000;
+    const MAX_AUTOMATICALLY_NONCE_VALID_UNTIL = 6;
 	/**
 	 * verify address
 	 *
