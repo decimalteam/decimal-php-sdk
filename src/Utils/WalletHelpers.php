@@ -76,6 +76,6 @@ class WalletHelpers {
     public static function isNonceSetAutomatically(Wallet $wallet, $options)
     {
         $setNonceAutomatically = isset($options['setNonceAutomatically']) && $options['setNonceAutomatically'] == true;
-        return $setNonceAutomatically && $wallet->currentNonce != null && ((time() - $wallet->currentNonceValidUntil) < self::MAX_AUTOMATICALLY_NONCE_VALID_UNTIL);
+        return $setNonceAutomatically && boolval($wallet->currentNonce) && ((time() - $wallet->currentNonceValidUntil) < self::MAX_AUTOMATICALLY_NONCE_VALID_UNTIL);
     }
 }
