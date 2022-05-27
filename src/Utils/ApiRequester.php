@@ -422,9 +422,9 @@ class ApiRequester
             'pending' => $resp->pending,
             'error' => $error,
         ];
-       
+
         if (boolval($this->wallet->currentNonce)) {
-            WalletHelpers::updateNonce($this->wallet, isset($jsonResp->code) ? null : (int)$this->wallet->currentNonce + 1);
+            WalletHelpers::updateNonce($this->wallet, $jsonResp->code ? null : (int)$this->wallet->currentNonce + 1);
         }
 
 
