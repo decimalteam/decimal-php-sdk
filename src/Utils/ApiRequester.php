@@ -66,10 +66,10 @@ class ApiRequester
             $this->options['restPort'] = ':' . ($this->options['restPort'] ?? self::DEFAULT_DEFAULT_NODE_REST_PORT);
         }
 
-        if(!isset($options['setNonceAutomatically'])){
-            $options['setNonceAutomatically'] = true;
+        if(!isset($this->options['setNonceAutomatically'])){
+            $this->options['setNonceAutomatically'] = true;
         }
-        if (!is_bool($options['setNonceAutomatically'])) {
+        if (!is_bool($this->options['setNonceAutomatically'])) {
             throw new DecimalException('Set nonce automatically should be a boolean');
         }
     }
@@ -102,17 +102,21 @@ class ApiRequester
 
     public function getSignMeta(Wallet $wallet)
     {
+
         $nodeInfo = $this->getNodeInfo();
+
         $accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
+
         $sequece = $accountInfo->result->value->sequence ?? 0;
 
         if (isset($this->options['nonce'])) {
             $sequece = $this->options['nonce'];
         }
-     
+
         $nonce = WalletHelpers::isNonceSetAutomatically($wallet, $this->options) ? $wallet->currentNonce : $sequece;
 
-        if (isset($this->options['setNonceAutomatically']) && $this->options['setNonceAutomatically'] == true) {
+
+        if($this->options['setNonceAutomatically']){
             WalletHelpers::updateNonce($wallet, $nonce);
         }
 
@@ -139,7 +143,7 @@ class ApiRequester
 
     public function getAccountInfo($address)
     {
-        $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
+        $url = $this->getRpcPrefix() . "accounts/$address";
         return $this->_request($url, self::GET, false);
     }
 
@@ -378,6 +382,7 @@ class ApiRequester
             $res = $client->$method($url, $options);
             $body = $res->getBody();
             $decoded = json_decode($body);
+
             return $decoded;
 
         } catch (\Exception $exception) {
@@ -417,10 +422,11 @@ class ApiRequester
             'pending' => $resp->pending,
             'error' => $error,
         ];
-
-        if (isset($this->options['setNonceAutomatically']) && $this->options['setNonceAutomatically'] == true) {
+       
+        if (boolval($this->wallet->currentNonce)) {
             WalletHelpers::updateNonce($this->wallet, isset($jsonResp->code) ? null : (int)$this->wallet->currentNonce + 1);
         }
+
 
         return $resp;
 
@@ -445,8 +451,4 @@ class ApiRequester
         ];
     }
 
-    protected function updateNonce($nonce)
-    {
-
-    }
 }
