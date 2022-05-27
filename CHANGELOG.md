@@ -54,5 +54,14 @@
 
 * removed unused options from README.md
 
+# [0.10.05](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.05/) (2022-05-27)
+* [65f327c](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/65f327cd0652989d38d2854ec37cb9b299a9684f)
+
+
+### Fixed
+
+*  fixed bug with update nonce method
+
+
 
 
