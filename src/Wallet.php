@@ -11,7 +11,6 @@ class Wallet
     private $validatorAddress;
     private $mnemonics;
     public $currentNonce;
-    public $currentNonceValidUntil;
 
     /**
      * Wallet constructor.
@@ -24,15 +23,13 @@ class Wallet
     public function __construct(
         $mnemonics = null,
         $path_key = "m/44'/60'/0'/0",
-        $currentNonce = null,
-        $currentNonceValidUntil = null
+        $currentNonce = null
     ){
         if (!$mnemonics) $mnemonics = WalletHelpers::createNewMnemonics();
         $this->mnemonics = $mnemonics;
         $this->arguments = WalletHelpers::generateNewAddress('dx', $mnemonics, $path_key);
         $this->validatorAddress = WalletHelpers::generateNewAddress('dxvaloper', $mnemonics, $path_key);
         $this->currentNonce = $currentNonce;
-        $this->currentNonceValidUntil = $currentNonceValidUntil;
     }
 
     public function getAddress()
@@ -76,6 +73,5 @@ class Wallet
     public function updateNonce($nonce)
     {
         $this->currentNonce = $nonce;
-        $this->currentNonceValidUntil = $nonce ? time(): null;
     }
 }
