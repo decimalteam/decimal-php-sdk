@@ -90,6 +90,14 @@
 
 *  set value for MAX_AUTOMATICALLY_NONCE_VALID_UNTIL = 6 seconds instead of 6000
 
+# [0.10.11](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.11/) (2022-05-30)
+* [40048d0](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/40048d033c0afbb0fcaa3b323e273ffce7832d5e)
+
+
+### Fixed
+
+*  removed timestamp parameter currentNonceValidUntil from class Wallet 
+*  added option 'mode' for Transaction sync | async | block
 
 
 

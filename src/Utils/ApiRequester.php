@@ -66,7 +66,15 @@ class ApiRequester
             $this->options['restPort'] = ':' . ($this->options['restPort'] ?? self::DEFAULT_DEFAULT_NODE_REST_PORT);
         }
 
-        if(!isset($this->options['setNonceAutomatically'])){
+        if (isset($this->options['mode']) && !in_array($options['mode'], $this->validModes)) {
+            throw new DecimalException('Mode is not valid');
+        }
+
+        if (!isset($this->options['mode'])) {
+            $this->options['mode'] = $this->validModes[0];
+        }
+
+        if (!isset($this->options['setNonceAutomatically'])) {
             $this->options['setNonceAutomatically'] = true;
         }
         if (!is_bool($this->options['setNonceAutomatically'])) {
@@ -107,16 +115,16 @@ class ApiRequester
 
         $accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
 
-        $sequece = $accountInfo->result->value->sequence ?? 0;
+        $sequence = $accountInfo->result->value->sequence ?? 0;
 
         if (isset($this->options['nonce'])) {
-            $sequece = $this->options['nonce'];
+            $sequence = $this->options['nonce'];
         }
 
-        $nonce = WalletHelpers::isNonceSetAutomatically($wallet, $this->options) ? $wallet->currentNonce : $sequece;
+        $nonce = WalletHelpers::isNonceSetAutomatically($wallet, $this->options) ? $wallet->currentNonce : $sequence;
 
 
-        if($this->options['setNonceAutomatically']){
+        if ($this->options['setNonceAutomatically']) {
             WalletHelpers::updateNonce($wallet, $nonce);
         }
 
@@ -352,8 +360,7 @@ class ApiRequester
     public function sendTx($tx, $rpc = false, $options = [], $method = self::POST)
     {
         $url = $this->getRpcPrefix() . 'txs';
-        $options['mode'] = 'sync';
-        $tx = ['tx' => $tx, 'mode' => 'sync'];
+        $tx = ['tx' => $tx, 'mode' => $this->options['mode']];
         return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
     }
 

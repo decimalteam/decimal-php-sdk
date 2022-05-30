@@ -82,7 +82,8 @@ $wallet = new Wallet();
 $transaction = new Transaction($wallet, [
     'gateUrl' => 'http://your-address.node/api',
     'useGate' => true/false,
-    'setNonceAutomatically' => true/false, // (optional) Automatically calculate nonce within a small transaction pool, after getting the first one from blockchain(default value true)
+    'mode' => 'sync', // Broadcast tx mode (sync | async | block) (default value sync)
+    'setNonceAutomatically' => true/false, // (optional) Automatically calculate nonce within a small transaction pool, after getting the first one from blockchain (default value true)
      'nonce' => '100' // (optional)  Custom nonce for the transaction {valid number string}. If you don't set nonce, sdk get it from blockchain 
 ]);
 ```
