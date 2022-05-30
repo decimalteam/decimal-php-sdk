@@ -60,7 +60,47 @@
 
 ### Fixed
 
-*  fixed bug with update nonce method
+*  now default value for options true 'setNonceAutomatically'
+*  edited checking flag in class ApiRequester if(boolval($this->wallet->currentNonce)) in method getSignMeta
+
+
+# [0.10.06](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.06/) (2022-05-27)
+* [59c02fb](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/59c02fb147829a7cfffafeecbfcbb3fa21e2b732)
+
+
+### Fixed
+
+*  edited method isNonceSetAutomatically in class WalletHelpers, set checking currentNonce: boolval($wallet->currentNonce) instead of  $wallet->currentNonce != null
+
+# [0.10.08](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.08/) (2022-05-27)
+* [4556d4b](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/4556d4b06058f7033c77cb9f4148db350a1de266)
+
+
+### Fixed
+
+*  edited checking response in method txResult in class ApiRequester: $jsonResp->code ? null instead of isset($jsonResp->code)
+
+# [0.10.09] Error version
+
+# [0.10.10](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.10/) (2022-05-27)
+* [769de17](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/769de17a5bea2768e0c2c0e475eaafc7b48d66c8)
+
+
+### Fixed
+
+*  set value for MAX_AUTOMATICALLY_NONCE_VALID_UNTIL = 6 seconds instead of 6000
+
+# [0.10.11](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.11/) (2022-05-30)
+* [40048d0](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/40048d033c0afbb0fcaa3b323e273ffce7832d5e)
+
+
+### Fixed
+
+*  removed timestamp parameter currentNonceValidUntil from class Wallet 
+*  added option 'mode' for Transaction sync | async | block
+
+
+
 
 
 
