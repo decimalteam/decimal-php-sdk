@@ -99,6 +99,14 @@
 *  removed timestamp parameter currentNonceValidUntil from class Wallet 
 *  added option 'mode' for Transaction sync | async | block
 
+# [0.10.12](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.12/) (2022-05-31)
+* [40048d0](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/40048d033c0afbb0fcaa3b323e273ffce7832d5e)
+
+
+### Added
+
+*  added package kornrunner/keccak
+
 
 
 
