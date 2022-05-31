@@ -1,7 +1,7 @@
 {
     "name": "decimalteam/decimal-php-sdk",
     "description": "decimal sdk",
-    "version": "0.10.11",
+    "version": "0.10.12",
     "license": "MIT",
     "authors": [
         {
@@ -10,13 +10,14 @@
         }
     ],
     "require": {
-        "vlucas/phpdotenv":"^4.2.0",
+        "vlucas/phpdotenv":"^5.4",
         "mdanter/ecc":"~0.5.0",
         "fgrosse/phpasn1": "^2.1",
         "bitwasp/bitcoin": "^1.0",
         "bitwasp/bech32": "^0.0.1",
         "guzzlehttp/guzzle": "~6.5|^7",
         "kornrunner/secp256k1": "^0.1.2",
+        "kornrunner/keccak": "^1.1",
         "simplito/elliptic-php": "^1.0",
         "php": "^7.3|^8.0"
     },
