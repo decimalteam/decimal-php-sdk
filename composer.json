@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "vlucas/phpdotenv":"^5.4",
+        "vlucas/phpdotenv":"^4.2.2",
         "mdanter/ecc":"~0.5.0",
         "fgrosse/phpasn1": "^2.1",
         "bitwasp/bitcoin": "^1.0",
