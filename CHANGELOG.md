@@ -1,5 +1,12 @@
 <a name="1.2.0"></a>
 
+# [0.10.13](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.13/) (2022-05-31)
+* [666d4b1](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/666d4b1bbc90acd48e34013d23b6a69339df3c33)
+
+### Added
+
+*  added support for vlucas/phpdotenv ^5
+
 # [0.10.12](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.12/) (2022-05-31)
 * [b9988e8](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/b9988e8397531d7e73a6cfa63ae63cf8623e64a3)
 
