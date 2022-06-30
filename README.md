@@ -124,6 +124,16 @@ $txPayload = [
 ];
 ```
 
+## Burn coins
+
+```php
+$txPayload = [
+    'coin' => 'tDEL', //coin
+    'amount' => '800', // 100 tDEL
+];
+$result = $transaction->burnCoins($txPayload);
+```
+
 ## Sell coins
 
 ```php

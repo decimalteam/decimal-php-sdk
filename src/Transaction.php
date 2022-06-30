@@ -19,6 +19,7 @@ class Transaction
 
     //constants for fee
     const COIN_SEND = 10;
+    const COIN_BURN = 10;
     const COIN_BUY = 100;
     const COIN_CREATE = 100;
     const COIN_SELL = 100;
@@ -146,6 +147,21 @@ class Transaction
                 ],
                 'requiredFields' => [
                     'to',
+                    'amount',
+                    'coin'
+                ],
+            ],
+        ],
+
+        'COIN_BURN' => [
+            'fee' => self::COIN_BURN,
+            'type' => 'coin/burn_coin',
+            'scheme' => [
+                'fieldTypes' => [
+                    'amount' => 'number',
+                    'coin' => 'string',
+                ],
+                'requiredFields' => [
                     'amount',
                     'coin'
                 ],
@@ -583,6 +599,21 @@ class Transaction
         $type = $this->txSchemes['COIN_SEND']['type'];
         $this->checkRequiredFields('COIN_SEND', $payload);
         $payload['fee'] = $this->txSchemes['COIN_SEND']['fee'];
+        $prePayload = $this->formatePrepayload($type, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+        return $this->requester->sendTx($preparedTx);
+    }
+
+    /**
+     * @param $payload
+     * @return array
+     * @throws DecimalException
+     */
+    public function burnCoins($payload)
+    {
+        $type = $this->txSchemes['COIN_BURN']['type'];
+        $this->checkRequiredFields('COIN_BURN', $payload);
+        $payload['fee'] = $this->txSchemes['COIN_BURN']['fee'];
         $prePayload = $this->formatePrepayload($type, $payload);
         $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);

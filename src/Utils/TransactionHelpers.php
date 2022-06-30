@@ -270,6 +270,9 @@ trait TransactionHelpers
             case $this->txSchemes['COIN_SEND']['type'];
                 return $this->coinSendPayload($payload);
                 break;
+            case $this->txSchemes['COIN_BURN']['type'];
+                return $this->coinBurnPayload($payload);
+                break;
             case $this->txSchemes['COIN_BUY']['type'];
                 return $this->coinBuyPayload($payload);
                 break;
@@ -354,12 +357,26 @@ trait TransactionHelpers
      * @param $payload
      * @return array
      */
-
     public function coinSendPayload($payload)
     {
         return [
             'sender' => $this->wallet->getAddress(),
             'receiver' => WalletHelpers::checkAddress($payload['to'], WalletHelpers::DX),
+            'coin' => [
+                'amount' => amountUNIRecalculate($payload['amount']),
+                'denom' => strtolower($payload['coin']),
+            ]
+        ];
+    }
+
+    /**
+     * @param $payload
+     * @return array
+     */
+    public function coinBurnPayload($payload): array
+    {
+        return [
+            'sender' => $this->wallet->getAddress(),
             'coin' => [
                 'amount' => amountUNIRecalculate($payload['amount']),
                 'denom' => strtolower($payload['coin']),
