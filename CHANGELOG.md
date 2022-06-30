@@ -5,7 +5,7 @@
 
 ### Added
 
-*  added transactions: in decimal api added new transaction type burn coins, also added implementation for sending new transaction type.
+*  added transactions: in decimal api added new transaction type burn coins
 
 # [0.10.13](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.10.13/) (2022-06-30)
 * [666d4b1](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/666d4b1bbc90acd48e34013d23b6a69339df3c33)
