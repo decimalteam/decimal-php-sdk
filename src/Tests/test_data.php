@@ -14,6 +14,10 @@ $test_data = [
             'coin' => $_ENV['COIN'],
             'amount' => $_ENV['AMOUNT']
         ],
+        'burnCoins' => [
+            'coin' => $_ENV['COIN'],
+            'amount' => $_ENV['AMOUNT']
+        ],
         'getCoin' => [
             'buyCoin' => $_ENV['BUY_COIN'],
             'spendCoin' => $_ENV['SPEND_COIN'],
