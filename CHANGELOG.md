@@ -1,7 +1,7 @@
 <a name="1.2.0"></a>
 
 # [0.11](https://bitbucket.org/decimalteam/decimal-php-sdk/src/0.11/) (2022-06-30)
-
+* [83f6866](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/83f68661bcbd3255e39d5a40318e0a4c2fdcb1ea)
 
 ### Added
 
