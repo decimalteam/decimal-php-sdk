@@ -32,13 +32,13 @@ trait TransactionHelpers
 
         $signature = Encrypt::sepc256k1Sign(json_encode($toSignPayload, JSON_UNESCAPED_SLASHES), $this->wallet->getPrivateKey());
 
-        $unsignedTx['signatures'] = [[
-            'signature' => $signature,
-            'pub_key' => [
-                'type' => self::PUB_KEY_TYPE,
-                'value' => base64_encode(hex2bin($this->wallet->getPublicKey())),
-            ],
-        ]];
+        // $unsignedTx['signatures'] = [[
+        //     'signature' => $signature,
+        //     'pub_key' => [
+        //         'type' => self::PUB_KEY_TYPE,
+        //         'value' => base64_encode(hex2bin($this->wallet->getPublicKey())),
+        //     ],
+        // ]];
 
         return $unsignedTx;
     }
@@ -318,9 +318,22 @@ trait TransactionHelpers
             case $this->txSchemes['SWAP_REDEEM']['type'];
                 return $this->msgSwapRedeemPayload($payload);
                 break;
+            case $this->txSchemes['SIMULATE_FEE']['type'];
+                return $this->simulateFeePayload($payload);
+                break;
             default:
                 throw new DecimalException('Invalid type of transaction');
         }
+    }
+
+    public function simulateFeePayload($payload) {
+        return [
+            'to' => $payload['to'],
+            'coin' => [
+                'amount' => amountUNIRecalculate($payload['amount']),
+                'demon' => strtolower($payload['coin'])
+            ],
+        ];
     }
 
     /**
@@ -328,11 +341,11 @@ trait TransactionHelpers
      * @return array
      */
 
-    public function coinSendPayload($payload)
+    public function sendCoinPayload($payload)
     {
         return [
             'sender' => $this->wallet->getAddress(),
-            'receiver' => $payload['to'],
+            'recipient' => $payload['to'],
             'coin' => [
                 'amount' => amountUNIRecalculate($payload['amount']),
                 'denom' => strtolower($payload['coin']),

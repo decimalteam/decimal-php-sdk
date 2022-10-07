@@ -9,7 +9,7 @@ use GuzzleHttp\Client as GClient;
 
 class ApiRequester
 {
-	const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api/';
+	const TEST_GATE_API = 'https://devnet-dec2-node-01.decimalchain.com/rest/';
 	const GET = 'get';
 	const POST = 'post';
 	const TIMEOUT = 5.0;
@@ -274,9 +274,8 @@ class ApiRequester
 	}
 
 
-	public function post($url, $payload, $rpc = false)
-	{
-		return $this->_request($url, self::POST, $payload);
+	public function post($url, $payload, $rpc = false) {
+		return $this->_request($url, self::POST,$rpc, $payload);
 	}
 
 	private function _request($url, $method, $rpc = false, $payload = null, $optional = [])
@@ -349,4 +348,6 @@ class ApiRequester
 			]
 		];
 	}
+
+	
 }

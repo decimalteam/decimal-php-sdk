@@ -10,18 +10,26 @@
         }
     ],
     "require": {
-        "mdanter/ecc":"~0.5.0",
+        "mdanter/ecc":"~0.5.2",
         "fgrosse/phpasn1": "^2.1",
         "bitwasp/bitcoin": "^1.0",
         "bitwasp/bech32": "^0.0.1",
         "guzzlehttp/guzzle": "~6.5|^7",
         "kornrunner/secp256k1": "^0.1.2",
         "simplito/elliptic-php": "^1.0",
-        "php": "^7.3|^8.0"
+        "php": "^7.3|^8.0",
+        "google/protobuf": "^3.21",
+        "bitcoin-php/bitcoin-ecdsa": "^1.3",
+        "kornrunner/keccak": "^1.1"
     },
     "autoload": {
         "psr-4": {
-            "DecimalSDK\\": "src/"
+            "DecimalSDK\\": "src/",
+            "Decimal\\": "src/Utils/Proto/Decimal/",
+            "Cosmos\\": "src/Utils/Proto/Cosmos/",
+            "GPBMetadata\\": "src/Utils/Proto/GPBMetadata/",
+            "Ethermint\\": "src/Utils/Proto/Ethermint/"
+
         },
         "files": [
             "src/helpers.php"

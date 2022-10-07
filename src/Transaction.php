@@ -3,10 +3,24 @@
 
 namespace DecimalSDK;
 
+use BitcoinPHP\BitcoinECDSA\BitcoinECDSA;
+use Cosmos\Tx\Signing\V1beta1\SignMode;
 use \DecimalSDK\Errors\DecimalException;
+use DecimalSDK\Utils\ProtoManager;
 use DecimalSDK\Utils\ApiRequester;
+use DecimalSDK\Utils\Crypto\Encrypt;
 use DecimalSDK\Utils\TransactionHelpers;
+use DecimalSDK\Utils\TxTypes;
 use DecimalSDK\Wallet;
+use kornrunner\Serializer\HexPrivateKeySerializer;
+use Mdanter\Ecc\Curves\CurveFactory;
+use Mdanter\Ecc\Curves\SecgCurve;
+use Mdanter\Ecc\Math\GmpMath;
+use Mdanter\Ecc\Serializer\Point\CompressedPointSerializer;
+use Mdanter\Ecc\Serializer\PublicKey\DerPublicKeySerializer;
+use Mdanter\Ecc\Serializer\PublicKey\PemPublicKeySerializer;
+use kornrunner\Keccak;
+use kornrunner\Secp256k1;
 
 class Transaction
 {
@@ -41,6 +55,7 @@ class Transaction
     const NFT_TRANSFER = 0;
     const NFT_DELEGATE = 0;
     const NFT_UNBOND = 0;
+    const SIMULATE_FEE = 0;
 
     const MAX_SPEND_LIMIT = '100000000000';
     const ADDITIONAL_COMISSION = 20;
@@ -52,6 +67,8 @@ class Transaction
     private $wallet;
     private $requester;
     private $nodeMeta;
+    private $protoManager;
+
 
     protected $txSchemes = [
         'COIN_BUY' => [
@@ -129,6 +146,21 @@ class Transaction
         'COIN_SEND' => [
             'fee' => self::COIN_SEND,
             'type' => 'coin/send_coin',
+            'scheme' => [
+                'fieldTypes' => [
+                    'to' => 'string',
+                    'amount' => 'number',
+                    'coin' => 'string',
+                ],
+                'requiredFields' => [
+                    'to',
+                    'amount',
+                    'coin'
+                ],
+            ],
+        ],
+        'SIMULATE_FEE' => [
+            'type' => 'simulate_fee',
             'scheme' => [
                 'fieldTypes' => [
                     'to' => 'string',
@@ -531,6 +563,145 @@ class Transaction
         $this->wallet = $wallet;
         $this->requester = new ApiRequester($options);
         $this->signMeta = $this->requester->getSignMeta($this->wallet);
+        $this->protoManager = ProtoManager::instance();
+
+    }
+
+    public function sendCoinPayload($payload) {
+        return [
+            'sender' => $this->wallet->getAddress(),
+            'recipient' => $payload['to'],
+            'coin' => $this->protoManager->getCoin([
+                'amount' => amountUNIRecalculate($payload['amount']),
+                'denom' => strtolower($payload['coin']),
+            ]),
+        ];
+    }
+    
+    public function sendCoin($payload) 
+    {
+        $preparedData = $this->sendCoinPayload($payload);
+        $msg = $this->protoManager->getMsgSendCoin($preparedData);
+
+        $msgAny = [
+        'type_url'  => TxTypes::COIN_SEND,
+        'value'     => $msg->serializeToJsonString()
+    ];
+
+    $result = $this->sendTransaction($msgAny,[]);
+    
+    return $result;
+    }
+
+    private function sendTransaction($msgAny, $options, $simulate = false) {
+        $messages = [$this->protoManager->getAny($msgAny)];
+
+        $txBody = $this->protoManager->getTxBody([
+            'messages'                          => $messages,
+            'memo'                              => isset($options['message']) ? $options['message'] : '',
+            'timeout_height'                    => 0,
+            'extension_options'                 => [],
+            'non_critical_extension_options'    => []
+        ]);
+
+        $fee = [
+            'amount' => [ 
+                $this->protoManager->getCoin([
+                    'denom'     => strtolower('del'), 
+                    'amount'    => str_repeat(amountUNIRecalculate(0), 22)
+                ])->serializeToString(),
+                ],
+             'gas' => '180000'
+            ];
+
+
+        $txBodyBytes = $txBody->serializeToString();
+
+        $signObj = $this->singTransaction($txBodyBytes,$fee);
+
+        $txRaw = $this->protoManager->getTxRaw([
+            'body_bytes'        => $txBodyBytes,
+            'auth_info_bytes'   => base64_decode($signObj['signDoc']->authInfoBytes),
+            'signatures'        => [base64_encode($signObj['stdSignature']['signature'])],
+        ]);
+
+
+
+        $txBytes = $txRaw->serializeToJsonString();
+
+        $payload = [
+            'tx_bytes' => $txBytes,
+        ];
+
+        var_dump($payload);
+
+        $response = $this->requester->post('cosmos/tx/v1beta1/simulate', $payload);
+        var_dump($response);
+    }
+
+    public function singTransaction($txBodyBytes, $fee) {
+        $privateKey = $this->wallet->getPrivateKey();
+
+        $bitcoinECDSA = new BitcoinECDSA();
+        $bitcoinECDSA->setPrivateKey($privateKey);
+
+        $publicKeyCompressed = $bitcoinECDSA->getPubKey();
+        $publicKeyEncoded = [
+            'type_url' => '/ethermint.crypto.v1.ethsecp256k1.PubKey',
+            'value' => $this->protoManager->getPubKey(['key' => $publicKeyCompressed])->serializeToString()
+        ];
+
+
+        $authInfo = $this->protoManager->getAuthInfo();
+        $authInfo->setSignerInfos([$this->protoManager->getSignerInfo([
+            'public_key' => $this->protoManager->getAny($publicKeyEncoded),
+            'sequence' => $this->signMeta['sequence'],
+            'mode_info' => $this->protoManager->getModeInfo([
+                'single' => $this->protoManager->getSingle([ 'mode' => SignMode::SIGN_MODE_DIRECT])
+            ]),
+        ])]);
+
+
+        $fee = [
+            'amount' => [ 
+                $this->protoManager->getCoin([
+                    'denom'     => strtolower('del'), 
+                    'amount'    => str_repeat(amountUNIRecalculate(0), 22)
+                ]),
+                ],
+             'gas_limit' => '180000'
+            ];
+
+        
+        $authInfo->setFee($this->protoManager->getFee($fee));
+
+        $authInfoBinary = $authInfo->serializeToString();
+        
+        $signBytes = $this->makeSignBytes($authInfoBinary,$txBodyBytes);
+        $signHash = Keccak::hash($signBytes->serializeToString(), 256);
+        $signature = Encrypt::sepc256k1Sign($signHash, $privateKey);
+
+        $stdSignature = [
+            'pub_key' => [
+                'type_url' => '/ethermint.crypto.v1.ethsecp256k1.PubKey', 
+                'value' => $publicKeyCompressed,
+            ],
+            'signature' => $signature
+        ];
+
+        return [
+            'stdSignature' =>$stdSignature,
+            'signDoc' => json_decode($this->makeSignBytes($authInfoBinary,$txBodyBytes)->serializeToJsonString()),
+        ];
+    }
+
+    public function makeSignBytes($authInfoBytes, $bodyBytes) {
+        return $this->protoManager->getSignDoc([
+            'body_bytes' => $bodyBytes,
+            'auth_info_bytes' => $authInfoBytes,
+            'chain_id' => $this->signMeta['chain_id'],
+            'account_number' => $this->signMeta['account_number']
+        ]);
     }
 
     /**
@@ -538,8 +709,7 @@ class Transaction
      * @return array
      * @throws DecimalException
      */
-    public function sendCoins($payload)
-    {
+    public function sendCoins($payload) {
         $type = $this->txSchemes['COIN_SEND']['type'];
         $this->checkRequiredFields('COIN_SEND', $payload);
         $payload['fee'] = $this->txSchemes['COIN_SEND']['fee'];
