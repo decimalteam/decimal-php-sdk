@@ -5,6 +5,7 @@ namespace DecimalSDK;
 
 use BitcoinPHP\BitcoinECDSA\BitcoinECDSA;
 use Cosmos\Tx\Signing\V1beta1\SignMode;
+use Decimal\Validator\V1\MsgDelegate;
 use \DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Utils\ProtoManager;
 use DecimalSDK\Utils\ApiRequester;
@@ -71,23 +72,6 @@ class Transaction
 
 
     protected $txSchemes = [
-        'COIN_BUY' => [
-            'fee' => self::COIN_BUY,
-            'type' => 'coin/buy_coin',
-            'scheme' => [
-                'fieldTypes' => [
-                    'buyCoin' => 'string',
-                    'amount' => 'number',
-                    'spendCoin' => 'string',
-                    'maxSpendLimit' => 'number',
-                ],
-                'requiredFields' => [
-                    'buyCoin',
-                    'amount',
-                    'spendCoin',
-                ],
-            ],
-        ],
         'COIN_CREATE' => [
             'fee' => self::COIN_CREATE,
             'type' => 'coin/create_coin',
@@ -567,241 +551,185 @@ class Transaction
 
     }
 
-    public function sendCoinPayload($payload) {
-        return [
-            'sender' => $this->wallet->getAddress(),
-            'recipient' => $payload['to'],
-            'coin' => $this->protoManager->getCoin([
-                'amount' => amountUNIRecalculate($payload['amount']),
-                'denom' => strtolower($payload['coin']),
-            ]),
-        ];
-    }
-    
-    public function sendCoin($payload) 
-    {
-        $preparedData = $this->sendCoinPayload($payload);
-        $msg = $this->protoManager->getMsgSendCoin($preparedData);
+    public function sendCoin($recipient, $denom, $amount) {
+        $msg = $this->protoManager->getMsgSendCoin($this->wallet->getAddress(), $recipient, $denom, $amount);
 
-        $msgAny = [
-        'type_url'  => TxTypes::COIN_SEND,
-        'value'     => $msg->serializeToJsonString()
-    ];
-
-    $result = $this->sendTransaction($msgAny,[]);
-    
-    return $result;
+        $result = $this->sendTransaction($msg, []);
+        return $result;
     }
 
-    private function sendTransaction($msgAny, $options, $simulate = false) {
-        $messages = [$this->protoManager->getAny($msgAny)];
 
-        $txBody = $this->protoManager->getTxBody([
-            'messages'                          => $messages,
-            'memo'                              => isset($options['message']) ? $options['message'] : '',
-            'timeout_height'                    => 0,
-            'extension_options'                 => [],
-            'non_critical_extension_options'    => []
-        ]);
+    public function sellCoin($sellCoin,$getCoin, $amount,$minBuyLimit) {
+        $msg = $this->protoManager->getMsgSellCoin(
+            $this->wallet->getAddress(),
+            strtolower($sellCoin),
+            amountUNIRecalculate($amount),
+            strtolower($getCoin),
+            amountUNIRecalculate($minBuyLimit)
+        );
 
-        $fee = [
-            'amount' => [ 
-                $this->protoManager->getCoin([
-                    'denom'     => strtolower('del'), 
-                    'amount'    => str_repeat(amountUNIRecalculate(0), 22)
-                ])->serializeToString(),
-                ],
-             'gas' => '180000'
-            ];
+        $result = $this->sendTransaction($msg, []);
+        return $result;
+    }
+
+    public function buyCoin($denomBuy,$denomSell, $amountBuy,$amountSell){
+        $msg = $this->protoManager->getMsgBuyCoin(
+            $this->wallet->getAddress(),
+                strtolower($denomBuy),
+                amountUNIRecalculate($amountBuy),
+                strtolower($denomSell),
+                amountUNIRecalculate($amountSell)
+            );
+
+        $result = $this->sendTransaction($msg,[]);
+        return $result;
+    }
+
+    public function sellAllCoin($denomSell,$denomBuy,$amountBuy){
+        $msg = $this->protoManager->getMsgSellAllCoin(
+            $this->wallet->getAddress(),
+                strtolower($denomSell),
+                strtolower($denomBuy),
+                amountUNIRecalculate($amountBuy)
+            );
+
+        $result = $this->sendTransaction($msg, []);
+        return $result;
+    }
 
 
-        $txBodyBytes = $txBody->serializeToString();
+    //TODO sends formatter
+    public function multiSendCoins($payload) {
+        $msg = $this->protoManager->getMsgMultiSendCoins($this->wallet->getAddress(),$payload['sends']);
 
-        $signObj = $this->singTransaction($txBodyBytes,$fee);
+        $result = $this->sendTransaction($msg,[]);
+        return $result;
+    }
 
-        $txRaw = $this->protoManager->getTxRaw([
-            'body_bytes'        => $txBodyBytes,
-            'auth_info_bytes'   => base64_decode($signObj['signDoc']->authInfoBytes),
-            'signatures'        => [base64_encode($signObj['stdSignature']['signature'])],
-        ]);
+    public function mintNft($recipient, $denom,$tokenUrl,$quantity,$reserve,$allowMint) {
+        $id = str_replace("-", "", $this->gen_uuid());
+        $msg = $this->protoManager->getMsgMintNft(
+            $this->wallet->getAddress(),
+            $recipient,
+            strtolower($denom),
+            $id,
+            $tokenUrl,
+            amountUNIRecalculate($allowMint),
+            amountUNIRecalculate($reserve),
+            amountUNIRecalculate($quantity)
+        );
+
+        $tokenUrlArray = explode('/',$tokenUrl);
+        $slug = end($tokenUrlArray);
+
+        $activeNft = $this->requester->post("nfts/service/$slug/activate",['tokenId' => $id]);
+        var_dump($activeNft);
+
+        if (!$activeNft['success']) {
+            throw new DecimalException(json_decode($activeNft['error']['errorMessage']));
+        }
+    
+        $result = $this->sendTransaction($msg, []);
+        return $result;
+    }
+
+    private function sendTransaction($msg, $options, $simulate = false) {
+
+        $sequence = $this->wallet->getSequence();
+        $memo = isset($options['message']) ? $options['message'] : '';
+
+        $txBody = $this->protoManager->getTxBody($msg, $memo);
+        $feeCoin = $this->protoManager->getCoin('del', '0');
+        $fee = $this->protoManager->getFee('180000', $feeCoin);
+        $signObj = $this->singTransaction($txBody, $fee);
 
 
+        $txRaw = $this->protoManager->getTxRaw(
+            $txBody->serializeToString(),
+            $signObj['authInfoBytes'],
+            [$signObj['signature']],
+        );
 
-        $txBytes = $txRaw->serializeToJsonString();
 
+        $txBytes = $txRaw->serializeToString();
+
+        
         $payload = [
-            'tx_bytes' => $txBytes,
+            'tx_bytes' => base64_encode($txBytes),
+            'feeCoin' => $feeCoin->getDenom()
         ];
 
-        var_dump($payload);
+        $predictedFee = $this->requester->post('rpc/simulate_fee', $payload);
 
-        $response = $this->requester->post('cosmos/tx/v1beta1/simulate', $payload);
+        if (!$predictedFee['success']) {
+            throw new DecimalException($predictedFee['error']['errorMessage']);
+        }
+    
+        var_dump($predictedFee);
+        $fee = $this->protoManager->getFee("180000", $this->protoManager->getCoin('del', $predictedFee));
+
+        $signObj = $this->singTransaction($txBody, $fee);
+        $txRaw = $this->protoManager->getTxRaw(          
+            $txBody->serializeToString(),
+            $signObj['authInfoBytes'],
+            [$signObj['signature']]
+        );
+        $txBytes = $txRaw->serializeToString();
+
+        $broadcast = $this->protoManager->getBroadcastRequest($txBytes);
+
+        $broadcastPreparedPayload = json_decode($broadcast->serializeToJsonString());
+
+        $response = $this->requester->sendTxToBroadcast($broadcastPreparedPayload);
+
+        if($response->tx_response->txhash) {
+            $this->wallet->setSequence($sequence++);
+        }
+
         var_dump($response);
+        return $response;
     }
 
-    public function singTransaction($txBodyBytes, $fee) {
+    private function singTransaction($txBody, $fee) {
         $privateKey = $this->wallet->getPrivateKey();
-
         $bitcoinECDSA = new BitcoinECDSA();
         $bitcoinECDSA->setPrivateKey($privateKey);
 
-        $publicKeyCompressed = $bitcoinECDSA->getPubKey();
-        $publicKeyEncoded = [
-            'type_url' => '/ethermint.crypto.v1.ethsecp256k1.PubKey',
-            'value' => $this->protoManager->getPubKey(['key' => $publicKeyCompressed])->serializeToString()
-        ];
-
-
+        $publicKey = $this->protoManager->getPubKey(hex2bin($bitcoinECDSA->getPubKey()));
+        $signerInfo = $this->protoManager->getSignerInfo($publicKey, $this->wallet->getSequence());
         $authInfo = $this->protoManager->getAuthInfo();
-        $authInfo->setSignerInfos([$this->protoManager->getSignerInfo([
-            'public_key' => $this->protoManager->getAny($publicKeyEncoded),
-            'sequence' => $this->signMeta['sequence'],
-            'mode_info' => $this->protoManager->getModeInfo([
-                'single' => $this->protoManager->getSingle([ 'mode' => SignMode::SIGN_MODE_DIRECT])
-            ]),
-        ])]);
+        $authInfo->setSignerInfos([$signerInfo]);
 
-
-        $fee = [
-            'amount' => [ 
-                $this->protoManager->getCoin([
-                    'denom'     => strtolower('del'), 
-                    'amount'    => str_repeat(amountUNIRecalculate(0), 22)
-                ]),
-                ],
-             'gas_limit' => '180000'
-            ];
-
-        
-        $authInfo->setFee($this->protoManager->getFee($fee));
-
-        $authInfoBinary = $authInfo->serializeToString();
-        
-        $signBytes = $this->makeSignBytes($authInfoBinary,$txBodyBytes);
-        $signHash = Keccak::hash($signBytes->serializeToString(), 256);
-        $signature = Encrypt::sepc256k1Sign($signHash, $privateKey);
-
-        $stdSignature = [
-            'pub_key' => [
-                'type_url' => '/ethermint.crypto.v1.ethsecp256k1.PubKey', 
-                'value' => $publicKeyCompressed,
-            ],
-            'signature' => $signature
-        ];
+        $feeCoin = $this->protoManager->getCoin('del', 0);
+        $fee = $this->protoManager->getFee('180000', $feeCoin);
+        $authInfo->setFee($fee);
+        $authInfoBytes = $authInfo->serializeToString();
+        $signBytes = $this->protoManager->getSignDoc(
+            $txBody->serializeToString(),
+            $authInfoBytes,
+            $this->signMeta['chain_id'], // decimal_2020-22100701
+            $this->signMeta['account_number'],
+        );
+        $signature = Encrypt::sepc256k1Sign($signBytes, $privateKey);
 
         return [
-            'stdSignature' =>$stdSignature,
-            'signDoc' => json_decode($this->makeSignBytes($authInfoBinary,$txBodyBytes)->serializeToJsonString()),
+            'pub_key' => $publicKey,
+            'signature' => $signature,
+            'authInfoBytes' => $authInfoBytes,
         ];
     }
 
-    public function makeSignBytes($authInfoBytes, $bodyBytes) {
-        return $this->protoManager->getSignDoc([
-            'body_bytes' => $bodyBytes,
-            'auth_info_bytes' => $authInfoBytes,
-            'chain_id' => $this->signMeta['chain_id'],
-            'account_number' => $this->signMeta['account_number']
-        ]);
-    }
+    private function makeSignBytes($authInfoBytes, $bodyBytes) {
+        $msg = $this->protoManager->getSignDoc(
+            $bodyBytes,
+            $authInfoBytes,
+            $this->signMeta['chain_id'],
+            $this->signMeta['account_number'],
+        );
 
-    /**
-     * @param $payload
-     * @return array
-     * @throws DecimalException
-     */
-    public function sendCoins($payload) {
-        $type = $this->txSchemes['COIN_SEND']['type'];
-        $this->checkRequiredFields('COIN_SEND', $payload);
-        $payload['fee'] = $this->txSchemes['COIN_SEND']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
-    }
+        $result = $this->sendTransaction($msg,[]);
 
-    /**
-     * Multisend Coin Transaction
-     *
-     * @param $payload array
-     */
-    public function multisendCoins($payload)
-    {
-        $type = $this->txSchemes['COIN_MULTISEND']['type'];
-
-        $this->checkRequiredFields('COIN_MULTISEND', $payload);
-        $payload['fee'] = $this->txSchemes['COIN_MULTISEND']['fee'];
-
-        $prePayload = $this->formatePrepayload($type, $payload);
-
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-
-        return $this->requester->sendTx($preparedTx);
-    }
-
-    /**
-     * get sends array for multiply send coins
-     *
-     * @param $payload
-     * @return array
-     */
-    protected function getMultiplySends($payload)
-    {
-        $out = [];
-        foreach ($payload['sends'] as $send) {
-            $out[] = [
-                'receiver' => $send['to'],
-                'coin' => [
-                    'amount' => amountUNIRecalculate($send['amount']),
-                    'denom' => strtolower($send['coin']),
-                ]
-            ];
-        }
-        return $out;
-    }
-
-    /**
-     * @param $payload
-     * @return array
-     * @throws DecimalException
-     */
-    public function getCoin($payload)
-    {
-        $type = $this->txSchemes['COIN_BUY']['type'];
-        $this->checkRequiredFields('COIN_BUY', $payload);
-        $payload['fee'] = $this->txSchemes['COIN_BUY']['fee'];
-        if (isset($payload['maxSpendLimit'])) {
-            $maxSpendLimit = amountUNIRecalculate($payload['maxSpendLimit']);
-        }else{
-            $maxSpendLimit = amountUNIRecalculate(100000000000);
-        }
-        $prePayload = [
-            'sender' => $this->wallet->getAddress(),
-            'coin_to_buy' => [
-                'amount' => amountUNIRecalculate($payload['amount']),
-                'denom' => strtolower($payload['buyCoin']),
-            ],
-            'max_coin_to_sell' => [
-                'amount' => $maxSpendLimit,
-                'denom' => strtolower($payload['spendCoin']),
-            ],
-        ];
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-
-        return $this->requester->sendTx($preparedTx);
-    }
-
-    /**
-     * @param $payload
-     * @return array
-     * @throws DecimalException
-     */
-    public function sellCoin($payload)
-    {
-        $type = $this->txSchemes['COIN_SELL']['type'];
-        $this->checkRequiredFields('COIN_SELL', $payload);
-        $payload['fee'] = $this->txSchemes['COIN_SELL']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
+        return $result;
     }
 
     /**
@@ -835,21 +763,6 @@ class Transaction
         return $this->requester->sendTx($preparedTx);
     }
 
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
-    public function validatorUnbound($payload)
-    {
-        $type = $this->txSchemes['VALIDATOR_UNBOND']['type'];
-        $result = $this->checkRequiredFields('VALIDATOR_UNBOND', $payload);
-        $payload['fee'] = $this->txSchemes['VALIDATOR_UNBOND']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
-    }
 
     /**
      * @param $payload
@@ -1017,14 +930,11 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function burnNft($payload)
-    {
-        $type = $this->txSchemes['NFT_BURN']['type'];
-        $result = $this->checkRequiredFields('NFT_BURN', $payload);
-        $payload['fee'] = $this->txSchemes['NFT_BURN']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
-        return $this->requester->sendTx($preparedTx);
+    public function burnNft($tokenId, $subTokenIds) {
+        $msg = $this->protoManager->getMsgBurnNft($this->wallet->getAddress(),$tokenId,$subTokenIds);
+
+        $result = $this->sendTransaction($msg,[]);
+        return $result;
     }
 
     /**
@@ -1033,16 +943,12 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function transferNft($payload)
+    public function transferNft($recipient,$tokenId,$subTokenIds)
     {
-        $type = $this->txSchemes['NFT_TRANSFER']['type'];
-        $result = $this->checkRequiredFields('NFT_TRANSFER', $payload);
+        $msg = $this->protoManager->getMsgTransferNft($this->wallet->getAddress(),$recipient,$tokenId,$subTokenIds);
 
-        $payload['fee'] = $this->txSchemes['NFT_TRANSFER']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
-
-        return $this->requester->sendTx($preparedTx);
+        $result = $this->sendTransaction($msg,[]);
+        return $result;
     }
 
     /**
@@ -1051,16 +957,25 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function editNftMetadata($payload)
+    public function editNftMetadata($tokenId, $tokenUri)
     {
-        $type = $this->txSchemes['NFT_EDIT_METADATA']['type'];
-        $result = $this->checkRequiredFields('NFT_EDIT_METADATA', $payload);
+        $msg = $this->protoManager->getMsgEditNftMetadata($this->wallet->getAddress(),$tokenId, $tokenUri);
 
-        $payload['fee'] = $this->txSchemes['NFT_EDIT_METADATA']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
+        $result = $this->sendTransaction($msg,[]);
+        return $result;
+    }
 
-        return $this->requester->sendTx($preparedTx);
+    public function updateNtfReserve($tokenId,$subTokenIds, $reserve, $denom) {
+        $msg = $this->protoManager->getMsgUpdateReserve(
+            $this->wallet->getAddress(),
+            $tokenId,
+            $subTokenIds,
+            amountUNIRecalculate($reserve),
+            strtolower($denom)
+        );
+
+        $result = $this->sendTransaction($msg,[]);
+        return $result;
     }
 
     /**
@@ -1069,17 +984,6 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function nftDelegate($payload)
-    {
-        $type = $this->txSchemes['NFT_DELEGATE']['type'];
-        $result = $this->checkRequiredFields('NFT_DELEGATE', $payload);
-
-        $payload['fee'] = $this->txSchemes['NFT_DELEGATE']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
-
-        return $this->requester->sendTx($preparedTx);
-    }
 
     public function nftUnbond($payload)
     {
@@ -1177,9 +1081,15 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function getNftMetadata($addressNft)
-    {
-        return $this->requester->getNftMetadata($addressNft);
+    public function getNftMetadata($addressNft) {
+        $response = $this->requester->getNftMetadata($addressNft);
+        return $response;
+    }
+
+    public function getNftList($limit, $offset, $query = null) {
+        $response = $this->requester->getNftList($this->wallet->getAddress(), $limit, $offset, $query);
+        var_dump($response);
+        return $response;
     }
 
     /**
@@ -1206,7 +1116,8 @@ class Transaction
 
     public function getCoinsList($limit = 1, $offset = 0, $query = null)
     {
-        return $this->requester->getCoinsList($limit, $offset, $query);
+        $response = $this->requester->getCoinsList($this->wallet->getAddress(), $limit, $offset, $query);
+        return $response;
     }
 
     /**

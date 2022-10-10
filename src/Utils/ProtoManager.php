@@ -2,19 +2,31 @@
 
 namespace DecimalSDK\Utils;
 
-use Cosmos\Tx\V1beta1\AuthInfo;
-use Cosmos\Tx\V1beta1\TxBody;
-use Decimal\Coin\V1\MsgBuyCoin;
+use Google\Protobuf\Any;
 use Cosmos\Base\V1beta1\Coin;
+use Cosmos\Tx\Signing\V1beta1\SignMode;
+use Cosmos\Tx\V1beta1\AuthInfo;
+use Cosmos\Tx\V1beta1\BroadcastTxRequest;
+use Cosmos\Tx\V1beta1\BroadcastMode;
+use Cosmos\Tx\V1beta1\TxBody;
 use Cosmos\Tx\V1beta1\Fee;
 use Cosmos\Tx\V1beta1\ModeInfo;
-use Cosmos\Tx\V1beta1\ModeInfo\Single;
 use Cosmos\Tx\V1beta1\SignDoc;
 use Cosmos\Tx\V1beta1\SignerInfo;
 use Cosmos\Tx\V1beta1\TxRaw;
-use Decimal\Coin\V1\MsgSendCoin;
+use Cosmos\Tx\V1beta1\ModeInfo\Single;
 use Ethermint\Crypto\V1\Ethsecp256k1\PubKey;
-use Google\Protobuf\Any;
+use Decimal\Coin\V1\MsgBuyCoin;
+use Decimal\Coin\V1\MsgMultiSendCoin;
+use Decimal\Coin\V1\MsgSellAllCoin;
+use Decimal\Coin\V1\MsgSellCoin;
+use Decimal\Coin\V1\MsgSendCoin;
+use Decimal\Coin\V1\MultiSendEntry;
+use Decimal\Nft\V1\MsgBurnToken;
+use Decimal\Nft\V1\MsgMintToken;
+use Decimal\Nft\V1\MsgSendToken;
+use Decimal\Nft\V1\MsgUpdateReserve;
+use Decimal\Nft\V1\MsgUpdateToken;
 
 class ProtoManager
 {
@@ -23,7 +35,7 @@ class ProtoManager
 
     public static function instance(): ProtoManager
     {
-        if(!isset(ProtoManager::$instance)){
+        if (!isset(ProtoManager::$instance)) {
             ProtoManager::$instance = new ProtoManager();
         }
 
@@ -33,8 +45,10 @@ class ProtoManager
     private static function setClassList(): array
     {
         return [
-            \DecimalSDK\Utils\TxTypes::COIN_BUY => MsgBuyCoin::class,
-            \DecimalSDK\Utils\TxTypes::COIN_SEND => MsgSendCoin::class
+            TxTypes::COIN_BUY => MsgBuyCoin::class,
+            TxTypes::COIN_SEND => MsgSendCoin::class,
+            TxTypes::COIN_SELL => MsgSellCoin:: class,
+            TxTypes::COIN_SELL_ALL => MsgSellAllCoin::class,
         ];
     }
 
@@ -48,14 +62,137 @@ class ProtoManager
         return $this->classesByType[$txType];
     }
 
-    public function getCoin($data): Coin
-    {
-        return new Coin($data);
+    public function getMsgMultiSendCoins($sender,$sends) {
+        $msg = new MsgMultiSendCoin();
+        $sendsPrepared  = [];
+        foreach($sends as $send) {
+            $sendEntity = new MultiSendEntry();
+
+            $sendEntity->setRecipient($send['to']);
+            $sendEntity->setCoin($this->getCoin($send['coin'], $send['amount']));
+            $sendsPrepared[] = $sendEntity;
+        }
+
+        $msg->setSender($sender);
+        $msg->setSends($sendsPrepared);
+
+        return $this->getAny([
+            'type_url' => TxTypes::COIN_MULTISEND,
+            'value' => $msg->serializeToString(),
+        ]);
+
     }
 
-    public function getMsgBuyCoin($data): MsgBuyCoin
+    public function getMsgMintNft($sender,$recipient, $denom,$tokenId, $tokenUri,$allowMint,$reserve,$quantity) {
+        $msg = new MsgMintToken();
+        $msg->setSender($sender);
+        $msg->setRecipient($recipient);
+        $msg->setDenom($denom);
+        $msg->setTokenId($tokenId);
+        $msg->setTokenUri($tokenUri);
+        $msg->setAllowMint($allowMint);
+        $msg->setReserve($this->getCoin($reserve['denom'], $reserve['amount']));
+        $msg->setQuantity($quantity);
+
+        return $this->getAny([
+            'type_url' => TxTypes::NFT_MINT,
+            'value'     => $msg->serializeToString()
+        ]);
+
+    }
+    public function getCoin($denom, $amount): Coin
     {
-        return new MsgBuyCoin($data);
+        $coin = new Coin();
+        $coin->setDenom($denom);
+        $coin->setAmount($amount);
+        return $coin;
+    }
+
+    public function getMsgBurnNft($sender, $tokenId, $subTokenId) {
+        $msg = new MsgBurnToken();
+        $msg->setSender($sender);
+        $msg->setTokenId($tokenId);
+        $msg->setSubTokenIds($subTokenId);
+
+        return $this->getAny([
+            'type_url' => TxTypes::NFT_BURN,
+            'value' => $msg->serializeToString()
+        ]);
+    }
+
+    public function getMsgTransferNft($sender, $recipient, $tokenId, $subTokenId) {
+        $msg = new MsgSendToken();
+        $msg->setSender($sender);
+        $msg->setRecipient($recipient);
+        $msg->setTokenId($tokenId);
+        $msg->setSubTokenIds($subTokenId);
+
+        return $this->getAny([
+            'type_url' => TxTypes::NFT_TRANSFER,
+            'value' => $msg->serializeToString()
+        ]);
+    }
+
+    public function getMsgEditNftMetadata($sender, $tokenId, $tokenUri) {
+        $msg = new MsgUpdateToken();
+        $msg->setSender($sender);
+        $msg->setTokenId($tokenId);
+        $msg->setTokenUri($tokenUri);
+
+        return $this->getAny([
+            'type_url' => TxTypes::NFT_EDIT_METADATA,
+            'value' => $msg->serializeToString(),
+        ]);
+    }
+
+    public function getMsgUpdateReserve($sender,$tokenId,$subTokenIds,$reserve, $denom) {
+        $msg = new MsgUpdateReserve();
+        $msg->setSender($sender);
+        $msg->setTokenId($tokenId);
+        $msg->setSubTokenIds($subTokenIds);
+        $msg->setReserve($this->getCoin($denom,$reserve));
+
+        return $this->getAny([
+            'type_url' => TxTypes::NFT_UPDATE_RESERVE,
+            'value' => $msg->serializeToString(), 
+        ]);
+    }
+
+    public function getMsgSellCoin($sender, $denomSell, $amountSell, $denomBuy,$amountBuy) {
+        $msg = new MsgSellCoin();
+        $msg->setSender($sender);
+        $msg->setCoinToSell($this->getCoin($denomSell, $amountSell));
+        $msg->setMinCoinToBuy($this->getCoin($denomBuy, $amountBuy));
+  
+        return $this->getAny([
+            'type_url'  => TxTypes::COIN_SELL,
+            'value'     => $msg->serializeToString()
+        ]);
+    }
+
+    public function getMsgBuyCoin($sender,$denomBuy,$amountBuy,$denomSell,$amountSell) {
+        $msg = new MsgBuyCoin();
+        $msg->setSender($sender);
+        $msg->setCoinToBuy($this->getCoin($denomBuy, $amountBuy));
+        $msg->setMaxCoinToSell($this->getCoin($denomSell, $amountSell));
+
+        return $this->getAny([
+            'type_url'  => TxTypes::COIN_BUY,
+            'value'     => $msg->serializeToString()
+        ]);
+    }
+
+    public function getMsgSellAllCoin($sender,$denomSell, $denomBuy, $amountBuy){
+        $msg = new MsgSellAllCoin();
+        $msg->setSender($sender);
+        $msg->setCoinDenomToSell($denomSell);
+        $msg->setMinCoinToBuy($this->getCoin($denomBuy, $amountBuy));
+        var_dump($msg->serializeToString());
+
+        return [
+            'type_url' => TxTypes::COIN_SELL_ALL,
+            'value' => $msg->serializeToString(),
+        ];
     }
 
     public function getAny($data): Any
@@ -63,45 +200,89 @@ class ProtoManager
         return new Any($data);
     }
 
-    public function getTxBody($data): TxBody
+    public function getTxBody($message, $memo = ''): TxBody
     {
-        return new TxBody($data);
+        return new TxBody([
+            'messages'                          => [$message],
+            'memo'                              => $memo,
+            'timeout_height'                    => 0,
+            'extension_options'                 => [],
+            'non_critical_extension_options'    => []
+        ]);
     }
 
-    public function getPubKey($data): PubKey
+    public function getPubKey($pubKeyBytes): PubKey
     {
-        return new PubKey($data);
+        $pubKey = new PubKey();
+        $pubKey->setKey($pubKeyBytes);
+        return $pubKey;
     }
 
-    public function getMsgSendCoin($data) {
-        return new MsgSendCoin($data);
+    public function getMsgSendCoin($sender, $recipient, $denom, $amount)
+    {
+        $msg = new MsgSendCoin();
+        $msg->setSender($sender);
+        $msg->setRecipient($recipient);
+        $msg->setCoin($this->getCoin($denom, $amount));
+        return $this->getAny([
+            'type_url'  => TxTypes::COIN_SEND,
+            'value'     => $msg->serializeToString()
+        ]);
     }
-    
-    public function getAuthInfo($payload = null) {
+
+    public function getAuthInfo($payload = null)
+    {
         return new AuthInfo($payload);
     }
 
-    public function getSignerInfo($payload) {
-        return new SignerInfo($payload);
+    public function getSignerInfo($pubKey, $sequence)
+    {
+        $signerInfo = new SignerInfo();
+        $signerInfo->setPublicKey($this->getAny([
+            'type_url' => '/ethermint.crypto.v1.ethsecp256k1.PubKey',
+            'value' => $pubKey->serializeToString()
+        ]));
+        $signerInfo->setSequence($sequence);
+        $signerInfo->setModeInfo($this->getSingleModeInfo());
+        return $signerInfo;
     }
 
-    public function getModeInfo($payload) {
-        return new ModeInfo($payload);
+    public function getSingleModeInfo()
+    {
+        return new ModeInfo(['single' => new Single(['mode' => SignMode::SIGN_MODE_DIRECT])]);
     }
 
-    public function getSingle($payload) { 
-        return new Single($payload);
+    public function getFee($gasLimit, $coin)
+    {
+        $fee = new Fee();
+        $fee->setGasLimit($gasLimit);
+        $fee->setAmount([$coin]);
+        return  $fee;
     }
 
-    public function getFee($payload) {
-        return new Fee($payload);
+    public function getSignDoc($bodyBytes, $authInfoBytes, $chainId, $accountNumber)
+    {
+        $signDoc = new SignDoc();
+        $signDoc->setBodyBytes($bodyBytes);
+        $signDoc->setAuthInfoBytes($authInfoBytes);
+        $signDoc->setChainId($chainId);
+        $signDoc->setAccountNumber($accountNumber);
+        return $signDoc;
     }
 
-    public function getSignDoc($payload) {
-        return new SignDoc($payload);
+    public function getTxRaw($bodyBytes, $authInfoBytes, $signature)
+    {
+        $txRaw = new TxRaw();
+        $txRaw->setBodyBytes($bodyBytes);
+        $txRaw->setAuthInfoBytes($authInfoBytes);
+        $txRaw->setSignatures($signature);
+        return $txRaw;
     }
 
-    public function getTxRaw($payload) {
-        return new TxRaw($payload);
+    public function getBroadcastRequest($txBytes) {
+        $broadcastRequest = new BroadcastTxRequest();
+        $broadcastRequest->setTxBytes($txBytes);
+        $broadcastRequest->setMode(BroadcastMode::BROADCAST_MODE_SYNC); // always sync mode for now
+        return $broadcastRequest;
     }
 }

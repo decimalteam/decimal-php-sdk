@@ -10,7 +10,7 @@ class Wallet
     private $arguments;
     private $validatorAddress;
     private $mnemonics;
-
+    private $sequence;
     /**
      * Wallet constructor.
      * @param null $mnemonics
@@ -63,5 +63,13 @@ class Wallet
     public function getMnemonics()
     {
         return $this->mnemonics;
+    }
+
+    public function getSequence() {
+        return $this->sequence;
+    }
+
+    public function setSequence($sequence) {
+        $this->sequence = $sequence;
     }
 }

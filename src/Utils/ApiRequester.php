@@ -9,11 +9,11 @@ use GuzzleHttp\Client as GClient;
 
 class ApiRequester
 {
-	const TEST_GATE_API = 'https://devnet-dec2-node-01.decimalchain.com/rest/';
+	const TEST_GATE_API = 'https://devnet-dec2.console.decimalchain.com/api/';
 	const GET = 'get';
 	const POST = 'post';
 	const TIMEOUT = 5.0;
-	const DEFAULT_NODE_URL = 'http://localhost';
+	const DEFAULT_NODE_URL = 'https://devnet-dec2-node-01.decimalchain.com/';
 	const DEFAULT_DEFAULT_NODE_RPC_PORT = '26657';
 	const DEFAULT_DEFAULT_NODE_REST_PORT = '1317';
 
@@ -61,6 +61,7 @@ class ApiRequester
 			$this->options['baseUrl'] = $this->options['nodeUrl'] ?? self::DEFAULT_NODE_URL;
 			$this->options['rpcPort'] = ':'.($this->options['rpcPort'] ?? self::DEFAULT_DEFAULT_NODE_RPC_PORT);
 			$this->options['restPort'] = ':'.($this->options['restPort'] ?? self::DEFAULT_DEFAULT_NODE_REST_PORT);
+
 		}
 	}
 
@@ -87,48 +88,49 @@ class ApiRequester
 
 	protected function getRpcPrefix()
 	{
-		return $this->options['useGate'] ? 'rpc/' : '';
+		return $this->options['useGate'] ? 'rpc/' : 'rest/';
 	}
 
 	public function getSignMeta(Wallet $wallet)
 	{
 		$nodeInfo = $this->getNodeInfo();
-
 		$accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
 
 		$meta = [
-			'sequence' => $accountInfo->result->value->sequence ?? 0,
-			'account_number' => $accountInfo->result->value->account_number ?? 0,
-			'chain_id' => $nodeInfo->node_info->network ?? 0,
+			'account_number' => $accountInfo->account->base_account->account_number ?? 0,
+			'chain_id' => $nodeInfo->default_node_info->network ?? 0,
 		];
 
+		$wallet->setSequence($accountInfo->account->base_account->sequence ?? 0);
 		return $meta;
 	}
 
 	public function getNodeInfo()
 	{
-		$url = $this->getRpcPrefix().'node_info';
-		return $this->_request($url, self::GET, false);
+		$url = 'rpc/node_info';
+		$response = $this->_request($url, self::GET, false);
+		return $response;
 	}
 
 	public function getAccountInfo($address)
 	{
 		//todo check it
 		if (isset($this->options['createNonce'])) {
-			$url = $this->getRpcPrefix()."auth/accounts/$address";
+			$url = "/accounts/$address";
 		} else {
-			$url = $this->getRpcPrefix()."accounts/$address";
+			$url = "accounts/$address";
 		}
 
 		//todo temp fix
-		$url = $this->getRpcPrefix()."auth/accounts/$address";
-		return $this->_request($url, self::GET, false);
+		$response = file_get_contents("https://devnet-dec2-node-01.decimalchain.com/rest/cosmos/auth/v1beta1/accounts/". $address);
+
+		return json_decode($response);
 	}
 
-	public function getCoinsList($limit = 1, $offset = 0, $query = null)
+	public function getCoinsList($address, $limit = 1, $offset = 0, $query = null)
 	{
 		//todo this coin to coins
-		$url = "coins?limit=$limit&offset=$offset";
+		$url = "address/$address/coins?limit=$limit&offset=$offset";
 
 		if ($query) {
 			$url += "&$query";
@@ -173,7 +175,6 @@ class ApiRequester
 		return $res;
 	}
 
-	//todo check it
 	public function getNftMetadata($addressNft)
 	{
 		if (!$addressNft) {
@@ -184,7 +185,22 @@ class ApiRequester
 		return $res;
 	}
 
-	public function getMultisigsByAdress($address)
+	public function getNftList($address, $limit=1, $offset=0, $query = 0) {
+		if(!$address) {
+			throw new DecimalException('address is required');
+		}
+
+		$url = "address/$address/nfts?limit=$limit&offset=$offset";
+
+		if ($query) {
+			$url += "&$query";
+		}
+
+		$response = $this->_request($url, self::GET. false);
+		return $response;
+	}
+
+	public function getMultiSigsByAddress($address)
 	{
 		if (!$address) {
 			throw new DecimalException('address is required');
@@ -269,6 +285,7 @@ class ApiRequester
 
 		$mode = isset($options['mode']) ? $options['mode'] : 'sync';
 		$tx = ['tx' => $tx, 'mode' => $mode];
+		var_dump($tx);
 
 		return $this->txResult($this->_request($url, self::POST, $rpc, $tx, $options));
 	}
@@ -349,5 +366,9 @@ class ApiRequester
 		];
 	}
 
+	public function sendTxToBroadcast($broadcastPayload) {
+		$response = $this->post('http://185.242.122.118/rest/cosmos/tx/v1beta1/txs',$broadcastPayload);
+		return $response;
+	}
 	
 }

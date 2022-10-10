@@ -336,23 +336,6 @@ trait TransactionHelpers
         ];
     }
 
-    /**
-     * @param $payload
-     * @return array
-     */
-
-    public function sendCoinPayload($payload)
-    {
-        return [
-            'sender' => $this->wallet->getAddress(),
-            'recipient' => $payload['to'],
-            'coin' => [
-                'amount' => amountUNIRecalculate($payload['amount']),
-                'denom' => strtolower($payload['coin']),
-            ]
-        ];
-    }
-
     public function coinSellPayload($payload)
     {
         return [
