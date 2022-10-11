@@ -9,82 +9,99 @@ use GuzzleHttp\Client as GClient;
 
 class ApiRequester
 {
-	const TEST_GATE_API = 'https://devnet-dec2.console.decimalchain.com/api/';
-	const GET = 'get';
-	const POST = 'post';
-	const TIMEOUT = 5.0;
-	const DEFAULT_NODE_URL = 'https://devnet-dec2-node-01.decimalchain.com/';
-	const DEFAULT_DEFAULT_NODE_RPC_PORT = '26657';
-	const DEFAULT_DEFAULT_NODE_REST_PORT = '1317';
+    const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api/';
+    const MAINNET_GATE_API = 'https://mainnet-gate.decimalchain.com/api/';
+    const GET = 'get';
+    const POST = 'post';
+    const TIMEOUT = 15.0;
+    const DEFAULT_NODE_URL = 'http://localhost';
+    const DEFAULT_DEFAULT_NODE_RPC_PORT = '26657';
+    const DEFAULT_DEFAULT_NODE_REST_PORT = '1317';
 
 
-	private $options;
-	private $client;
-	private $clientRpc;
-	private $useGate;
-	private $gateUrl;
-	private $nodeUrl;
-	private $rpcPort;
-	private $restPort;
-	private $validModes = ['sync', 'async', 'block'];
+    private $options;
+    private $client;
+    private $clientRpc;
+    private $useGate;
+    private $gateUrl;
+    private $nodeUrl;
+    private $rpcPort;
+    private $restPort;
+    private $validModes = ['sync', 'async', 'block'];
+    private $wallet;
 
-	/**
-	 * ApiRequester constructor.
-	 *
-	 * awailable options
-	 * useGate = true/false
-	 * gateUrl
-	 * nodeUrl
-	 * rpcPort
-	 * restPort
-	 *
-	 *
-	 * @param  array  $options
-	 *
-	 *
-	 */
-	public function __construct($options = [])
-	{
-		$this->validateOptions($options);
-		$this->setClient();
-	}
+    /**
+     * ApiRequester constructor.
+     *
+     * awailable options
+     * useGate = true/false
+     * gateUrl
+     * nodeUrl
+     * rpcPort
+     * restPort
+     *
+     *
+     * @param array $options
+     *
+     *
+     */
+    public function __construct(Wallet $wallet, $options = [])
+    {
+        $this->validateOptions($options);
+        $this->setClient();
+        $this->wallet = $wallet;
+    }
 
-	protected function validateOptions($options)
-	{
-		$this->options = $options;
-		if (!array_key_exists('useGate', $this->options)) {
-			$this->options['useGate'] = true;
-		}
-		if ($this->options['useGate']) {
-			$this->options['baseUrl'] = $this->options['gateUrl'] ?? self::TEST_GATE_API;
-		} elseif (!$this->options['useGate']) {
-			$this->options['baseUrl'] = $this->options['nodeUrl'] ?? self::DEFAULT_NODE_URL;
-			$this->options['rpcPort'] = ':'.($this->options['rpcPort'] ?? self::DEFAULT_DEFAULT_NODE_RPC_PORT);
-			$this->options['restPort'] = ':'.($this->options['restPort'] ?? self::DEFAULT_DEFAULT_NODE_REST_PORT);
+    protected function validateOptions($options)
+    {
+        $this->options = $options;
+        if (!array_key_exists('useGate', $this->options)) {
+            $this->options['useGate'] = true;
+        }
+        if ($this->options['useGate']) {
+            $this->options['baseUrl'] = $this->options['gateUrl'] ?? self::TEST_GATE_API;
+        } elseif (!$this->options['useGate']) {
+            $this->options['baseUrl'] = $this->options['nodeUrl'] ?? self::DEFAULT_NODE_URL;
+            $this->options['rpcPort'] = ':' . ($this->options['rpcPort'] ?? self::DEFAULT_DEFAULT_NODE_RPC_PORT);
+            $this->options['restPort'] = ':' . ($this->options['restPort'] ?? self::DEFAULT_DEFAULT_NODE_REST_PORT);
+        }
 
-		}
-	}
+        if (isset($this->options['mode']) && !in_array($options['mode'], $this->validModes)) {
+            throw new DecimalException('Mode is not valid');
+        }
 
-	protected function setClient()
-	{
-		if ($this->options['useGate']) {
-			$params = [
-				'base_uri' => $this->options['baseUrl'],
-				'timeout' => self::TIMEOUT,
-			];
-		} elseif (!$this->options['useGate']) {
-			$params = [
-				'base_uri' => $this->options['baseUrl'].$this->options['restPort'],
-				'timeout' => self::TIMEOUT,
-			];
-			$paramsRpc = [
-				'base_uri' => $this->options['baseUrl'].$this->options['rpcPort'],
-				'timeout' => self::TIMEOUT,
-			];
-			$this->clientRpc = new GClient($paramsRpc);
-		}
-		$this->client = new GClient($params);
-	}
+        if (!isset($this->options['mode'])) {
+            $this->options['mode'] = $this->validModes[0];
+        }
+
+        if (!isset($this->options['setNonceAutomatically'])) {
+            $this->options['setNonceAutomatically'] = true;
+        }
+        if (!is_bool($this->options['setNonceAutomatically'])) {
+            throw new DecimalException('Set nonce automatically should be a boolean');
+        }
+    }
+
+    protected function setClient()
+    {
+        if ($this->options['useGate']) {
+            $params = [
+                'base_uri' => $this->options['baseUrl'],
+                'timeout' => self::TIMEOUT,
+            ];
+        } elseif (!$this->options['useGate']) {
+            $params = [
+                'base_uri' => $this->options['baseUrl'] . $this->options['restPort'],
+                'timeout' => self::TIMEOUT,
+            ];
+            $paramsRpc = [
+                'base_uri' => $this->options['baseUrl'] . $this->options['rpcPort'],
+                'timeout' => self::TIMEOUT,
+            ];
+            $this->clientRpc = new GClient($paramsRpc);
+        }
+        $this->client = new GClient($params);
+    }
 
 	protected function getRpcPrefix()
 	{
@@ -132,48 +149,77 @@ class ApiRequester
 		//todo this coin to coins
 		$url = "address/$address/coins?limit=$limit&offset=$offset";
 
-		if ($query) {
-			$url += "&$query";
-		}
+        if ($query) {
+            $url += "&$query";
+        }
 
-		return $this->_request($url, self::GET, false);
-	}
+        return $this->_request($url, self::GET, false);
+    }
 
-	public function getCoin($symbol)
-	{
-		if (!$symbol) {
-			throw new DecimalException('symbol is required');
-		}
+    public function getCoin($symbol)
+    {
+        if (!$symbol) {
+            throw new DecimalException('symbol is required');
+        }
 
-		$url = "coin/$symbol";
+        $url = "coin/$symbol";
 
-		return $this->_request($url, self::GET, false);
-	}
+        return $this->_request($url, self::GET, false);
+    }
 
-	//todo check it
-	public function getAddress($address, $txLimit = 0)
-	{
-		if (!$address) {
-			throw new DecimalException('address is required');
-		}
 
-		$url = "address/$address?txLimit=$txLimit";
+    public function getAddress($address, $txLimit = 0, $params = [])
+    {
+        $signature = isset($params['signature']) ? '&signature=' . json_encode($params['signature']) : '';
+        $timestamp = isset($params['timestamp']) ? '&timestamp=' . $params['timestamp'] : '';
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
-		return $this->_request($url, self::GET);
-	}
+        $url = "address/$address?txLimit=$txLimit$timestamp$signature";
 
-	public function getNonce($address)
-	{
-		if (!$address) {
-			throw new DecimalException('address is required');
-		}
+        return $this->_request($url, self::GET);
+    }
 
-		$url = $this->getRpcPrefix()."auth/accounts/$address";
+    public function getNftsTxes($address, $limit, $offset, $order, $params = [])
+    {
+        $signature = isset($params['signature']) ? '&signature=' . json_encode($params['signature']) : '';
+        $timestamp = isset($params['timestamp']) ? '&timestamp=' . $params['timestamp'] : '';
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
+        $url = "address/$address/nfts/txs?$order&limit=$limit&offset=$offset$timestamp$signature";
 
-		$res = $this->_request($url, self::GET, false);
-		$res->result->value->sequence++;
-		return $res;
-	}
+        return $this->_request($url, self::GET);
+    }
+
+    public function getNftTxes($addressNft, $timestamp, $signature, $limit, $offset, $order)
+    {
+        $signature = json_encode($signature);
+        if (!$addressNft) {
+            throw new DecimalException('Nft id is required');
+        }
+        $url = "nfts/$addressNft/txs?$order&limit=$limit&offset=$offset&timestamp=$timestamp&signature=$signature";
+
+        return $this->_request($url, self::GET);
+    }
+
+    public function getNonce($address)
+    {
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
+
+        $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
+
+        if ($this->options['baseUrl'] == self::MAINNET_GATE_API) {
+            $url = $this->getRpcPrefix() . "auth/accounts/$address";
+        }
+
+        $res = $this->_request($url, self::GET, false);
+        $res->result->value->sequence++;
+        return $res;
+    }
 
 	public function getTransaction($hash) {
 		if (!$hash) {
@@ -226,145 +272,172 @@ class ApiRequester
 			throw new DecimalException('address is required');
 		}
 
-		$url = "address/$address/multisigs";
+        $url = "address/$address/multisigs";
 
-		$res = $this->_request($url, self::GET, false);
-		return $res->result;
-	}
+        $res = $this->_request($url, self::GET, false);
+        return $res->result;
+    }
 
-	public function getMultisig($address)
-	{
-		if (!$address) {
-			throw new DecimalException('address is required');
-		}
+    public function getMultisig($address)
+    {
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
-		$url = "multisig/$address";
+        $url = "multisig/$address";
 
-		$res = $this->_request($url, self::GET);
-		return $res->result;
-	}
+        $res = $this->_request($url, self::GET);
+        return $res->result;
+    }
 
-	public function getMultisigTXs($address, $limit = 1, $offset = 0)
-	{
-		if (!$address) {
-			throw new DecimalException('address is required');
-		}
+    public function getMultisigTXs($address, $limit = 1, $offset = 0)
+    {
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
-		$url = "multisig/$address/txs?limit=$limit&offset=$offset";
+        $url = "multisig/$address/txs?limit=$limit&offset=$offset";
 
-		$res = $this->_request($url, self::GET);
-		return $res->result;
-	}
+        $res = $this->_request($url, self::GET);
+        return $res->result;
+    }
 
-	public function getStakesByAddress($address)
-	{
-		if (!$address) {
-			throw new DecimalException('address is required');
-		}
+    public function getStakesByAddress($address)
+    {
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
-		$url = "address/$address/stakes";
+        $url = "address/$address/stakes";
 
-		$res = $this->_request($url, self::GET);
-		return $res->result;
-	}
+        $res = $this->_request($url, self::GET);
+        return $res->result;
+    }
 
-	public function getNftStakesByAddress($address)
-	{
-		if (!$address) {
-			throw new DecimalException('address is required');
-		}
+    public function getNftStakesByAddress($address)
+    {
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
-		$url = "address/$address/nfts/stakes";
+        $url = "address/$address/nfts/stakes";
 
-		$res = $this->_request($url, self::GET);
+        $res = $this->_request($url, self::GET);
 
-		return $res->result;
-	}
+        return $res->result;
+    }
 
-	public function getValidator($address)
-	{
-		try {
-			if (!$address) {
-				throw new DecimalException('address is required');
-			}
+    public function getValidator($address)
+    {
+        try {
+            if (!$address) {
+                throw new DecimalException('address is required');
+            }
 
-			$url = "validator/$address";
+            $url = "validator/$address";
 
-			$res = $this->_request($url, self::GET);
+            $res = $this->_request($url, self::GET);
 
-			return $res->result;
+            return $res->result;
 
-		} catch (\Exception $e) {
-			throw new DecimalException('Such a validator does not exist');
-		}
-	}
+        } catch (\Exception $e) {
+            throw new DecimalException('Such a validator does not exist');
+        }
+    }
 
-	public function sendTx($tx, $rpc = false, $options = [])
-	{
-		$url = $this->getRpcPrefix()."txs";
+    public function checkTransaction($hash)
+    {
+        try {
+            $url = 'tx/' . $hash;
+            $res = $this->client->get($url);
+            $body = $res->getBody();
+            return json_decode($body->getContents(), true);
+        } catch (\Exception $exception) {
+            return $this->getError(json_encode($exception->getMessage()));
+        }
+    }
 
-		$mode = isset($options['mode']) ? $options['mode'] : 'sync';
-		$tx = ['tx' => $tx, 'mode' => $mode];
-		var_dump($tx);
+    public function sendTx($tx, $rpc = false, $options = [], $method = self::POST)
+    {
+        $url = $this->getRpcPrefix() . 'txs';
+        $tx = ['tx' => $tx, 'mode' => $this->options['mode']];
 
-		return $this->txResult($this->_request($url, self::POST, $rpc, $tx, $options));
-	}
+		return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
+    }
 
 
 	public function post($url, $payload, $rpc = false) {
 		return $this->_request($url, self::POST,$rpc, $payload);
 	}
 
-	private function _request($url, $method, $rpc = false, $payload = null, $optional = [])
-	{
-		$options = [];
-		if ($payload) {
-			$options['headers'] = [
-				'Content-Type' => 'application/json',
-			];
-			$options['body'] = json_encode($payload, JSON_UNESCAPED_SLASHES);
-		}
-		if ($rpc) {
-			$client = $this->clientRpc;
-		} else {
-			$client = $this->client;
-		}
-		try {
-			$res = $client->$method($url, $options);
-			$body = $res->getBody();
-			return json_decode($body->getContents());
-		} catch (\Exception $exception) {
+    private function _request($url, $method, $rpc = false, $payload = null, $optional = [])
+    {
+        try {
+            $options = [];
+            if ($payload) {
+                $options['headers'] = [
+                    'Content-Type' => 'application/json',
+                ];
+                $options['body'] = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            }
+            if ($rpc) {
+                $client = $this->clientRpc;
+            } else {
+                $client = $this->client;
+            }
 
-			return $this->getError(json_encode($exception->getMessage()));
-		}
-	}
+            $res = $client->$method($url, $options);
+            $body = $res->getBody();
+            $decoded = json_decode($body);
 
-	public function txResult($jsonResp)
-	{
-		$resp = $jsonResp;
+            return $decoded;
 
-		if (property_exists('jsonResp', 'code')) {
-			if ($jsonResp->raw_log) {
-				$rawLogAsString = json_encode($jsonResp->raw_log);
-				if (substr($rawLogAsString, 0) === '{' && $jsonResp->raw_log->message) {
-					$errorMessage = $jsonResp->raw_log->message;
-				} else {
-					$errorMessage = $rawLogAsString;
-				}
-				$resp = $this->getError($errorMessage, $jsonResp->code, $jsonResp->txhash);
-			}
-		} else {
-			if (property_exists('jsonResp', 'txhash')) {
-				$resp = [
-					'hash' => $jsonResp->txhash,
-					'success' => true,
-					'error' => null
-				];
-			}
-		}
+        } catch (\Exception $exception) {
 
-		return $resp;
-	}
+            return $this->getError(json_encode($exception->getMessage()));
+        }
+    }
+
+    public function txResult($jsonResp)
+    {
+        $resp = $jsonResp;
+        $errorMessage = null;
+        if (property_exists($jsonResp, 'code') && property_exists($jsonResp, 'raw_log')) {
+            if ($jsonResp->raw_log) {
+                $rawLogAsString = json_encode($jsonResp->raw_log);
+                if (substr($rawLogAsString, 0) === '{' && $jsonResp->raw_log->message) {
+                    $errorMessage = $jsonResp->raw_log->message;
+                } else {
+                    $errorMessage = $rawLogAsString;
+                }
+            }
+        }
+
+        if (property_exists($jsonResp, 'code') && !empty($jsonResp->code)) {
+            $error = [
+                'errorCode' => $resp->code,
+                'errorMessage' => $errorMessage
+            ];
+        } else {
+            $error = null;
+        }
+
+        $resp = [
+            'hash' => $resp->txhash,
+            'height' => $resp->height,
+            'success' => !$resp->code,
+            'pending' => $resp->pending,
+            'error' => $error,
+        ];
+
+        if (boolval($this->wallet->currentNonce)) {
+            WalletHelpers::updateNonce($this->wallet, $jsonResp->code ? null : (int)$this->wallet->currentNonce + 1);
+        }
+
+
+        return $resp;
+
+    }
 
 	/**
 	 *  get error body
@@ -385,10 +458,4 @@ class ApiRequester
 			]
 		];
 	}
-
-	public function sendTxToBroadcast($broadcastPayload) {
-		$response = $this->post('http://185.242.122.118/rest/cosmos/tx/v1beta1/txs',$broadcastPayload);
-		return $response;
-	}
-	
 }

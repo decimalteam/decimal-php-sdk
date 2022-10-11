@@ -20,12 +20,16 @@ class Wallet
      */
     //"m/44'/60'/0'/0/0"
     //how it was "m/44'/60'/0'/0"
-    public function __construct($mnemonics = null, $path_key = "m/44'/60'/0'/0")
-    {
+    public function __construct(
+        $mnemonics = null,
+        $path_key = "m/44'/60'/0'/0",
+        $currentNonce = null
+    ){
         if (!$mnemonics) $mnemonics = WalletHelpers::createNewMnemonics();
         $this->mnemonics = $mnemonics;
         $this->arguments = WalletHelpers::generateNewAddress('dx', $mnemonics, $path_key);
         $this->validatorAddress = WalletHelpers::generateNewAddress('dxvaloper', $mnemonics, $path_key);
+        $this->currentNonce = $currentNonce;
     }
 
     public function getAddress()

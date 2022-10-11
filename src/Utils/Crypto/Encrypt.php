@@ -176,4 +176,13 @@ class Encrypt
 
         return $pad . $num;
     }
+
+	/**
+	 * @param $sBech
+	 * @return mixed
+	 */
+	public static function decodeBech32($sBech)
+	{
+		return decode($sBech);
+	}
 }

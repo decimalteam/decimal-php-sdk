@@ -27,6 +27,8 @@ class Transaction
 {
     use TransactionHelpers;
 
+    const DXVALOPER = 'dxvaloper';
+
     //constants for fee
     const COIN_REDEEM_CHECK = 30;
     const COIN_ISSUE_CHECK = 0;
@@ -52,6 +54,9 @@ class Transaction
     const UNIT = 0.001;
     const PUB_KEY_TYPE = 'tendermint/PubKeySecp256k1';
     const DEFAULT_GAS_LIMIT = '9000000000000000000';
+    const DEFAULT_ORDER_FIELD = 'createdAt';
+    const DEFAULT_ORDER_DIRECTION = 'DESC';
+    const DEFAULT_ORDER = 'order[' . self::DEFAULT_ORDER_FIELD . ']=' . self::DEFAULT_ORDER_DIRECTION;
 
     private $account;
     private $wallet;
@@ -238,6 +243,7 @@ class Transaction
             'type' => 'nft/msg_mint',
             'scheme' => [
                 'fieldTypes' => [
+                    'id' => 'string',
                     'denom' => 'string',
                     'token_uri' => 'string',
                     'quantity' => 'integer',
@@ -245,6 +251,7 @@ class Transaction
                     'reserve' => 'number'
                 ],
                 'requiredFields' => [
+                    'id',
                     'denom',
                     'token_uri',
                     'quantity',
@@ -326,10 +333,12 @@ class Transaction
 
     public function __construct(Wallet $wallet, $options = [])
     {
-        if (!$wallet) throw new DecimalException('Wrong wallet');
+        if (!$wallet) {
+            throw new DecimalException('Wrong wallet');
+        }
 
         $this->wallet = $wallet;
-        $this->requester = new ApiRequester($options);
+        $this->requester = new ApiRequester($wallet, $options);
         $this->signMeta = $this->requester->getSignMeta($this->wallet);
         $this->protoManager = ProtoManager::instance();
 
@@ -574,7 +583,7 @@ class Transaction
         $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE_EDIT', $payload);
         $payload['fee'] = $this->txSchemes['VALIDATOR_CANDIDATE_EDIT']['fee'];
         $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -590,7 +599,6 @@ class Transaction
         $prePayload = $this->formatePrepayload($type);
         $payload['fee'] = $this->txSchemes['VALIDATOR_SET_OFFLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
-        //dd($preparedTx);
         return $this->requester->sendTx($preparedTx);
     }
 
@@ -602,7 +610,6 @@ class Transaction
     public function enableValidator()
     {
         $type = $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
-
         $prePayload = $this->formatePrepayload($type);
         $payload['fee'] = $this->txSchemes['VALIDATOR_SET_ONLINE']['fee'];
         $preparedTx = $this->prepareTransaction($type, $prePayload);
@@ -791,9 +798,92 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function getNftStakesByAddress($addressNft)
+    public function getNft($addressNft)
     {
-        return $this->requester->getNftStakesByAddress($addressNft);
+        $timestamp = time();
+        $signature = $this->signWithElliptic([
+            'nftId' => $addressNft,
+            'timestamp' => $timestamp
+        ]);
+        return $this->requester->getNftById($addressNft, $timestamp, $signature);
+    }
+
+    /**
+     * @param $address
+     * @param int $limit
+     * @param int $offset
+     * @param null $query
+     * @return null
+     */
+    public function getNfts($address, $limit = 10, $offset = 0, $query = null)
+    {
+        if ($address == $this->wallet->getAddress()) {
+            $timestamp = time();
+            $signature = $this->signWithElliptic(['timestamp' => $timestamp]);
+            return $this->requester->getNfts($address, $timestamp, $signature, $limit, $offset, $query);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param $address
+     * @param int $txLimit
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    public function getAddress($address, $txLimit = 0)
+    {
+        $params = $this->checkWalletAddressNft($address);
+        return $this->requester->getAddress($address, $txLimit, $params);
+    }
+
+    /**
+     * @param $address
+     * @param int $limit
+     * @param int $offset
+     * @param string $order
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    public function getNftsTxes($address, $limit = 10, $offset = 0, $order = self::DEFAULT_ORDER)
+    {
+        $params = $this->checkWalletAddressNft($address);
+        return $this->requester->getNftsTxes($address, $limit, $offset, $order, $params);
+    }
+
+    /**
+     * @param $addressNft
+     * @param int $limit
+     * @param int $offset
+     * @param string $order
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    public function getNftTxes($addressNft, $limit = 10, $offset = 0, $order = self::DEFAULT_ORDER)
+    {
+        $timestamp = time();
+        $signature = $this->signWithElliptic([
+            'nftId' => $addressNft,
+            'timestamp' => $timestamp
+        ]);
+
+        return $this->requester->getNftTxes($addressNft, $timestamp, $signature, $limit, $offset, $order);
+    }
+
+    /**
+     * @param $address
+     * @return mixed
+     * @throws DecimalException
+     */
+
+    public function getNftStakesByAddress($address)
+    {
+        $params = $this->checkWalletAddressNft($address);
+        return $this->requester->getNftStakesByAddress($address, $params);
     }
 
     /**
@@ -828,8 +918,9 @@ class Transaction
 
         $scheme = $this->txSchemes[$name]['scheme'];
         $errors = $this->fieldsValidation($scheme, $payload);
-        if (count($scheme['requiredFields']))
+        if (count($scheme['requiredFields'])) {
             $errors = array_merge(array_fill_keys($scheme['requiredFields'], 'field is required'), $errors);
+        }
         if (count($errors)) {
             throw new DecimalException("payload validation fails " . json_encode($errors, JSON_UNESCAPED_SLASHES));
         }
@@ -858,25 +949,56 @@ class Transaction
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
-    function gen_uuid() {
-        return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+    /**
+     * @param $object
+     * @return mixed
+     */
+
+    private function signWithElliptic($object)
+    {
+        $privateKey = $this->wallet->getPrivateKey();
+        $hash = Keccak::hash(json_encode($object), '256');
+        $ec = new EC('secp256k1');
+        $signature = $ec->sign($hash, $privateKey, 'hex', ['canonical' => true]);
+        return $signature;
+    }
+
+    /**
+     * @param $address
+     * @return array
+     */
+
+    private function checkWalletAddressNft($address)
+    {
+        if ($address == $this->wallet->getAddress()) {
+            $params['timestamp'] = time();
+            $params['signature'] = $this->signWithElliptic(['timestamp' => $params['timestamp']]);
+            return $params;
+        } else {
+            return [];
+        }
+    }
+
+    function gen_uuid()
+    {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"
-            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
 
             // 16 bits for "time_mid"
-            mt_rand( 0, 0xffff ),
+            mt_rand(0, 0xffff),
 
             // 16 bits for "time_hi_and_version",
             // four most significant bits holds version number 4
-            mt_rand( 0, 0x0fff ) | 0x4000,
+            mt_rand(0, 0x0fff) | 0x4000,
 
             // 16 bits, 8 bits for "clk_seq_hi_res",
             // 8 bits for "clk_seq_low",
             // two most significant bits holds zero and one for variant DCE1.1
-            mt_rand( 0, 0x3fff ) | 0x8000,
+            mt_rand(0, 0x3fff) | 0x8000,
 
             // 48 bits for "node"
-            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
         );
     }
 }
