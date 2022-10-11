@@ -28,12 +28,6 @@ class Transaction
     use TransactionHelpers;
 
     //constants for fee
-    const COIN_SEND = 10;
-    const COIN_BUY = 100;
-    const COIN_CREATE = 100;
-    const COIN_SELL = 100;
-    const COIN_MULTISEND = 8;
-    const COIN_SELL_ALL = 100;
     const COIN_REDEEM_CHECK = 30;
     const COIN_ISSUE_CHECK = 0;
     const VALIDATOR_CANDIDATE = 10000;
@@ -49,14 +43,9 @@ class Transaction
     const PROPOSAL_VOTE = 0;
     const SWAP_INIT = 0;
     const SWAP_REDEEM = 0;
-    const COIN_UPDATE = 0;
-    const NFT_MINT = 0;
-    const NFT_BURN = 0;
-    const NFT_EDIT_METADATA = 0;
     const NFT_TRANSFER = 0;
     const NFT_DELEGATE = 0;
     const NFT_UNBOND = 0;
-    const SIMULATE_FEE = 0;
 
     const MAX_SPEND_LIMIT = '100000000000';
     const ADDITIONAL_COMISSION = 20;
@@ -72,124 +61,6 @@ class Transaction
 
 
     protected $txSchemes = [
-        'COIN_CREATE' => [
-            'fee' => self::COIN_CREATE,
-            'type' => 'coin/create_coin',
-            'scheme' => [
-                'fieldTypes' => [
-                    'title' => 'string',
-                    'ticker' => 'string',
-                    'initSupply' => 'number',
-                    'maxSupply' => 'number',
-                    'reserve' => 'number',
-                    'crr' => 'number'
-                ],
-                'requiredFields' => [
-                    'title',
-                    'ticker',
-                    'initSupply',
-                    'maxSupply',
-                    'reserve',
-                    'crr',
-                ],
-            ],
-        ],
-        'COIN_UPDATE' => [
-            'fee' => self::COIN_UPDATE,
-            'type' => 'coin/update_coin',
-            'scheme' => [
-                'fieldTypes' => [
-                    'ticker' => 'string',
-                    'maxSupply' => 'number',
-                    'identity' => 'string'
-                ],
-                'requiredFields' => [
-                    'ticker',
-                    'maxSupply',
-                    'identity'
-                ]
-            ]
-        ],
-        'COIN_SELL' => [
-            'fee' => self::COIN_SELL,
-            'type' => 'coin/sell_coin',
-            'scheme' => [
-                'fieldTypes' => [
-                    'getCoin' => 'string',
-                    'amount' => 'number',
-                    'sellCoin' => 'string',
-                    'minBuyLimit' => 'number',
-                ],
-                'requiredFields' => [
-                    'getCoin',
-                    'amount',
-                    'sellCoin'
-                ],
-            ],
-        ],
-        'COIN_SEND' => [
-            'fee' => self::COIN_SEND,
-            'type' => 'coin/send_coin',
-            'scheme' => [
-                'fieldTypes' => [
-                    'to' => 'string',
-                    'amount' => 'number',
-                    'coin' => 'string',
-                ],
-                'requiredFields' => [
-                    'to',
-                    'amount',
-                    'coin'
-                ],
-            ],
-        ],
-        'SIMULATE_FEE' => [
-            'type' => 'simulate_fee',
-            'scheme' => [
-                'fieldTypes' => [
-                    'to' => 'string',
-                    'amount' => 'number',
-                    'coin' => 'string',
-                ],
-                'requiredFields' => [
-                    'to',
-                    'amount',
-                    'coin'
-                ],
-            ],
-        ],
-        //todo check schema multisend
-        'COIN_MULTISEND' => [
-            'fee' => self::COIN_MULTISEND,
-            'type' => 'coin/multi_send_coin',
-            'scheme' => [
-                'fieldTypes' => [
-                    'sends' => 'array'
-                ],
-                'requiredFields' => [
-                    'sends',
-                    //todo check it too
-                    //'to',
-                    //'amount',
-                    //'coin'
-                ],
-            ],
-        ],
-        'COIN_SELL_ALL' => [
-            'fee' => self::COIN_SELL_ALL,
-            'type' => 'coin/sell_all_coin',
-            'scheme' => [
-                'fieldTypes' => [
-                    'sellCoin' => 'string',
-                    'getCoin' => 'string',
-                    'minBuyLimit' => 'number',
-                ],
-                'requiredFields' => [
-                    'sellCoin',
-                    'getCoin',
-                ],
-            ],
-        ],
         'COIN_REDEEM_CHECK' => [
             'fee' => self::COIN_REDEEM_CHECK,
             'type' => 'coin/redeem_check',
@@ -382,93 +253,6 @@ class Transaction
                 ],
             ],
         ],
-        'NFT_BURN' => [
-            'fee' => self::NFT_BURN,
-            'type' => 'nft/msg_burn',
-            'scheme' => [
-                'fieldTypes' => [
-                    'denom' => 'string',
-                    'id' => 'string',
-                    'sub_token_ids' => 'array',
-
-                ],
-                'requiredFields' => [
-                    'denom',
-                    'id',
-                    'sub_token_ids'
-                ],
-            ],
-        ],
-        'NFT_EDIT_METADATA' => [
-            'fee' => self::NFT_EDIT_METADATA,
-            'type' => 'nft/msg_edit_metadata',
-            'scheme' => [
-                'fieldTypes' => [
-                    'id' => 'string',
-                    'token_uri' => 'string',
-                    'denom' => 'string',
-                ],
-                'requiredFields' => [
-                    'id',
-                    'token_uri',
-                    'denom'
-                ],
-            ],
-        ],
-        'NFT_TRANSFER' => [
-            'fee' => self::NFT_TRANSFER,
-            'type' => 'nft/msg_transfer',
-            'scheme' => [
-                'fieldTypes' => [
-                    'id' => 'string',
-                    'recipient' => 'string',
-                    'sub_token_ids' => 'array',
-                    'denom' => 'string'
-                ],
-                'requiredFields' => [
-                    'id',
-                    'recipient',
-                    'sub_token_ids',
-                    'denom'
-                ],
-            ],
-        ],
-        'NFT_DELEGATE' => [
-            'fee' => self::NFT_DELEGATE,
-            'type' => 'validator/delegate_nft',
-            'scheme' => [
-                'fieldTypes' => [
-                    'id' => 'string',
-                    'validator_address' => 'string',
-                    'sub_token_ids' => 'array',
-                    'denom' => 'string'
-                ],
-                'requiredFields' => [
-                    'id',
-                    'validator_address',
-                    'sub_token_ids',
-                    'denom'
-                ],
-            ],
-        ],
-        'NFT_UNBOND' => [
-            'fee' => self::NFT_UNBOND,
-            'type' => 'validator/unbond_nft',
-            'scheme' => [
-                'fieldTypes' => [
-                    'id' => 'string',
-                    'validator_address' => 'string',
-                    'sub_token_ids' => 'array',
-                    'denom' => 'string'
-                ],
-                'requiredFields' => [
-                    'id',
-                    'validator_address',
-                    'sub_token_ids',
-                    'denom'
-                ],
-            ],
-        ],
         'PROPOSAL_VOTE' => [
             'fee' => self::PROPOSAL_VOTE,
             'type' => 'cosmos-sdk/MsgVote',
@@ -562,9 +346,9 @@ class Transaction
     public function sellCoin($sellCoin,$getCoin, $amount,$minBuyLimit) {
         $msg = $this->protoManager->getMsgSellCoin(
             $this->wallet->getAddress(),
-            strtolower($sellCoin),
+            strtolower(trim($sellCoin)),
             amountUNIRecalculate($amount),
-            strtolower($getCoin),
+            strtolower(trim($getCoin)),
             amountUNIRecalculate($minBuyLimit)
         );
 
@@ -575,9 +359,9 @@ class Transaction
     public function buyCoin($denomBuy,$denomSell, $amountBuy,$amountSell){
         $msg = $this->protoManager->getMsgBuyCoin(
             $this->wallet->getAddress(),
-                strtolower($denomBuy),
+                strtolower(trim($denomBuy)),
                 amountUNIRecalculate($amountBuy),
-                strtolower($denomSell),
+                strtolower(trim($denomSell)),
                 amountUNIRecalculate($amountSell)
             );
 
@@ -588,8 +372,8 @@ class Transaction
     public function sellAllCoin($denomSell,$denomBuy,$amountBuy){
         $msg = $this->protoManager->getMsgSellAllCoin(
             $this->wallet->getAddress(),
-                strtolower($denomSell),
-                strtolower($denomBuy),
+                strtolower(trim($denomSell)),
+                strtolower(trim($denomBuy)),
                 amountUNIRecalculate($amountBuy)
             );
 
@@ -598,42 +382,51 @@ class Transaction
     }
 
 
-    //TODO sends formatter
     public function multiSendCoins($payload) {
-        $msg = $this->protoManager->getMsgMultiSendCoins($this->wallet->getAddress(),$payload['sends']);
+        $sendsPrepare = [];
+
+        foreach($payload['sends'] as $send) {
+            $sendsPrepare[] = [
+                'amount' => amountUNIRecalculate($send['amount']),
+                'denom' => strtolower(trim($send['coin'])),
+                'to' => $send['to']
+            ]; 
+        }
+
+        $msg = $this->protoManager->getMsgMultiSendCoins($this->wallet->getAddress(),$sendsPrepare);
 
         $result = $this->sendTransaction($msg,[]);
         return $result;
     }
 
-    public function mintNft($recipient, $denom,$tokenUrl,$quantity,$reserve,$allowMint) {
-        $id = str_replace("-", "", $this->gen_uuid());
+    public function mintNft($id,$recipient = null,$denom,$tokenUrl,$quantity,$reserve,$allowMint) {
         $msg = $this->protoManager->getMsgMintNft(
             $this->wallet->getAddress(),
             $recipient,
-            strtolower($denom),
+            strtolower(trim($denom)),
             $id,
             $tokenUrl,
             amountUNIRecalculate($allowMint),
-            amountUNIRecalculate($reserve),
+            $reserve,
             amountUNIRecalculate($quantity)
         );
 
         $tokenUrlArray = explode('/',$tokenUrl);
         $slug = end($tokenUrlArray);
 
-        $activeNft = $this->requester->post("nfts/service/$slug/activate",['tokenId' => $id]);
-        var_dump($activeNft);
+        $activeNft = $this->requester->post("https://devnet-dec2.console.decimalchain.com/api/nfts/service/$slug/activate",['tokenId' => $id]);
 
         if (!$activeNft['success']) {
             throw new DecimalException(json_decode($activeNft['error']['errorMessage']));
         }
-    
+
         $result = $this->sendTransaction($msg, []);
         return $result;
     }
 
     private function sendTransaction($msg, $options, $simulate = false) {
+
+        $this->signMeta = $this->requester->getSignMeta($this->wallet);
 
         $sequence = $this->wallet->getSequence();
         $memo = isset($options['message']) ? $options['message'] : '';
@@ -642,7 +435,6 @@ class Transaction
         $feeCoin = $this->protoManager->getCoin('del', '0');
         $fee = $this->protoManager->getFee('180000', $feeCoin);
         $signObj = $this->singTransaction($txBody, $fee);
-
 
         $txRaw = $this->protoManager->getTxRaw(
             $txBody->serializeToString(),
@@ -661,11 +453,12 @@ class Transaction
 
         $predictedFee = $this->requester->post('rpc/simulate_fee', $payload);
 
-        if (!$predictedFee['success']) {
+        if (!is_int($predictedFee)) {
             throw new DecimalException($predictedFee['error']['errorMessage']);
         }
-    
-        var_dump($predictedFee);
+        
+        $this->wallet->setSequence($sequence++);
+
         $fee = $this->protoManager->getFee("180000", $this->protoManager->getCoin('del', $predictedFee));
 
         $signObj = $this->singTransaction($txBody, $fee);
@@ -686,7 +479,6 @@ class Transaction
             $this->wallet->setSequence($sequence++);
         }
 
-        var_dump($response);
         return $response;
     }
 
@@ -732,19 +524,9 @@ class Transaction
         return $result;
     }
 
-    /**
-     * @param $payload
-     * @return array
-     * @throws DecimalException
-     */
-    public function sellAllCoinsData($payload)
-    {
-        $type = $this->txSchemes['COIN_SELL_ALL']['type'];
-        $this->checkRequiredFields('COIN_SELL_ALL', $payload);
-        $payload['fee'] = $this->txSchemes['COIN_SELL_ALL']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
+    public function getTransaction($hash) {
+        $response = $this->requester->getTransaction($hash);
+        return $response;
     }
 
     /**
@@ -849,22 +631,6 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function updateCoin($payload)
-    {
-        $type = $this->txSchemes['COIN_UPDATE']['type'];
-        $result = $this->checkRequiredFields('COIN_UPDATE', $payload);
-        $payload['fee'] = $this->txSchemes['COIN_UPDATE']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
-    }
-
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
     public function multisigCreate($payload)
     {
         $type = $this->txSchemes['MULTISIG_CREATE_WALLET']['type'];
@@ -906,78 +672,6 @@ class Transaction
         $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
         return $this->requester->sendTx($preparedTx);
     }
-
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
-    public function createNftMint($payload)
-    {
-        $type = $this->txSchemes['NFT_MINT']['type'];
-        $result = $this->checkRequiredFields('NFT_MINT', $payload);
-        $payload['fee'] = $this->txSchemes['NFT_MINT']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, ['allow_mint' => $payload['allow_mint']]);
-
-        return $this->requester->sendTx($preparedTx);
-    }
-
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
-    public function burnNft($tokenId, $subTokenIds) {
-        $msg = $this->protoManager->getMsgBurnNft($this->wallet->getAddress(),$tokenId,$subTokenIds);
-
-        $result = $this->sendTransaction($msg,[]);
-        return $result;
-    }
-
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
-    public function transferNft($recipient,$tokenId,$subTokenIds)
-    {
-        $msg = $this->protoManager->getMsgTransferNft($this->wallet->getAddress(),$recipient,$tokenId,$subTokenIds);
-
-        $result = $this->sendTransaction($msg,[]);
-        return $result;
-    }
-
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
-    public function editNftMetadata($tokenId, $tokenUri)
-    {
-        $msg = $this->protoManager->getMsgEditNftMetadata($this->wallet->getAddress(),$tokenId, $tokenUri);
-
-        $result = $this->sendTransaction($msg,[]);
-        return $result;
-    }
-
-    public function updateNtfReserve($tokenId,$subTokenIds, $reserve, $denom) {
-        $msg = $this->protoManager->getMsgUpdateReserve(
-            $this->wallet->getAddress(),
-            $tokenId,
-            $subTokenIds,
-            amountUNIRecalculate($reserve),
-            strtolower($denom)
-        );
-
-        $result = $this->sendTransaction($msg,[]);
-        return $result;
-    }
-
     /**
      * @param $payload
      * @return array|mixed
@@ -1088,7 +782,6 @@ class Transaction
 
     public function getNftList($limit, $offset, $query = null) {
         $response = $this->requester->getNftList($this->wallet->getAddress(), $limit, $offset, $query);
-        var_dump($response);
         return $response;
     }
 

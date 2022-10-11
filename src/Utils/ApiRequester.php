@@ -175,6 +175,26 @@ class ApiRequester
 		return $res;
 	}
 
+	public function getTransaction($hash) {
+		if (!$hash) {
+			throw new DecimalException('hash is required');
+		}
+
+		$url = "https://devnet-dec2-explorer-api.decimalchain.com/api/tx/$hash";
+
+		$response = $this->_request($url, self::GET, false);
+		return $response;
+	}
+
+
+	public function getEstimateTxFee($type, $data,$options=null){
+		var_dump("Estimate TX Fee");
+		var_dump("Type:", $type);
+		var_dump("Data: ", $data);
+		
+		return 0.453;
+	}
+
 	public function getNftMetadata($addressNft)
 	{
 		if (!$addressNft) {

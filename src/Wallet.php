@@ -3,6 +3,7 @@
 namespace DecimalSDK;
 
 use DecimalSDK\Errors\DecimalException;
+use DecimalSDK\Utils\Crypto\Encrypt;
 use DecimalSDK\Utils\WalletHelpers;
 
 class Wallet
@@ -71,5 +72,10 @@ class Wallet
 
     public function setSequence($sequence) {
         $this->sequence = $sequence;
+    }
+
+    public function verifyAddress($prefix = "dx"){
+        $decoded = Encrypt::decodedBech32($this->getAddress());
+        return $decoded[0] === $prefix;
     }
 }

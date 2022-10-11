@@ -16,9 +16,9 @@ interface TxTypes {
     const MULTISIG_SIGN_TX = "/decimal.multisig.v1.MsgSignTransaction";
     const SWAP_INIT = "/decimal.swap.v1.MsgSwapInitialize";
     const SWAP_REDEEM = "/decimal.swap.v1.MsgSwapRedeem";
-    const NFT_MINT = "/decimal.nft.v1.MsgMintNFT";
-    const NFT_BURN = "/decimal.nft.v1.MsgBurnNFT";
-    const NFT_EDIT_METADATA = "/decimal.nft.v1.MsgEditNFTMetadata";
-    const NFT_TRANSFER = "/decimal.nft.v1.MsgTransferNFT";
-    const NFT_UPDATE_RESERVE = "/decimal.nft.v1.MsgUpdateReserveNFT";
+    const NFT_MINT = "/decimal.nft.v1.MsgMintToken";
+    const NFT_BURN = "/decimal.nft.v1.MsgBurnToken";
+    const NFT_EDIT_METADATA = "/decimal.nft.v1.MsgUpdateToken";
+    const NFT_TRANSFER = "/decimal.nft.v1.MsgSendToken";
+    const NFT_UPDATE_RESERVE = "/decimal.nft.v1.MsgUpdateReserve";
 }

@@ -10,6 +10,7 @@ use BitWasp\Bitcoin\Mnemonic\MnemonicFactory;
 use DecimalSDK\Utils\Crypto\Bip44\BIP44;
 use function BitWasp\Bech32\convertBits;
 use function BitWasp\Bech32\encode;
+use function BitWasp\Bech32\decode;
 use kornrunner\Keccak;
 use kornrunner\Secp256k1;
 use kornrunner\Serializer\HexSignatureSerializer;
@@ -102,7 +103,11 @@ class Encrypt
     {
         return encode($hrp, $bitsArray);
     }
-
+    
+    public static function decodedBech32($bech32) {
+        return decode($bech32); 
+    }
+    
     public static function signTransaction($txPayload, $privateKey = null)
     {
         $tx = json_encode(sortPayload($txPayload));

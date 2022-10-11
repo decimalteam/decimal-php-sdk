@@ -69,7 +69,7 @@ class ProtoManager
             $sendEntity = new MultiSendEntry();
 
             $sendEntity->setRecipient($send['to']);
-            $sendEntity->setCoin($this->getCoin($send['coin'], $send['amount']));
+            $sendEntity->setCoin($this->getCoin($send['denom'], $send['amount']));
             $sendsPrepared[] = $sendEntity;
         }
 
@@ -83,15 +83,15 @@ class ProtoManager
 
     }
 
-    public function getMsgMintNft($sender,$recipient, $denom,$tokenId, $tokenUri,$allowMint,$reserve,$quantity) {
+    public function getMsgMintNft($sender, $recipient, $denom,$tokenId, $tokenUri,$allowMint,$reserve,$quantity) {
         $msg = new MsgMintToken();
         $msg->setSender($sender);
-        $msg->setRecipient($recipient);
         $msg->setDenom($denom);
+        $msg->setRecipient($recipient);
         $msg->setTokenId($tokenId);
         $msg->setTokenUri($tokenUri);
         $msg->setAllowMint($allowMint);
-        $msg->setReserve($this->getCoin($reserve['denom'], $reserve['amount']));
+        $msg->setReserve($this->getCoin(strtolower(trim($reserve['denom'])), amountUNIRecalculate($reserve['amount'])));
         $msg->setQuantity($quantity);
 
         return $this->getAny([
@@ -189,10 +189,10 @@ class ProtoManager
         $msg->setMinCoinToBuy($this->getCoin($denomBuy, $amountBuy));
         var_dump($msg->serializeToString());
 
-        return [
+        return $this->getAny([
             'type_url' => TxTypes::COIN_SELL_ALL,
             'value' => $msg->serializeToString(),
-        ];
+        ]);
     }
 
     public function getAny($data): Any
