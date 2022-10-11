@@ -104,8 +104,8 @@ Test::runTest($wallet, [
 
 ```php
 $txPayload = [
-    'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', //receiver address
-    'coin' => 'tDEL', //coin
+    'to' => 'dx14x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj', //receiver address
+    'coin' => 'del', //coin
     'amount' => '100', // 100 tDEL
     'memo' => 'message' // optional
 ];
@@ -138,8 +138,8 @@ $result = $transaction->burnCoins($txPayload);
 
 ```php
 $txPayload = [
-    'sellCoin' => 'DEL',
-    'getCoin' => 'ETH',
+    'sellCoin' => 'del',
+    'getCoin' => 'a1111111',
     'amount' => '10',
     'minBuyLimit' => '2', //Optionally
 ];
@@ -151,25 +151,25 @@ $result = $transaction->sellCoin($txPayload);
 
 ```php
 $txPayload = [
-    'buyCoin' => 'BTC',
-    'spendCoin' => 'DEL',
+    'buyCoin' => 'del',
+    'spendCoin' => 'A1111111',
     'amount' => '10',
     'maxSpendLimit' => '20', //Optionally
 ];
 
-$result = $transaction->getCoin($txPayload);
+$result = $transaction->buyCoin($txPayload);
 ```
 
 ## Sell all coins
 
 ```php
 $txPayload = [
-    'sellCoin' => 'BTC',
-    'getCoin' => 'DEL',
+    'sellCoin' => 'A1111111',
+    'getCoin' => 'del',
     'maxSpendLimit' => '2', //Optionally
 ];
 
-$result = $transaction->sellAllCoinsData($txPayload);
+$result = $transaction->sellAllCoin($txPayload);
 ```
 
 ## Validator delegate
@@ -324,7 +324,7 @@ $txPayload = [
         'memo' => 'message' // optional
 ];
 
-$result = $transaction->multisendCoins($txPayload);
+$result = $transaction->multiSendCoins($txPayload);
 
 ```
 
@@ -419,7 +419,7 @@ $txPayload = [
     'denom'=> 'phone',
     'token_uri'=> 'https://devnet-nft.decimalchain.com/api/nfts/CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ',
     'quantity'=> '1',
-    'reserve'=> '1',
+    'reserve'=> ['denom' => 'del', 'amount'=>1],
     'allow_mint'=> true
      ];
 $result = $transaction->createNftMint($txPayload);
@@ -440,7 +440,6 @@ $result = $transaction->burnNft($txPayload);
 
 ```php
 $txPayload = [
-    'denom'=> 'phone',
     'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
     'token_uri'=> 'http://devnet.nft.decimalchain.com/api/nfts/CvavSYvudYqiGeOY67dzLmdl6NjqTdEb'
      ];
@@ -451,7 +450,6 @@ $result = $transaction->editNftMetadata($txPayload);
 
 ```php
 $txPayload = [
-    'denom'=> 'phone',
     'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
     'sub_token_ids'=> [1,2],
     'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
