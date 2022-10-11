@@ -4,24 +4,14 @@
 namespace DecimalSDK;
 
 use BitcoinPHP\BitcoinECDSA\BitcoinECDSA;
-use Cosmos\Tx\Signing\V1beta1\SignMode;
-use Decimal\Validator\V1\MsgDelegate;
 use \DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Utils\ProtoManager;
 use DecimalSDK\Utils\ApiRequester;
 use DecimalSDK\Utils\Crypto\Encrypt;
 use DecimalSDK\Utils\TransactionHelpers;
-use DecimalSDK\Utils\TxTypes;
 use DecimalSDK\Wallet;
-use kornrunner\Serializer\HexPrivateKeySerializer;
-use Mdanter\Ecc\Curves\CurveFactory;
-use Mdanter\Ecc\Curves\SecgCurve;
-use Mdanter\Ecc\Math\GmpMath;
-use Mdanter\Ecc\Serializer\Point\CompressedPointSerializer;
-use Mdanter\Ecc\Serializer\PublicKey\DerPublicKeySerializer;
-use Mdanter\Ecc\Serializer\PublicKey\PemPublicKeySerializer;
+use Elliptic\EC;
 use kornrunner\Keccak;
-use kornrunner\Secp256k1;
 
 class Transaction
 {
@@ -235,28 +225,6 @@ class Transaction
                 ],
                 'requiredFields' => [
                     'txId',
-                ],
-            ],
-        ],
-        'NFT_MINT' => [
-            'fee' => self::NFT_MINT,
-            'type' => 'nft/msg_mint',
-            'scheme' => [
-                'fieldTypes' => [
-                    'id' => 'string',
-                    'denom' => 'string',
-                    'token_uri' => 'string',
-                    'quantity' => 'integer',
-                    'allow_mint' => 'boolean',
-                    'reserve' => 'number'
-                ],
-                'requiredFields' => [
-                    'id',
-                    'denom',
-                    'token_uri',
-                    'quantity',
-                    'allow_mint',
-                    'reserve'
                 ],
             ],
         ],

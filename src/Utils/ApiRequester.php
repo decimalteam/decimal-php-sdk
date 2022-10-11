@@ -485,4 +485,10 @@ class ApiRequester
             return $this->getError(json_encode($exception->getMessage()));
         }
     }
+
+    public function sendTxToBroadcast($broadcastPayload) {
+		$response = $this->post('http://185.242.122.118/rest/cosmos/tx/v1beta1/txs',$broadcastPayload);
+		return $response;
+	}
+	
 }
