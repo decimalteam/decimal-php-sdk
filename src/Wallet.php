@@ -3,6 +3,7 @@
 namespace DecimalSDK;
 
 use DecimalSDK\Errors\DecimalException;
+use DecimalSDK\Utils\Crypto\Encrypt;
 use DecimalSDK\Utils\WalletHelpers;
 
 class Wallet
@@ -10,8 +11,7 @@ class Wallet
     private $arguments;
     private $validatorAddress;
     private $mnemonics;
-    public $currentNonce;
-
+    private $sequence;
     /**
      * Wallet constructor.
      * @param null $mnemonics
@@ -70,8 +70,16 @@ class Wallet
         return $this->mnemonics;
     }
 
-    public function updateNonce($nonce)
-    {
-        $this->currentNonce = $nonce;
+    public function getSequence() {
+        return $this->sequence;
+    }
+
+    public function setSequence($sequence) {
+        $this->sequence = $sequence;
+    }
+
+    public function verifyAddress($prefix = "dx"){
+        $decoded = Encrypt::decodedBech32($this->getAddress());
+        return $decoded[0] === $prefix;
     }
 }

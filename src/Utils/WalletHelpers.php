@@ -46,12 +46,14 @@ class WalletHelpers {
     {
         if (!$mnemonics) $mnemonics = Encrypt::createMnemonics();
 
-        $hexSeed = Encrypt::generateSeedFromMnemonics($mnemonics);
-        $extendedKeys = Encrypt::createExtendedKeysFromSeed($hexSeed, $path_key);
-        $derivedKeys = Encrypt::derivedKeysFromExtended($extendedKeys['privateExtended']);
-        $bech32Bits = Encrypt::derivedPublicToBech32Bits($derivedKeys['derivedPublicKey']);
-        $address = Encrypt::createAddressFromBech32Bits($hrp,$bech32Bits);
-        $validatorAddress = Encrypt::createAddressFromBech32Bits($hrp,$bech32Bits);
+		$hexSeed = Encrypt::generateSeedFromMnemonics($mnemonics);
+
+		$extendedKeys = Encrypt::createExtendedKeysFromSeed($hexSeed, $path_key);
+		$derivedKeys = Encrypt::derivedKeysFromExtended($extendedKeys['privateExtended']);
+		$bech32Bits = Encrypt::derivedPublicToBech32Bits($derivedKeys['derivedPublicKey']);
+
+		$address = Encrypt::createAddressFromBech32Bits($hrp, $bech32Bits);
+        $validatorAddress = Encrypt::createAddressFromBech32Bits($hrp, $bech32Bits);
 
         return [
             $hexSeed,

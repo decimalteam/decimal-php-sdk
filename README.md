@@ -103,25 +103,13 @@ Test::runTest($wallet, [
 ## Send coins
 
 ```php
-$txPayload = [
-    'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', //receiver address
-    'coin' => 'tDEL', //coin
-    'amount' => '100', // 100 tDEL
-    'memo' => 'message' // optional
-];
-$result = $transaction->sendCoins($txPayload);
+
+$recipient = 'dx14x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj';
+$denom = 'del';
+$amount = 3;
+
+$result = $transaction->sendCoins($recipient,$denom,$amount);
 // => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
-```
-
-## If you want to pay for transaction by custom coin, you need add feeCoin to $txPayload
-
-```php
-$txPayload = [
-    'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', //receiver address
-    'coin' => 'tDEL', //coinF
-    'amount' => '100', // 100 tDEL
-    'feeCoin' => 'customCoin'
-];
 ```
 
 ## Burn coins
@@ -137,39 +125,34 @@ $result = $transaction->burnCoins($txPayload);
 ## Sell coins
 
 ```php
-$txPayload = [
-    'sellCoin' => 'DEL',
-    'getCoin' => 'ETH',
-    'amount' => '10',
-    'minBuyLimit' => '2', //Optionally
-];
 
-$result = $transaction->sellCoin($txPayload);
+$denomSell = 'del';
+$denomBuy = 'a1111111';
+$amountSell = 10;
+$amountBuy = 2;
+
+$result = $transaction->sellCoin($denomSell, $denomBuy,$amountSell, $amountBuy);
 ```
 
 ## Buy Coins
 
 ```php
-$txPayload = [
-    'buyCoin' => 'BTC',
-    'spendCoin' => 'DEL',
-    'amount' => '10',
-    'maxSpendLimit' => '20', //Optionally
-];
+$denomSell = 'del';
+$denomBuy = 'a1111111';
+$amountBuy = 10;
+$amountSell = 10;
 
-$result = $transaction->getCoin($txPayload);
+$result = $transaction->buyCoin($denomSell,$denomBuy, $amountBuy,$amountSell);
 ```
 
 ## Sell all coins
 
 ```php
-$txPayload = [
-    'sellCoin' => 'BTC',
-    'getCoin' => 'DEL',
-    'maxSpendLimit' => '2', //Optionally
-];
+$denomSell = 'A1111111';
+$denomBuy = 'del';
+$minCoinToBuy = 2;
 
-$result = $transaction->sellAllCoinsData($txPayload);
+$result = $transaction->sellAllCoin($denomSell,$denomBuy,$minCoinToBuy);
 ```
 
 ## Validator delegate
@@ -308,7 +291,6 @@ $result = $transaction->multisigSignTX($txPayload);
 
 ```php
 $txPayload = [
-        'sender' => $wallet->getAddress(),
         'sends' => [
              [
                 'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
@@ -324,7 +306,7 @@ $txPayload = [
         'memo' => 'message' // optional
 ];
 
-$result = $transaction->multisendCoins($txPayload);
+$result = $transaction->multiSendCoins($txPayload);
 
 ```
 
@@ -413,50 +395,47 @@ $coverHash = hash_file('sha1', $path_to_file_cover , false);
 $id = $transaction->generateNftId($headline, $description, $slug, $coverHash, $assetHash);
 
 // denom - name of nft collection
-$txPayload = [
-    'id' => $id,
-    'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
-    'denom'=> 'phone',
-    'token_uri'=> 'https://devnet-nft.decimalchain.com/api/nfts/CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ',
-    'quantity'=> '1',
-    'reserve'=> '1',
-    'allow_mint'=> true
-     ];
-$result = $transaction->createNftMint($txPayload);
+$recipient ='dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v';
+$denom = 'test';
+$tokenUri = 'https://devnet-nft.decimalchain.com/api/nfts/ZOmGepIA6YWSkrTFaXXb5klr38Mv40Kv';
+$reserve = ['denom' => 'del', 'amount'=> 1];
+$quantity = '1';
+$allow_mint = true;
+
+$result = $transaction->createNftMint($id,
+        $recipient, // optional
+        $denom,
+        $tokenUri,
+        $quantity,
+        $reserve,
+        true);
 ```
 
 ## NFT burn
 
 ```php
-$txPayload = [
-    'denom'=> 'phone',
-    'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
-    'sub_token_ids'=> [1,2]
-     ];
-$result = $transaction->burnNft($txPayload);
+$result = $transaction->burnNft('f98a662205beea30b3c90a95723f320b902919c8', [1]);
 ```
 
 ## NFT edit metadata
 
 ```php
-$txPayload = [
-    'denom'=> 'phone',
-    'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
-    'token_uri'=> 'http://devnet.nft.decimalchain.com/api/nfts/CvavSYvudYqiGeOY67dzLmdl6NjqTdEb'
-     ];
-$result = $transaction->editNftMetadata($txPayload);
+
+$id = 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689';
+$tokenUri ='https://develop.nft.decimalchain.com/api/nfts/pepe1111';
+
+$result = $transaction->editNftMetadata($id,$tokenUri);
 ```
 
 ## NFT transfer
 
 ```php
-$txPayload = [
-    'denom'=> 'phone',
-    'id'=> 'd6ebb0c3-f075-43f2-ac60-ac0d02858154',
-    'sub_token_ids'=> [1,2],
-    'recipient'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
-     ];
-$result = $transaction->transferNft($txPayload);
+
+$recipient = 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v';
+$id ='c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689';
+$subTokenId = [1];
+
+$result = $transaction->transferNft($recipient, $id, $subTokenId);
 ```
 
 ## NFT delegate
@@ -468,6 +447,7 @@ $txPayload = [
     'sub_token_ids'=> [1,2],
     'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
+
 $result = $transaction->nftDelegate($txPayload);
 ```
 
@@ -480,19 +460,20 @@ $txPayload = [
     'sub_token_ids'=> [1,2],
     'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
+
 $result = $transaction->nftUnbond($txPayload);
 ```
 
 ## NFT reserve update
 
 ```php
-$txPayload = [
-    'id' => '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
-    'reserve' => '1',
-    'denom' => 'timPhone',
-    'sub_token_ids' => ['1']
-     ];
-$result = $transaction->nftUpdateReserve($txPayload);
+
+$id => '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
+$reserve => '1',
+$denom => 'timPhone',
+$sub_token_ids => ['1']
+
+$result = $transaction->nftUpdateReserve($id,$sub_token_ids, $reserve, $denom);
 ```
 
 ## get NFT metadata

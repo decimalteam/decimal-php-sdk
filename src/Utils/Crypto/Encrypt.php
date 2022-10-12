@@ -3,6 +3,7 @@
 
 namespace DecimalSDK\Utils\Crypto;
 
+use BitcoinPHP\BitcoinECDSA\BitcoinECDSA;
 use BitWasp\Bitcoin\Key\Factory\HierarchicalKeyFactory;
 use BitWasp\Bitcoin\Mnemonic\Bip39\Bip39SeedGenerator;
 use BitWasp\Bitcoin\Mnemonic\MnemonicFactory;
@@ -10,6 +11,7 @@ use DecimalSDK\Utils\Crypto\Bip44\BIP44;
 use function BitWasp\Bech32\convertBits;
 use function BitWasp\Bech32\encode;
 use function BitWasp\Bech32\decode;
+use kornrunner\Keccak;
 use kornrunner\Secp256k1;
 use kornrunner\Serializer\HexSignatureSerializer;
 
@@ -69,11 +71,13 @@ class Encrypt
     public static function derivedKeysFromExtended($key, $child = 0)
     {
         $bip32 = (new HierarchicalKeyFactory())->fromExtended($key);
-
         $keyPair = $bip32->deriveChild($child);
+        $bitcoinECDSA = new BitcoinECDSA();
+        $bitcoinECDSA->setPrivateKey($keyPair->getPrivateKey()->getHex());
         return [
             'derivedPrivateKey' => $keyPair->getPrivateKey()->getHex(),
-            'derivedPublicKey' => $keyPair->getPublicKey()->getHex(),
+            'derivedPublicKey' => $bitcoinECDSA->getUncompressedPubKey(),
+            'derivedPublicCompressedKey' => $bitcoinECDSA->getPubKey(),
         ];
     }
 
@@ -85,20 +89,25 @@ class Encrypt
 
     public static function derivedPublicToBech32Bits($key)
     {
-        $uint = self::hexToUint8Array(self::hexToRipmed160($key));
+        $hash = Keccak::hash(hex2bin(substr($key, 2)), 256);
+        $uint = self::hexToUint8Array(substr($hash, 24));
         return convertBits($uint, count($uint), 8, 5);
     }
 
     public static function hexToRipmed160(string $str)
     {
-        return hash('ripemd160', hash('sha256', hex2bin($str), true));
+        return Keccak::hash(hex2bin($str), 256);
     }
 
     public static function createAddressFromBech32Bits($hrp, $bitsArray)
     {
         return encode($hrp, $bitsArray);
     }
-
+    
+    public static function decodedBech32($bech32) {
+        return decode($bech32); 
+    }
+    
     public static function signTransaction($txPayload, $privateKey = null)
     {
         $tx = json_encode(sortPayload($txPayload));
@@ -118,7 +127,7 @@ class Encrypt
 
     public static function sepc256k1Sign($tx, $key)
     {
-        $msg322 = hash('sha256', $tx, false);
+        $msg322 = Keccak::hash($tx->serializeToString(), 256);
 
         $secp256k1 = new Secp256k1();
         $signature = $secp256k1->sign($msg322, $key);
@@ -126,7 +135,7 @@ class Encrypt
         $serializer = new HexSignatureSerializer();
         $signatureString = $serializer->serialize($signature);
 
-        return base64_encode(hex2bin($signatureString));
+        return hex2bin($signatureString);
     }
 
     public static function decodeHex(string $hex)

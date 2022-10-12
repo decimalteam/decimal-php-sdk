@@ -103,61 +103,51 @@ class ApiRequester
         $this->client = new GClient($params);
     }
 
-    public function getRpcPrefix()
-    {
-        return $this->options['useGate'] ? 'rpc/' : '';
-    }
+	protected function getRpcPrefix()
+	{
+		return $this->options['useGate'] ? 'rpc/' : 'rest/';
+	}
 
-    public function getSignMeta(Wallet $wallet)
-    {
+	public function getSignMeta(Wallet $wallet)
+	{
+		$nodeInfo = $this->getNodeInfo();
+		$accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
 
-        $nodeInfo = $this->getNodeInfo();
+		$meta = [
+			'account_number' => $accountInfo->account->base_account->account_number ?? 0,
+			'chain_id' => $nodeInfo->default_node_info->network ?? 0,
+		];
 
-        $accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
+		$wallet->setSequence($accountInfo->account->base_account->sequence ?? 0);
+		return $meta;
+	}
 
-        $sequence = $accountInfo->result->value->sequence ?? 0;
+	public function getNodeInfo()
+	{
+		$url = 'rpc/node_info';
+		$response = $this->_request($url, self::GET, false);
+		return $response;
+	}
 
-        if (isset($this->options['nonce'])) {
-            $sequence = $this->options['nonce'];
-        }
+	public function getAccountInfo($address)
+	{
+		//todo check it
+		if (isset($this->options['createNonce'])) {
+			$url = "/accounts/$address";
+		} else {
+			$url = "accounts/$address";
+		}
 
-        $nonce = WalletHelpers::isNonceSetAutomatically($wallet, $this->options) ? $wallet->currentNonce : $sequence;
+		//todo temp fix
+		$response = file_get_contents("https://devnet-dec2-node-01.decimalchain.com/rest/cosmos/auth/v1beta1/accounts/". $address);
 
+		return json_decode($response);
+	}
 
-        if ($this->options['setNonceAutomatically']) {
-            WalletHelpers::updateNonce($wallet, $nonce);
-        }
-
-        $meta = [
-            'account_number' => $accountInfo->result->value->account_number ?? 0,
-            'sequence' => $nonce,
-            'chain_id' => $nodeInfo->node_info->network ?? 0,
-        ];
-
-
-        return $meta;
-    }
-
-    public function getNodeInfo()
-    {
-        $url = $this->getRpcPrefix() . 'node_info';
-        return $this->_request($url, self::GET, false);
-    }
-
-    public function getAddressCount()
-    {
-        return $this->_request('address/count', 'GET');
-    }
-
-    public function getAccountInfo($address)
-    {
-        $url = $this->getRpcPrefix() . "accounts/$address";
-        return $this->_request($url, self::GET, false);
-    }
-
-    public function getCoinsList($limit = 1, $offset = 0, $query = null)
-    {
-        $url = "coin?limit=$limit&offset=$offset";
+	public function getCoinsList($address, $limit = 1, $offset = 0, $query = null)
+	{
+		//todo this coin to coins
+		$url = "address/$address/coins?limit=$limit&offset=$offset";
 
         if ($query) {
             $url += "&$query";
@@ -231,46 +221,56 @@ class ApiRequester
         return $res;
     }
 
-    public function getNftMetadata($addressNft, $address, $payload)
-    {
-        $url = "nfts/$addressNft?walletAddress=" . $address;
+	public function getTransaction($hash) {
+		if (!$hash) {
+			throw new DecimalException('hash is required');
+		}
 
-        $res = $this->_request($url, self::GET, false, $payload);
-        return $res;
-    }
+		$url = "https://devnet-dec2-explorer-api.decimalchain.com/api/tx/$hash";
 
-    public function getNftById($addressNft, $timestamp, $signature)
-    {
-        $signature = json_encode($signature);
-        $url = "nfts/$addressNft?timestamp=$timestamp&signature=$signature";
-        try {
-            $res = $this->client->get($url);
-            $body = $res->getBody();
-            return json_decode($body->getContents(), true);
-        } catch (\Exception $exception) {
-            return $this->getError(json_encode($exception->getMessage()));
-        }
-    }
+		$response = $this->_request($url, self::GET, false);
+		return $response;
+	}
 
-    public function getNfts($address, $timestamp, $signature, $limit = 10, $offset = 0, $query = null)
-    {
-        $signature = json_encode($signature);
-        $query = $query ? '&query=' . $query : '';
-        $url = "address/$address/nfts?limit=$limit&offset=$offset&timestamp=$timestamp&signature=$signature$query";
-        try {
-            $res = $this->client->get($url);
-            $body = $res->getBody();
-            return json_decode($body->getContents(), true);
-        } catch (\Exception $exception) {
-            return $this->getError(json_encode($exception->getMessage()));
-        }
-    }
 
-    public function getMultisigsByAdress($address)
-    {
-        if (!$address) {
-            throw new DecimalException('address is required');
-        }
+	public function getEstimateTxFee($type, $data,$options=null){
+		var_dump("Estimate TX Fee");
+		var_dump("Type:", $type);
+		var_dump("Data: ", $data);
+		
+		return 0.453;
+	}
+
+	public function getNftMetadata($addressNft)
+	{
+		if (!$addressNft) {
+			throw new DecimalException('address is required');
+		}
+		$url = "nfts/$addressNft";
+		$res = $this->_request($url, self::GET, false);
+		return $res;
+	}
+
+	public function getNftList($address, $limit=1, $offset=0, $query = 0) {
+		if(!$address) {
+			throw new DecimalException('address is required');
+		}
+
+		$url = "address/$address/nfts?limit=$limit&offset=$offset";
+
+		if ($query) {
+			$url += "&$query";
+		}
+
+		$response = $this->_request($url, self::GET. false);
+		return $response;
+	}
+
+	public function getMultiSigsByAddress($address)
+	{
+		if (!$address) {
+			throw new DecimalException('address is required');
+		}
 
         $url = "address/$address/multisigs";
 
@@ -361,14 +361,14 @@ class ApiRequester
     {
         $url = $this->getRpcPrefix() . 'txs';
         $tx = ['tx' => $tx, 'mode' => $this->options['mode']];
-        return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
+
+		return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
     }
 
 
-    public function post($url, $payload, $rpc = false)
-    {
-        return $this->_request($url, self::POST, $rpc, $payload);
-    }
+	public function post($url, $payload, $rpc = false) {
+		return $this->_request($url, self::POST,$rpc, $payload);
+	}
 
     private function _request($url, $method, $rpc = false, $payload = null, $optional = [])
     {
@@ -439,23 +439,56 @@ class ApiRequester
 
     }
 
-    /**
-     *  get error body
-     *
-     * @param $exception
-     * @param null $txhash
-     * @return array
-     */
-    protected function getError($exception, $code = null, $txhash = null)
+	/**
+	 *  get error body
+	 *
+	 * @param $exception
+	 * @param  null  $txhash
+	 * @return array
+	 */
+	protected function getError($exception, $code = null, $txhash = null)
+	{
+		//todo log errors
+		return [
+			'hash' => $txhash,
+			'success' => false,
+			'error' => [
+				'errorCode' => $code,
+				'errorMessage' => $exception,
+			]
+		];
+	}
+
+	public function getNfts($address, $timestamp, $signature, $limit = 10, $offset = 0, $query = null)
     {
-        return [
-            'hash' => $txhash,
-            'success' => false,
-            'error' => [
-                'errorCode' => $code,
-                'errorMessage' => $exception,
-            ]
-        ];
+        $signature = json_encode($signature);
+        $query = $query ? '&query=' . $query : '';
+        $url = "address/$address/nfts?limit=$limit&offset=$offset&timestamp=$timestamp&signature=$signature$query";
+        try {
+            $res = $this->client->get($url);
+            $body = $res->getBody();
+            return json_decode($body->getContents(), true);
+        } catch (\Exception $exception) {
+            return $this->getError(json_encode($exception->getMessage()));
+        }
     }
 
+    public function getNftById($addressNft, $timestamp, $signature)
+    {
+        $signature = json_encode($signature);
+        $url = "nfts/$addressNft?timestamp=$timestamp&signature=$signature";
+        try {
+            $res = $this->client->get($url);
+            $body = $res->getBody();
+            return json_decode($body->getContents(), true);
+        } catch (\Exception $exception) {
+            return $this->getError(json_encode($exception->getMessage()));
+        }
+    }
+
+    public function sendTxToBroadcast($broadcastPayload) {
+		$response = $this->post('http://185.242.122.118/rest/cosmos/tx/v1beta1/txs',$broadcastPayload);
+		return $response;
+	}
+	
 }

@@ -3,9 +3,6 @@
 
 namespace DecimalSDK;
 
-use Src\ApiRequester;
-use Src\Crypto\Encrypt;
-
 class AccountState
 {
 
@@ -45,10 +42,6 @@ class AccountState
     public function getState()
     {
         if(!$this->address) return null;
-
-//        $this->accountInfo = (new ApiRequester())->getAccountInfo($this->address);
-//        $this->nodeInfo = (new ApiRequester())->getNodeInfo();
-
         return $this;
 
     }
