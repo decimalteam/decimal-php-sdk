@@ -313,7 +313,7 @@ class Transaction
     }
 
     public function sendCoin($recipient, $denom, $amount) {
-        $msg = $this->protoManager->getMsgSendCoin($this->wallet->getAddress(), $recipient, $denom, $amount);
+        $msg = $this->protoManager->getMsgSendCoin($this->wallet->getAddress(), $recipient, $denom, amountUNIRecalculate($amount));
 
         $result = $this->sendTransaction($msg, []);
         return $result;
@@ -403,9 +403,9 @@ class Transaction
 
     private function sendTransaction($msg, $options, $simulate = false) {
 
-        $this->signMeta = $this->requester->getSignMeta($this->wallet);
 
         $sequence = $this->wallet->getSequence();
+        
         $memo = isset($options['message']) ? $options['message'] : '';
 
         $txBody = $this->protoManager->getTxBody($msg, $memo);

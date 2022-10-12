@@ -9,12 +9,11 @@ use GuzzleHttp\Client as GClient;
 
 class ApiRequester
 {
-    const TEST_GATE_API = 'https://testnet-gate.decimalchain.com/api/';
-    const MAINNET_GATE_API = 'https://mainnet-gate.decimalchain.com/api/';
+	const TEST_GATE_API = 'https://devnet-dec2.console.decimalchain.com/api/';
     const GET = 'get';
     const POST = 'post';
-    const TIMEOUT = 15.0;
-    const DEFAULT_NODE_URL = 'http://localhost';
+	const TIMEOUT = 5.0;
+	const DEFAULT_NODE_URL = 'https://devnet-dec2-node-01.decimalchain.com/';
     const DEFAULT_DEFAULT_NODE_RPC_PORT = '26657';
     const DEFAULT_DEFAULT_NODE_REST_PORT = '1317';
 
