@@ -517,17 +517,17 @@ class Transaction
      * @throws DecimalException
      */
 
-     public function validatorDelegate($validator, $denom, $stake){
-        $msg = $this->protoManager->getMsgValidatorDelegate(
-            $this->wallet->getAddress(),
-            $validator,
-            strtolower(trim($denom)),
-            amountUNIRecalculate($stake)
-        );
+    public function validatorDelegate($payload)
+    {
+        $type = $this->txSchemes['VALIDATOR_DELEGATE']['type'];
+        $result = $this->checkRequiredFields('VALIDATOR_DELEGATE', $payload);
+        $payload['fee'] = $this->txSchemes['VALIDATOR_DELEGATE']['fee'];
+        $prePayload = $this->formatePrepayload($type, $payload);
+        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
 
-        $result = $this->sendTransaction($msg, []);
-        return $result;
+        return $this->requester->sendTx($preparedTx);
     }
+
 
     /**
      * @param $payload
