@@ -120,22 +120,6 @@ class Transaction
                 ],
             ],
         ],
-        'VALIDATOR_DELEGATE' => [
-            'fee' => self::VALIDATOR_DELEGATE,
-            'type' => 'validator/delegate',
-            'scheme' => [
-                'fieldTypes' => [
-                    'address' => 'string',
-                    'stake' => 'number',
-                    'coin' => 'string',
-                ],
-                'requiredFields' => [
-                    'address',
-                    'stake',
-                    'coin'
-                ],
-            ],
-        ],
         'VALIDATOR_SET_ONLINE' => [
             'fee' => self::VALIDATOR_SET_ONLINE,
             'type' => 'validator/set_online'
@@ -143,22 +127,6 @@ class Transaction
         'VALIDATOR_SET_OFFLINE' => [
             'fee' => self::VALIDATOR_SET_OFFLINE,
             'type' => 'validator/set_offline'
-        ],
-        'VALIDATOR_UNBOND' => [
-            'fee' => self::VALIDATOR_UNBOND,
-            'type' => 'validator/unbond',
-            'scheme' => [
-                'fieldTypes' => [
-                    'address' => 'string',
-                    'stake' => 'number',
-                    'coin' => 'string',
-                ],
-                'requiredFields' => [
-                    'address',
-                    'stake',
-                    'coin'
-                ],
-            ],
         ],
         'VALIDATOR_CANDIDATE_EDIT' => [
             'fee' => self::VALIDATOR_CANDIDATE_EDIT,
