@@ -30,7 +30,10 @@
             "Decimal\\": "src/Utils/Proto/Decimal/",
             "Cosmos\\": "src/Utils/Proto/Cosmos/",
             "GPBMetadata\\": "src/Utils/Proto/GPBMetadata/",
-            "Ethermint\\": "src/Utils/Proto/Ethermint/"
+            "Ethermint\\": "src/Utils/Proto/Ethermint/",
+            "Gogoproto\\": "src/Utils/Proto/Gogoproto",
+            "CosmosProto\\": "src/Utils/Proto/CosmosProto",
+            "Tendermint\\": "src/Utils/Proto/Tendermint"
 
         },
         "files": [

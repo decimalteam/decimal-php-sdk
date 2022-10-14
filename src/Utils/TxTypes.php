@@ -22,4 +22,5 @@ interface TxTypes {
     const NFT_TRANSFER = "/decimal.nft.v1.MsgSendToken";
     const NFT_UPDATE_RESERVE = "/decimal.nft.v1.MsgUpdateReserve";
     const VALIDATOR_DELEGATE = "/decimal.validator.v1.MsgDelegate";
+    const VALIDATOR_UNBOUND = "/decimal.validator.v1.MsgUndelegate";
 }

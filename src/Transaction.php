@@ -315,8 +315,7 @@ class Transaction
     public function sendCoin($recipient, $denom, $amount) {
         $msg = $this->protoManager->getMsgSendCoin(
             $this->wallet->getAddress(),
-            $recipient,
-            strtolower(trim($denom)),
+            $recipient,strtolower(trim($denom)),
             amountUNIRecalculate($amount)
         );
 
@@ -517,15 +516,28 @@ class Transaction
      * @throws DecimalException
      */
 
-    public function validatorDelegate($payload)
-    {
-        $type = $this->txSchemes['VALIDATOR_DELEGATE']['type'];
-        $result = $this->checkRequiredFields('VALIDATOR_DELEGATE', $payload);
-        $payload['fee'] = $this->txSchemes['VALIDATOR_DELEGATE']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
+     public function validatorDelegate($validator, $denom, $stake){
+        $msg = $this->protoManager->getMsgValidatorDelegate(
+            $this->wallet->getAddress(),
+            $validator,
+            strtolower(trim($denom)),
+            amountUNIRecalculate($stake)
+        );
 
-        return $this->requester->sendTx($preparedTx);
+        $result = $this->sendTransaction($msg,[]);
+        return $result;
+    }
+
+    public function validatorUnbound($validator, $denom, $stake) {
+        $msg = $this->protoManager->getMsgValidatorUnbound(
+            $this->wallet->getAddress(),
+            $validator,
+            strtolower(trim($denom)),
+            amountUNIRecalculate($stake)
+        );
+
+        $result = $this->sendTransaction($msg,[]);
+        return $result;
     }
 
 

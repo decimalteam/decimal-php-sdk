@@ -27,8 +27,8 @@ use Decimal\Nft\V1\MsgMintToken;
 use Decimal\Nft\V1\MsgSendToken;
 use Decimal\Nft\V1\MsgUpdateReserve;
 use Decimal\Nft\V1\MsgUpdateToken;
-use Decimal\Validator\V1\Delegation;
 use Decimal\Validator\V1\MsgDelegate;
+use Decimal\Validator\V1\MsgUndelegate;
 
 class ProtoManager
 {
@@ -93,6 +93,18 @@ class ProtoManager
 
         return $this->getAny([
             'type_url' => TxTypes::VALIDATOR_DELEGATE,
+            'value' => $msg->serializeToString()
+        ]);
+    }
+
+    public function getMsgValidatorUnbound($delegator, $validator, $denom, $amount) {
+        $msg = new MsgUndelegate();
+        $msg->setDelegator($delegator);
+        $msg->setValidator($validator);
+        $msg->setCoin($this->getCoin($denom,$amount));
+
+        return $this->getAny([
+            'type_url' => TxTypes::VALIDATOR_UNBOUND,
             'value' => $msg->serializeToString()
         ]);
     }

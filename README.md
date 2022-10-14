@@ -158,25 +158,21 @@ $result = $transaction->sellAllCoin($denomSell,$denomBuy,$minCoinToBuy);
 ## Validator delegate
 
 ```php
-$txPayload = [
-    'address' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
-    'stake' => '10',
-    'coin' => 'tdel',
-];
+$address = 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
+$coin = 'tdel';
+$stake = '10';
 
-$result = $transaction->validatorDelegate($txPayload);
+$result = $transaction->validatorDelegate($address,$coin,$stake);
 ```
 
 ## Validator unbound
 
 ```php
-$txPayload = [
-    'address' => 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
-    'stake' => '10',
-    'coin' => 'tdel',
-];
+$address = 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
+$coin = 'tdel';
+$stake = '10';
 
-$result = $transaction->validatorUnbound($txPayload);
+$result = $transaction->validatorUnbound($address,$coin,$stake);
 ```
 
 ## Validator declare
