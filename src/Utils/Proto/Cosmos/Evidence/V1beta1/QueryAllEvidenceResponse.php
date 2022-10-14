@@ -35,14 +35,14 @@ class QueryAllEvidenceResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $evidence
+     *     @type array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $evidence
      *           evidence returns all evidences.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Evidence\V1Beta1\Query::initOnce();
+        \Cosmos\Evidence\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -61,7 +61,7 @@ class QueryAllEvidenceResponse extends \Google\Protobuf\Internal\Message
      * evidence returns all evidences.
      *
      * Generated from protobuf field <code>repeated .google.protobuf.Any evidence = 1 [json_name = "evidence"];</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEvidence($var)

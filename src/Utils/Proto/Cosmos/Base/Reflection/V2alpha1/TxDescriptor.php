@@ -40,12 +40,12 @@ class TxDescriptor extends \Google\Protobuf\Internal\Message
      *           fullname is the protobuf fullname of the raw transaction type (for instance the tx.Tx type)
      *           it is not meant to support polymorphism of transaction types, it is supposed to be used by
      *           reflection clients to understand if they can handle a specific transaction type in an application.
-     *     @type \Cosmos\Base\Reflection\V2alpha1\MsgDescriptor[]|\Google\Protobuf\Internal\RepeatedField $msgs
+     *     @type array<\Cosmos\Base\Reflection\V2alpha1\MsgDescriptor>|\Google\Protobuf\Internal\RepeatedField $msgs
      *           msgs lists the accepted application messages (sdk.Msg)
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V2Alpha1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V2alpha1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 
@@ -94,7 +94,7 @@ class TxDescriptor extends \Google\Protobuf\Internal\Message
      * msgs lists the accepted application messages (sdk.Msg)
      *
      * Generated from protobuf field <code>repeated .cosmos.base.reflection.v2alpha1.MsgDescriptor msgs = 2 [json_name = "msgs"];</code>
-     * @param \Cosmos\Base\Reflection\V2alpha1\MsgDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Reflection\V2alpha1\MsgDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setMsgs($var)

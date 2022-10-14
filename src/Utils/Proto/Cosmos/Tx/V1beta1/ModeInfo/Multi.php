@@ -37,13 +37,13 @@ class Multi extends \Google\Protobuf\Internal\Message
      *
      *     @type \Cosmos\Crypto\Multisig\V1beta1\CompactBitArray $bitarray
      *           bitarray specifies which keys within the multisig are signing
-     *     @type \Cosmos\Tx\V1beta1\ModeInfo[]|\Google\Protobuf\Internal\RepeatedField $mode_infos
+     *     @type array<\Cosmos\Tx\V1beta1\ModeInfo>|\Google\Protobuf\Internal\RepeatedField $mode_infos
      *           mode_infos is the corresponding modes of the signers of the multisig
      *           which could include nested multisig public keys
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\V1Beta1\Tx::initOnce();
+        \Cosmos\Tx\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -100,7 +100,7 @@ class Multi extends \Google\Protobuf\Internal\Message
      * which could include nested multisig public keys
      *
      * Generated from protobuf field <code>repeated .cosmos.tx.v1beta1.ModeInfo mode_infos = 2 [json_name = "modeInfos"];</code>
-     * @param \Cosmos\Tx\V1beta1\ModeInfo[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Tx\V1beta1\ModeInfo>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setModeInfos($var)

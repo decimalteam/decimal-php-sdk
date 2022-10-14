@@ -16,11 +16,15 @@ use Google\Protobuf\Internal\GPBUtil;
 class EventActivateChain extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint32 id = 1 [json_name = "id", (.gogoproto.customname) = "ID"];</code>
+     * Generated from protobuf field <code>string sender = 1 [json_name = "sender", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     */
+    protected $sender = '';
+    /**
+     * Generated from protobuf field <code>uint32 id = 2 [json_name = "id", (.gogoproto.customname) = "ID"];</code>
      */
     protected $id = 0;
     /**
-     * Generated from protobuf field <code>string name = 2 [json_name = "name"];</code>
+     * Generated from protobuf field <code>string name = 3 [json_name = "name"];</code>
      */
     protected $name = '';
 
@@ -30,17 +34,40 @@ class EventActivateChain extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
+     *     @type string $sender
      *     @type int $id
      *     @type string $name
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Swap\V1\Events::initOnce();
+        \Decimal\Swap\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint32 id = 1 [json_name = "id", (.gogoproto.customname) = "ID"];</code>
+     * Generated from protobuf field <code>string sender = 1 [json_name = "sender", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @return string
+     */
+    public function getSender()
+    {
+        return $this->sender;
+    }
+
+    /**
+     * Generated from protobuf field <code>string sender = 1 [json_name = "sender", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setSender($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->sender = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>uint32 id = 2 [json_name = "id", (.gogoproto.customname) = "ID"];</code>
      * @return int
      */
     public function getId()
@@ -49,7 +76,7 @@ class EventActivateChain extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint32 id = 1 [json_name = "id", (.gogoproto.customname) = "ID"];</code>
+     * Generated from protobuf field <code>uint32 id = 2 [json_name = "id", (.gogoproto.customname) = "ID"];</code>
      * @param int $var
      * @return $this
      */
@@ -62,7 +89,7 @@ class EventActivateChain extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string name = 2 [json_name = "name"];</code>
+     * Generated from protobuf field <code>string name = 3 [json_name = "name"];</code>
      * @return string
      */
     public function getName()
@@ -71,7 +98,7 @@ class EventActivateChain extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string name = 2 [json_name = "name"];</code>
+     * Generated from protobuf field <code>string name = 3 [json_name = "name"];</code>
      * @param string $var
      * @return $this
      */

@@ -17,8 +17,6 @@ use Google\Protobuf\Internal\GPBUtil;
 class QueryUpgradedConsensusStateResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Since: cosmos-sdk 0.43
-     *
      * Generated from protobuf field <code>bytes upgraded_consensus_state = 2 [json_name = "upgradedConsensusState"];</code>
      */
     protected $upgraded_consensus_state = '';
@@ -30,17 +28,14 @@ class QueryUpgradedConsensusStateResponse extends \Google\Protobuf\Internal\Mess
      *     Optional. Data for populating the Message object.
      *
      *     @type string $upgraded_consensus_state
-     *           Since: cosmos-sdk 0.43
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Upgrade\V1Beta1\Query::initOnce();
+        \Cosmos\Upgrade\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Since: cosmos-sdk 0.43
-     *
      * Generated from protobuf field <code>bytes upgraded_consensus_state = 2 [json_name = "upgradedConsensusState"];</code>
      * @return string
      */
@@ -50,8 +45,6 @@ class QueryUpgradedConsensusStateResponse extends \Google\Protobuf\Internal\Mess
     }
 
     /**
-     * Since: cosmos-sdk 0.43
-     *
      * Generated from protobuf field <code>bytes upgraded_consensus_state = 2 [json_name = "upgradedConsensusState"];</code>
      * @param string $var
      * @return $this

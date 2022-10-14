@@ -37,7 +37,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * denom_metadata defines the metadata of the differents coins.
      *
-     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Metadata denom_metadata = 4 [json_name = "denomMetadata", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Metadata denom_metadata = 4 [json_name = "denomMetadata", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"denom_metadata\""];</code>
      */
     private $denom_metadata;
 
@@ -49,17 +49,17 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      *
      *     @type \Cosmos\Bank\V1beta1\Params $params
      *           params defines all the paramaters of the module.
-     *     @type \Cosmos\Bank\V1beta1\Balance[]|\Google\Protobuf\Internal\RepeatedField $balances
+     *     @type array<\Cosmos\Bank\V1beta1\Balance>|\Google\Protobuf\Internal\RepeatedField $balances
      *           balances is an array containing the balances of all the accounts.
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $supply
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $supply
      *           supply represents the total supply. If it is left empty, then supply will be calculated based on the provided
      *           balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
-     *     @type \Cosmos\Bank\V1beta1\Metadata[]|\Google\Protobuf\Internal\RepeatedField $denom_metadata
+     *     @type array<\Cosmos\Bank\V1beta1\Metadata>|\Google\Protobuf\Internal\RepeatedField $denom_metadata
      *           denom_metadata defines the metadata of the differents coins.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Genesis::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
@@ -114,7 +114,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * balances is an array containing the balances of all the accounts.
      *
      * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Balance balances = 2 [json_name = "balances", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Bank\V1beta1\Balance[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Bank\V1beta1\Balance>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setBalances($var)
@@ -142,7 +142,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin supply = 3 [json_name = "supply", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSupply($var)
@@ -156,7 +156,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * denom_metadata defines the metadata of the differents coins.
      *
-     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Metadata denom_metadata = 4 [json_name = "denomMetadata", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Metadata denom_metadata = 4 [json_name = "denomMetadata", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"denom_metadata\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getDenomMetadata()
@@ -167,8 +167,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * denom_metadata defines the metadata of the differents coins.
      *
-     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Metadata denom_metadata = 4 [json_name = "denomMetadata", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Bank\V1beta1\Metadata[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Metadata denom_metadata = 4 [json_name = "denomMetadata", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"denom_metadata\""];</code>
+     * @param array<\Cosmos\Bank\V1beta1\Metadata>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setDenomMetadata($var)

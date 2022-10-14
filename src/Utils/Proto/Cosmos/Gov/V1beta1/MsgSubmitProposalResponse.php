@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgSubmitProposalResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      */
     protected $proposal_id = 0;
 
@@ -30,12 +30,12 @@ class MsgSubmitProposalResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Tx::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @return int|string
      */
     public function getProposalId()
@@ -44,7 +44,7 @@ class MsgSubmitProposalResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @param int|string $var
      * @return $this
      */

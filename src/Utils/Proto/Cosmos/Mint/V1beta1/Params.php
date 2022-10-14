@@ -24,31 +24,31 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * maximum annual change in inflation rate
      *
-     * Generated from protobuf field <code>string inflation_rate_change = 2 [json_name = "inflationRateChange", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation_rate_change = 2 [json_name = "inflationRateChange", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"inflation_rate_change\""];</code>
      */
     protected $inflation_rate_change = '';
     /**
      * maximum inflation rate
      *
-     * Generated from protobuf field <code>string inflation_max = 3 [json_name = "inflationMax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation_max = 3 [json_name = "inflationMax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"inflation_max\""];</code>
      */
     protected $inflation_max = '';
     /**
      * minimum inflation rate
      *
-     * Generated from protobuf field <code>string inflation_min = 4 [json_name = "inflationMin", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation_min = 4 [json_name = "inflationMin", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"inflation_min\""];</code>
      */
     protected $inflation_min = '';
     /**
      * goal of percent bonded atoms
      *
-     * Generated from protobuf field <code>string goal_bonded = 5 [json_name = "goalBonded", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string goal_bonded = 5 [json_name = "goalBonded", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"goal_bonded\""];</code>
      */
     protected $goal_bonded = '';
     /**
      * expected blocks per year
      *
-     * Generated from protobuf field <code>uint64 blocks_per_year = 6 [json_name = "blocksPerYear"];</code>
+     * Generated from protobuf field <code>uint64 blocks_per_year = 6 [json_name = "blocksPerYear", (.gogoproto.moretags) = "yaml:\"blocks_per_year\""];</code>
      */
     protected $blocks_per_year = 0;
 
@@ -73,7 +73,7 @@ class Params extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Mint\V1Beta1\Mint::initOnce();
+        \Cosmos\Mint\V1beta1\GPBMetadata\Mint::initOnce();
         parent::__construct($data);
     }
 
@@ -106,7 +106,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * maximum annual change in inflation rate
      *
-     * Generated from protobuf field <code>string inflation_rate_change = 2 [json_name = "inflationRateChange", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation_rate_change = 2 [json_name = "inflationRateChange", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"inflation_rate_change\""];</code>
      * @return string
      */
     public function getInflationRateChange()
@@ -117,7 +117,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * maximum annual change in inflation rate
      *
-     * Generated from protobuf field <code>string inflation_rate_change = 2 [json_name = "inflationRateChange", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation_rate_change = 2 [json_name = "inflationRateChange", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"inflation_rate_change\""];</code>
      * @param string $var
      * @return $this
      */
@@ -132,7 +132,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * maximum inflation rate
      *
-     * Generated from protobuf field <code>string inflation_max = 3 [json_name = "inflationMax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation_max = 3 [json_name = "inflationMax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"inflation_max\""];</code>
      * @return string
      */
     public function getInflationMax()
@@ -143,7 +143,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * maximum inflation rate
      *
-     * Generated from protobuf field <code>string inflation_max = 3 [json_name = "inflationMax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation_max = 3 [json_name = "inflationMax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"inflation_max\""];</code>
      * @param string $var
      * @return $this
      */
@@ -158,7 +158,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * minimum inflation rate
      *
-     * Generated from protobuf field <code>string inflation_min = 4 [json_name = "inflationMin", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation_min = 4 [json_name = "inflationMin", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"inflation_min\""];</code>
      * @return string
      */
     public function getInflationMin()
@@ -169,7 +169,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * minimum inflation rate
      *
-     * Generated from protobuf field <code>string inflation_min = 4 [json_name = "inflationMin", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation_min = 4 [json_name = "inflationMin", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"inflation_min\""];</code>
      * @param string $var
      * @return $this
      */
@@ -184,7 +184,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * goal of percent bonded atoms
      *
-     * Generated from protobuf field <code>string goal_bonded = 5 [json_name = "goalBonded", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string goal_bonded = 5 [json_name = "goalBonded", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"goal_bonded\""];</code>
      * @return string
      */
     public function getGoalBonded()
@@ -195,7 +195,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * goal of percent bonded atoms
      *
-     * Generated from protobuf field <code>string goal_bonded = 5 [json_name = "goalBonded", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string goal_bonded = 5 [json_name = "goalBonded", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"goal_bonded\""];</code>
      * @param string $var
      * @return $this
      */
@@ -210,7 +210,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * expected blocks per year
      *
-     * Generated from protobuf field <code>uint64 blocks_per_year = 6 [json_name = "blocksPerYear"];</code>
+     * Generated from protobuf field <code>uint64 blocks_per_year = 6 [json_name = "blocksPerYear", (.gogoproto.moretags) = "yaml:\"blocks_per_year\""];</code>
      * @return int|string
      */
     public function getBlocksPerYear()
@@ -221,7 +221,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * expected blocks per year
      *
-     * Generated from protobuf field <code>uint64 blocks_per_year = 6 [json_name = "blocksPerYear"];</code>
+     * Generated from protobuf field <code>uint64 blocks_per_year = 6 [json_name = "blocksPerYear", (.gogoproto.moretags) = "yaml:\"blocks_per_year\""];</code>
      * @param int|string $var
      * @return $this
      */

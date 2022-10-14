@@ -18,25 +18,25 @@ class RedelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * creation_height  defines the height which the redelegation took place.
      *
-     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight"];</code>
+     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight", (.gogoproto.moretags) = "yaml:\"creation_height\""];</code>
      */
     protected $creation_height = 0;
     /**
      * completion_time defines the unix time for redelegation completion.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"completion_time\"", (.gogoproto.stdtime) = true];</code>
      */
     protected $completion_time = null;
     /**
      * initial_balance defines the initial balance when redelegation started.
      *
-     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"initial_balance\""];</code>
      */
     protected $initial_balance = '';
     /**
      * shares_dst is the amount of destination-validator shares created by redelegation.
      *
-     * Generated from protobuf field <code>string shares_dst = 4 [json_name = "sharesDst", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string shares_dst = 4 [json_name = "sharesDst", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      */
     protected $shares_dst = '';
 
@@ -57,14 +57,14 @@ class RedelegationEntry extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
     /**
      * creation_height  defines the height which the redelegation took place.
      *
-     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight"];</code>
+     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight", (.gogoproto.moretags) = "yaml:\"creation_height\""];</code>
      * @return int|string
      */
     public function getCreationHeight()
@@ -75,7 +75,7 @@ class RedelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * creation_height  defines the height which the redelegation took place.
      *
-     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight"];</code>
+     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight", (.gogoproto.moretags) = "yaml:\"creation_height\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -90,7 +90,7 @@ class RedelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * completion_time defines the unix time for redelegation completion.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"completion_time\"", (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getCompletionTime()
@@ -111,7 +111,7 @@ class RedelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * completion_time defines the unix time for redelegation completion.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"completion_time\"", (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */
@@ -126,7 +126,7 @@ class RedelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * initial_balance defines the initial balance when redelegation started.
      *
-     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"initial_balance\""];</code>
      * @return string
      */
     public function getInitialBalance()
@@ -137,7 +137,7 @@ class RedelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * initial_balance defines the initial balance when redelegation started.
      *
-     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"initial_balance\""];</code>
      * @param string $var
      * @return $this
      */
@@ -152,7 +152,7 @@ class RedelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * shares_dst is the amount of destination-validator shares created by redelegation.
      *
-     * Generated from protobuf field <code>string shares_dst = 4 [json_name = "sharesDst", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string shares_dst = 4 [json_name = "sharesDst", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      * @return string
      */
     public function getSharesDst()
@@ -163,7 +163,7 @@ class RedelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * shares_dst is the amount of destination-validator shares created by redelegation.
      *
-     * Generated from protobuf field <code>string shares_dst = 4 [json_name = "sharesDst", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string shares_dst = 4 [json_name = "sharesDst", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      * @param string $var
      * @return $this
      */

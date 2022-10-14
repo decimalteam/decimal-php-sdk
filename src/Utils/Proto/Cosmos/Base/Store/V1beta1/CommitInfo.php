@@ -32,11 +32,11 @@ class CommitInfo extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int|string $version
-     *     @type \Cosmos\Base\Store\V1beta1\StoreInfo[]|\Google\Protobuf\Internal\RepeatedField $store_infos
+     *     @type array<\Cosmos\Base\Store\V1beta1\StoreInfo>|\Google\Protobuf\Internal\RepeatedField $store_infos
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Store\V1Beta1\CommitInfo::initOnce();
+        \Cosmos\Base\Store\V1beta1\GPBMetadata\CommitInfo::initOnce();
         parent::__construct($data);
     }
 
@@ -73,7 +73,7 @@ class CommitInfo extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.store.v1beta1.StoreInfo store_infos = 2 [json_name = "storeInfos", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Base\Store\V1beta1\StoreInfo[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Store\V1beta1\StoreInfo>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setStoreInfos($var)

@@ -33,13 +33,13 @@ class QueryRedelegationsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Staking\V1beta1\RedelegationResponse[]|\Google\Protobuf\Internal\RepeatedField $redelegation_responses
+     *     @type array<\Cosmos\Staking\V1beta1\RedelegationResponse>|\Google\Protobuf\Internal\RepeatedField $redelegation_responses
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Query::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -54,7 +54,7 @@ class QueryRedelegationsResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.RedelegationResponse redelegation_responses = 1 [json_name = "redelegationResponses", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\RedelegationResponse[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\RedelegationResponse>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRedelegationResponses($var)

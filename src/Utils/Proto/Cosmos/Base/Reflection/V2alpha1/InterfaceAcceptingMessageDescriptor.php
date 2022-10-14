@@ -39,14 +39,14 @@ class InterfaceAcceptingMessageDescriptor extends \Google\Protobuf\Internal\Mess
      *
      *     @type string $fullname
      *           fullname is the protobuf fullname of the type containing the interface
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $field_descriptor_names
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $field_descriptor_names
      *           field_descriptor_names is a list of the protobuf name (not fullname) of the field
      *           which contains the interface as google.protobuf.Any (the interface is the same, but
      *           it can be in multiple fields of the same proto message)
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V2Alpha1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V2alpha1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 
@@ -95,7 +95,7 @@ class InterfaceAcceptingMessageDescriptor extends \Google\Protobuf\Internal\Mess
      * it can be in multiple fields of the same proto message)
      *
      * Generated from protobuf field <code>repeated string field_descriptor_names = 2 [json_name = "fieldDescriptorNames"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setFieldDescriptorNames($var)

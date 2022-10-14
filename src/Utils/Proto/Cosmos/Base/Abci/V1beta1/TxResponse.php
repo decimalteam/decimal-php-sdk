@@ -91,16 +91,6 @@ class TxResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string timestamp = 12 [json_name = "timestamp"];</code>
      */
     protected $timestamp = '';
-    /**
-     * Events defines all the events emitted by processing a transaction. Note,
-     * these events include those emitted by processing all the messages and those
-     * emitted from the ante. Whereas Logs contains the events, with
-     * additional metadata, emitted only by processing the messages.
-     * Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
-     *
-     * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 13 [json_name = "events", (.gogoproto.nullable) = false];</code>
-     */
-    private $events;
 
     /**
      * Constructor.
@@ -121,7 +111,7 @@ class TxResponse extends \Google\Protobuf\Internal\Message
      *     @type string $raw_log
      *           The output of the application's logger (raw string). May be
      *           non-deterministic.
-     *     @type \Cosmos\Base\Abci\V1beta1\ABCIMessageLog[]|\Google\Protobuf\Internal\RepeatedField $logs
+     *     @type array<\Cosmos\Base\Abci\V1beta1\ABCIMessageLog>|\Google\Protobuf\Internal\RepeatedField $logs
      *           The output of the application's logger (typed). May be non-deterministic.
      *     @type string $info
      *           Additional information. May be non-deterministic.
@@ -135,16 +125,10 @@ class TxResponse extends \Google\Protobuf\Internal\Message
      *           Time of the previous block. For heights > 1, it's the weighted median of
      *           the timestamps of the valid votes in the block.LastCommit. For height == 1,
      *           it's genesis time.
-     *     @type \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $events
-     *           Events defines all the events emitted by processing a transaction. Note,
-     *           these events include those emitted by processing all the messages and those
-     *           emitted from the ante. Whereas Logs contains the events, with
-     *           additional metadata, emitted only by processing the messages.
-     *           Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Abci\V1Beta1\Abci::initOnce();
+        \Cosmos\Base\Abci\V1beta1\GPBMetadata\Abci::initOnce();
         parent::__construct($data);
     }
 
@@ -321,7 +305,7 @@ class TxResponse extends \Google\Protobuf\Internal\Message
      * The output of the application's logger (typed). May be non-deterministic.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.abci.v1beta1.ABCIMessageLog logs = 7 [json_name = "logs", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "ABCIMessageLogs"];</code>
-     * @param \Cosmos\Base\Abci\V1beta1\ABCIMessageLog[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Abci\V1beta1\ABCIMessageLog>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setLogs($var)
@@ -472,40 +456,6 @@ class TxResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->timestamp = $var;
-
-        return $this;
-    }
-
-    /**
-     * Events defines all the events emitted by processing a transaction. Note,
-     * these events include those emitted by processing all the messages and those
-     * emitted from the ante. Whereas Logs contains the events, with
-     * additional metadata, emitted only by processing the messages.
-     * Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
-     *
-     * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 13 [json_name = "events", (.gogoproto.nullable) = false];</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getEvents()
-    {
-        return $this->events;
-    }
-
-    /**
-     * Events defines all the events emitted by processing a transaction. Note,
-     * these events include those emitted by processing all the messages and those
-     * emitted from the ante. Whereas Logs contains the events, with
-     * additional metadata, emitted only by processing the messages.
-     * Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
-     *
-     * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 13 [json_name = "events", (.gogoproto.nullable) = false];</code>
-     * @param \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setEvents($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Tendermint\Abci\Event::class);
-        $this->events = $arr;
 
         return $this;
     }

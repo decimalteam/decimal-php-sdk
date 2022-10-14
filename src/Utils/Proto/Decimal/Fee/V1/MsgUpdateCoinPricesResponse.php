@@ -25,7 +25,7 @@ class MsgUpdateCoinPricesResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Fee\V1\Tx::initOnce();
+        \Decimal\Fee\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

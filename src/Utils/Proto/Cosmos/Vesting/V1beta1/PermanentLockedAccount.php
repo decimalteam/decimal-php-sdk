@@ -12,7 +12,6 @@ use Google\Protobuf\Internal\GPBUtil;
  * PermanentLockedAccount implements the VestingAccount interface. It does
  * not ever release coins, locking them indefinitely. Coins in this account can
  * still be used for delegating and for governance votes even while locked.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.vesting.v1beta1.PermanentLockedAccount</code>
  */
@@ -33,7 +32,7 @@ class PermanentLockedAccount extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Vesting\V1Beta1\Vesting::initOnce();
+        \Cosmos\Vesting\V1beta1\GPBMetadata\Vesting::initOnce();
         parent::__construct($data);
     }
 

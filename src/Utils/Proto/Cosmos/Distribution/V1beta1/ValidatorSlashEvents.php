@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class ValidatorSlashEvents extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>repeated .cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_events = 1 [json_name = "validatorSlashEvents", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_events = 1 [json_name = "validatorSlashEvents", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"validator_slash_events\""];</code>
      */
     private $validator_slash_events;
 
@@ -26,16 +26,16 @@ class ValidatorSlashEvents extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Distribution\V1beta1\ValidatorSlashEvent[]|\Google\Protobuf\Internal\RepeatedField $validator_slash_events
+     *     @type array<\Cosmos\Distribution\V1beta1\ValidatorSlashEvent>|\Google\Protobuf\Internal\RepeatedField $validator_slash_events
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Distribution::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Distribution::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_events = 1 [json_name = "validatorSlashEvents", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_events = 1 [json_name = "validatorSlashEvents", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"validator_slash_events\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getValidatorSlashEvents()
@@ -44,8 +44,8 @@ class ValidatorSlashEvents extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_events = 1 [json_name = "validatorSlashEvents", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Distribution\V1beta1\ValidatorSlashEvent[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_events = 1 [json_name = "validatorSlashEvents", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"validator_slash_events\""];</code>
+     * @param array<\Cosmos\Distribution\V1beta1\ValidatorSlashEvent>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValidatorSlashEvents($var)

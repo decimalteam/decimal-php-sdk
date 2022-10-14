@@ -36,7 +36,7 @@ class StoreInfo extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Store\V1Beta1\CommitInfo::initOnce();
+        \Cosmos\Base\Store\V1beta1\GPBMetadata\CommitInfo::initOnce();
         parent::__construct($data);
     }
 

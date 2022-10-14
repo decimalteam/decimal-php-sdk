@@ -10,7 +10,6 @@ use Google\Protobuf\Internal\GPBUtil;
 
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.auth.v1beta1.QueryAccountsRequest</code>
  */
@@ -34,7 +33,7 @@ class QueryAccountsRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Auth\V1Beta1\Query::initOnce();
+        \Cosmos\Auth\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 

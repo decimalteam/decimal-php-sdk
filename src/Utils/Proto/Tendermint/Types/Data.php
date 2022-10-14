@@ -30,14 +30,14 @@ class Data extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $txs
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $txs
      *           Txs that will be applied by state &#64; block.Height+1.
      *           NOTE: not all txs here are valid.  We're just agreeing on the order first.
      *           This means that block.AppHash does not include these txs.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Types::initOnce();
+        \Tendermint\Types\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -60,7 +60,7 @@ class Data extends \Google\Protobuf\Internal\Message
      * This means that block.AppHash does not include these txs.
      *
      * Generated from protobuf field <code>repeated bytes txs = 1 [json_name = "txs"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTxs($var)

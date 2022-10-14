@@ -30,7 +30,7 @@ class GetSyncingResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Tendermint\V1Beta1\Query::initOnce();
+        \Cosmos\Base\Tendermint\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 

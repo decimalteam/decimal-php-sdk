@@ -21,11 +21,7 @@ class Grant extends \Google\Protobuf\Internal\Message
      */
     protected $authorization = null;
     /**
-     * time when the grant will expire and will be pruned. If null, then the grant
-     * doesn't have a time expiration (other conditions  in `authorization`
-     * may apply to invalidate the grant)
-     *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp expiration = 2 [json_name = "expiration", (.gogoproto.nullable) = true, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp expiration = 2 [json_name = "expiration", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
      */
     protected $expiration = null;
 
@@ -37,13 +33,10 @@ class Grant extends \Google\Protobuf\Internal\Message
      *
      *     @type \Google\Protobuf\Any $authorization
      *     @type \Google\Protobuf\Timestamp $expiration
-     *           time when the grant will expire and will be pruned. If null, then the grant
-     *           doesn't have a time expiration (other conditions  in `authorization`
-     *           may apply to invalidate the grant)
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Authz\V1Beta1\Authz::initOnce();
+        \Cosmos\Authz\V1beta1\GPBMetadata\Authz::initOnce();
         parent::__construct($data);
     }
 
@@ -80,11 +73,7 @@ class Grant extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * time when the grant will expire and will be pruned. If null, then the grant
-     * doesn't have a time expiration (other conditions  in `authorization`
-     * may apply to invalidate the grant)
-     *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp expiration = 2 [json_name = "expiration", (.gogoproto.nullable) = true, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp expiration = 2 [json_name = "expiration", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getExpiration()
@@ -103,11 +92,7 @@ class Grant extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * time when the grant will expire and will be pruned. If null, then the grant
-     * doesn't have a time expiration (other conditions  in `authorization`
-     * may apply to invalidate the grant)
-     *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp expiration = 2 [json_name = "expiration", (.gogoproto.nullable) = true, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp expiration = 2 [json_name = "expiration", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */

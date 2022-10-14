@@ -29,12 +29,12 @@ class QueryDelegatorValidatorsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $validators
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $validators
      *           validators defines the validators a delegator is delegating for.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Query::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -53,7 +53,7 @@ class QueryDelegatorValidatorsResponse extends \Google\Protobuf\Internal\Message
      * validators defines the validators a delegator is delegating for.
      *
      * Generated from protobuf field <code>repeated string validators = 1 [json_name = "validators"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValidators($var)

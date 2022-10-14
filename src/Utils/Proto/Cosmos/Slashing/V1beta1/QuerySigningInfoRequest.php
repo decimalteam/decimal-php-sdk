@@ -19,7 +19,7 @@ class QuerySigningInfoRequest extends \Google\Protobuf\Internal\Message
     /**
      * cons_address is the address to query signing info of
      *
-     * Generated from protobuf field <code>string cons_address = 1 [json_name = "consAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string cons_address = 1 [json_name = "consAddress"];</code>
      */
     protected $cons_address = '';
 
@@ -34,14 +34,14 @@ class QuerySigningInfoRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Query::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
      * cons_address is the address to query signing info of
      *
-     * Generated from protobuf field <code>string cons_address = 1 [json_name = "consAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string cons_address = 1 [json_name = "consAddress"];</code>
      * @return string
      */
     public function getConsAddress()
@@ -52,7 +52,7 @@ class QuerySigningInfoRequest extends \Google\Protobuf\Internal\Message
     /**
      * cons_address is the address to query signing info of
      *
-     * Generated from protobuf field <code>string cons_address = 1 [json_name = "consAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string cons_address = 1 [json_name = "consAddress"];</code>
      * @param string $var
      * @return $this
      */

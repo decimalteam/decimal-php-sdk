@@ -25,7 +25,7 @@ class MsgDepositResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Tx::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

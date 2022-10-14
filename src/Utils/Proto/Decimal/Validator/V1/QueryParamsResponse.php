@@ -33,7 +33,7 @@ class QueryParamsResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Query::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 

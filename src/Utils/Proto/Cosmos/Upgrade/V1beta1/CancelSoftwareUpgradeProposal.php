@@ -11,8 +11,6 @@ use Google\Protobuf\Internal\GPBUtil;
 /**
  * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
  * upgrade.
- * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
- * proposals, see MsgCancelUpgrade.
  *
  * Generated from protobuf message <code>cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal</code>
  */
@@ -38,7 +36,7 @@ class CancelSoftwareUpgradeProposal extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Upgrade\V1Beta1\Upgrade::initOnce();
+        \Cosmos\Upgrade\V1beta1\GPBMetadata\Upgrade::initOnce();
         parent::__construct($data);
     }
 

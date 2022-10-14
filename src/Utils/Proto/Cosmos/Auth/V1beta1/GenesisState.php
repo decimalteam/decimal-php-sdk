@@ -36,12 +36,12 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      *
      *     @type \Cosmos\Auth\V1beta1\Params $params
      *           params defines all the paramaters of the module.
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $accounts
+     *     @type array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $accounts
      *           accounts are the accounts present at genesis.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Auth\V1Beta1\Genesis::initOnce();
+        \Cosmos\Auth\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
@@ -96,7 +96,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * accounts are the accounts present at genesis.
      *
      * Generated from protobuf field <code>repeated .google.protobuf.Any accounts = 2 [json_name = "accounts"];</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAccounts($var)

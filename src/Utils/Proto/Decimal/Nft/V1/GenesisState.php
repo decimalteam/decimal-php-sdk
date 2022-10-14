@@ -18,13 +18,13 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * collections defines all existing NFT collections (including tokens and sub-tokens).
      *
-     * Generated from protobuf field <code>repeated .decimal.nft.v1.Collection collections = 2 [json_name = "collections", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.nft.v1.Collection collections = 1 [json_name = "collections", (.gogoproto.nullable) = false];</code>
      */
     private $collections;
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.nft.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.nft.v1.Params params = 2 [json_name = "params", (.gogoproto.nullable) = false];</code>
      */
     protected $params = null;
 
@@ -34,21 +34,21 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Nft\V1\Collection[]|\Google\Protobuf\Internal\RepeatedField $collections
+     *     @type array<\Decimal\Nft\V1\Collection>|\Google\Protobuf\Internal\RepeatedField $collections
      *           collections defines all existing NFT collections (including tokens and sub-tokens).
      *     @type \Decimal\Nft\V1\Params $params
      *           params defines all the module's parameters.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Genesis::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * collections defines all existing NFT collections (including tokens and sub-tokens).
      *
-     * Generated from protobuf field <code>repeated .decimal.nft.v1.Collection collections = 2 [json_name = "collections", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.nft.v1.Collection collections = 1 [json_name = "collections", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getCollections()
@@ -59,8 +59,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * collections defines all existing NFT collections (including tokens and sub-tokens).
      *
-     * Generated from protobuf field <code>repeated .decimal.nft.v1.Collection collections = 2 [json_name = "collections", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Nft\V1\Collection[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .decimal.nft.v1.Collection collections = 1 [json_name = "collections", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Nft\V1\Collection>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCollections($var)
@@ -74,7 +74,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.nft.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.nft.v1.Params params = 2 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @return \Decimal\Nft\V1\Params|null
      */
     public function getParams()
@@ -95,7 +95,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.nft.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.nft.v1.Params params = 2 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @param \Decimal\Nft\V1\Params $var
      * @return $this
      */

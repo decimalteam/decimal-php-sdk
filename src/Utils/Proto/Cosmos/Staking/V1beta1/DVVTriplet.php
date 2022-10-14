@@ -19,15 +19,15 @@ use Google\Protobuf\Internal\GPBUtil;
 class DVVTriplet extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      */
     protected $delegator_address = '';
     /**
-     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.gogoproto.moretags) = "yaml:\"validator_src_address\""];</code>
      */
     protected $validator_src_address = '';
     /**
-     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.gogoproto.moretags) = "yaml:\"validator_dst_address\""];</code>
      */
     protected $validator_dst_address = '';
 
@@ -43,12 +43,12 @@ class DVVTriplet extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @return string
      */
     public function getDelegatorAddress()
@@ -57,7 +57,7 @@ class DVVTriplet extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -70,7 +70,7 @@ class DVVTriplet extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.gogoproto.moretags) = "yaml:\"validator_src_address\""];</code>
      * @return string
      */
     public function getValidatorSrcAddress()
@@ -79,7 +79,7 @@ class DVVTriplet extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.gogoproto.moretags) = "yaml:\"validator_src_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -92,7 +92,7 @@ class DVVTriplet extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.gogoproto.moretags) = "yaml:\"validator_dst_address\""];</code>
      * @return string
      */
     public function getValidatorDstAddress()
@@ -101,7 +101,7 @@ class DVVTriplet extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.gogoproto.moretags) = "yaml:\"validator_dst_address\""];</code>
      * @param string $var
      * @return $this
      */

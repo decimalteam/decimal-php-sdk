@@ -19,17 +19,17 @@ class MsgGrantAllowance extends \Google\Protobuf\Internal\Message
     /**
      * granter is the address of the user granting an allowance of their funds.
      *
-     * Generated from protobuf field <code>string granter = 1 [json_name = "granter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string granter = 1 [json_name = "granter"];</code>
      */
     protected $granter = '';
     /**
      * grantee is the address of the user being granted an allowance of another user's funds.
      *
-     * Generated from protobuf field <code>string grantee = 2 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 2 [json_name = "grantee"];</code>
      */
     protected $grantee = '';
     /**
-     * allowance can be any of basic, periodic, allowed fee allowance.
+     * allowance can be any of basic and filtered fee allowance.
      *
      * Generated from protobuf field <code>.google.protobuf.Any allowance = 3 [json_name = "allowance", (.cosmos_proto.accepts_interface) = "FeeAllowanceI"];</code>
      */
@@ -46,18 +46,18 @@ class MsgGrantAllowance extends \Google\Protobuf\Internal\Message
      *     @type string $grantee
      *           grantee is the address of the user being granted an allowance of another user's funds.
      *     @type \Google\Protobuf\Any $allowance
-     *           allowance can be any of basic, periodic, allowed fee allowance.
+     *           allowance can be any of basic and filtered fee allowance.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Feegrant\V1Beta1\Tx::initOnce();
+        \Cosmos\Feegrant\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
      * granter is the address of the user granting an allowance of their funds.
      *
-     * Generated from protobuf field <code>string granter = 1 [json_name = "granter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string granter = 1 [json_name = "granter"];</code>
      * @return string
      */
     public function getGranter()
@@ -68,7 +68,7 @@ class MsgGrantAllowance extends \Google\Protobuf\Internal\Message
     /**
      * granter is the address of the user granting an allowance of their funds.
      *
-     * Generated from protobuf field <code>string granter = 1 [json_name = "granter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string granter = 1 [json_name = "granter"];</code>
      * @param string $var
      * @return $this
      */
@@ -83,7 +83,7 @@ class MsgGrantAllowance extends \Google\Protobuf\Internal\Message
     /**
      * grantee is the address of the user being granted an allowance of another user's funds.
      *
-     * Generated from protobuf field <code>string grantee = 2 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 2 [json_name = "grantee"];</code>
      * @return string
      */
     public function getGrantee()
@@ -94,7 +94,7 @@ class MsgGrantAllowance extends \Google\Protobuf\Internal\Message
     /**
      * grantee is the address of the user being granted an allowance of another user's funds.
      *
-     * Generated from protobuf field <code>string grantee = 2 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 2 [json_name = "grantee"];</code>
      * @param string $var
      * @return $this
      */
@@ -107,7 +107,7 @@ class MsgGrantAllowance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * allowance can be any of basic, periodic, allowed fee allowance.
+     * allowance can be any of basic and filtered fee allowance.
      *
      * Generated from protobuf field <code>.google.protobuf.Any allowance = 3 [json_name = "allowance", (.cosmos_proto.accepts_interface) = "FeeAllowanceI"];</code>
      * @return \Google\Protobuf\Any|null
@@ -128,7 +128,7 @@ class MsgGrantAllowance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * allowance can be any of basic, periodic, allowed fee allowance.
+     * allowance can be any of basic and filtered fee allowance.
      *
      * Generated from protobuf field <code>.google.protobuf.Any allowance = 3 [json_name = "allowance", (.cosmos_proto.accepts_interface) = "FeeAllowanceI"];</code>
      * @param \Google\Protobuf\Any $var

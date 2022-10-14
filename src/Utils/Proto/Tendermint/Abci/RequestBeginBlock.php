@@ -39,11 +39,11 @@ class RequestBeginBlock extends \Google\Protobuf\Internal\Message
      *     @type string $hash
      *     @type \Tendermint\Types\Header $header
      *     @type \Tendermint\Abci\LastCommitInfo $last_commit_info
-     *     @type \Tendermint\Abci\Evidence[]|\Google\Protobuf\Internal\RepeatedField $byzantine_validators
+     *     @type array<\Tendermint\Abci\Evidence>|\Google\Protobuf\Internal\RepeatedField $byzantine_validators
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Abci\Types::initOnce();
+        \Tendermint\Abci\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -144,7 +144,7 @@ class RequestBeginBlock extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.abci.Evidence byzantine_validators = 4 [json_name = "byzantineValidators", (.gogoproto.nullable) = false];</code>
-     * @param \Tendermint\Abci\Evidence[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Abci\Evidence>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setByzantineValidators($var)

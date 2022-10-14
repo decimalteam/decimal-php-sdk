@@ -18,7 +18,7 @@ class ValidatorSlashEventRecord extends \Google\Protobuf\Internal\Message
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      */
     protected $validator_address = '';
     /**
@@ -36,7 +36,7 @@ class ValidatorSlashEventRecord extends \Google\Protobuf\Internal\Message
     /**
      * validator_slash_event describes the slash event.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_event = 4 [json_name = "validatorSlashEvent", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_event = 4 [json_name = "validatorSlashEvent", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"event\""];</code>
      */
     protected $validator_slash_event = null;
 
@@ -57,14 +57,14 @@ class ValidatorSlashEventRecord extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Genesis::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -75,7 +75,7 @@ class ValidatorSlashEventRecord extends \Google\Protobuf\Internal\Message
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -142,7 +142,7 @@ class ValidatorSlashEventRecord extends \Google\Protobuf\Internal\Message
     /**
      * validator_slash_event describes the slash event.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_event = 4 [json_name = "validatorSlashEvent", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_event = 4 [json_name = "validatorSlashEvent", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"event\""];</code>
      * @return \Cosmos\Distribution\V1beta1\ValidatorSlashEvent|null
      */
     public function getValidatorSlashEvent()
@@ -163,7 +163,7 @@ class ValidatorSlashEventRecord extends \Google\Protobuf\Internal\Message
     /**
      * validator_slash_event describes the slash event.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_event = 4 [json_name = "validatorSlashEvent", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorSlashEvent validator_slash_event = 4 [json_name = "validatorSlashEvent", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"event\""];</code>
      * @param \Cosmos\Distribution\V1beta1\ValidatorSlashEvent $var
      * @return $this
      */

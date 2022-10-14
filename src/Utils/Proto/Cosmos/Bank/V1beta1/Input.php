@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class Input extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      */
     protected $address = '';
     /**
@@ -31,16 +31,16 @@ class Input extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $address
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $coins
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $coins
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Bank::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Bank::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @return string
      */
     public function getAddress()
@@ -49,7 +49,7 @@ class Input extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @param string $var
      * @return $this
      */
@@ -72,7 +72,7 @@ class Input extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 2 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCoins($var)

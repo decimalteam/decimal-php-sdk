@@ -19,19 +19,19 @@ class CommissionRates extends \Google\Protobuf\Internal\Message
     /**
      * rate is the commission rate charged to delegators, as a fraction.
      *
-     * Generated from protobuf field <code>string rate = 1 [json_name = "rate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string rate = 1 [json_name = "rate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      */
     protected $rate = '';
     /**
      * max_rate defines the maximum commission rate which validator can ever charge, as a fraction.
      *
-     * Generated from protobuf field <code>string max_rate = 2 [json_name = "maxRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string max_rate = 2 [json_name = "maxRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"max_rate\""];</code>
      */
     protected $max_rate = '';
     /**
      * max_change_rate defines the maximum daily increase of the validator commission, as a fraction.
      *
-     * Generated from protobuf field <code>string max_change_rate = 3 [json_name = "maxChangeRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string max_change_rate = 3 [json_name = "maxChangeRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"max_change_rate\""];</code>
      */
     protected $max_change_rate = '';
 
@@ -50,14 +50,14 @@ class CommissionRates extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
     /**
      * rate is the commission rate charged to delegators, as a fraction.
      *
-     * Generated from protobuf field <code>string rate = 1 [json_name = "rate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string rate = 1 [json_name = "rate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      * @return string
      */
     public function getRate()
@@ -68,7 +68,7 @@ class CommissionRates extends \Google\Protobuf\Internal\Message
     /**
      * rate is the commission rate charged to delegators, as a fraction.
      *
-     * Generated from protobuf field <code>string rate = 1 [json_name = "rate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string rate = 1 [json_name = "rate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      * @param string $var
      * @return $this
      */
@@ -83,7 +83,7 @@ class CommissionRates extends \Google\Protobuf\Internal\Message
     /**
      * max_rate defines the maximum commission rate which validator can ever charge, as a fraction.
      *
-     * Generated from protobuf field <code>string max_rate = 2 [json_name = "maxRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string max_rate = 2 [json_name = "maxRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"max_rate\""];</code>
      * @return string
      */
     public function getMaxRate()
@@ -94,7 +94,7 @@ class CommissionRates extends \Google\Protobuf\Internal\Message
     /**
      * max_rate defines the maximum commission rate which validator can ever charge, as a fraction.
      *
-     * Generated from protobuf field <code>string max_rate = 2 [json_name = "maxRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string max_rate = 2 [json_name = "maxRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"max_rate\""];</code>
      * @param string $var
      * @return $this
      */
@@ -109,7 +109,7 @@ class CommissionRates extends \Google\Protobuf\Internal\Message
     /**
      * max_change_rate defines the maximum daily increase of the validator commission, as a fraction.
      *
-     * Generated from protobuf field <code>string max_change_rate = 3 [json_name = "maxChangeRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string max_change_rate = 3 [json_name = "maxChangeRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"max_change_rate\""];</code>
      * @return string
      */
     public function getMaxChangeRate()
@@ -120,7 +120,7 @@ class CommissionRates extends \Google\Protobuf\Internal\Message
     /**
      * max_change_rate defines the maximum daily increase of the validator commission, as a fraction.
      *
-     * Generated from protobuf field <code>string max_change_rate = 3 [json_name = "maxChangeRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string max_change_rate = 3 [json_name = "maxChangeRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"max_change_rate\""];</code>
      * @param string $var
      * @return $this
      */

@@ -28,12 +28,12 @@ class QueryServicesDescriptor extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\Reflection\V2alpha1\QueryServiceDescriptor[]|\Google\Protobuf\Internal\RepeatedField $query_services
+     *     @type array<\Cosmos\Base\Reflection\V2alpha1\QueryServiceDescriptor>|\Google\Protobuf\Internal\RepeatedField $query_services
      *           query_services is a list of cosmos-sdk QueryServiceDescriptor
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V2Alpha1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V2alpha1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 
@@ -52,7 +52,7 @@ class QueryServicesDescriptor extends \Google\Protobuf\Internal\Message
      * query_services is a list of cosmos-sdk QueryServiceDescriptor
      *
      * Generated from protobuf field <code>repeated .cosmos.base.reflection.v2alpha1.QueryServiceDescriptor query_services = 1 [json_name = "queryServices"];</code>
-     * @param \Cosmos\Base\Reflection\V2alpha1\QueryServiceDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Reflection\V2alpha1\QueryServiceDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setQueryServices($var)

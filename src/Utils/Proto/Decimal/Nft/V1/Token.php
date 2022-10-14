@@ -92,12 +92,12 @@ class Token extends \Google\Protobuf\Internal\Message
      *           minted defines total count of minted NFT sub-tokens.
      *     @type int $burnt
      *           burnt defines total count of burnt NFT sub-tokens.
-     *     @type \Decimal\Nft\V1\SubToken[]|\Google\Protobuf\Internal\RepeatedField $sub_tokens
+     *     @type array<\Decimal\Nft\V1\SubToken>|\Google\Protobuf\Internal\RepeatedField $sub_tokens
      *           sub_tokens defines the list of NFT sub-tokens existing in the NFT token.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Nft::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Nft::initOnce();
         parent::__construct($data);
     }
 
@@ -334,7 +334,7 @@ class Token extends \Google\Protobuf\Internal\Message
      * sub_tokens defines the list of NFT sub-tokens existing in the NFT token.
      *
      * Generated from protobuf field <code>repeated .decimal.nft.v1.SubToken sub_tokens = 9 [json_name = "subTokens", (.gogoproto.castrepeated) = "SubTokens"];</code>
-     * @param \Decimal\Nft\V1\SubToken[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Nft\V1\SubToken>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSubTokens($var)

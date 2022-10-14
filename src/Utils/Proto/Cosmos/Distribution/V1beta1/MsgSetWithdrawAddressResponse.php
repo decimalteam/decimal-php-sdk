@@ -25,7 +25,7 @@ class MsgSetWithdrawAddressResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Tx::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

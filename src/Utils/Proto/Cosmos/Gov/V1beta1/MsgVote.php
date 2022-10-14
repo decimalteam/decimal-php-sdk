@@ -16,11 +16,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgVote extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      */
     protected $proposal_id = 0;
     /**
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      */
     protected $voter = '';
     /**
@@ -40,12 +40,12 @@ class MsgVote extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Tx::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @return int|string
      */
     public function getProposalId()
@@ -54,7 +54,7 @@ class MsgVote extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -67,7 +67,7 @@ class MsgVote extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @return string
      */
     public function getVoter()
@@ -76,7 +76,7 @@ class MsgVote extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @param string $var
      * @return $this
      */

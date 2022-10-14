@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class Validators extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>repeated string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>repeated string address = 1 [json_name = "address"];</code>
      */
     private $address;
 
@@ -26,16 +26,16 @@ class Validators extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $address
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $address
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Authz::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Authz::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>repeated string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>repeated string address = 1 [json_name = "address"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getAddress()
@@ -44,8 +44,8 @@ class Validators extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated string address = 1 [json_name = "address"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAddress($var)

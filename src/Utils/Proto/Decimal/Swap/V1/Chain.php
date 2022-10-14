@@ -49,7 +49,7 @@ class Chain extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Swap\V1\Swap::initOnce();
+        \Decimal\Swap\V1\GPBMetadata\Swap::initOnce();
         parent::__construct($data);
     }
 

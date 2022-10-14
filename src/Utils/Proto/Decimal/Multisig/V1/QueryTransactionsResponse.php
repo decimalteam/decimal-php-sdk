@@ -30,12 +30,12 @@ class QueryTransactionsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Multisig\V1\Transaction[]|\Google\Protobuf\Internal\RepeatedField $transactions
+     *     @type array<\Decimal\Multisig\V1\Transaction>|\Google\Protobuf\Internal\RepeatedField $transactions
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Multisig\V1\Query::initOnce();
+        \Decimal\Multisig\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -50,7 +50,7 @@ class QueryTransactionsResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 1 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Multisig\V1\Transaction[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Multisig\V1\Transaction>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTransactions($var)

@@ -65,7 +65,7 @@ class TxBody extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $messages
+     *     @type array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $messages
      *           messages is a list of messages to be executed. The required signers of
      *           those messages define the number and order of elements in AuthInfo's
      *           signer_infos and Tx's signatures. Each required signer address is added to
@@ -80,18 +80,18 @@ class TxBody extends \Google\Protobuf\Internal\Message
      *     @type int|string $timeout_height
      *           timeout is the block height after which this transaction will not
      *           be processed by the chain
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $extension_options
+     *     @type array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $extension_options
      *           extension_options are arbitrary options that can be added by chains
      *           when the default options are not sufficient. If any of these are present
      *           and can't be handled, the transaction will be rejected
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $non_critical_extension_options
+     *     @type array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $non_critical_extension_options
      *           extension_options are arbitrary options that can be added by chains
      *           when the default options are not sufficient. If any of these are present
      *           and can't be handled, they will be ignored
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\V1Beta1\Tx::initOnce();
+        \Cosmos\Tx\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -122,7 +122,7 @@ class TxBody extends \Google\Protobuf\Internal\Message
      * transaction.
      *
      * Generated from protobuf field <code>repeated .google.protobuf.Any messages = 1 [json_name = "messages"];</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setMessages($var)
@@ -210,7 +210,7 @@ class TxBody extends \Google\Protobuf\Internal\Message
      * and can't be handled, the transaction will be rejected
      *
      * Generated from protobuf field <code>repeated .google.protobuf.Any extension_options = 1023 [json_name = "extensionOptions"];</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setExtensionOptions($var)
@@ -240,7 +240,7 @@ class TxBody extends \Google\Protobuf\Internal\Message
      * and can't be handled, they will be ignored
      *
      * Generated from protobuf field <code>repeated .google.protobuf.Any non_critical_extension_options = 2047 [json_name = "nonCriticalExtensionOptions"];</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setNonCriticalExtensionOptions($var)

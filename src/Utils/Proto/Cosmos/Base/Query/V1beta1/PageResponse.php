@@ -22,8 +22,7 @@ class PageResponse extends \Google\Protobuf\Internal\Message
 {
     /**
      * next_key is the key to be passed to PageRequest.key to
-     * query the next page most efficiently. It will be empty if
-     * there are no more results.
+     * query the next page most efficiently
      *
      * Generated from protobuf field <code>bytes next_key = 1 [json_name = "nextKey"];</code>
      */
@@ -44,22 +43,20 @@ class PageResponse extends \Google\Protobuf\Internal\Message
      *
      *     @type string $next_key
      *           next_key is the key to be passed to PageRequest.key to
-     *           query the next page most efficiently. It will be empty if
-     *           there are no more results.
+     *           query the next page most efficiently
      *     @type int|string $total
      *           total is total number of results available if PageRequest.count_total
      *           was set, its value is undefined otherwise
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Query\V1Beta1\Pagination::initOnce();
+        \Cosmos\Base\Query\V1beta1\GPBMetadata\Pagination::initOnce();
         parent::__construct($data);
     }
 
     /**
      * next_key is the key to be passed to PageRequest.key to
-     * query the next page most efficiently. It will be empty if
-     * there are no more results.
+     * query the next page most efficiently
      *
      * Generated from protobuf field <code>bytes next_key = 1 [json_name = "nextKey"];</code>
      * @return string
@@ -71,8 +68,7 @@ class PageResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * next_key is the key to be passed to PageRequest.key to
-     * query the next page most efficiently. It will be empty if
-     * there are no more results.
+     * query the next page most efficiently
      *
      * Generated from protobuf field <code>bytes next_key = 1 [json_name = "nextKey"];</code>
      * @param string $var

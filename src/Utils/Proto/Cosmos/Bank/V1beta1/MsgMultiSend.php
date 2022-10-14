@@ -30,12 +30,12 @@ class MsgMultiSend extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Bank\V1beta1\Input[]|\Google\Protobuf\Internal\RepeatedField $inputs
-     *     @type \Cosmos\Bank\V1beta1\Output[]|\Google\Protobuf\Internal\RepeatedField $outputs
+     *     @type array<\Cosmos\Bank\V1beta1\Input>|\Google\Protobuf\Internal\RepeatedField $inputs
+     *     @type array<\Cosmos\Bank\V1beta1\Output>|\Google\Protobuf\Internal\RepeatedField $outputs
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Tx::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -50,7 +50,7 @@ class MsgMultiSend extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Input inputs = 1 [json_name = "inputs", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Bank\V1beta1\Input[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Bank\V1beta1\Input>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setInputs($var)
@@ -72,7 +72,7 @@ class MsgMultiSend extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Output outputs = 2 [json_name = "outputs", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Bank\V1beta1\Output[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Bank\V1beta1\Output>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOutputs($var)

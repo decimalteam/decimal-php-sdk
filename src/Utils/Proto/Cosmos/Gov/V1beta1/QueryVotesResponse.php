@@ -34,14 +34,14 @@ class QueryVotesResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Gov\V1beta1\Vote[]|\Google\Protobuf\Internal\RepeatedField $votes
+     *     @type array<\Cosmos\Gov\V1beta1\Vote>|\Google\Protobuf\Internal\RepeatedField $votes
      *           votes defined the queried votes.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Query::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -60,7 +60,7 @@ class QueryVotesResponse extends \Google\Protobuf\Internal\Message
      * votes defined the queried votes.
      *
      * Generated from protobuf field <code>repeated .cosmos.gov.v1beta1.Vote votes = 1 [json_name = "votes", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Gov\V1beta1\Vote[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Gov\V1beta1\Vote>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setVotes($var)

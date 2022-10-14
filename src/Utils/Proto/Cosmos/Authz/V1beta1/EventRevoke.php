@@ -24,13 +24,13 @@ class EventRevoke extends \Google\Protobuf\Internal\Message
     /**
      * Granter account address
      *
-     * Generated from protobuf field <code>string granter = 3 [json_name = "granter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string granter = 3 [json_name = "granter"];</code>
      */
     protected $granter = '';
     /**
      * Grantee account address
      *
-     * Generated from protobuf field <code>string grantee = 4 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 4 [json_name = "grantee"];</code>
      */
     protected $grantee = '';
 
@@ -49,7 +49,7 @@ class EventRevoke extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Authz\V1Beta1\Event::initOnce();
+        \Cosmos\Authz\V1beta1\GPBMetadata\Event::initOnce();
         parent::__construct($data);
     }
 
@@ -82,7 +82,7 @@ class EventRevoke extends \Google\Protobuf\Internal\Message
     /**
      * Granter account address
      *
-     * Generated from protobuf field <code>string granter = 3 [json_name = "granter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string granter = 3 [json_name = "granter"];</code>
      * @return string
      */
     public function getGranter()
@@ -93,7 +93,7 @@ class EventRevoke extends \Google\Protobuf\Internal\Message
     /**
      * Granter account address
      *
-     * Generated from protobuf field <code>string granter = 3 [json_name = "granter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string granter = 3 [json_name = "granter"];</code>
      * @param string $var
      * @return $this
      */
@@ -108,7 +108,7 @@ class EventRevoke extends \Google\Protobuf\Internal\Message
     /**
      * Grantee account address
      *
-     * Generated from protobuf field <code>string grantee = 4 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 4 [json_name = "grantee"];</code>
      * @return string
      */
     public function getGrantee()
@@ -119,7 +119,7 @@ class EventRevoke extends \Google\Protobuf\Internal\Message
     /**
      * Grantee account address
      *
-     * Generated from protobuf field <code>string grantee = 4 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 4 [json_name = "grantee"];</code>
      * @param string $var
      * @return $this
      */

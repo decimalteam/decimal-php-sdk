@@ -34,14 +34,14 @@ class QueryGrantsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Authz\V1beta1\Grant[]|\Google\Protobuf\Internal\RepeatedField $grants
+     *     @type array<\Cosmos\Authz\V1beta1\Grant>|\Google\Protobuf\Internal\RepeatedField $grants
      *           authorizations is a list of grants granted for grantee by granter.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines an pagination for the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Authz\V1Beta1\Query::initOnce();
+        \Cosmos\Authz\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -60,7 +60,7 @@ class QueryGrantsResponse extends \Google\Protobuf\Internal\Message
      * authorizations is a list of grants granted for grantee by granter.
      *
      * Generated from protobuf field <code>repeated .cosmos.authz.v1beta1.Grant grants = 1 [json_name = "grants"];</code>
-     * @param \Cosmos\Authz\V1beta1\Grant[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Authz\V1beta1\Grant>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setGrants($var)

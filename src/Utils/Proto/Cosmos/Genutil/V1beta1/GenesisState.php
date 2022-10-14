@@ -18,7 +18,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * gen_txs defines the genesis transactions.
      *
-     * Generated from protobuf field <code>repeated bytes gen_txs = 1 [json_name = "genTxs", (.gogoproto.jsontag) = "gentxs", (.gogoproto.casttype) = "encoding/json.RawMessage"];</code>
+     * Generated from protobuf field <code>repeated bytes gen_txs = 1 [json_name = "genTxs", (.gogoproto.jsontag) = "gentxs", (.gogoproto.moretags) = "yaml:\"gentxs\"", (.gogoproto.casttype) = "encoding/json.RawMessage"];</code>
      */
     private $gen_txs;
 
@@ -28,19 +28,19 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $gen_txs
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $gen_txs
      *           gen_txs defines the genesis transactions.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Genutil\V1Beta1\Genesis::initOnce();
+        \Cosmos\Genutil\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * gen_txs defines the genesis transactions.
      *
-     * Generated from protobuf field <code>repeated bytes gen_txs = 1 [json_name = "genTxs", (.gogoproto.jsontag) = "gentxs", (.gogoproto.casttype) = "encoding/json.RawMessage"];</code>
+     * Generated from protobuf field <code>repeated bytes gen_txs = 1 [json_name = "genTxs", (.gogoproto.jsontag) = "gentxs", (.gogoproto.moretags) = "yaml:\"gentxs\"", (.gogoproto.casttype) = "encoding/json.RawMessage"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getGenTxs()
@@ -51,8 +51,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * gen_txs defines the genesis transactions.
      *
-     * Generated from protobuf field <code>repeated bytes gen_txs = 1 [json_name = "genTxs", (.gogoproto.jsontag) = "gentxs", (.gogoproto.casttype) = "encoding/json.RawMessage"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated bytes gen_txs = 1 [json_name = "genTxs", (.gogoproto.jsontag) = "gentxs", (.gogoproto.moretags) = "yaml:\"gentxs\"", (.gogoproto.casttype) = "encoding/json.RawMessage"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setGenTxs($var)

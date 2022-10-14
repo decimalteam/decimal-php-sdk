@@ -18,13 +18,13 @@ class Minter extends \Google\Protobuf\Internal\Message
     /**
      * current annual inflation rate
      *
-     * Generated from protobuf field <code>string inflation = 1 [json_name = "inflation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation = 1 [json_name = "inflation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      */
     protected $inflation = '';
     /**
      * current annual expected provisions
      *
-     * Generated from protobuf field <code>string annual_provisions = 2 [json_name = "annualProvisions", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string annual_provisions = 2 [json_name = "annualProvisions", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"annual_provisions\""];</code>
      */
     protected $annual_provisions = '';
 
@@ -41,14 +41,14 @@ class Minter extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Mint\V1Beta1\Mint::initOnce();
+        \Cosmos\Mint\V1beta1\GPBMetadata\Mint::initOnce();
         parent::__construct($data);
     }
 
     /**
      * current annual inflation rate
      *
-     * Generated from protobuf field <code>string inflation = 1 [json_name = "inflation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation = 1 [json_name = "inflation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      * @return string
      */
     public function getInflation()
@@ -59,7 +59,7 @@ class Minter extends \Google\Protobuf\Internal\Message
     /**
      * current annual inflation rate
      *
-     * Generated from protobuf field <code>string inflation = 1 [json_name = "inflation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string inflation = 1 [json_name = "inflation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      * @param string $var
      * @return $this
      */
@@ -74,7 +74,7 @@ class Minter extends \Google\Protobuf\Internal\Message
     /**
      * current annual expected provisions
      *
-     * Generated from protobuf field <code>string annual_provisions = 2 [json_name = "annualProvisions", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string annual_provisions = 2 [json_name = "annualProvisions", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"annual_provisions\""];</code>
      * @return string
      */
     public function getAnnualProvisions()
@@ -85,7 +85,7 @@ class Minter extends \Google\Protobuf\Internal\Message
     /**
      * current annual expected provisions
      *
-     * Generated from protobuf field <code>string annual_provisions = 2 [json_name = "annualProvisions", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string annual_provisions = 2 [json_name = "annualProvisions", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"annual_provisions\""];</code>
      * @param string $var
      * @return $this
      */

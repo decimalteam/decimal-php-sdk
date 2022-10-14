@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class Validator extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      */
     protected $address = '';
     /**
@@ -45,12 +45,12 @@ class Validator extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Tendermint\V1Beta1\Query::initOnce();
+        \Cosmos\Base\Tendermint\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @return string
      */
     public function getAddress()
@@ -59,7 +59,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @param string $var
      * @return $this
      */

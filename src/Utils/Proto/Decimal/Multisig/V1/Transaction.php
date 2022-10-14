@@ -49,13 +49,13 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *     @type string $id
      *     @type string $wallet
      *     @type string $receiver
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $coins
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $signers
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $coins
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $signers
      *     @type int|string $created_at
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Multisig\V1\Multisig::initOnce();
+        \Decimal\Multisig\V1\GPBMetadata\Multisig::initOnce();
         parent::__construct($data);
     }
 
@@ -136,7 +136,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 4 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCoins($var)
@@ -158,7 +158,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated string signers = 5 [json_name = "signers"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSigners($var)

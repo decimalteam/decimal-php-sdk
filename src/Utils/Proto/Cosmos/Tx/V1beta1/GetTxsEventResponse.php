@@ -29,19 +29,11 @@ class GetTxsEventResponse extends \Google\Protobuf\Internal\Message
      */
     private $tx_responses;
     /**
-     * pagination defines a pagination for the response.
-     * Deprecated post v0.46.x: use total instead.
+     * pagination defines an pagination for the response.
      *
-     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageResponse pagination = 3 [json_name = "pagination", deprecated = true];</code>
-     * @deprecated
+     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageResponse pagination = 3 [json_name = "pagination"];</code>
      */
     protected $pagination = null;
-    /**
-     * total is total number of results available
-     *
-     * Generated from protobuf field <code>uint64 total = 4 [json_name = "total"];</code>
-     */
-    protected $total = 0;
 
     /**
      * Constructor.
@@ -49,19 +41,16 @@ class GetTxsEventResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Tx\V1beta1\Tx[]|\Google\Protobuf\Internal\RepeatedField $txs
+     *     @type array<\Cosmos\Tx\V1beta1\Tx>|\Google\Protobuf\Internal\RepeatedField $txs
      *           txs is the list of queried transactions.
-     *     @type \Cosmos\Base\Abci\V1beta1\TxResponse[]|\Google\Protobuf\Internal\RepeatedField $tx_responses
+     *     @type array<\Cosmos\Base\Abci\V1beta1\TxResponse>|\Google\Protobuf\Internal\RepeatedField $tx_responses
      *           tx_responses is the list of queried TxResponses.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
-     *           pagination defines a pagination for the response.
-     *           Deprecated post v0.46.x: use total instead.
-     *     @type int|string $total
-     *           total is total number of results available
+     *           pagination defines an pagination for the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\V1Beta1\Service::initOnce();
+        \Cosmos\Tx\V1beta1\GPBMetadata\Service::initOnce();
         parent::__construct($data);
     }
 
@@ -80,7 +69,7 @@ class GetTxsEventResponse extends \Google\Protobuf\Internal\Message
      * txs is the list of queried transactions.
      *
      * Generated from protobuf field <code>repeated .cosmos.tx.v1beta1.Tx txs = 1 [json_name = "txs"];</code>
-     * @param \Cosmos\Tx\V1beta1\Tx[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Tx\V1beta1\Tx>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTxs($var)
@@ -106,7 +95,7 @@ class GetTxsEventResponse extends \Google\Protobuf\Internal\Message
      * tx_responses is the list of queried TxResponses.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.abci.v1beta1.TxResponse tx_responses = 2 [json_name = "txResponses"];</code>
-     * @param \Cosmos\Base\Abci\V1beta1\TxResponse[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Abci\V1beta1\TxResponse>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTxResponses($var)
@@ -118,71 +107,37 @@ class GetTxsEventResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * pagination defines a pagination for the response.
-     * Deprecated post v0.46.x: use total instead.
+     * pagination defines an pagination for the response.
      *
-     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageResponse pagination = 3 [json_name = "pagination", deprecated = true];</code>
+     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageResponse pagination = 3 [json_name = "pagination"];</code>
      * @return \Cosmos\Base\Query\V1beta1\PageResponse|null
-     * @deprecated
      */
     public function getPagination()
     {
-        @trigger_error('pagination is deprecated.', E_USER_DEPRECATED);
         return $this->pagination;
     }
 
     public function hasPagination()
     {
-        @trigger_error('pagination is deprecated.', E_USER_DEPRECATED);
         return isset($this->pagination);
     }
 
     public function clearPagination()
     {
-        @trigger_error('pagination is deprecated.', E_USER_DEPRECATED);
         unset($this->pagination);
     }
 
     /**
-     * pagination defines a pagination for the response.
-     * Deprecated post v0.46.x: use total instead.
+     * pagination defines an pagination for the response.
      *
-     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageResponse pagination = 3 [json_name = "pagination", deprecated = true];</code>
+     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageResponse pagination = 3 [json_name = "pagination"];</code>
      * @param \Cosmos\Base\Query\V1beta1\PageResponse $var
      * @return $this
-     * @deprecated
      */
     public function setPagination($var)
     {
-        @trigger_error('pagination is deprecated.', E_USER_DEPRECATED);
         GPBUtil::checkMessage($var, \Cosmos\Base\Query\V1beta1\PageResponse::class);
         $this->pagination = $var;
-
-        return $this;
-    }
-
-    /**
-     * total is total number of results available
-     *
-     * Generated from protobuf field <code>uint64 total = 4 [json_name = "total"];</code>
-     * @return int|string
-     */
-    public function getTotal()
-    {
-        return $this->total;
-    }
-
-    /**
-     * total is total number of results available
-     *
-     * Generated from protobuf field <code>uint64 total = 4 [json_name = "total"];</code>
-     * @param int|string $var
-     * @return $this
-     */
-    public function setTotal($var)
-    {
-        GPBUtil::checkUint64($var);
-        $this->total = $var;
 
         return $this;
     }

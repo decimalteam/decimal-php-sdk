@@ -44,8 +44,6 @@ class VersionInfo extends \Google\Protobuf\Internal\Message
      */
     private $build_deps;
     /**
-     * Since: cosmos-sdk 0.43
-     *
      * Generated from protobuf field <code>string cosmos_sdk_version = 8 [json_name = "cosmosSdkVersion"];</code>
      */
     protected $cosmos_sdk_version = '';
@@ -62,13 +60,12 @@ class VersionInfo extends \Google\Protobuf\Internal\Message
      *     @type string $git_commit
      *     @type string $build_tags
      *     @type string $go_version
-     *     @type \Cosmos\Base\Tendermint\V1beta1\Module[]|\Google\Protobuf\Internal\RepeatedField $build_deps
+     *     @type array<\Cosmos\Base\Tendermint\V1beta1\Module>|\Google\Protobuf\Internal\RepeatedField $build_deps
      *     @type string $cosmos_sdk_version
-     *           Since: cosmos-sdk 0.43
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Tendermint\V1Beta1\Query::initOnce();
+        \Cosmos\Base\Tendermint\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -215,7 +212,7 @@ class VersionInfo extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.tendermint.v1beta1.Module build_deps = 7 [json_name = "buildDeps"];</code>
-     * @param \Cosmos\Base\Tendermint\V1beta1\Module[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Tendermint\V1beta1\Module>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setBuildDeps($var)
@@ -227,8 +224,6 @@ class VersionInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Since: cosmos-sdk 0.43
-     *
      * Generated from protobuf field <code>string cosmos_sdk_version = 8 [json_name = "cosmosSdkVersion"];</code>
      * @return string
      */
@@ -238,8 +233,6 @@ class VersionInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Since: cosmos-sdk 0.43
-     *
      * Generated from protobuf field <code>string cosmos_sdk_version = 8 [json_name = "cosmosSdkVersion"];</code>
      * @param string $var
      * @return $this

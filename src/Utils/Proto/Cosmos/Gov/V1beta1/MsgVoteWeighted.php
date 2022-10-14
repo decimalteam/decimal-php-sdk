@@ -10,18 +10,17 @@ use Google\Protobuf\Internal\GPBUtil;
 
 /**
  * MsgVoteWeighted defines a message to cast a vote.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.gov.v1beta1.MsgVoteWeighted</code>
  */
 class MsgVoteWeighted extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      */
     protected $proposal_id = 0;
     /**
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      */
     protected $voter = '';
     /**
@@ -37,16 +36,16 @@ class MsgVoteWeighted extends \Google\Protobuf\Internal\Message
      *
      *     @type int|string $proposal_id
      *     @type string $voter
-     *     @type \Cosmos\Gov\V1beta1\WeightedVoteOption[]|\Google\Protobuf\Internal\RepeatedField $options
+     *     @type array<\Cosmos\Gov\V1beta1\WeightedVoteOption>|\Google\Protobuf\Internal\RepeatedField $options
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Tx::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @return int|string
      */
     public function getProposalId()
@@ -55,7 +54,7 @@ class MsgVoteWeighted extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "proposal_id"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -68,7 +67,7 @@ class MsgVoteWeighted extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @return string
      */
     public function getVoter()
@@ -77,7 +76,7 @@ class MsgVoteWeighted extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @param string $var
      * @return $this
      */
@@ -100,7 +99,7 @@ class MsgVoteWeighted extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.gov.v1beta1.WeightedVoteOption options = 3 [json_name = "options", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Gov\V1beta1\WeightedVoteOption[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Gov\V1beta1\WeightedVoteOption>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOptions($var)

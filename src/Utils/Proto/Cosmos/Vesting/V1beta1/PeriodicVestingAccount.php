@@ -21,11 +21,11 @@ class PeriodicVestingAccount extends \Google\Protobuf\Internal\Message
      */
     protected $base_vesting_account = null;
     /**
-     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime"];</code>
+     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime", (.gogoproto.moretags) = "yaml:\"start_time\""];</code>
      */
     protected $start_time = 0;
     /**
-     * Generated from protobuf field <code>repeated .cosmos.vesting.v1beta1.Period vesting_periods = 3 [json_name = "vestingPeriods", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.vesting.v1beta1.Period vesting_periods = 3 [json_name = "vestingPeriods", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"vesting_periods\""];</code>
      */
     private $vesting_periods;
 
@@ -37,11 +37,11 @@ class PeriodicVestingAccount extends \Google\Protobuf\Internal\Message
      *
      *     @type \Cosmos\Vesting\V1beta1\BaseVestingAccount $base_vesting_account
      *     @type int|string $start_time
-     *     @type \Cosmos\Vesting\V1beta1\Period[]|\Google\Protobuf\Internal\RepeatedField $vesting_periods
+     *     @type array<\Cosmos\Vesting\V1beta1\Period>|\Google\Protobuf\Internal\RepeatedField $vesting_periods
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Vesting\V1Beta1\Vesting::initOnce();
+        \Cosmos\Vesting\V1beta1\GPBMetadata\Vesting::initOnce();
         parent::__construct($data);
     }
 
@@ -78,7 +78,7 @@ class PeriodicVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime"];</code>
+     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime", (.gogoproto.moretags) = "yaml:\"start_time\""];</code>
      * @return int|string
      */
     public function getStartTime()
@@ -87,7 +87,7 @@ class PeriodicVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime"];</code>
+     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime", (.gogoproto.moretags) = "yaml:\"start_time\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -100,7 +100,7 @@ class PeriodicVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.vesting.v1beta1.Period vesting_periods = 3 [json_name = "vestingPeriods", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.vesting.v1beta1.Period vesting_periods = 3 [json_name = "vestingPeriods", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"vesting_periods\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getVestingPeriods()
@@ -109,8 +109,8 @@ class PeriodicVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.vesting.v1beta1.Period vesting_periods = 3 [json_name = "vestingPeriods", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Vesting\V1beta1\Period[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.vesting.v1beta1.Period vesting_periods = 3 [json_name = "vestingPeriods", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"vesting_periods\""];</code>
+     * @param array<\Cosmos\Vesting\V1beta1\Period>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setVestingPeriods($var)

@@ -39,7 +39,7 @@ class BroadcastTxRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\V1Beta1\Service::initOnce();
+        \Cosmos\Tx\V1beta1\GPBMetadata\Service::initOnce();
         parent::__construct($data);
     }
 

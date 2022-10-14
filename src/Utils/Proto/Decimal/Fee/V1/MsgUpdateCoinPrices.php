@@ -36,12 +36,12 @@ class MsgUpdateCoinPrices extends \Google\Protobuf\Internal\Message
      *
      *     @type string $oracle
      *           oracle defines address empowered to update coin prices.
-     *     @type \Decimal\Fee\V1\CoinPrice[]|\Google\Protobuf\Internal\RepeatedField $prices
+     *     @type array<\Decimal\Fee\V1\CoinPrice>|\Google\Protobuf\Internal\RepeatedField $prices
      *           prices defines the coin prices requested to update.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Fee\V1\Tx::initOnce();
+        \Decimal\Fee\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -86,7 +86,7 @@ class MsgUpdateCoinPrices extends \Google\Protobuf\Internal\Message
      * prices defines the coin prices requested to update.
      *
      * Generated from protobuf field <code>repeated .decimal.fee.v1.CoinPrice prices = 2 [json_name = "prices", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Fee\V1\CoinPrice[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Fee\V1\CoinPrice>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPrices($var)

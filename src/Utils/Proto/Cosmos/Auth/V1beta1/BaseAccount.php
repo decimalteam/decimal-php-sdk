@@ -18,15 +18,15 @@ use Google\Protobuf\Internal\GPBUtil;
 class BaseAccount extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      */
     protected $address = '';
     /**
-     * Generated from protobuf field <code>.google.protobuf.Any pub_key = 2 [json_name = "pubKey", (.gogoproto.jsontag) = "public_key,omitempty"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any pub_key = 2 [json_name = "pubKey", (.gogoproto.jsontag) = "public_key,omitempty", (.gogoproto.moretags) = "yaml:\"public_key\""];</code>
      */
     protected $pub_key = null;
     /**
-     * Generated from protobuf field <code>uint64 account_number = 3 [json_name = "accountNumber"];</code>
+     * Generated from protobuf field <code>uint64 account_number = 3 [json_name = "accountNumber", (.gogoproto.moretags) = "yaml:\"account_number\""];</code>
      */
     protected $account_number = 0;
     /**
@@ -47,12 +47,12 @@ class BaseAccount extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Auth\V1Beta1\Auth::initOnce();
+        \Cosmos\Auth\V1beta1\GPBMetadata\Auth::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @return string
      */
     public function getAddress()
@@ -61,7 +61,7 @@ class BaseAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @param string $var
      * @return $this
      */
@@ -74,7 +74,7 @@ class BaseAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Any pub_key = 2 [json_name = "pubKey", (.gogoproto.jsontag) = "public_key,omitempty"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any pub_key = 2 [json_name = "pubKey", (.gogoproto.jsontag) = "public_key,omitempty", (.gogoproto.moretags) = "yaml:\"public_key\""];</code>
      * @return \Google\Protobuf\Any|null
      */
     public function getPubKey()
@@ -93,7 +93,7 @@ class BaseAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Any pub_key = 2 [json_name = "pubKey", (.gogoproto.jsontag) = "public_key,omitempty"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any pub_key = 2 [json_name = "pubKey", (.gogoproto.jsontag) = "public_key,omitempty", (.gogoproto.moretags) = "yaml:\"public_key\""];</code>
      * @param \Google\Protobuf\Any $var
      * @return $this
      */
@@ -106,7 +106,7 @@ class BaseAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 account_number = 3 [json_name = "accountNumber"];</code>
+     * Generated from protobuf field <code>uint64 account_number = 3 [json_name = "accountNumber", (.gogoproto.moretags) = "yaml:\"account_number\""];</code>
      * @return int|string
      */
     public function getAccountNumber()
@@ -115,7 +115,7 @@ class BaseAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 account_number = 3 [json_name = "accountNumber"];</code>
+     * Generated from protobuf field <code>uint64 account_number = 3 [json_name = "accountNumber", (.gogoproto.moretags) = "yaml:\"account_number\""];</code>
      * @param int|string $var
      * @return $this
      */

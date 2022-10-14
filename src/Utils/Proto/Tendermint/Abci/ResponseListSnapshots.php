@@ -24,11 +24,11 @@ class ResponseListSnapshots extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Tendermint\Abci\Snapshot[]|\Google\Protobuf\Internal\RepeatedField $snapshots
+     *     @type array<\Tendermint\Abci\Snapshot>|\Google\Protobuf\Internal\RepeatedField $snapshots
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Abci\Types::initOnce();
+        \Tendermint\Abci\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -43,7 +43,7 @@ class ResponseListSnapshots extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.abci.Snapshot snapshots = 1 [json_name = "snapshots"];</code>
-     * @param \Tendermint\Abci\Snapshot[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Abci\Snapshot>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSnapshots($var)

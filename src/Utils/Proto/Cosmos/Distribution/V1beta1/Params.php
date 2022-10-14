@@ -16,19 +16,19 @@ use Google\Protobuf\Internal\GPBUtil;
 class Params extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string community_tax = 1 [json_name = "communityTax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string community_tax = 1 [json_name = "communityTax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"community_tax\""];</code>
      */
     protected $community_tax = '';
     /**
-     * Generated from protobuf field <code>string base_proposer_reward = 2 [json_name = "baseProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string base_proposer_reward = 2 [json_name = "baseProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"base_proposer_reward\""];</code>
      */
     protected $base_proposer_reward = '';
     /**
-     * Generated from protobuf field <code>string bonus_proposer_reward = 3 [json_name = "bonusProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string bonus_proposer_reward = 3 [json_name = "bonusProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"bonus_proposer_reward\""];</code>
      */
     protected $bonus_proposer_reward = '';
     /**
-     * Generated from protobuf field <code>bool withdraw_addr_enabled = 4 [json_name = "withdrawAddrEnabled"];</code>
+     * Generated from protobuf field <code>bool withdraw_addr_enabled = 4 [json_name = "withdrawAddrEnabled", (.gogoproto.moretags) = "yaml:\"withdraw_addr_enabled\""];</code>
      */
     protected $withdraw_addr_enabled = false;
 
@@ -45,12 +45,12 @@ class Params extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Distribution::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Distribution::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string community_tax = 1 [json_name = "communityTax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string community_tax = 1 [json_name = "communityTax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"community_tax\""];</code>
      * @return string
      */
     public function getCommunityTax()
@@ -59,7 +59,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string community_tax = 1 [json_name = "communityTax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string community_tax = 1 [json_name = "communityTax", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"community_tax\""];</code>
      * @param string $var
      * @return $this
      */
@@ -72,7 +72,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string base_proposer_reward = 2 [json_name = "baseProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string base_proposer_reward = 2 [json_name = "baseProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"base_proposer_reward\""];</code>
      * @return string
      */
     public function getBaseProposerReward()
@@ -81,7 +81,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string base_proposer_reward = 2 [json_name = "baseProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string base_proposer_reward = 2 [json_name = "baseProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"base_proposer_reward\""];</code>
      * @param string $var
      * @return $this
      */
@@ -94,7 +94,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bonus_proposer_reward = 3 [json_name = "bonusProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string bonus_proposer_reward = 3 [json_name = "bonusProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"bonus_proposer_reward\""];</code>
      * @return string
      */
     public function getBonusProposerReward()
@@ -103,7 +103,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bonus_proposer_reward = 3 [json_name = "bonusProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string bonus_proposer_reward = 3 [json_name = "bonusProposerReward", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"bonus_proposer_reward\""];</code>
      * @param string $var
      * @return $this
      */
@@ -116,7 +116,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bool withdraw_addr_enabled = 4 [json_name = "withdrawAddrEnabled"];</code>
+     * Generated from protobuf field <code>bool withdraw_addr_enabled = 4 [json_name = "withdrawAddrEnabled", (.gogoproto.moretags) = "yaml:\"withdraw_addr_enabled\""];</code>
      * @return bool
      */
     public function getWithdrawAddrEnabled()
@@ -125,7 +125,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bool withdraw_addr_enabled = 4 [json_name = "withdrawAddrEnabled"];</code>
+     * Generated from protobuf field <code>bool withdraw_addr_enabled = 4 [json_name = "withdrawAddrEnabled", (.gogoproto.moretags) = "yaml:\"withdraw_addr_enabled\""];</code>
      * @param bool $var
      * @return $this
      */

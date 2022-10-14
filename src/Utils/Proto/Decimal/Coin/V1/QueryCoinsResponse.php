@@ -30,12 +30,12 @@ class QueryCoinsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Coin\V1\Coin[]|\Google\Protobuf\Internal\RepeatedField $coins
+     *     @type array<\Decimal\Coin\V1\Coin>|\Google\Protobuf\Internal\RepeatedField $coins
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Coin\V1\Query::initOnce();
+        \Decimal\Coin\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -50,7 +50,7 @@ class QueryCoinsResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .decimal.coin.v1.Coin coins = 1 [json_name = "coins", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Coin\V1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Coin\V1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCoins($var)

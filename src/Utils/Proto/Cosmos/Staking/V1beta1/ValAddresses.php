@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class ValAddresses extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>repeated string addresses = 1 [json_name = "addresses", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>repeated string addresses = 1 [json_name = "addresses"];</code>
      */
     private $addresses;
 
@@ -26,16 +26,16 @@ class ValAddresses extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $addresses
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $addresses
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>repeated string addresses = 1 [json_name = "addresses", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>repeated string addresses = 1 [json_name = "addresses"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getAddresses()
@@ -44,8 +44,8 @@ class ValAddresses extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated string addresses = 1 [json_name = "addresses", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated string addresses = 1 [json_name = "addresses"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAddresses($var)

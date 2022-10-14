@@ -33,11 +33,11 @@ class RedelegationResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Cosmos\Staking\V1beta1\Redelegation $redelegation
-     *     @type \Cosmos\Staking\V1beta1\RedelegationEntryResponse[]|\Google\Protobuf\Internal\RepeatedField $entries
+     *     @type array<\Cosmos\Staking\V1beta1\RedelegationEntryResponse>|\Google\Protobuf\Internal\RepeatedField $entries
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
@@ -84,7 +84,7 @@ class RedelegationResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.RedelegationEntryResponse entries = 2 [json_name = "entries", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\RedelegationEntryResponse[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\RedelegationEntryResponse>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEntries($var)

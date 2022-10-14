@@ -25,7 +25,7 @@ class MsgBuyCoinResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Coin\V1\Tx::initOnce();
+        \Decimal\Coin\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

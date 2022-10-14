@@ -36,7 +36,7 @@ class QueryUpgradedConsensusStateRequest extends \Google\Protobuf\Internal\Messa
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Upgrade\V1Beta1\Query::initOnce();
+        \Cosmos\Upgrade\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 

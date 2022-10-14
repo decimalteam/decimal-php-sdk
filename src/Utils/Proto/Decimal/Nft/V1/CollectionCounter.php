@@ -33,7 +33,7 @@ class CollectionCounter extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Nft::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Nft::initOnce();
         parent::__construct($data);
     }
 

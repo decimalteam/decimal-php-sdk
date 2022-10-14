@@ -16,6 +16,12 @@ use Google\Protobuf\Internal\GPBUtil;
 class GenesisState extends \Google\Protobuf\Internal\Message
 {
     /**
+     * chains defines the blockchain networks active at genesis.
+     *
+     * Generated from protobuf field <code>repeated .decimal.swap.v1.Chain chains = 1 [json_name = "chains", (.gogoproto.nullable) = false];</code>
+     */
+    private $chains;
+    /**
      * swaps defines the swaps active at genesis.
      *
      * Generated from protobuf field <code>repeated .decimal.swap.v1.Swap swaps = 2 [json_name = "swaps", (.gogoproto.nullable) = false];</code>
@@ -24,7 +30,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.swap.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.swap.v1.Params params = 3 [json_name = "params", (.gogoproto.nullable) = false];</code>
      */
     protected $params = null;
 
@@ -34,15 +40,43 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Swap\V1\Swap[]|\Google\Protobuf\Internal\RepeatedField $swaps
+     *     @type array<\Decimal\Swap\V1\Chain>|\Google\Protobuf\Internal\RepeatedField $chains
+     *           chains defines the blockchain networks active at genesis.
+     *     @type array<\Decimal\Swap\V1\Swap>|\Google\Protobuf\Internal\RepeatedField $swaps
      *           swaps defines the swaps active at genesis.
      *     @type \Decimal\Swap\V1\Params $params
      *           params defines all the module's parameters.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Swap\V1\Genesis::initOnce();
+        \Decimal\Swap\V1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
+    }
+
+    /**
+     * chains defines the blockchain networks active at genesis.
+     *
+     * Generated from protobuf field <code>repeated .decimal.swap.v1.Chain chains = 1 [json_name = "chains", (.gogoproto.nullable) = false];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getChains()
+    {
+        return $this->chains;
+    }
+
+    /**
+     * chains defines the blockchain networks active at genesis.
+     *
+     * Generated from protobuf field <code>repeated .decimal.swap.v1.Chain chains = 1 [json_name = "chains", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Swap\V1\Chain>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setChains($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Decimal\Swap\V1\Chain::class);
+        $this->chains = $arr;
+
+        return $this;
     }
 
     /**
@@ -60,7 +94,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * swaps defines the swaps active at genesis.
      *
      * Generated from protobuf field <code>repeated .decimal.swap.v1.Swap swaps = 2 [json_name = "swaps", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Swap\V1\Swap[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Swap\V1\Swap>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSwaps($var)
@@ -74,7 +108,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.swap.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.swap.v1.Params params = 3 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @return \Decimal\Swap\V1\Params|null
      */
     public function getParams()
@@ -95,7 +129,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.swap.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.swap.v1.Params params = 3 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @param \Decimal\Swap\V1\Params $var
      * @return $this
      */

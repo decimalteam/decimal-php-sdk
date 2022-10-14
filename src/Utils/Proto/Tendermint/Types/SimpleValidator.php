@@ -33,7 +33,7 @@ class SimpleValidator extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Validator::initOnce();
+        \Tendermint\Types\GPBMetadata\Validator::initOnce();
         parent::__construct($data);
     }
 

@@ -32,13 +32,13 @@ class ValidatorSet extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Tendermint\Types\Validator[]|\Google\Protobuf\Internal\RepeatedField $validators
+     *     @type array<\Tendermint\Types\Validator>|\Google\Protobuf\Internal\RepeatedField $validators
      *     @type \Tendermint\Types\Validator $proposer
      *     @type int|string $total_voting_power
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Validator::initOnce();
+        \Tendermint\Types\GPBMetadata\Validator::initOnce();
         parent::__construct($data);
     }
 
@@ -53,7 +53,7 @@ class ValidatorSet extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.types.Validator validators = 1 [json_name = "validators"];</code>
-     * @param \Tendermint\Types\Validator[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Types\Validator>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValidators($var)

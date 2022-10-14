@@ -36,12 +36,12 @@ class Multi extends \Google\Protobuf\Internal\Message
      *
      *     @type \Cosmos\Crypto\Multisig\V1beta1\CompactBitArray $bitarray
      *           bitarray specifies which keys within the multisig are signing
-     *     @type \Cosmos\Tx\Signing\V1beta1\SignatureDescriptor\Data[]|\Google\Protobuf\Internal\RepeatedField $signatures
+     *     @type array<\Cosmos\Tx\Signing\V1beta1\SignatureDescriptor\Data>|\Google\Protobuf\Internal\RepeatedField $signatures
      *           signatures is the signatures of the multi-signature
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\Signing\V1Beta1\Signing::initOnce();
+        \Cosmos\Tx\Signing\V1beta1\GPBMetadata\Signing::initOnce();
         parent::__construct($data);
     }
 
@@ -96,7 +96,7 @@ class Multi extends \Google\Protobuf\Internal\Message
      * signatures is the signatures of the multi-signature
      *
      * Generated from protobuf field <code>repeated .cosmos.tx.signing.v1beta1.SignatureDescriptor.Data signatures = 2 [json_name = "signatures"];</code>
-     * @param \Cosmos\Tx\Signing\V1beta1\SignatureDescriptor\Data[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Tx\Signing\V1beta1\SignatureDescriptor\Data>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSignatures($var)

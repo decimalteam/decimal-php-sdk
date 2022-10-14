@@ -18,13 +18,13 @@ class SigningInfo extends \Google\Protobuf\Internal\Message
     /**
      * address is the validator address.
      *
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      */
     protected $address = '';
     /**
      * validator_signing_info represents the signing info of this validator.
      *
-     * Generated from protobuf field <code>.cosmos.slashing.v1beta1.ValidatorSigningInfo validator_signing_info = 2 [json_name = "validatorSigningInfo", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.slashing.v1beta1.ValidatorSigningInfo validator_signing_info = 2 [json_name = "validatorSigningInfo", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"validator_signing_info\""];</code>
      */
     protected $validator_signing_info = null;
 
@@ -41,14 +41,14 @@ class SigningInfo extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Genesis::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * address is the validator address.
      *
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @return string
      */
     public function getAddress()
@@ -59,7 +59,7 @@ class SigningInfo extends \Google\Protobuf\Internal\Message
     /**
      * address is the validator address.
      *
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @param string $var
      * @return $this
      */
@@ -74,7 +74,7 @@ class SigningInfo extends \Google\Protobuf\Internal\Message
     /**
      * validator_signing_info represents the signing info of this validator.
      *
-     * Generated from protobuf field <code>.cosmos.slashing.v1beta1.ValidatorSigningInfo validator_signing_info = 2 [json_name = "validatorSigningInfo", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.slashing.v1beta1.ValidatorSigningInfo validator_signing_info = 2 [json_name = "validatorSigningInfo", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"validator_signing_info\""];</code>
      * @return \Cosmos\Slashing\V1beta1\ValidatorSigningInfo|null
      */
     public function getValidatorSigningInfo()
@@ -95,7 +95,7 @@ class SigningInfo extends \Google\Protobuf\Internal\Message
     /**
      * validator_signing_info represents the signing info of this validator.
      *
-     * Generated from protobuf field <code>.cosmos.slashing.v1beta1.ValidatorSigningInfo validator_signing_info = 2 [json_name = "validatorSigningInfo", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.slashing.v1beta1.ValidatorSigningInfo validator_signing_info = 2 [json_name = "validatorSigningInfo", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"validator_signing_info\""];</code>
      * @param \Cosmos\Slashing\V1beta1\ValidatorSigningInfo $var
      * @return $this
      */

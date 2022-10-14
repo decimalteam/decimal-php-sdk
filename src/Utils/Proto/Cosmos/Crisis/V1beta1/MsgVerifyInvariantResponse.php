@@ -25,7 +25,7 @@ class MsgVerifyInvariantResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Crisis\V1Beta1\Tx::initOnce();
+        \Cosmos\Crisis\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

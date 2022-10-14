@@ -33,13 +33,13 @@ class QuerySigningInfosResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Slashing\V1beta1\ValidatorSigningInfo[]|\Google\Protobuf\Internal\RepeatedField $info
+     *     @type array<\Cosmos\Slashing\V1beta1\ValidatorSigningInfo>|\Google\Protobuf\Internal\RepeatedField $info
      *           info is the signing info of all validators
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Query::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -58,7 +58,7 @@ class QuerySigningInfosResponse extends \Google\Protobuf\Internal\Message
      * info is the signing info of all validators
      *
      * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.ValidatorSigningInfo info = 1 [json_name = "info", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Slashing\V1beta1\ValidatorSigningInfo[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Slashing\V1beta1\ValidatorSigningInfo>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setInfo($var)

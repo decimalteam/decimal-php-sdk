@@ -19,13 +19,13 @@ class QueryDelegationRewardsRequest extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress"];</code>
      */
     protected $delegator_address = '';
     /**
      * validator_address defines the validator address to query for.
      *
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress"];</code>
      */
     protected $validator_address = '';
 
@@ -42,14 +42,14 @@ class QueryDelegationRewardsRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Query::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
      * delegator_address defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress"];</code>
      * @return string
      */
     public function getDelegatorAddress()
@@ -60,7 +60,7 @@ class QueryDelegationRewardsRequest extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress"];</code>
      * @param string $var
      * @return $this
      */
@@ -75,7 +75,7 @@ class QueryDelegationRewardsRequest extends \Google\Protobuf\Internal\Message
     /**
      * validator_address defines the validator address to query for.
      *
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress"];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -86,7 +86,7 @@ class QueryDelegationRewardsRequest extends \Google\Protobuf\Internal\Message
     /**
      * validator_address defines the validator address to query for.
      *
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress"];</code>
      * @param string $var
      * @return $this
      */

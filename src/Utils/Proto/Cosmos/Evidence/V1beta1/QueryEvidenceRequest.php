@@ -33,7 +33,7 @@ class QueryEvidenceRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Evidence\V1Beta1\Query::initOnce();
+        \Cosmos\Evidence\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 

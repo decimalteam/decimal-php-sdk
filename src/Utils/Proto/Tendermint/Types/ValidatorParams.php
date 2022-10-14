@@ -27,11 +27,11 @@ class ValidatorParams extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $pub_key_types
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $pub_key_types
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Params::initOnce();
+        \Tendermint\Types\GPBMetadata\Params::initOnce();
         parent::__construct($data);
     }
 
@@ -46,7 +46,7 @@ class ValidatorParams extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated string pub_key_types = 1 [json_name = "pubKeyTypes"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPubKeyTypes($var)

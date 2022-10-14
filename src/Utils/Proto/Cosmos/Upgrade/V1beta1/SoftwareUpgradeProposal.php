@@ -11,8 +11,6 @@ use Google\Protobuf\Internal\GPBUtil;
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
  * upgrade.
- * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
- * proposals, see MsgSoftwareUpgrade.
  *
  * Generated from protobuf message <code>cosmos.upgrade.v1beta1.SoftwareUpgradeProposal</code>
  */
@@ -43,7 +41,7 @@ class SoftwareUpgradeProposal extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Upgrade\V1Beta1\Upgrade::initOnce();
+        \Cosmos\Upgrade\V1beta1\GPBMetadata\Upgrade::initOnce();
         parent::__construct($data);
     }
 

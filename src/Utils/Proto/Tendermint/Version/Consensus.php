@@ -37,7 +37,7 @@ class Consensus extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Version\Types::initOnce();
+        \Tendermint\Version\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 

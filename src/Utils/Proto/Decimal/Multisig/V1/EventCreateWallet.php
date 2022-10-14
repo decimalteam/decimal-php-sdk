@@ -44,13 +44,13 @@ class EventCreateWallet extends \Google\Protobuf\Internal\Message
      *
      *     @type string $sender
      *     @type string $wallet
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $owners
-     *     @type int[]|\Google\Protobuf\Internal\RepeatedField $weights
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $owners
+     *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $weights
      *     @type int $threshold
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Multisig\V1\Events::initOnce();
+        \Decimal\Multisig\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 
@@ -109,7 +109,7 @@ class EventCreateWallet extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated string owners = 3 [json_name = "owners"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOwners($var)
@@ -131,7 +131,7 @@ class EventCreateWallet extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated uint32 weights = 4 [json_name = "weights"];</code>
-     * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<int>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setWeights($var)

@@ -57,7 +57,7 @@ class CoinPrice extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Fee\V1\Fee::initOnce();
+        \Decimal\Fee\V1\GPBMetadata\Fee::initOnce();
         parent::__construct($data);
     }
 

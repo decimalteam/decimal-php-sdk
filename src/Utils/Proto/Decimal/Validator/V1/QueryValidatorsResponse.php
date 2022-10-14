@@ -34,14 +34,14 @@ class QueryValidatorsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Validator\V1\Validator[]|\Google\Protobuf\Internal\RepeatedField $validators
+     *     @type array<\Decimal\Validator\V1\Validator>|\Google\Protobuf\Internal\RepeatedField $validators
      *           validators contains all the queried validators.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Query::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -60,7 +60,7 @@ class QueryValidatorsResponse extends \Google\Protobuf\Internal\Message
      * validators contains all the queried validators.
      *
      * Generated from protobuf field <code>repeated .decimal.validator.v1.Validator validators = 1 [json_name = "validators", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Validator\V1\Validator[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Validator\V1\Validator>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValidators($var)

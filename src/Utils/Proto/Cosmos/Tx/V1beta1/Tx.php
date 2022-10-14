@@ -48,14 +48,14 @@ class Tx extends \Google\Protobuf\Internal\Message
      *     @type \Cosmos\Tx\V1beta1\AuthInfo $auth_info
      *           auth_info is the authorization related content of the transaction,
      *           specifically signers, signer modes and fee
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $signatures
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $signatures
      *           signatures is a list of signatures that matches the length and order of
      *           AuthInfo's signer_infos to allow connecting signature meta information like
      *           public key and signing mode by position.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\V1Beta1\Tx::initOnce();
+        \Cosmos\Tx\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -152,7 +152,7 @@ class Tx extends \Google\Protobuf\Internal\Message
      * public key and signing mode by position.
      *
      * Generated from protobuf field <code>repeated bytes signatures = 3 [json_name = "signatures"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSignatures($var)

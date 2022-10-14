@@ -17,7 +17,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgSubmitEvidence extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string submitter = 1 [json_name = "submitter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string submitter = 1 [json_name = "submitter"];</code>
      */
     protected $submitter = '';
     /**
@@ -36,12 +36,12 @@ class MsgSubmitEvidence extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Evidence\V1Beta1\Tx::initOnce();
+        \Cosmos\Evidence\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string submitter = 1 [json_name = "submitter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string submitter = 1 [json_name = "submitter"];</code>
      * @return string
      */
     public function getSubmitter()
@@ -50,7 +50,7 @@ class MsgSubmitEvidence extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string submitter = 1 [json_name = "submitter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string submitter = 1 [json_name = "submitter"];</code>
      * @param string $var
      * @return $this
      */

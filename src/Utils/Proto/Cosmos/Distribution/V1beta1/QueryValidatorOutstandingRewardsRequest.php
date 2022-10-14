@@ -19,7 +19,7 @@ class QueryValidatorOutstandingRewardsRequest extends \Google\Protobuf\Internal\
     /**
      * validator_address defines the validator address to query for.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress"];</code>
      */
     protected $validator_address = '';
 
@@ -34,14 +34,14 @@ class QueryValidatorOutstandingRewardsRequest extends \Google\Protobuf\Internal\
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Query::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
      * validator_address defines the validator address to query for.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress"];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -52,7 +52,7 @@ class QueryValidatorOutstandingRewardsRequest extends \Google\Protobuf\Internal\
     /**
      * validator_address defines the validator address to query for.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress"];</code>
      * @param string $var
      * @return $this
      */

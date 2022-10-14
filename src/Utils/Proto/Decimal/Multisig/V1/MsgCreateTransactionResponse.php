@@ -30,7 +30,7 @@ class MsgCreateTransactionResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Multisig\V1\Tx::initOnce();
+        \Decimal\Multisig\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

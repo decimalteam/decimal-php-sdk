@@ -55,7 +55,7 @@ class EventSignTransaction extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Multisig\V1\Events::initOnce();
+        \Decimal\Multisig\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 

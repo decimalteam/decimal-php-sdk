@@ -18,7 +18,6 @@ class QueryTotalSupplyRequest extends \Google\Protobuf\Internal\Message
 {
     /**
      * pagination defines an optional pagination for the request.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 1 [json_name = "pagination"];</code>
      */
@@ -32,17 +31,15 @@ class QueryTotalSupplyRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type \Cosmos\Base\Query\V1beta1\PageRequest $pagination
      *           pagination defines an optional pagination for the request.
-     *           Since: cosmos-sdk 0.43
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Query::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
      * pagination defines an optional pagination for the request.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 1 [json_name = "pagination"];</code>
      * @return \Cosmos\Base\Query\V1beta1\PageRequest|null
@@ -64,7 +61,6 @@ class QueryTotalSupplyRequest extends \Google\Protobuf\Internal\Message
 
     /**
      * pagination defines an optional pagination for the request.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 1 [json_name = "pagination"];</code>
      * @param \Cosmos\Base\Query\V1beta1\PageRequest $var

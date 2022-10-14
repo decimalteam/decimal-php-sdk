@@ -30,7 +30,7 @@ class PrivKey extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Crypto\Secp256K1\Keys::initOnce();
+        \Cosmos\Crypto\Secp256k1\GPBMetadata\Keys::initOnce();
         parent::__construct($data);
     }
 

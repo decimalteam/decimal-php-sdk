@@ -18,19 +18,19 @@ class DelegatorStartingInfoRecord extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address is the address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      */
     protected $delegator_address = '';
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      */
     protected $validator_address = '';
     /**
      * starting_info defines the starting info of a delegator.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.DelegatorStartingInfo starting_info = 3 [json_name = "startingInfo", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.DelegatorStartingInfo starting_info = 3 [json_name = "startingInfo", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"starting_info\""];</code>
      */
     protected $starting_info = null;
 
@@ -49,14 +49,14 @@ class DelegatorStartingInfoRecord extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Genesis::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * delegator_address is the address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @return string
      */
     public function getDelegatorAddress()
@@ -67,7 +67,7 @@ class DelegatorStartingInfoRecord extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address is the address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -82,7 +82,7 @@ class DelegatorStartingInfoRecord extends \Google\Protobuf\Internal\Message
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -93,7 +93,7 @@ class DelegatorStartingInfoRecord extends \Google\Protobuf\Internal\Message
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -108,7 +108,7 @@ class DelegatorStartingInfoRecord extends \Google\Protobuf\Internal\Message
     /**
      * starting_info defines the starting info of a delegator.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.DelegatorStartingInfo starting_info = 3 [json_name = "startingInfo", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.DelegatorStartingInfo starting_info = 3 [json_name = "startingInfo", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"starting_info\""];</code>
      * @return \Cosmos\Distribution\V1beta1\DelegatorStartingInfo|null
      */
     public function getStartingInfo()
@@ -129,7 +129,7 @@ class DelegatorStartingInfoRecord extends \Google\Protobuf\Internal\Message
     /**
      * starting_info defines the starting info of a delegator.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.DelegatorStartingInfo starting_info = 3 [json_name = "startingInfo", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.DelegatorStartingInfo starting_info = 3 [json_name = "startingInfo", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"starting_info\""];</code>
      * @param \Cosmos\Distribution\V1beta1\DelegatorStartingInfo $var
      * @return $this
      */

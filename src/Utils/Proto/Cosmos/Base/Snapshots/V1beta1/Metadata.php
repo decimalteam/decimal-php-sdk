@@ -28,12 +28,12 @@ class Metadata extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $chunk_hashes
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $chunk_hashes
      *           SHA-256 chunk hashes
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Snapshots\V1Beta1\Snapshot::initOnce();
+        \Cosmos\Base\Snapshots\V1beta1\GPBMetadata\Snapshot::initOnce();
         parent::__construct($data);
     }
 
@@ -52,7 +52,7 @@ class Metadata extends \Google\Protobuf\Internal\Message
      * SHA-256 chunk hashes
      *
      * Generated from protobuf field <code>repeated bytes chunk_hashes = 1 [json_name = "chunkHashes"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setChunkHashes($var)

@@ -28,12 +28,12 @@ class SignatureDescriptors extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Tx\Signing\V1beta1\SignatureDescriptor[]|\Google\Protobuf\Internal\RepeatedField $signatures
+     *     @type array<\Cosmos\Tx\Signing\V1beta1\SignatureDescriptor>|\Google\Protobuf\Internal\RepeatedField $signatures
      *           signatures are the signature descriptors
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\Signing\V1Beta1\Signing::initOnce();
+        \Cosmos\Tx\Signing\V1beta1\GPBMetadata\Signing::initOnce();
         parent::__construct($data);
     }
 
@@ -52,7 +52,7 @@ class SignatureDescriptors extends \Google\Protobuf\Internal\Message
      * signatures are the signature descriptors
      *
      * Generated from protobuf field <code>repeated .cosmos.tx.signing.v1beta1.SignatureDescriptor signatures = 1 [json_name = "signatures"];</code>
-     * @param \Cosmos\Tx\Signing\V1beta1\SignatureDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Tx\Signing\V1beta1\SignatureDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSignatures($var)

@@ -24,7 +24,6 @@ class QueryTotalSupplyResponse extends \Google\Protobuf\Internal\Message
     private $supply;
     /**
      * pagination defines the pagination in the response.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageResponse pagination = 2 [json_name = "pagination"];</code>
      */
@@ -36,15 +35,14 @@ class QueryTotalSupplyResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $supply
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $supply
      *           supply is the supply of the coins
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
-     *           Since: cosmos-sdk 0.43
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Query::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -63,7 +61,7 @@ class QueryTotalSupplyResponse extends \Google\Protobuf\Internal\Message
      * supply is the supply of the coins
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin supply = 1 [json_name = "supply", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSupply($var)
@@ -76,7 +74,6 @@ class QueryTotalSupplyResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * pagination defines the pagination in the response.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageResponse pagination = 2 [json_name = "pagination"];</code>
      * @return \Cosmos\Base\Query\V1beta1\PageResponse|null
@@ -98,7 +95,6 @@ class QueryTotalSupplyResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * pagination defines the pagination in the response.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageResponse pagination = 2 [json_name = "pagination"];</code>
      * @param \Cosmos\Base\Query\V1beta1\PageResponse $var

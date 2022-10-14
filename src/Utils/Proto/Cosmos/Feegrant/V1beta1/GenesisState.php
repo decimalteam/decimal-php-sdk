@@ -26,11 +26,11 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Feegrant\V1beta1\Grant[]|\Google\Protobuf\Internal\RepeatedField $allowances
+     *     @type array<\Cosmos\Feegrant\V1beta1\Grant>|\Google\Protobuf\Internal\RepeatedField $allowances
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Feegrant\V1Beta1\Genesis::initOnce();
+        \Cosmos\Feegrant\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
@@ -45,7 +45,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.feegrant.v1beta1.Grant allowances = 1 [json_name = "allowances", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Feegrant\V1beta1\Grant[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Feegrant\V1beta1\Grant>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAllowances($var)

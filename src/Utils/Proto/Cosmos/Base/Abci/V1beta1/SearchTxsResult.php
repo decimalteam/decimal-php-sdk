@@ -18,7 +18,7 @@ class SearchTxsResult extends \Google\Protobuf\Internal\Message
     /**
      * Count of all txs
      *
-     * Generated from protobuf field <code>uint64 total_count = 1 [json_name = "totalCount"];</code>
+     * Generated from protobuf field <code>uint64 total_count = 1 [json_name = "totalCount", (.gogoproto.jsontag) = "total_count", (.gogoproto.moretags) = "yaml:\"total_count\""];</code>
      */
     protected $total_count = 0;
     /**
@@ -30,13 +30,13 @@ class SearchTxsResult extends \Google\Protobuf\Internal\Message
     /**
      * Index of current page, start from 1
      *
-     * Generated from protobuf field <code>uint64 page_number = 3 [json_name = "pageNumber"];</code>
+     * Generated from protobuf field <code>uint64 page_number = 3 [json_name = "pageNumber", (.gogoproto.jsontag) = "page_number", (.gogoproto.moretags) = "yaml:\"page_number\""];</code>
      */
     protected $page_number = 0;
     /**
      * Count of total pages
      *
-     * Generated from protobuf field <code>uint64 page_total = 4 [json_name = "pageTotal"];</code>
+     * Generated from protobuf field <code>uint64 page_total = 4 [json_name = "pageTotal", (.gogoproto.jsontag) = "page_total", (.gogoproto.moretags) = "yaml:\"page_total\""];</code>
      */
     protected $page_total = 0;
     /**
@@ -68,19 +68,19 @@ class SearchTxsResult extends \Google\Protobuf\Internal\Message
      *           Count of total pages
      *     @type int|string $limit
      *           Max count txs per page
-     *     @type \Cosmos\Base\Abci\V1beta1\TxResponse[]|\Google\Protobuf\Internal\RepeatedField $txs
+     *     @type array<\Cosmos\Base\Abci\V1beta1\TxResponse>|\Google\Protobuf\Internal\RepeatedField $txs
      *           List of txs in current page
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Abci\V1Beta1\Abci::initOnce();
+        \Cosmos\Base\Abci\V1beta1\GPBMetadata\Abci::initOnce();
         parent::__construct($data);
     }
 
     /**
      * Count of all txs
      *
-     * Generated from protobuf field <code>uint64 total_count = 1 [json_name = "totalCount"];</code>
+     * Generated from protobuf field <code>uint64 total_count = 1 [json_name = "totalCount", (.gogoproto.jsontag) = "total_count", (.gogoproto.moretags) = "yaml:\"total_count\""];</code>
      * @return int|string
      */
     public function getTotalCount()
@@ -91,7 +91,7 @@ class SearchTxsResult extends \Google\Protobuf\Internal\Message
     /**
      * Count of all txs
      *
-     * Generated from protobuf field <code>uint64 total_count = 1 [json_name = "totalCount"];</code>
+     * Generated from protobuf field <code>uint64 total_count = 1 [json_name = "totalCount", (.gogoproto.jsontag) = "total_count", (.gogoproto.moretags) = "yaml:\"total_count\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -132,7 +132,7 @@ class SearchTxsResult extends \Google\Protobuf\Internal\Message
     /**
      * Index of current page, start from 1
      *
-     * Generated from protobuf field <code>uint64 page_number = 3 [json_name = "pageNumber"];</code>
+     * Generated from protobuf field <code>uint64 page_number = 3 [json_name = "pageNumber", (.gogoproto.jsontag) = "page_number", (.gogoproto.moretags) = "yaml:\"page_number\""];</code>
      * @return int|string
      */
     public function getPageNumber()
@@ -143,7 +143,7 @@ class SearchTxsResult extends \Google\Protobuf\Internal\Message
     /**
      * Index of current page, start from 1
      *
-     * Generated from protobuf field <code>uint64 page_number = 3 [json_name = "pageNumber"];</code>
+     * Generated from protobuf field <code>uint64 page_number = 3 [json_name = "pageNumber", (.gogoproto.jsontag) = "page_number", (.gogoproto.moretags) = "yaml:\"page_number\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -158,7 +158,7 @@ class SearchTxsResult extends \Google\Protobuf\Internal\Message
     /**
      * Count of total pages
      *
-     * Generated from protobuf field <code>uint64 page_total = 4 [json_name = "pageTotal"];</code>
+     * Generated from protobuf field <code>uint64 page_total = 4 [json_name = "pageTotal", (.gogoproto.jsontag) = "page_total", (.gogoproto.moretags) = "yaml:\"page_total\""];</code>
      * @return int|string
      */
     public function getPageTotal()
@@ -169,7 +169,7 @@ class SearchTxsResult extends \Google\Protobuf\Internal\Message
     /**
      * Count of total pages
      *
-     * Generated from protobuf field <code>uint64 page_total = 4 [json_name = "pageTotal"];</code>
+     * Generated from protobuf field <code>uint64 page_total = 4 [json_name = "pageTotal", (.gogoproto.jsontag) = "page_total", (.gogoproto.moretags) = "yaml:\"page_total\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -222,7 +222,7 @@ class SearchTxsResult extends \Google\Protobuf\Internal\Message
      * List of txs in current page
      *
      * Generated from protobuf field <code>repeated .cosmos.base.abci.v1beta1.TxResponse txs = 6 [json_name = "txs"];</code>
-     * @param \Cosmos\Base\Abci\V1beta1\TxResponse[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Abci\V1beta1\TxResponse>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTxs($var)

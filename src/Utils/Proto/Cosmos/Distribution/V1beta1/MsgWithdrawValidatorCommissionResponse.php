@@ -15,12 +15,6 @@ use Google\Protobuf\Internal\GPBUtil;
  */
 class MsgWithdrawValidatorCommissionResponse extends \Google\Protobuf\Internal\Message
 {
-    /**
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin amount = 1 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     */
-    private $amount;
 
     /**
      * Constructor.
@@ -28,39 +22,11 @@ class MsgWithdrawValidatorCommissionResponse extends \Google\Protobuf\Internal\M
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $amount
-     *           Since: cosmos-sdk 0.46
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Tx::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
-    }
-
-    /**
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin amount = 1 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getAmount()
-    {
-        return $this->amount;
-    }
-
-    /**
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin amount = 1 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setAmount($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cosmos\Base\V1beta1\Coin::class);
-        $this->amount = $arr;
-
-        return $this;
     }
 
 }

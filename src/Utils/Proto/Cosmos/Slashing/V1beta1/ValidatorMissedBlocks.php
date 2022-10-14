@@ -19,13 +19,13 @@ class ValidatorMissedBlocks extends \Google\Protobuf\Internal\Message
     /**
      * address is the validator address.
      *
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      */
     protected $address = '';
     /**
      * missed_blocks is an array of missed blocks by the validator.
      *
-     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.MissedBlock missed_blocks = 2 [json_name = "missedBlocks", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.MissedBlock missed_blocks = 2 [json_name = "missedBlocks", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"missed_blocks\""];</code>
      */
     private $missed_blocks;
 
@@ -37,19 +37,19 @@ class ValidatorMissedBlocks extends \Google\Protobuf\Internal\Message
      *
      *     @type string $address
      *           address is the validator address.
-     *     @type \Cosmos\Slashing\V1beta1\MissedBlock[]|\Google\Protobuf\Internal\RepeatedField $missed_blocks
+     *     @type array<\Cosmos\Slashing\V1beta1\MissedBlock>|\Google\Protobuf\Internal\RepeatedField $missed_blocks
      *           missed_blocks is an array of missed blocks by the validator.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Genesis::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * address is the validator address.
      *
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @return string
      */
     public function getAddress()
@@ -60,7 +60,7 @@ class ValidatorMissedBlocks extends \Google\Protobuf\Internal\Message
     /**
      * address is the validator address.
      *
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @param string $var
      * @return $this
      */
@@ -75,7 +75,7 @@ class ValidatorMissedBlocks extends \Google\Protobuf\Internal\Message
     /**
      * missed_blocks is an array of missed blocks by the validator.
      *
-     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.MissedBlock missed_blocks = 2 [json_name = "missedBlocks", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.MissedBlock missed_blocks = 2 [json_name = "missedBlocks", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"missed_blocks\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getMissedBlocks()
@@ -86,8 +86,8 @@ class ValidatorMissedBlocks extends \Google\Protobuf\Internal\Message
     /**
      * missed_blocks is an array of missed blocks by the validator.
      *
-     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.MissedBlock missed_blocks = 2 [json_name = "missedBlocks", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Slashing\V1beta1\MissedBlock[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.MissedBlock missed_blocks = 2 [json_name = "missedBlocks", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"missed_blocks\""];</code>
+     * @param array<\Cosmos\Slashing\V1beta1\MissedBlock>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setMissedBlocks($var)

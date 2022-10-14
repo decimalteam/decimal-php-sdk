@@ -38,7 +38,7 @@ class CompactBitArray extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Crypto\Multisig\V1Beta1\Multisig::initOnce();
+        \Cosmos\Crypto\Multisig\V1beta1\GPBMetadata\Multisig::initOnce();
         parent::__construct($data);
     }
 

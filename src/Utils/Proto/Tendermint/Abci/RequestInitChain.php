@@ -47,13 +47,13 @@ class RequestInitChain extends \Google\Protobuf\Internal\Message
      *     @type \Google\Protobuf\Timestamp $time
      *     @type string $chain_id
      *     @type \Tendermint\Abci\ConsensusParams $consensus_params
-     *     @type \Tendermint\Abci\ValidatorUpdate[]|\Google\Protobuf\Internal\RepeatedField $validators
+     *     @type array<\Tendermint\Abci\ValidatorUpdate>|\Google\Protobuf\Internal\RepeatedField $validators
      *     @type string $app_state_bytes
      *     @type int|string $initial_height
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Abci\Types::initOnce();
+        \Tendermint\Abci\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -154,7 +154,7 @@ class RequestInitChain extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.abci.ValidatorUpdate validators = 4 [json_name = "validators", (.gogoproto.nullable) = false];</code>
-     * @param \Tendermint\Abci\ValidatorUpdate[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Abci\ValidatorUpdate>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValidators($var)

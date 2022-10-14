@@ -26,11 +26,11 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Authz\V1beta1\GrantAuthorization[]|\Google\Protobuf\Internal\RepeatedField $authorization
+     *     @type array<\Cosmos\Authz\V1beta1\GrantAuthorization>|\Google\Protobuf\Internal\RepeatedField $authorization
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Authz\V1Beta1\Genesis::initOnce();
+        \Cosmos\Authz\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
@@ -45,7 +45,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.authz.v1beta1.GrantAuthorization authorization = 1 [json_name = "authorization", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Authz\V1beta1\GrantAuthorization[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Authz\V1beta1\GrantAuthorization>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAuthorization($var)

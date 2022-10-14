@@ -30,12 +30,12 @@ class QueryRecordsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Legacy\V1\Record[]|\Google\Protobuf\Internal\RepeatedField $records
+     *     @type array<\Decimal\Legacy\V1\Record>|\Google\Protobuf\Internal\RepeatedField $records
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Legacy\V1\Query::initOnce();
+        \Decimal\Legacy\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -50,7 +50,7 @@ class QueryRecordsResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .decimal.legacy.v1.Record records = 1 [json_name = "records", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Legacy\V1\Record[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Legacy\V1\Record>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRecords($var)

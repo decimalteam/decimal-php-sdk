@@ -35,14 +35,14 @@ class QueryAllBalancesResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $balances
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $balances
      *           balances is the balances of all the coins.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Query::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -61,7 +61,7 @@ class QueryAllBalancesResponse extends \Google\Protobuf\Internal\Message
      * balances is the balances of all the coins.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin balances = 1 [json_name = "balances", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setBalances($var)

@@ -17,23 +17,23 @@ use Google\Protobuf\Internal\GPBUtil;
 class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string title = 1 [json_name = "title"];</code>
+     * Generated from protobuf field <code>string title = 1 [json_name = "title", (.gogoproto.moretags) = "yaml:\"title\""];</code>
      */
     protected $title = '';
     /**
-     * Generated from protobuf field <code>string description = 2 [json_name = "description"];</code>
+     * Generated from protobuf field <code>string description = 2 [json_name = "description", (.gogoproto.moretags) = "yaml:\"description\""];</code>
      */
     protected $description = '';
     /**
-     * Generated from protobuf field <code>string recipient = 3 [json_name = "recipient"];</code>
+     * Generated from protobuf field <code>string recipient = 3 [json_name = "recipient", (.gogoproto.moretags) = "yaml:\"recipient\""];</code>
      */
     protected $recipient = '';
     /**
-     * Generated from protobuf field <code>string amount = 4 [json_name = "amount"];</code>
+     * Generated from protobuf field <code>string amount = 4 [json_name = "amount", (.gogoproto.moretags) = "yaml:\"amount\""];</code>
      */
     protected $amount = '';
     /**
-     * Generated from protobuf field <code>string deposit = 5 [json_name = "deposit"];</code>
+     * Generated from protobuf field <code>string deposit = 5 [json_name = "deposit", (.gogoproto.moretags) = "yaml:\"deposit\""];</code>
      */
     protected $deposit = '';
 
@@ -51,12 +51,12 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Distribution::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Distribution::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string title = 1 [json_name = "title"];</code>
+     * Generated from protobuf field <code>string title = 1 [json_name = "title", (.gogoproto.moretags) = "yaml:\"title\""];</code>
      * @return string
      */
     public function getTitle()
@@ -65,7 +65,7 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>string title = 1 [json_name = "title"];</code>
+     * Generated from protobuf field <code>string title = 1 [json_name = "title", (.gogoproto.moretags) = "yaml:\"title\""];</code>
      * @param string $var
      * @return $this
      */
@@ -78,7 +78,7 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>string description = 2 [json_name = "description"];</code>
+     * Generated from protobuf field <code>string description = 2 [json_name = "description", (.gogoproto.moretags) = "yaml:\"description\""];</code>
      * @return string
      */
     public function getDescription()
@@ -87,7 +87,7 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>string description = 2 [json_name = "description"];</code>
+     * Generated from protobuf field <code>string description = 2 [json_name = "description", (.gogoproto.moretags) = "yaml:\"description\""];</code>
      * @param string $var
      * @return $this
      */
@@ -100,7 +100,7 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>string recipient = 3 [json_name = "recipient"];</code>
+     * Generated from protobuf field <code>string recipient = 3 [json_name = "recipient", (.gogoproto.moretags) = "yaml:\"recipient\""];</code>
      * @return string
      */
     public function getRecipient()
@@ -109,7 +109,7 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>string recipient = 3 [json_name = "recipient"];</code>
+     * Generated from protobuf field <code>string recipient = 3 [json_name = "recipient", (.gogoproto.moretags) = "yaml:\"recipient\""];</code>
      * @param string $var
      * @return $this
      */
@@ -122,7 +122,7 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>string amount = 4 [json_name = "amount"];</code>
+     * Generated from protobuf field <code>string amount = 4 [json_name = "amount", (.gogoproto.moretags) = "yaml:\"amount\""];</code>
      * @return string
      */
     public function getAmount()
@@ -131,7 +131,7 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>string amount = 4 [json_name = "amount"];</code>
+     * Generated from protobuf field <code>string amount = 4 [json_name = "amount", (.gogoproto.moretags) = "yaml:\"amount\""];</code>
      * @param string $var
      * @return $this
      */
@@ -144,7 +144,7 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>string deposit = 5 [json_name = "deposit"];</code>
+     * Generated from protobuf field <code>string deposit = 5 [json_name = "deposit", (.gogoproto.moretags) = "yaml:\"deposit\""];</code>
      * @return string
      */
     public function getDeposit()
@@ -153,7 +153,7 @@ class CommunityPoolSpendProposalWithDeposit extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>string deposit = 5 [json_name = "deposit"];</code>
+     * Generated from protobuf field <code>string deposit = 5 [json_name = "deposit", (.gogoproto.moretags) = "yaml:\"deposit\""];</code>
      * @param string $var
      * @return $this
      */

@@ -57,7 +57,7 @@ class BlockParams extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Params::initOnce();
+        \Tendermint\Types\GPBMetadata\Params::initOnce();
         parent::__construct($data);
     }
 

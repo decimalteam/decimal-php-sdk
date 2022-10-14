@@ -16,33 +16,29 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgCreateValidator extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 1 [json_name = "description", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     */
+    protected $operator_address = '';
+    /**
+     * Generated from protobuf field <code>string reward_address = 2 [json_name = "rewardAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     */
+    protected $reward_address = '';
+    /**
+     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 3 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
+     */
+    protected $consensus_pubkey = null;
+    /**
+     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 4 [json_name = "description", (.gogoproto.nullable) = false];</code>
      */
     protected $description = null;
     /**
-     * Generated from protobuf field <code>.decimal.validator.v1.CommissionRates commission = 2 [json_name = "commission", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>string commission = 5 [json_name = "commission", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
      */
-    protected $commission = null;
+    protected $commission = '';
     /**
-     * Generated from protobuf field <code>string min_self_delegation = 3 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin stake = 6 [json_name = "stake", (.gogoproto.nullable) = false];</code>
      */
-    protected $min_self_delegation = '';
-    /**
-     * Generated from protobuf field <code>string delegator_address = 4 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     */
-    protected $delegator_address = '';
-    /**
-     * Generated from protobuf field <code>string validator_address = 5 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     */
-    protected $validator_address = '';
-    /**
-     * Generated from protobuf field <code>.google.protobuf.Any pubkey = 6 [json_name = "pubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
-     */
-    protected $pubkey = null;
-    /**
-     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin value = 7 [json_name = "value", (.gogoproto.nullable) = false];</code>
-     */
-    protected $value = null;
+    protected $stake = null;
 
     /**
      * Constructor.
@@ -50,22 +46,97 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
+     *     @type string $operator_address
+     *     @type string $reward_address
+     *     @type \Google\Protobuf\Any $consensus_pubkey
      *     @type \Decimal\Validator\V1\Description $description
-     *     @type \Decimal\Validator\V1\CommissionRates $commission
-     *     @type string $min_self_delegation
-     *     @type string $delegator_address
-     *     @type string $validator_address
-     *     @type \Google\Protobuf\Any $pubkey
-     *     @type \Cosmos\Base\V1beta1\Coin $value
+     *     @type string $commission
+     *     @type \Cosmos\Base\V1beta1\Coin $stake
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Tx::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 1 [json_name = "description", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @return string
+     */
+    public function getOperatorAddress()
+    {
+        return $this->operator_address;
+    }
+
+    /**
+     * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setOperatorAddress($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->operator_address = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string reward_address = 2 [json_name = "rewardAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @return string
+     */
+    public function getRewardAddress()
+    {
+        return $this->reward_address;
+    }
+
+    /**
+     * Generated from protobuf field <code>string reward_address = 2 [json_name = "rewardAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRewardAddress($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->reward_address = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 3 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
+     * @return \Google\Protobuf\Any|null
+     */
+    public function getConsensusPubkey()
+    {
+        return $this->consensus_pubkey;
+    }
+
+    public function hasConsensusPubkey()
+    {
+        return isset($this->consensus_pubkey);
+    }
+
+    public function clearConsensusPubkey()
+    {
+        unset($this->consensus_pubkey);
+    }
+
+    /**
+     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 3 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
+     * @param \Google\Protobuf\Any $var
+     * @return $this
+     */
+    public function setConsensusPubkey($var)
+    {
+        GPBUtil::checkMessage($var, \Google\Protobuf\Any::class);
+        $this->consensus_pubkey = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 4 [json_name = "description", (.gogoproto.nullable) = false];</code>
      * @return \Decimal\Validator\V1\Description|null
      */
     public function getDescription()
@@ -84,7 +155,7 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 1 [json_name = "description", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 4 [json_name = "description", (.gogoproto.nullable) = false];</code>
      * @param \Decimal\Validator\V1\Description $var
      * @return $this
      */
@@ -97,163 +168,55 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.decimal.validator.v1.CommissionRates commission = 2 [json_name = "commission", (.gogoproto.nullable) = false];</code>
-     * @return \Decimal\Validator\V1\CommissionRates|null
+     * Generated from protobuf field <code>string commission = 5 [json_name = "commission", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * @return string
      */
     public function getCommission()
     {
         return $this->commission;
     }
 
-    public function hasCommission()
-    {
-        return isset($this->commission);
-    }
-
-    public function clearCommission()
-    {
-        unset($this->commission);
-    }
-
     /**
-     * Generated from protobuf field <code>.decimal.validator.v1.CommissionRates commission = 2 [json_name = "commission", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Validator\V1\CommissionRates $var
+     * Generated from protobuf field <code>string commission = 5 [json_name = "commission", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * @param string $var
      * @return $this
      */
     public function setCommission($var)
     {
-        GPBUtil::checkMessage($var, \Decimal\Validator\V1\CommissionRates::class);
+        GPBUtil::checkString($var, True);
         $this->commission = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>string min_self_delegation = 3 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     * @return string
-     */
-    public function getMinSelfDelegation()
-    {
-        return $this->min_self_delegation;
-    }
-
-    /**
-     * Generated from protobuf field <code>string min_self_delegation = 3 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setMinSelfDelegation($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->min_self_delegation = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>string delegator_address = 4 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @return string
-     */
-    public function getDelegatorAddress()
-    {
-        return $this->delegator_address;
-    }
-
-    /**
-     * Generated from protobuf field <code>string delegator_address = 4 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setDelegatorAddress($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->delegator_address = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>string validator_address = 5 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @return string
-     */
-    public function getValidatorAddress()
-    {
-        return $this->validator_address;
-    }
-
-    /**
-     * Generated from protobuf field <code>string validator_address = 5 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setValidatorAddress($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->validator_address = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.google.protobuf.Any pubkey = 6 [json_name = "pubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
-     * @return \Google\Protobuf\Any|null
-     */
-    public function getPubkey()
-    {
-        return $this->pubkey;
-    }
-
-    public function hasPubkey()
-    {
-        return isset($this->pubkey);
-    }
-
-    public function clearPubkey()
-    {
-        unset($this->pubkey);
-    }
-
-    /**
-     * Generated from protobuf field <code>.google.protobuf.Any pubkey = 6 [json_name = "pubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
-     * @param \Google\Protobuf\Any $var
-     * @return $this
-     */
-    public function setPubkey($var)
-    {
-        GPBUtil::checkMessage($var, \Google\Protobuf\Any::class);
-        $this->pubkey = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin value = 7 [json_name = "value", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin stake = 6 [json_name = "stake", (.gogoproto.nullable) = false];</code>
      * @return \Cosmos\Base\V1beta1\Coin|null
      */
-    public function getValue()
+    public function getStake()
     {
-        return $this->value;
+        return $this->stake;
     }
 
-    public function hasValue()
+    public function hasStake()
     {
-        return isset($this->value);
+        return isset($this->stake);
     }
 
-    public function clearValue()
+    public function clearStake()
     {
-        unset($this->value);
+        unset($this->stake);
     }
 
     /**
-     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin value = 7 [json_name = "value", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin stake = 6 [json_name = "stake", (.gogoproto.nullable) = false];</code>
      * @param \Cosmos\Base\V1beta1\Coin $var
      * @return $this
      */
-    public function setValue($var)
+    public function setStake($var)
     {
         GPBUtil::checkMessage($var, \Cosmos\Base\V1beta1\Coin::class);
-        $this->value = $var;
+        $this->stake = $var;
 
         return $this;
     }

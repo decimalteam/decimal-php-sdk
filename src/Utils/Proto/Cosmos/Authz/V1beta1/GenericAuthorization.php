@@ -34,7 +34,7 @@ class GenericAuthorization extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Authz\V1Beta1\Authz::initOnce();
+        \Cosmos\Authz\V1beta1\GPBMetadata\Authz::initOnce();
         parent::__construct($data);
     }
 

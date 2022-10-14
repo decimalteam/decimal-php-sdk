@@ -16,47 +16,77 @@ use Google\Protobuf\Internal\GPBUtil;
 class Params extends \Google\Protobuf\Internal\Message
 {
     /**
-     * unbonding_time is the time duration of unbonding.
+     * max_validators defines the maximum number of validators can be bounded at the same time.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration unbonding_time = 1 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
-     */
-    protected $unbonding_time = null;
-    /**
-     * max_validators is the maximum number of validators.
-     *
-     * Generated from protobuf field <code>uint32 max_validators = 2 [json_name = "maxValidators"];</code>
+     * Generated from protobuf field <code>uint32 max_validators = 1 [json_name = "maxValidators"];</code>
      */
     protected $max_validators = 0;
     /**
-     * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
+     * max_delegations defines the maximum number of delegations per validator at be bounded at the same time.
+     *
+     * Generated from protobuf field <code>uint32 max_delegations = 2 [json_name = "maxDelegations"];</code>
+     */
+    protected $max_delegations = 0;
+    /**
+     * max_entries defines the max entries for single undelegation/redelegation (per pair/trio).
      *
      * Generated from protobuf field <code>uint32 max_entries = 3 [json_name = "maxEntries"];</code>
      */
     protected $max_entries = 0;
     /**
-     * historical_entries is the number of historical entries to persist.
+     * historical_entries defines the number of historical entries to persist.
      *
      * Generated from protobuf field <code>uint32 historical_entries = 4 [json_name = "historicalEntries"];</code>
      */
     protected $historical_entries = 0;
     /**
-     * max_delegations is the maximum number of delegations per validator.
+     * redelegation_time defines the time duration of redelegation a stake (moving to the other validator).
      *
-     * Generated from protobuf field <code>uint32 max_delegations = 5 [json_name = "maxDelegations"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration redelegation_time = 5 [json_name = "redelegationTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
      */
-    protected $max_delegations = 0;
+    protected $redelegation_time = null;
     /**
-     * min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators.
+     * undelegation_time defines the time duration of undelegation a stake (unbonding from the validator).
      *
-     * Generated from protobuf field <code>string min_commission_rate = 6 [json_name = "minCommissionRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration undelegation_time = 6 [json_name = "undelegationTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
      */
-    protected $min_commission_rate = '';
+    protected $undelegation_time = null;
     /**
-     * bond_denom defines the bondable coin denomination.
+     * base_denom is base denom on the basis of which power is calculated
      *
-     * Generated from protobuf field <code>string bond_denom = 7 [json_name = "bondDenom"];</code>
+     * Generated from protobuf field <code>string base_denom = 7 [json_name = "baseDenom"];</code>
      */
-    protected $bond_denom = '';
+    protected $base_denom = '';
+    /**
+     * width of sliding window for downtime slashing
+     *
+     * Generated from protobuf field <code>int64 signed_blocks_window = 10 [json_name = "signedBlocksWindow"];</code>
+     */
+    protected $signed_blocks_window = 0;
+    /**
+     * minimum blocks signed per window
+     *
+     * Generated from protobuf field <code>bytes min_signed_per_window = 11 [json_name = "minSignedPerWindow", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     */
+    protected $min_signed_per_window = '';
+    /**
+     * downtime jail duration
+     *
+     * Generated from protobuf field <code>.google.protobuf.Duration downtime_jail_duration = 12 [json_name = "downtimeJailDuration", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     */
+    protected $downtime_jail_duration = null;
+    /**
+     * fraction of power slashed in case of double sign
+     *
+     * Generated from protobuf field <code>bytes slash_fraction_double_sign = 13 [json_name = "slashFractionDoubleSign", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     */
+    protected $slash_fraction_double_sign = '';
+    /**
+     * fraction of power slashed for downtime
+     *
+     * Generated from protobuf field <code>bytes slash_fraction_downtime = 14 [json_name = "slashFractionDowntime", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     */
+    protected $slash_fraction_downtime = '';
 
     /**
      * Constructor.
@@ -64,67 +94,41 @@ class Params extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\Protobuf\Duration $unbonding_time
-     *           unbonding_time is the time duration of unbonding.
      *     @type int $max_validators
-     *           max_validators is the maximum number of validators.
-     *     @type int $max_entries
-     *           max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
-     *     @type int $historical_entries
-     *           historical_entries is the number of historical entries to persist.
+     *           max_validators defines the maximum number of validators can be bounded at the same time.
      *     @type int $max_delegations
-     *           max_delegations is the maximum number of delegations per validator.
-     *     @type string $min_commission_rate
-     *           min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators.
-     *     @type string $bond_denom
-     *           bond_denom defines the bondable coin denomination.
+     *           max_delegations defines the maximum number of delegations per validator at be bounded at the same time.
+     *     @type int $max_entries
+     *           max_entries defines the max entries for single undelegation/redelegation (per pair/trio).
+     *     @type int $historical_entries
+     *           historical_entries defines the number of historical entries to persist.
+     *     @type \Google\Protobuf\Duration $redelegation_time
+     *           redelegation_time defines the time duration of redelegation a stake (moving to the other validator).
+     *     @type \Google\Protobuf\Duration $undelegation_time
+     *           undelegation_time defines the time duration of undelegation a stake (unbonding from the validator).
+     *     @type string $base_denom
+     *           base_denom is base denom on the basis of which power is calculated
+     *     @type int|string $signed_blocks_window
+     *           width of sliding window for downtime slashing
+     *     @type string $min_signed_per_window
+     *           minimum blocks signed per window
+     *     @type \Google\Protobuf\Duration $downtime_jail_duration
+     *           downtime jail duration
+     *     @type string $slash_fraction_double_sign
+     *           fraction of power slashed in case of double sign
+     *     @type string $slash_fraction_downtime
+     *           fraction of power slashed for downtime
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Params::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Params::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * unbonding_time is the time duration of unbonding.
+     * max_validators defines the maximum number of validators can be bounded at the same time.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration unbonding_time = 1 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
-     * @return \Google\Protobuf\Duration|null
-     */
-    public function getUnbondingTime()
-    {
-        return $this->unbonding_time;
-    }
-
-    public function hasUnbondingTime()
-    {
-        return isset($this->unbonding_time);
-    }
-
-    public function clearUnbondingTime()
-    {
-        unset($this->unbonding_time);
-    }
-
-    /**
-     * unbonding_time is the time duration of unbonding.
-     *
-     * Generated from protobuf field <code>.google.protobuf.Duration unbonding_time = 1 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
-     * @param \Google\Protobuf\Duration $var
-     * @return $this
-     */
-    public function setUnbondingTime($var)
-    {
-        GPBUtil::checkMessage($var, \Google\Protobuf\Duration::class);
-        $this->unbonding_time = $var;
-
-        return $this;
-    }
-
-    /**
-     * max_validators is the maximum number of validators.
-     *
-     * Generated from protobuf field <code>uint32 max_validators = 2 [json_name = "maxValidators"];</code>
+     * Generated from protobuf field <code>uint32 max_validators = 1 [json_name = "maxValidators"];</code>
      * @return int
      */
     public function getMaxValidators()
@@ -133,9 +137,9 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * max_validators is the maximum number of validators.
+     * max_validators defines the maximum number of validators can be bounded at the same time.
      *
-     * Generated from protobuf field <code>uint32 max_validators = 2 [json_name = "maxValidators"];</code>
+     * Generated from protobuf field <code>uint32 max_validators = 1 [json_name = "maxValidators"];</code>
      * @param int $var
      * @return $this
      */
@@ -148,7 +152,33 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
+     * max_delegations defines the maximum number of delegations per validator at be bounded at the same time.
+     *
+     * Generated from protobuf field <code>uint32 max_delegations = 2 [json_name = "maxDelegations"];</code>
+     * @return int
+     */
+    public function getMaxDelegations()
+    {
+        return $this->max_delegations;
+    }
+
+    /**
+     * max_delegations defines the maximum number of delegations per validator at be bounded at the same time.
+     *
+     * Generated from protobuf field <code>uint32 max_delegations = 2 [json_name = "maxDelegations"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setMaxDelegations($var)
+    {
+        GPBUtil::checkUint32($var);
+        $this->max_delegations = $var;
+
+        return $this;
+    }
+
+    /**
+     * max_entries defines the max entries for single undelegation/redelegation (per pair/trio).
      *
      * Generated from protobuf field <code>uint32 max_entries = 3 [json_name = "maxEntries"];</code>
      * @return int
@@ -159,7 +189,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
+     * max_entries defines the max entries for single undelegation/redelegation (per pair/trio).
      *
      * Generated from protobuf field <code>uint32 max_entries = 3 [json_name = "maxEntries"];</code>
      * @param int $var
@@ -174,7 +204,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * historical_entries is the number of historical entries to persist.
+     * historical_entries defines the number of historical entries to persist.
      *
      * Generated from protobuf field <code>uint32 historical_entries = 4 [json_name = "historicalEntries"];</code>
      * @return int
@@ -185,7 +215,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * historical_entries is the number of historical entries to persist.
+     * historical_entries defines the number of historical entries to persist.
      *
      * Generated from protobuf field <code>uint32 historical_entries = 4 [json_name = "historicalEntries"];</code>
      * @param int $var
@@ -200,79 +230,239 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * max_delegations is the maximum number of delegations per validator.
+     * redelegation_time defines the time duration of redelegation a stake (moving to the other validator).
      *
-     * Generated from protobuf field <code>uint32 max_delegations = 5 [json_name = "maxDelegations"];</code>
-     * @return int
+     * Generated from protobuf field <code>.google.protobuf.Duration redelegation_time = 5 [json_name = "redelegationTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * @return \Google\Protobuf\Duration|null
      */
-    public function getMaxDelegations()
+    public function getRedelegationTime()
     {
-        return $this->max_delegations;
+        return $this->redelegation_time;
+    }
+
+    public function hasRedelegationTime()
+    {
+        return isset($this->redelegation_time);
+    }
+
+    public function clearRedelegationTime()
+    {
+        unset($this->redelegation_time);
     }
 
     /**
-     * max_delegations is the maximum number of delegations per validator.
+     * redelegation_time defines the time duration of redelegation a stake (moving to the other validator).
      *
-     * Generated from protobuf field <code>uint32 max_delegations = 5 [json_name = "maxDelegations"];</code>
-     * @param int $var
+     * Generated from protobuf field <code>.google.protobuf.Duration redelegation_time = 5 [json_name = "redelegationTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * @param \Google\Protobuf\Duration $var
      * @return $this
      */
-    public function setMaxDelegations($var)
+    public function setRedelegationTime($var)
     {
-        GPBUtil::checkUint32($var);
-        $this->max_delegations = $var;
+        GPBUtil::checkMessage($var, \Google\Protobuf\Duration::class);
+        $this->redelegation_time = $var;
 
         return $this;
     }
 
     /**
-     * min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators.
+     * undelegation_time defines the time duration of undelegation a stake (unbonding from the validator).
      *
-     * Generated from protobuf field <code>string min_commission_rate = 6 [json_name = "minCommissionRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
-     * @return string
+     * Generated from protobuf field <code>.google.protobuf.Duration undelegation_time = 6 [json_name = "undelegationTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * @return \Google\Protobuf\Duration|null
      */
-    public function getMinCommissionRate()
+    public function getUndelegationTime()
     {
-        return $this->min_commission_rate;
+        return $this->undelegation_time;
+    }
+
+    public function hasUndelegationTime()
+    {
+        return isset($this->undelegation_time);
+    }
+
+    public function clearUndelegationTime()
+    {
+        unset($this->undelegation_time);
     }
 
     /**
-     * min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators.
+     * undelegation_time defines the time duration of undelegation a stake (unbonding from the validator).
      *
-     * Generated from protobuf field <code>string min_commission_rate = 6 [json_name = "minCommissionRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
-     * @param string $var
+     * Generated from protobuf field <code>.google.protobuf.Duration undelegation_time = 6 [json_name = "undelegationTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * @param \Google\Protobuf\Duration $var
      * @return $this
      */
-    public function setMinCommissionRate($var)
+    public function setUndelegationTime($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->min_commission_rate = $var;
+        GPBUtil::checkMessage($var, \Google\Protobuf\Duration::class);
+        $this->undelegation_time = $var;
 
         return $this;
     }
 
     /**
-     * bond_denom defines the bondable coin denomination.
+     * base_denom is base denom on the basis of which power is calculated
      *
-     * Generated from protobuf field <code>string bond_denom = 7 [json_name = "bondDenom"];</code>
+     * Generated from protobuf field <code>string base_denom = 7 [json_name = "baseDenom"];</code>
      * @return string
      */
-    public function getBondDenom()
+    public function getBaseDenom()
     {
-        return $this->bond_denom;
+        return $this->base_denom;
     }
 
     /**
-     * bond_denom defines the bondable coin denomination.
+     * base_denom is base denom on the basis of which power is calculated
      *
-     * Generated from protobuf field <code>string bond_denom = 7 [json_name = "bondDenom"];</code>
+     * Generated from protobuf field <code>string base_denom = 7 [json_name = "baseDenom"];</code>
      * @param string $var
      * @return $this
      */
-    public function setBondDenom($var)
+    public function setBaseDenom($var)
     {
         GPBUtil::checkString($var, True);
-        $this->bond_denom = $var;
+        $this->base_denom = $var;
+
+        return $this;
+    }
+
+    /**
+     * width of sliding window for downtime slashing
+     *
+     * Generated from protobuf field <code>int64 signed_blocks_window = 10 [json_name = "signedBlocksWindow"];</code>
+     * @return int|string
+     */
+    public function getSignedBlocksWindow()
+    {
+        return $this->signed_blocks_window;
+    }
+
+    /**
+     * width of sliding window for downtime slashing
+     *
+     * Generated from protobuf field <code>int64 signed_blocks_window = 10 [json_name = "signedBlocksWindow"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setSignedBlocksWindow($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->signed_blocks_window = $var;
+
+        return $this;
+    }
+
+    /**
+     * minimum blocks signed per window
+     *
+     * Generated from protobuf field <code>bytes min_signed_per_window = 11 [json_name = "minSignedPerWindow", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * @return string
+     */
+    public function getMinSignedPerWindow()
+    {
+        return $this->min_signed_per_window;
+    }
+
+    /**
+     * minimum blocks signed per window
+     *
+     * Generated from protobuf field <code>bytes min_signed_per_window = 11 [json_name = "minSignedPerWindow", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setMinSignedPerWindow($var)
+    {
+        GPBUtil::checkString($var, False);
+        $this->min_signed_per_window = $var;
+
+        return $this;
+    }
+
+    /**
+     * downtime jail duration
+     *
+     * Generated from protobuf field <code>.google.protobuf.Duration downtime_jail_duration = 12 [json_name = "downtimeJailDuration", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * @return \Google\Protobuf\Duration|null
+     */
+    public function getDowntimeJailDuration()
+    {
+        return $this->downtime_jail_duration;
+    }
+
+    public function hasDowntimeJailDuration()
+    {
+        return isset($this->downtime_jail_duration);
+    }
+
+    public function clearDowntimeJailDuration()
+    {
+        unset($this->downtime_jail_duration);
+    }
+
+    /**
+     * downtime jail duration
+     *
+     * Generated from protobuf field <code>.google.protobuf.Duration downtime_jail_duration = 12 [json_name = "downtimeJailDuration", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * @param \Google\Protobuf\Duration $var
+     * @return $this
+     */
+    public function setDowntimeJailDuration($var)
+    {
+        GPBUtil::checkMessage($var, \Google\Protobuf\Duration::class);
+        $this->downtime_jail_duration = $var;
+
+        return $this;
+    }
+
+    /**
+     * fraction of power slashed in case of double sign
+     *
+     * Generated from protobuf field <code>bytes slash_fraction_double_sign = 13 [json_name = "slashFractionDoubleSign", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * @return string
+     */
+    public function getSlashFractionDoubleSign()
+    {
+        return $this->slash_fraction_double_sign;
+    }
+
+    /**
+     * fraction of power slashed in case of double sign
+     *
+     * Generated from protobuf field <code>bytes slash_fraction_double_sign = 13 [json_name = "slashFractionDoubleSign", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setSlashFractionDoubleSign($var)
+    {
+        GPBUtil::checkString($var, False);
+        $this->slash_fraction_double_sign = $var;
+
+        return $this;
+    }
+
+    /**
+     * fraction of power slashed for downtime
+     *
+     * Generated from protobuf field <code>bytes slash_fraction_downtime = 14 [json_name = "slashFractionDowntime", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * @return string
+     */
+    public function getSlashFractionDowntime()
+    {
+        return $this->slash_fraction_downtime;
+    }
+
+    /**
+     * fraction of power slashed for downtime
+     *
+     * Generated from protobuf field <code>bytes slash_fraction_downtime = 14 [json_name = "slashFractionDowntime", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setSlashFractionDowntime($var)
+    {
+        GPBUtil::checkString($var, False);
+        $this->slash_fraction_downtime = $var;
 
         return $this;
     }

@@ -24,11 +24,11 @@ class ResponseBeginBlock extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $events
+     *     @type array<\Tendermint\Abci\Event>|\Google\Protobuf\Internal\RepeatedField $events
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Abci\Types::initOnce();
+        \Tendermint\Abci\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -43,7 +43,7 @@ class ResponseBeginBlock extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 1 [json_name = "events", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "events,omitempty"];</code>
-     * @param \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Abci\Event>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEvents($var)

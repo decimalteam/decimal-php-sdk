@@ -42,6 +42,8 @@ class ResponseDeliverTx extends \Google\Protobuf\Internal\Message
      */
     protected $gas_used = 0;
     /**
+     * nondeterministic
+     *
      * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 7 [json_name = "events", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "events,omitempty"];</code>
      */
     private $events;
@@ -64,12 +66,13 @@ class ResponseDeliverTx extends \Google\Protobuf\Internal\Message
      *           nondeterministic
      *     @type int|string $gas_wanted
      *     @type int|string $gas_used
-     *     @type \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $events
+     *     @type array<\Tendermint\Abci\Event>|\Google\Protobuf\Internal\RepeatedField $events
+     *           nondeterministic
      *     @type string $codespace
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Abci\Types::initOnce();
+        \Tendermint\Abci\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -214,6 +217,8 @@ class ResponseDeliverTx extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * nondeterministic
+     *
      * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 7 [json_name = "events", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "events,omitempty"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
@@ -223,8 +228,10 @@ class ResponseDeliverTx extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * nondeterministic
+     *
      * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 7 [json_name = "events", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "events,omitempty"];</code>
-     * @param \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Abci\Event>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEvents($var)

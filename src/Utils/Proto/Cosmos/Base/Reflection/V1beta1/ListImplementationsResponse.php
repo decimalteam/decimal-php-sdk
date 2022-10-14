@@ -27,11 +27,11 @@ class ListImplementationsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $implementation_message_names
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $implementation_message_names
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V1Beta1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V1beta1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 
@@ -46,7 +46,7 @@ class ListImplementationsResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated string implementation_message_names = 1 [json_name = "implementationMessageNames"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setImplementationMessageNames($var)

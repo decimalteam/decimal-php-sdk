@@ -54,7 +54,6 @@ class PageRequest extends \Google\Protobuf\Internal\Message
     protected $count_total = false;
     /**
      * reverse is set to true if results are to be returned in the descending order.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>bool reverse = 5 [json_name = "reverse"];</code>
      */
@@ -84,11 +83,10 @@ class PageRequest extends \Google\Protobuf\Internal\Message
      *           is set.
      *     @type bool $reverse
      *           reverse is set to true if results are to be returned in the descending order.
-     *           Since: cosmos-sdk 0.43
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Query\V1Beta1\Pagination::initOnce();
+        \Cosmos\Base\Query\V1beta1\GPBMetadata\Pagination::initOnce();
         parent::__construct($data);
     }
 
@@ -214,7 +212,6 @@ class PageRequest extends \Google\Protobuf\Internal\Message
 
     /**
      * reverse is set to true if results are to be returned in the descending order.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>bool reverse = 5 [json_name = "reverse"];</code>
      * @return bool
@@ -226,7 +223,6 @@ class PageRequest extends \Google\Protobuf\Internal\Message
 
     /**
      * reverse is set to true if results are to be returned in the descending order.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>bool reverse = 5 [json_name = "reverse"];</code>
      * @param bool $var

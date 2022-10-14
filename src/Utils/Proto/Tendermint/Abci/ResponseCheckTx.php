@@ -64,12 +64,12 @@ class ResponseCheckTx extends \Google\Protobuf\Internal\Message
      *           nondeterministic
      *     @type int|string $gas_wanted
      *     @type int|string $gas_used
-     *     @type \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $events
+     *     @type array<\Tendermint\Abci\Event>|\Google\Protobuf\Internal\RepeatedField $events
      *     @type string $codespace
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Abci\Types::initOnce();
+        \Tendermint\Abci\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -224,7 +224,7 @@ class ResponseCheckTx extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 7 [json_name = "events", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "events,omitempty"];</code>
-     * @param \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Abci\Event>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEvents($var)

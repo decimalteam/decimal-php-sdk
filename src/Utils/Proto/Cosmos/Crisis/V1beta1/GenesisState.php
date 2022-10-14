@@ -19,7 +19,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * constant_fee is the fee used to verify the invariant in the crisis
      * module.
      *
-     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin constant_fee = 3 [json_name = "constantFee", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin constant_fee = 3 [json_name = "constantFee", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"constant_fee\""];</code>
      */
     protected $constant_fee = null;
 
@@ -35,7 +35,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Crisis\V1Beta1\Genesis::initOnce();
+        \Cosmos\Crisis\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
@@ -43,7 +43,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * constant_fee is the fee used to verify the invariant in the crisis
      * module.
      *
-     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin constant_fee = 3 [json_name = "constantFee", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin constant_fee = 3 [json_name = "constantFee", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"constant_fee\""];</code>
      * @return \Cosmos\Base\V1beta1\Coin|null
      */
     public function getConstantFee()
@@ -65,7 +65,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * constant_fee is the fee used to verify the invariant in the crisis
      * module.
      *
-     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin constant_fee = 3 [json_name = "constantFee", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin constant_fee = 3 [json_name = "constantFee", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"constant_fee\""];</code>
      * @param \Cosmos\Base\V1beta1\Coin $var
      * @return $this
      */

@@ -35,14 +35,14 @@ class QueryDelegationTotalRewardsResponse extends \Google\Protobuf\Internal\Mess
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Distribution\V1beta1\DelegationDelegatorReward[]|\Google\Protobuf\Internal\RepeatedField $rewards
+     *     @type array<\Cosmos\Distribution\V1beta1\DelegationDelegatorReward>|\Google\Protobuf\Internal\RepeatedField $rewards
      *           rewards defines all the rewards accrued by a delegator.
-     *     @type \Cosmos\Base\V1beta1\DecCoin[]|\Google\Protobuf\Internal\RepeatedField $total
+     *     @type array<\Cosmos\Base\V1beta1\DecCoin>|\Google\Protobuf\Internal\RepeatedField $total
      *           total defines the sum of all the rewards.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Query::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -61,7 +61,7 @@ class QueryDelegationTotalRewardsResponse extends \Google\Protobuf\Internal\Mess
      * rewards defines all the rewards accrued by a delegator.
      *
      * Generated from protobuf field <code>repeated .cosmos.distribution.v1beta1.DelegationDelegatorReward rewards = 1 [json_name = "rewards", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Distribution\V1beta1\DelegationDelegatorReward[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Distribution\V1beta1\DelegationDelegatorReward>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRewards($var)
@@ -87,7 +87,7 @@ class QueryDelegationTotalRewardsResponse extends \Google\Protobuf\Internal\Mess
      * total defines the sum of all the rewards.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin total = 2 [json_name = "total", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
-     * @param \Cosmos\Base\V1beta1\DecCoin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\DecCoin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTotal($var)

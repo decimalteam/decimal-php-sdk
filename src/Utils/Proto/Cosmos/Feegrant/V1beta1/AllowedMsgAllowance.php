@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class AllowedMsgAllowance extends \Google\Protobuf\Internal\Message
 {
     /**
-     * allowance can be any of basic and periodic fee allowance.
+     * allowance can be any of basic and filtered fee allowance.
      *
      * Generated from protobuf field <code>.google.protobuf.Any allowance = 1 [json_name = "allowance", (.cosmos_proto.accepts_interface) = "FeeAllowanceI"];</code>
      */
@@ -35,18 +35,18 @@ class AllowedMsgAllowance extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Google\Protobuf\Any $allowance
-     *           allowance can be any of basic and periodic fee allowance.
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $allowed_messages
+     *           allowance can be any of basic and filtered fee allowance.
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $allowed_messages
      *           allowed_messages are the messages for which the grantee has the access.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Feegrant\V1Beta1\Feegrant::initOnce();
+        \Cosmos\Feegrant\V1beta1\GPBMetadata\Feegrant::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * allowance can be any of basic and periodic fee allowance.
+     * allowance can be any of basic and filtered fee allowance.
      *
      * Generated from protobuf field <code>.google.protobuf.Any allowance = 1 [json_name = "allowance", (.cosmos_proto.accepts_interface) = "FeeAllowanceI"];</code>
      * @return \Google\Protobuf\Any|null
@@ -67,7 +67,7 @@ class AllowedMsgAllowance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * allowance can be any of basic and periodic fee allowance.
+     * allowance can be any of basic and filtered fee allowance.
      *
      * Generated from protobuf field <code>.google.protobuf.Any allowance = 1 [json_name = "allowance", (.cosmos_proto.accepts_interface) = "FeeAllowanceI"];</code>
      * @param \Google\Protobuf\Any $var
@@ -96,7 +96,7 @@ class AllowedMsgAllowance extends \Google\Protobuf\Internal\Message
      * allowed_messages are the messages for which the grantee has the access.
      *
      * Generated from protobuf field <code>repeated string allowed_messages = 2 [json_name = "allowedMessages"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAllowedMessages($var)

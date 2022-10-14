@@ -24,7 +24,7 @@ class GenesisOwners extends \Google\Protobuf\Internal\Message
     /**
      * index_owners are the owners at the given index.
      *
-     * Generated from protobuf field <code>.cosmos.capability.v1beta1.CapabilityOwners index_owners = 2 [json_name = "indexOwners", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.capability.v1beta1.CapabilityOwners index_owners = 2 [json_name = "indexOwners", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"index_owners\""];</code>
      */
     protected $index_owners = null;
 
@@ -41,7 +41,7 @@ class GenesisOwners extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Capability\V1Beta1\Genesis::initOnce();
+        \Cosmos\Capability\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
@@ -74,7 +74,7 @@ class GenesisOwners extends \Google\Protobuf\Internal\Message
     /**
      * index_owners are the owners at the given index.
      *
-     * Generated from protobuf field <code>.cosmos.capability.v1beta1.CapabilityOwners index_owners = 2 [json_name = "indexOwners", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.capability.v1beta1.CapabilityOwners index_owners = 2 [json_name = "indexOwners", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"index_owners\""];</code>
      * @return \Cosmos\Capability\V1beta1\CapabilityOwners|null
      */
     public function getIndexOwners()
@@ -95,7 +95,7 @@ class GenesisOwners extends \Google\Protobuf\Internal\Message
     /**
      * index_owners are the owners at the given index.
      *
-     * Generated from protobuf field <code>.cosmos.capability.v1beta1.CapabilityOwners index_owners = 2 [json_name = "indexOwners", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.capability.v1beta1.CapabilityOwners index_owners = 2 [json_name = "indexOwners", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"index_owners\""];</code>
      * @param \Cosmos\Capability\V1beta1\CapabilityOwners $var
      * @return $this
      */

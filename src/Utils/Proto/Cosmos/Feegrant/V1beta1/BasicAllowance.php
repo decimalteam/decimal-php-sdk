@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * BasicAllowance implements Allowance with a one-time grant of coins
+ * BasicAllowance implements Allowance with a one-time grant of tokens
  * that optionally expires. The grantee can use up to SpendLimit to cover fees.
  *
  * Generated from protobuf message <code>cosmos.feegrant.v1beta1.BasicAllowance</code>
@@ -17,8 +17,8 @@ use Google\Protobuf\Internal\GPBUtil;
 class BasicAllowance extends \Google\Protobuf\Internal\Message
 {
     /**
-     * spend_limit specifies the maximum amount of coins that can be spent
-     * by this allowance and will be updated as coins are spent. If it is
+     * spend_limit specifies the maximum amount of tokens that can be spent
+     * by this allowance and will be updated as tokens are spent. If it is
      * empty, there is no spend limit and any amount of coins can be spent.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin spend_limit = 1 [json_name = "spendLimit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
@@ -37,22 +37,22 @@ class BasicAllowance extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $spend_limit
-     *           spend_limit specifies the maximum amount of coins that can be spent
-     *           by this allowance and will be updated as coins are spent. If it is
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $spend_limit
+     *           spend_limit specifies the maximum amount of tokens that can be spent
+     *           by this allowance and will be updated as tokens are spent. If it is
      *           empty, there is no spend limit and any amount of coins can be spent.
      *     @type \Google\Protobuf\Timestamp $expiration
      *           expiration specifies an optional time when this allowance expires
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Feegrant\V1Beta1\Feegrant::initOnce();
+        \Cosmos\Feegrant\V1beta1\GPBMetadata\Feegrant::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * spend_limit specifies the maximum amount of coins that can be spent
-     * by this allowance and will be updated as coins are spent. If it is
+     * spend_limit specifies the maximum amount of tokens that can be spent
+     * by this allowance and will be updated as tokens are spent. If it is
      * empty, there is no spend limit and any amount of coins can be spent.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin spend_limit = 1 [json_name = "spendLimit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
@@ -64,12 +64,12 @@ class BasicAllowance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * spend_limit specifies the maximum amount of coins that can be spent
-     * by this allowance and will be updated as coins are spent. If it is
+     * spend_limit specifies the maximum amount of tokens that can be spent
+     * by this allowance and will be updated as tokens are spent. If it is
      * empty, there is no spend limit and any amount of coins can be spent.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin spend_limit = 1 [json_name = "spendLimit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSpendLimit($var)

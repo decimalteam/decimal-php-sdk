@@ -16,9 +16,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class QueryValidatorDelegationsResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>repeated .decimal.validator.v1.DelegationResponse delegation_responses = 1 [json_name = "delegationResponses", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.validator.v1.Delegation delegations = 1 [json_name = "delegations", (.gogoproto.nullable) = false];</code>
      */
-    private $delegation_responses;
+    private $delegations;
     /**
      * pagination defines the pagination in the response.
      *
@@ -32,34 +32,34 @@ class QueryValidatorDelegationsResponse extends \Google\Protobuf\Internal\Messag
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Validator\V1\DelegationResponse[]|\Google\Protobuf\Internal\RepeatedField $delegation_responses
+     *     @type array<\Decimal\Validator\V1\Delegation>|\Google\Protobuf\Internal\RepeatedField $delegations
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Query::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>repeated .decimal.validator.v1.DelegationResponse delegation_responses = 1 [json_name = "delegationResponses", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.validator.v1.Delegation delegations = 1 [json_name = "delegations", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
-    public function getDelegationResponses()
+    public function getDelegations()
     {
-        return $this->delegation_responses;
+        return $this->delegations;
     }
 
     /**
-     * Generated from protobuf field <code>repeated .decimal.validator.v1.DelegationResponse delegation_responses = 1 [json_name = "delegationResponses", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Validator\V1\DelegationResponse[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .decimal.validator.v1.Delegation delegations = 1 [json_name = "delegations", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Validator\V1\Delegation>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
-    public function setDelegationResponses($var)
+    public function setDelegations($var)
     {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Decimal\Validator\V1\DelegationResponse::class);
-        $this->delegation_responses = $arr;
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Decimal\Validator\V1\Delegation::class);
+        $this->delegations = $arr;
 
         return $this;
     }

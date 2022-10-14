@@ -17,11 +17,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgCreateVestingAccount extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string from_address = 1 [json_name = "fromAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string from_address = 1 [json_name = "fromAddress", (.gogoproto.moretags) = "yaml:\"from_address\""];</code>
      */
     protected $from_address = '';
     /**
-     * Generated from protobuf field <code>string to_address = 2 [json_name = "toAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string to_address = 2 [json_name = "toAddress", (.gogoproto.moretags) = "yaml:\"to_address\""];</code>
      */
     protected $to_address = '';
     /**
@@ -29,7 +29,7 @@ class MsgCreateVestingAccount extends \Google\Protobuf\Internal\Message
      */
     private $amount;
     /**
-     * Generated from protobuf field <code>int64 end_time = 4 [json_name = "endTime"];</code>
+     * Generated from protobuf field <code>int64 end_time = 4 [json_name = "endTime", (.gogoproto.moretags) = "yaml:\"end_time\""];</code>
      */
     protected $end_time = 0;
     /**
@@ -45,18 +45,18 @@ class MsgCreateVestingAccount extends \Google\Protobuf\Internal\Message
      *
      *     @type string $from_address
      *     @type string $to_address
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $amount
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $amount
      *     @type int|string $end_time
      *     @type bool $delayed
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Vesting\V1Beta1\Tx::initOnce();
+        \Cosmos\Vesting\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string from_address = 1 [json_name = "fromAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string from_address = 1 [json_name = "fromAddress", (.gogoproto.moretags) = "yaml:\"from_address\""];</code>
      * @return string
      */
     public function getFromAddress()
@@ -65,7 +65,7 @@ class MsgCreateVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string from_address = 1 [json_name = "fromAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string from_address = 1 [json_name = "fromAddress", (.gogoproto.moretags) = "yaml:\"from_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -78,7 +78,7 @@ class MsgCreateVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string to_address = 2 [json_name = "toAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string to_address = 2 [json_name = "toAddress", (.gogoproto.moretags) = "yaml:\"to_address\""];</code>
      * @return string
      */
     public function getToAddress()
@@ -87,7 +87,7 @@ class MsgCreateVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string to_address = 2 [json_name = "toAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string to_address = 2 [json_name = "toAddress", (.gogoproto.moretags) = "yaml:\"to_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -110,7 +110,7 @@ class MsgCreateVestingAccount extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin amount = 3 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAmount($var)
@@ -122,7 +122,7 @@ class MsgCreateVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 end_time = 4 [json_name = "endTime"];</code>
+     * Generated from protobuf field <code>int64 end_time = 4 [json_name = "endTime", (.gogoproto.moretags) = "yaml:\"end_time\""];</code>
      * @return int|string
      */
     public function getEndTime()
@@ -131,7 +131,7 @@ class MsgCreateVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 end_time = 4 [json_name = "endTime"];</code>
+     * Generated from protobuf field <code>int64 end_time = 4 [json_name = "endTime", (.gogoproto.moretags) = "yaml:\"end_time\""];</code>
      * @param int|string $var
      * @return $this
      */

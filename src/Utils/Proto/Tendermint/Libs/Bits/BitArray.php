@@ -29,11 +29,11 @@ class BitArray extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int|string $bits
-     *     @type int[]|string[]|\Google\Protobuf\Internal\RepeatedField $elems
+     *     @type array<int>|array<string>|\Google\Protobuf\Internal\RepeatedField $elems
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Libs\Bits\Types::initOnce();
+        \Tendermint\Libs\Bits\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -70,7 +70,7 @@ class BitArray extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated uint64 elems = 2 [json_name = "elems"];</code>
-     * @param int[]|string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<int>|array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setElems($var)

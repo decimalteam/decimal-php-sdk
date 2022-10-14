@@ -41,7 +41,7 @@ class ParamChange extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Params\V1Beta1\Params::initOnce();
+        \Cosmos\Params\V1beta1\GPBMetadata\Params::initOnce();
         parent::__construct($data);
     }
 

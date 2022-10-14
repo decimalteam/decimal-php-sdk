@@ -26,11 +26,11 @@ class Pairs extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\Kv\V1beta1\Pair[]|\Google\Protobuf\Internal\RepeatedField $pairs
+     *     @type array<\Cosmos\Base\Kv\V1beta1\Pair>|\Google\Protobuf\Internal\RepeatedField $pairs
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Kv\V1Beta1\Kv::initOnce();
+        \Cosmos\Base\Kv\V1beta1\GPBMetadata\Kv::initOnce();
         parent::__construct($data);
     }
 
@@ -45,7 +45,7 @@ class Pairs extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.kv.v1beta1.Pair pairs = 1 [json_name = "pairs", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Base\Kv\V1beta1\Pair[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Kv\V1beta1\Pair>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPairs($var)

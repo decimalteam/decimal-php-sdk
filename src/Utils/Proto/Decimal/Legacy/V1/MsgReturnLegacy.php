@@ -9,6 +9,8 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
+ * MsgReturnLegacy defines a SDK message for returning coins, nft, multisig wallets by account public key.
+ *
  * Generated from protobuf message <code>decimal.legacy.v1.MsgReturnLegacy</code>
  */
 class MsgReturnLegacy extends \Google\Protobuf\Internal\Message
@@ -33,7 +35,7 @@ class MsgReturnLegacy extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Legacy\V1\Tx::initOnce();
+        \Decimal\Legacy\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

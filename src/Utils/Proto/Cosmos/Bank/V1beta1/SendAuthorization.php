@@ -11,7 +11,6 @@ use Google\Protobuf\Internal\GPBUtil;
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from
  * the granter's account.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.bank.v1beta1.SendAuthorization</code>
  */
@@ -28,11 +27,11 @@ class SendAuthorization extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $spend_limit
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $spend_limit
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Authz::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Authz::initOnce();
         parent::__construct($data);
     }
 
@@ -47,7 +46,7 @@ class SendAuthorization extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin spend_limit = 1 [json_name = "spendLimit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSpendLimit($var)

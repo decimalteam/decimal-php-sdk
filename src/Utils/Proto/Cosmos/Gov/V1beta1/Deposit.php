@@ -17,11 +17,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class Deposit extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      */
     protected $proposal_id = 0;
     /**
-     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor"];</code>
      */
     protected $depositor = '';
     /**
@@ -37,16 +37,16 @@ class Deposit extends \Google\Protobuf\Internal\Message
      *
      *     @type int|string $proposal_id
      *     @type string $depositor
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $amount
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $amount
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Gov::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Gov::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @return int|string
      */
     public function getProposalId()
@@ -55,7 +55,7 @@ class Deposit extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -68,7 +68,7 @@ class Deposit extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor"];</code>
      * @return string
      */
     public function getDepositor()
@@ -77,7 +77,7 @@ class Deposit extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor"];</code>
      * @param string $var
      * @return $this
      */
@@ -100,7 +100,7 @@ class Deposit extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin amount = 3 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAmount($var)

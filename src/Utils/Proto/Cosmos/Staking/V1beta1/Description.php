@@ -36,7 +36,7 @@ class Description extends \Google\Protobuf\Internal\Message
     /**
      * security_contact defines an optional email for security contact.
      *
-     * Generated from protobuf field <code>string security_contact = 4 [json_name = "securityContact"];</code>
+     * Generated from protobuf field <code>string security_contact = 4 [json_name = "securityContact", (.gogoproto.moretags) = "yaml:\"security_contact\""];</code>
      */
     protected $security_contact = '';
     /**
@@ -65,7 +65,7 @@ class Description extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
@@ -150,7 +150,7 @@ class Description extends \Google\Protobuf\Internal\Message
     /**
      * security_contact defines an optional email for security contact.
      *
-     * Generated from protobuf field <code>string security_contact = 4 [json_name = "securityContact"];</code>
+     * Generated from protobuf field <code>string security_contact = 4 [json_name = "securityContact", (.gogoproto.moretags) = "yaml:\"security_contact\""];</code>
      * @return string
      */
     public function getSecurityContact()
@@ -161,7 +161,7 @@ class Description extends \Google\Protobuf\Internal\Message
     /**
      * security_contact defines an optional email for security contact.
      *
-     * Generated from protobuf field <code>string security_contact = 4 [json_name = "securityContact"];</code>
+     * Generated from protobuf field <code>string security_contact = 4 [json_name = "securityContact", (.gogoproto.moretags) = "yaml:\"security_contact\""];</code>
      * @param string $var
      * @return $this
      */

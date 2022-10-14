@@ -26,7 +26,6 @@ class SimulateRequest extends \Google\Protobuf\Internal\Message
     protected $tx = null;
     /**
      * tx_bytes is the raw transaction.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>bytes tx_bytes = 2 [json_name = "txBytes"];</code>
      */
@@ -43,11 +42,10 @@ class SimulateRequest extends \Google\Protobuf\Internal\Message
      *           Deprecated. Send raw tx bytes instead.
      *     @type string $tx_bytes
      *           tx_bytes is the raw transaction.
-     *           Since: cosmos-sdk 0.43
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\V1Beta1\Service::initOnce();
+        \Cosmos\Tx\V1beta1\GPBMetadata\Service::initOnce();
         parent::__construct($data);
     }
 
@@ -97,7 +95,6 @@ class SimulateRequest extends \Google\Protobuf\Internal\Message
 
     /**
      * tx_bytes is the raw transaction.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>bytes tx_bytes = 2 [json_name = "txBytes"];</code>
      * @return string
@@ -109,7 +106,6 @@ class SimulateRequest extends \Google\Protobuf\Internal\Message
 
     /**
      * tx_bytes is the raw transaction.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>bytes tx_bytes = 2 [json_name = "txBytes"];</code>
      * @param string $var

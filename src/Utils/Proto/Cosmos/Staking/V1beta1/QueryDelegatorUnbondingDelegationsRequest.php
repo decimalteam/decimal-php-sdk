@@ -19,7 +19,7 @@ class QueryDelegatorUnbondingDelegationsRequest extends \Google\Protobuf\Interna
     /**
      * delegator_addr defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr"];</code>
      */
     protected $delegator_addr = '';
     /**
@@ -42,14 +42,14 @@ class QueryDelegatorUnbondingDelegationsRequest extends \Google\Protobuf\Interna
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Query::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
      * delegator_addr defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr"];</code>
      * @return string
      */
     public function getDelegatorAddr()
@@ -60,7 +60,7 @@ class QueryDelegatorUnbondingDelegationsRequest extends \Google\Protobuf\Interna
     /**
      * delegator_addr defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr"];</code>
      * @param string $var
      * @return $this
      */

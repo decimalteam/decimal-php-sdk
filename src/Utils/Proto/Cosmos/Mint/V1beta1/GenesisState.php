@@ -41,7 +41,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Mint\V1Beta1\Genesis::initOnce();
+        \Cosmos\Mint\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 

@@ -18,7 +18,7 @@ class VotingParams extends \Google\Protobuf\Internal\Message
     /**
      *  Length of the voting period.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration voting_period = 1 [json_name = "votingPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "voting_period,omitempty", (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration voting_period = 1 [json_name = "votingPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "voting_period,omitempty", (.gogoproto.moretags) = "yaml:\"voting_period\"", (.gogoproto.stdduration) = true];</code>
      */
     protected $voting_period = null;
 
@@ -33,14 +33,14 @@ class VotingParams extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Gov::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Gov::initOnce();
         parent::__construct($data);
     }
 
     /**
      *  Length of the voting period.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration voting_period = 1 [json_name = "votingPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "voting_period,omitempty", (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration voting_period = 1 [json_name = "votingPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "voting_period,omitempty", (.gogoproto.moretags) = "yaml:\"voting_period\"", (.gogoproto.stdduration) = true];</code>
      * @return \Google\Protobuf\Duration|null
      */
     public function getVotingPeriod()
@@ -61,7 +61,7 @@ class VotingParams extends \Google\Protobuf\Internal\Message
     /**
      *  Length of the voting period.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration voting_period = 1 [json_name = "votingPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "voting_period,omitempty", (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration voting_period = 1 [json_name = "votingPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "voting_period,omitempty", (.gogoproto.moretags) = "yaml:\"voting_period\"", (.gogoproto.stdduration) = true];</code>
      * @param \Google\Protobuf\Duration $var
      * @return $this
      */

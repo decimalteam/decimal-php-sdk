@@ -26,11 +26,11 @@ class QueryActiveSwapsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Swap\V1\Swap[]|\Google\Protobuf\Internal\RepeatedField $swaps
+     *     @type array<\Decimal\Swap\V1\Swap>|\Google\Protobuf\Internal\RepeatedField $swaps
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Swap\V1\Query::initOnce();
+        \Decimal\Swap\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -45,7 +45,7 @@ class QueryActiveSwapsResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .decimal.swap.v1.Swap swaps = 1 [json_name = "swaps", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Swap\V1\Swap[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Swap\V1\Swap>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSwaps($var)

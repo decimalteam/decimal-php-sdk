@@ -25,7 +25,7 @@ class MsgRevokeAllowanceResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Feegrant\V1Beta1\Tx::initOnce();
+        \Cosmos\Feegrant\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

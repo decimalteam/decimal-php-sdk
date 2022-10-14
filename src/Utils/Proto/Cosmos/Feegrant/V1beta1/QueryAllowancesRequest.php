@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class QueryAllowancesRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee"];</code>
      */
     protected $grantee = '';
     /**
@@ -38,12 +38,12 @@ class QueryAllowancesRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Feegrant\V1Beta1\Query::initOnce();
+        \Cosmos\Feegrant\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee"];</code>
      * @return string
      */
     public function getGrantee()
@@ -52,7 +52,7 @@ class QueryAllowancesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee"];</code>
      * @param string $var
      * @return $this
      */

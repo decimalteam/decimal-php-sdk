@@ -33,7 +33,7 @@ class MsgSubmitEvidenceResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Evidence\V1Beta1\Tx::initOnce();
+        \Cosmos\Evidence\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

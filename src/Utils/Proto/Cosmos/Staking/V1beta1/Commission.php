@@ -24,7 +24,7 @@ class Commission extends \Google\Protobuf\Internal\Message
     /**
      * update_time is the last time the commission rate was changed.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp update_time = 2 [json_name = "updateTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp update_time = 2 [json_name = "updateTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"update_time\"", (.gogoproto.stdtime) = true];</code>
      */
     protected $update_time = null;
 
@@ -41,7 +41,7 @@ class Commission extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
@@ -84,7 +84,7 @@ class Commission extends \Google\Protobuf\Internal\Message
     /**
      * update_time is the last time the commission rate was changed.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp update_time = 2 [json_name = "updateTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp update_time = 2 [json_name = "updateTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"update_time\"", (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getUpdateTime()
@@ -105,7 +105,7 @@ class Commission extends \Google\Protobuf\Internal\Message
     /**
      * update_time is the last time the commission rate was changed.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp update_time = 2 [json_name = "updateTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp update_time = 2 [json_name = "updateTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"update_time\"", (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */

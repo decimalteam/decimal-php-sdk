@@ -21,7 +21,7 @@ class ContinuousVestingAccount extends \Google\Protobuf\Internal\Message
      */
     protected $base_vesting_account = null;
     /**
-     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime"];</code>
+     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime", (.gogoproto.moretags) = "yaml:\"start_time\""];</code>
      */
     protected $start_time = 0;
 
@@ -36,7 +36,7 @@ class ContinuousVestingAccount extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Vesting\V1Beta1\Vesting::initOnce();
+        \Cosmos\Vesting\V1beta1\GPBMetadata\Vesting::initOnce();
         parent::__construct($data);
     }
 
@@ -73,7 +73,7 @@ class ContinuousVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime"];</code>
+     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime", (.gogoproto.moretags) = "yaml:\"start_time\""];</code>
      * @return int|string
      */
     public function getStartTime()
@@ -82,7 +82,7 @@ class ContinuousVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime"];</code>
+     * Generated from protobuf field <code>int64 start_time = 2 [json_name = "startTime", (.gogoproto.moretags) = "yaml:\"start_time\""];</code>
      * @param int|string $var
      * @return $this
      */

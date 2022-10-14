@@ -44,12 +44,12 @@ class QueryServiceDescriptor extends \Google\Protobuf\Internal\Message
      *           fullname is the protobuf fullname of the service descriptor
      *     @type bool $is_module
      *           is_module describes if this service is actually exposed by an application's module
-     *     @type \Cosmos\Base\Reflection\V2alpha1\QueryMethodDescriptor[]|\Google\Protobuf\Internal\RepeatedField $methods
+     *     @type array<\Cosmos\Base\Reflection\V2alpha1\QueryMethodDescriptor>|\Google\Protobuf\Internal\RepeatedField $methods
      *           methods provides a list of query service methods
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V2Alpha1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V2alpha1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 
@@ -120,7 +120,7 @@ class QueryServiceDescriptor extends \Google\Protobuf\Internal\Message
      * methods provides a list of query service methods
      *
      * Generated from protobuf field <code>repeated .cosmos.base.reflection.v2alpha1.QueryMethodDescriptor methods = 3 [json_name = "methods"];</code>
-     * @param \Cosmos\Base\Reflection\V2alpha1\QueryMethodDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Reflection\V2alpha1\QueryMethodDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setMethods($var)

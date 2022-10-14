@@ -19,7 +19,7 @@ class QueryDelegatorWithdrawAddressResponse extends \Google\Protobuf\Internal\Me
     /**
      * withdraw_address defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string withdraw_address = 1 [json_name = "withdrawAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string withdraw_address = 1 [json_name = "withdrawAddress"];</code>
      */
     protected $withdraw_address = '';
 
@@ -34,14 +34,14 @@ class QueryDelegatorWithdrawAddressResponse extends \Google\Protobuf\Internal\Me
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Query::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
      * withdraw_address defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string withdraw_address = 1 [json_name = "withdrawAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string withdraw_address = 1 [json_name = "withdrawAddress"];</code>
      * @return string
      */
     public function getWithdrawAddress()
@@ -52,7 +52,7 @@ class QueryDelegatorWithdrawAddressResponse extends \Google\Protobuf\Internal\Me
     /**
      * withdraw_address defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string withdraw_address = 1 [json_name = "withdrawAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string withdraw_address = 1 [json_name = "withdrawAddress"];</code>
      * @param string $var
      * @return $this
      */

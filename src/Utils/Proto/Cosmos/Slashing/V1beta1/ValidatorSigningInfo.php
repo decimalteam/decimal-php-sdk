@@ -17,13 +17,13 @@ use Google\Protobuf\Internal\GPBUtil;
 class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      */
     protected $address = '';
     /**
      * Height at which validator was first a candidate OR was unjailed
      *
-     * Generated from protobuf field <code>int64 start_height = 2 [json_name = "startHeight"];</code>
+     * Generated from protobuf field <code>int64 start_height = 2 [json_name = "startHeight", (.gogoproto.moretags) = "yaml:\"start_height\""];</code>
      */
     protected $start_height = 0;
     /**
@@ -31,13 +31,13 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
      * in a block and may have signed a precommit or not. This in conjunction with the
      * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      *
-     * Generated from protobuf field <code>int64 index_offset = 3 [json_name = "indexOffset"];</code>
+     * Generated from protobuf field <code>int64 index_offset = 3 [json_name = "indexOffset", (.gogoproto.moretags) = "yaml:\"index_offset\""];</code>
      */
     protected $index_offset = 0;
     /**
      * Timestamp until which the validator is jailed due to liveness downtime.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp jailed_until = 4 [json_name = "jailedUntil", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp jailed_until = 4 [json_name = "jailedUntil", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"jailed_until\"", (.gogoproto.stdtime) = true];</code>
      */
     protected $jailed_until = null;
     /**
@@ -51,7 +51,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
      * A counter kept to avoid unnecessary array reads.
      * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
      *
-     * Generated from protobuf field <code>int64 missed_blocks_counter = 6 [json_name = "missedBlocksCounter"];</code>
+     * Generated from protobuf field <code>int64 missed_blocks_counter = 6 [json_name = "missedBlocksCounter", (.gogoproto.moretags) = "yaml:\"missed_blocks_counter\""];</code>
      */
     protected $missed_blocks_counter = 0;
 
@@ -79,12 +79,12 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Slashing::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Slashing::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @return string
      */
     public function getAddress()
@@ -93,7 +93,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @param string $var
      * @return $this
      */
@@ -108,7 +108,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
     /**
      * Height at which validator was first a candidate OR was unjailed
      *
-     * Generated from protobuf field <code>int64 start_height = 2 [json_name = "startHeight"];</code>
+     * Generated from protobuf field <code>int64 start_height = 2 [json_name = "startHeight", (.gogoproto.moretags) = "yaml:\"start_height\""];</code>
      * @return int|string
      */
     public function getStartHeight()
@@ -119,7 +119,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
     /**
      * Height at which validator was first a candidate OR was unjailed
      *
-     * Generated from protobuf field <code>int64 start_height = 2 [json_name = "startHeight"];</code>
+     * Generated from protobuf field <code>int64 start_height = 2 [json_name = "startHeight", (.gogoproto.moretags) = "yaml:\"start_height\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -136,7 +136,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
      * in a block and may have signed a precommit or not. This in conjunction with the
      * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      *
-     * Generated from protobuf field <code>int64 index_offset = 3 [json_name = "indexOffset"];</code>
+     * Generated from protobuf field <code>int64 index_offset = 3 [json_name = "indexOffset", (.gogoproto.moretags) = "yaml:\"index_offset\""];</code>
      * @return int|string
      */
     public function getIndexOffset()
@@ -149,7 +149,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
      * in a block and may have signed a precommit or not. This in conjunction with the
      * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      *
-     * Generated from protobuf field <code>int64 index_offset = 3 [json_name = "indexOffset"];</code>
+     * Generated from protobuf field <code>int64 index_offset = 3 [json_name = "indexOffset", (.gogoproto.moretags) = "yaml:\"index_offset\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -164,7 +164,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
     /**
      * Timestamp until which the validator is jailed due to liveness downtime.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp jailed_until = 4 [json_name = "jailedUntil", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp jailed_until = 4 [json_name = "jailedUntil", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"jailed_until\"", (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getJailedUntil()
@@ -185,7 +185,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
     /**
      * Timestamp until which the validator is jailed due to liveness downtime.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp jailed_until = 4 [json_name = "jailedUntil", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp jailed_until = 4 [json_name = "jailedUntil", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"jailed_until\"", (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */
@@ -229,7 +229,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
      * A counter kept to avoid unnecessary array reads.
      * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
      *
-     * Generated from protobuf field <code>int64 missed_blocks_counter = 6 [json_name = "missedBlocksCounter"];</code>
+     * Generated from protobuf field <code>int64 missed_blocks_counter = 6 [json_name = "missedBlocksCounter", (.gogoproto.moretags) = "yaml:\"missed_blocks_counter\""];</code>
      * @return int|string
      */
     public function getMissedBlocksCounter()
@@ -241,7 +241,7 @@ class ValidatorSigningInfo extends \Google\Protobuf\Internal\Message
      * A counter kept to avoid unnecessary array reads.
      * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
      *
-     * Generated from protobuf field <code>int64 missed_blocks_counter = 6 [json_name = "missedBlocksCounter"];</code>
+     * Generated from protobuf field <code>int64 missed_blocks_counter = 6 [json_name = "missedBlocksCounter", (.gogoproto.moretags) = "yaml:\"missed_blocks_counter\""];</code>
      * @param int|string $var
      * @return $this
      */

@@ -26,11 +26,11 @@ class ValAddresses extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $addresses
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $addresses
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Validator::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Validator::initOnce();
         parent::__construct($data);
     }
 
@@ -45,7 +45,7 @@ class ValAddresses extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated string addresses = 1 [json_name = "addresses", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAddresses($var)
