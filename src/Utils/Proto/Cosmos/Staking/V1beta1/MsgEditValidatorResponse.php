@@ -25,7 +25,7 @@ class MsgEditValidatorResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Tx::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

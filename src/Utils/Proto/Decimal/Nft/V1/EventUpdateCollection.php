@@ -40,7 +40,7 @@ class EventUpdateCollection extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Events::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 

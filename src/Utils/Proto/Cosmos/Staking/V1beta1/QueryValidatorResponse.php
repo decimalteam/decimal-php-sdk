@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class QueryValidatorResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * validator defines the validator info.
+     * validator defines the the validator info.
      *
      * Generated from protobuf field <code>.cosmos.staking.v1beta1.Validator validator = 1 [json_name = "validator", (.gogoproto.nullable) = false];</code>
      */
@@ -29,16 +29,16 @@ class QueryValidatorResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Cosmos\Staking\V1beta1\Validator $validator
-     *           validator defines the validator info.
+     *           validator defines the the validator info.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Query::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * validator defines the validator info.
+     * validator defines the the validator info.
      *
      * Generated from protobuf field <code>.cosmos.staking.v1beta1.Validator validator = 1 [json_name = "validator", (.gogoproto.nullable) = false];</code>
      * @return \Cosmos\Staking\V1beta1\Validator|null
@@ -59,7 +59,7 @@ class QueryValidatorResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * validator defines the validator info.
+     * validator defines the the validator info.
      *
      * Generated from protobuf field <code>.cosmos.staking.v1beta1.Validator validator = 1 [json_name = "validator", (.gogoproto.nullable) = false];</code>
      * @param \Cosmos\Staking\V1beta1\Validator $var

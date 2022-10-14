@@ -31,11 +31,11 @@ class MsgMultiSendCoin extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $sender
-     *     @type \Decimal\Coin\V1\MultiSendEntry[]|\Google\Protobuf\Internal\RepeatedField $sends
+     *     @type array<\Decimal\Coin\V1\MultiSendEntry>|\Google\Protobuf\Internal\RepeatedField $sends
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Coin\V1\Tx::initOnce();
+        \Decimal\Coin\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -72,7 +72,7 @@ class MsgMultiSendCoin extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .decimal.coin.v1.MultiSendEntry sends = 2 [json_name = "sends", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Coin\V1\MultiSendEntry[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Coin\V1\MultiSendEntry>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSends($var)

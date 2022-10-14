@@ -9,25 +9,30 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * MsgDelegate defines a SDK message for performing a delegation of coins
- * from a delegator to a validator.
+ * MsgDelegate defines a SDK message for performing a delegation of coins from a delegator to a validator.
  *
  * Generated from protobuf message <code>decimal.validator.v1.MsgDelegate</code>
  */
 class MsgDelegate extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * delegator is the bech32-encoded address of the delegator.
+     *
+     * Generated from protobuf field <code>string delegator = 1 [json_name = "delegator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      */
-    protected $delegator_address = '';
+    protected $delegator = '';
     /**
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * validator is the bech32-encoded address of the validator.
+     *
+     * Generated from protobuf field <code>string validator = 2 [json_name = "validator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      */
-    protected $validator_address = '';
+    protected $validator = '';
     /**
-     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin amount = 3 [json_name = "amount", (.gogoproto.nullable) = false];</code>
+     * coin defines amount of the coin to delegate.
+     *
+     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin coin = 3 [json_name = "coin", (.gogoproto.nullable) = false];</code>
      */
-    protected $amount = null;
+    protected $coin = null;
 
     /**
      * Constructor.
@@ -35,88 +40,103 @@ class MsgDelegate extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $delegator_address
-     *     @type string $validator_address
-     *     @type \Cosmos\Base\V1beta1\Coin $amount
+     *     @type string $delegator
+     *           delegator is the bech32-encoded address of the delegator.
+     *     @type string $validator
+     *           validator is the bech32-encoded address of the validator.
+     *     @type \Cosmos\Base\V1beta1\Coin $coin
+     *           coin defines amount of the coin to delegate.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Tx::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * delegator is the bech32-encoded address of the delegator.
+     *
+     * Generated from protobuf field <code>string delegator = 1 [json_name = "delegator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @return string
      */
-    public function getDelegatorAddress()
+    public function getDelegator()
     {
-        return $this->delegator_address;
+        return $this->delegator;
     }
 
     /**
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * delegator is the bech32-encoded address of the delegator.
+     *
+     * Generated from protobuf field <code>string delegator = 1 [json_name = "delegator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @param string $var
      * @return $this
      */
-    public function setDelegatorAddress($var)
+    public function setDelegator($var)
     {
         GPBUtil::checkString($var, True);
-        $this->delegator_address = $var;
+        $this->delegator = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * validator is the bech32-encoded address of the validator.
+     *
+     * Generated from protobuf field <code>string validator = 2 [json_name = "validator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @return string
      */
-    public function getValidatorAddress()
+    public function getValidator()
     {
-        return $this->validator_address;
+        return $this->validator;
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * validator is the bech32-encoded address of the validator.
+     *
+     * Generated from protobuf field <code>string validator = 2 [json_name = "validator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @param string $var
      * @return $this
      */
-    public function setValidatorAddress($var)
+    public function setValidator($var)
     {
         GPBUtil::checkString($var, True);
-        $this->validator_address = $var;
+        $this->validator = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin amount = 3 [json_name = "amount", (.gogoproto.nullable) = false];</code>
+     * coin defines amount of the coin to delegate.
+     *
+     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin coin = 3 [json_name = "coin", (.gogoproto.nullable) = false];</code>
      * @return \Cosmos\Base\V1beta1\Coin|null
      */
-    public function getAmount()
+    public function getCoin()
     {
-        return $this->amount;
+        return $this->coin;
     }
 
-    public function hasAmount()
+    public function hasCoin()
     {
-        return isset($this->amount);
+        return isset($this->coin);
     }
 
-    public function clearAmount()
+    public function clearCoin()
     {
-        unset($this->amount);
+        unset($this->coin);
     }
 
     /**
-     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin amount = 3 [json_name = "amount", (.gogoproto.nullable) = false];</code>
+     * coin defines amount of the coin to delegate.
+     *
+     * Generated from protobuf field <code>.cosmos.base.v1beta1.Coin coin = 3 [json_name = "coin", (.gogoproto.nullable) = false];</code>
      * @param \Cosmos\Base\V1beta1\Coin $var
      * @return $this
      */
-    public function setAmount($var)
+    public function setCoin($var)
     {
         GPBUtil::checkMessage($var, \Cosmos\Base\V1beta1\Coin::class);
-        $this->amount = $var;
+        $this->coin = $var;
 
         return $this;
     }

@@ -25,14 +25,14 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * last_total_power tracks the total amounts of bonded tokens recorded during
      * the previous end block.
      *
-     * Generated from protobuf field <code>bytes last_total_power = 2 [json_name = "lastTotalPower", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
+     * Generated from protobuf field <code>bytes last_total_power = 2 [json_name = "lastTotalPower", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"last_total_power\""];</code>
      */
     protected $last_total_power = '';
     /**
      * last_validator_powers is a special index that provides a historical list
      * of the last-block's bonded validators.
      *
-     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.LastValidatorPower last_validator_powers = 3 [json_name = "lastValidatorPowers", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.LastValidatorPower last_validator_powers = 3 [json_name = "lastValidatorPowers", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"last_validator_powers\""];</code>
      */
     private $last_validator_powers;
     /**
@@ -50,7 +50,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_delegations defines the unbonding delegations active at genesis.
      *
-     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.UnbondingDelegation unbonding_delegations = 6 [json_name = "unbondingDelegations", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.UnbondingDelegation unbonding_delegations = 6 [json_name = "unbondingDelegations", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"unbonding_delegations\""];</code>
      */
     private $unbonding_delegations;
     /**
@@ -75,22 +75,22 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      *     @type string $last_total_power
      *           last_total_power tracks the total amounts of bonded tokens recorded during
      *           the previous end block.
-     *     @type \Cosmos\Staking\V1beta1\LastValidatorPower[]|\Google\Protobuf\Internal\RepeatedField $last_validator_powers
+     *     @type array<\Cosmos\Staking\V1beta1\LastValidatorPower>|\Google\Protobuf\Internal\RepeatedField $last_validator_powers
      *           last_validator_powers is a special index that provides a historical list
      *           of the last-block's bonded validators.
-     *     @type \Cosmos\Staking\V1beta1\Validator[]|\Google\Protobuf\Internal\RepeatedField $validators
+     *     @type array<\Cosmos\Staking\V1beta1\Validator>|\Google\Protobuf\Internal\RepeatedField $validators
      *           delegations defines the validator set at genesis.
-     *     @type \Cosmos\Staking\V1beta1\Delegation[]|\Google\Protobuf\Internal\RepeatedField $delegations
+     *     @type array<\Cosmos\Staking\V1beta1\Delegation>|\Google\Protobuf\Internal\RepeatedField $delegations
      *           delegations defines the delegations active at genesis.
-     *     @type \Cosmos\Staking\V1beta1\UnbondingDelegation[]|\Google\Protobuf\Internal\RepeatedField $unbonding_delegations
+     *     @type array<\Cosmos\Staking\V1beta1\UnbondingDelegation>|\Google\Protobuf\Internal\RepeatedField $unbonding_delegations
      *           unbonding_delegations defines the unbonding delegations active at genesis.
-     *     @type \Cosmos\Staking\V1beta1\Redelegation[]|\Google\Protobuf\Internal\RepeatedField $redelegations
+     *     @type array<\Cosmos\Staking\V1beta1\Redelegation>|\Google\Protobuf\Internal\RepeatedField $redelegations
      *           redelegations defines the redelegations active at genesis.
      *     @type bool $exported
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Genesis::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
@@ -134,7 +134,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * last_total_power tracks the total amounts of bonded tokens recorded during
      * the previous end block.
      *
-     * Generated from protobuf field <code>bytes last_total_power = 2 [json_name = "lastTotalPower", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
+     * Generated from protobuf field <code>bytes last_total_power = 2 [json_name = "lastTotalPower", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"last_total_power\""];</code>
      * @return string
      */
     public function getLastTotalPower()
@@ -146,7 +146,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * last_total_power tracks the total amounts of bonded tokens recorded during
      * the previous end block.
      *
-     * Generated from protobuf field <code>bytes last_total_power = 2 [json_name = "lastTotalPower", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
+     * Generated from protobuf field <code>bytes last_total_power = 2 [json_name = "lastTotalPower", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"last_total_power\""];</code>
      * @param string $var
      * @return $this
      */
@@ -162,7 +162,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * last_validator_powers is a special index that provides a historical list
      * of the last-block's bonded validators.
      *
-     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.LastValidatorPower last_validator_powers = 3 [json_name = "lastValidatorPowers", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.LastValidatorPower last_validator_powers = 3 [json_name = "lastValidatorPowers", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"last_validator_powers\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getLastValidatorPowers()
@@ -174,8 +174,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * last_validator_powers is a special index that provides a historical list
      * of the last-block's bonded validators.
      *
-     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.LastValidatorPower last_validator_powers = 3 [json_name = "lastValidatorPowers", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\LastValidatorPower[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.LastValidatorPower last_validator_powers = 3 [json_name = "lastValidatorPowers", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"last_validator_powers\""];</code>
+     * @param array<\Cosmos\Staking\V1beta1\LastValidatorPower>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setLastValidatorPowers($var)
@@ -201,7 +201,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * delegations defines the validator set at genesis.
      *
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.Validator validators = 4 [json_name = "validators", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\Validator[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\Validator>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValidators($var)
@@ -227,7 +227,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * delegations defines the delegations active at genesis.
      *
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.Delegation delegations = 5 [json_name = "delegations", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\Delegation[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\Delegation>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setDelegations($var)
@@ -241,7 +241,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_delegations defines the unbonding delegations active at genesis.
      *
-     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.UnbondingDelegation unbonding_delegations = 6 [json_name = "unbondingDelegations", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.UnbondingDelegation unbonding_delegations = 6 [json_name = "unbondingDelegations", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"unbonding_delegations\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getUnbondingDelegations()
@@ -252,8 +252,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_delegations defines the unbonding delegations active at genesis.
      *
-     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.UnbondingDelegation unbonding_delegations = 6 [json_name = "unbondingDelegations", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\UnbondingDelegation[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.UnbondingDelegation unbonding_delegations = 6 [json_name = "unbondingDelegations", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"unbonding_delegations\""];</code>
+     * @param array<\Cosmos\Staking\V1beta1\UnbondingDelegation>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setUnbondingDelegations($var)
@@ -279,7 +279,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * redelegations defines the redelegations active at genesis.
      *
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.Redelegation redelegations = 7 [json_name = "redelegations", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\Redelegation[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\Redelegation>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRedelegations($var)

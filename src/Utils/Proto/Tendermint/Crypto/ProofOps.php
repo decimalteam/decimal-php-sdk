@@ -26,11 +26,11 @@ class ProofOps extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Tendermint\Crypto\ProofOp[]|\Google\Protobuf\Internal\RepeatedField $ops
+     *     @type array<\Tendermint\Crypto\ProofOp>|\Google\Protobuf\Internal\RepeatedField $ops
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Crypto\Proof::initOnce();
+        \Tendermint\Crypto\GPBMetadata\Proof::initOnce();
         parent::__construct($data);
     }
 
@@ -45,7 +45,7 @@ class ProofOps extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.crypto.ProofOp ops = 1 [json_name = "ops", (.gogoproto.nullable) = false];</code>
-     * @param \Tendermint\Crypto\ProofOp[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Crypto\ProofOp>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOps($var)

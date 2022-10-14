@@ -18,25 +18,25 @@ class UnbondingDelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * creation_height is the height which the unbonding took place.
      *
-     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight"];</code>
+     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight", (.gogoproto.moretags) = "yaml:\"creation_height\""];</code>
      */
     protected $creation_height = 0;
     /**
      * completion_time is the unix time for unbonding completion.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"completion_time\"", (.gogoproto.stdtime) = true];</code>
      */
     protected $completion_time = null;
     /**
      * initial_balance defines the tokens initially scheduled to receive at completion.
      *
-     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"initial_balance\""];</code>
      */
     protected $initial_balance = '';
     /**
      * balance defines the tokens to receive at completion.
      *
-     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
      */
     protected $balance = '';
 
@@ -57,14 +57,14 @@ class UnbondingDelegationEntry extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
     /**
      * creation_height is the height which the unbonding took place.
      *
-     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight"];</code>
+     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight", (.gogoproto.moretags) = "yaml:\"creation_height\""];</code>
      * @return int|string
      */
     public function getCreationHeight()
@@ -75,7 +75,7 @@ class UnbondingDelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * creation_height is the height which the unbonding took place.
      *
-     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight"];</code>
+     * Generated from protobuf field <code>int64 creation_height = 1 [json_name = "creationHeight", (.gogoproto.moretags) = "yaml:\"creation_height\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -90,7 +90,7 @@ class UnbondingDelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * completion_time is the unix time for unbonding completion.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"completion_time\"", (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getCompletionTime()
@@ -111,7 +111,7 @@ class UnbondingDelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * completion_time is the unix time for unbonding completion.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp completion_time = 2 [json_name = "completionTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"completion_time\"", (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */
@@ -126,7 +126,7 @@ class UnbondingDelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * initial_balance defines the tokens initially scheduled to receive at completion.
      *
-     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"initial_balance\""];</code>
      * @return string
      */
     public function getInitialBalance()
@@ -137,7 +137,7 @@ class UnbondingDelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * initial_balance defines the tokens initially scheduled to receive at completion.
      *
-     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string initial_balance = 3 [json_name = "initialBalance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"initial_balance\""];</code>
      * @param string $var
      * @return $this
      */
@@ -152,7 +152,7 @@ class UnbondingDelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * balance defines the tokens to receive at completion.
      *
-     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
      * @return string
      */
     public function getBalance()
@@ -163,7 +163,7 @@ class UnbondingDelegationEntry extends \Google\Protobuf\Internal\Message
     /**
      * balance defines the tokens to receive at completion.
      *
-     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
      * @param string $var
      * @return $this
      */

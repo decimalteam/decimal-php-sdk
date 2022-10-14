@@ -23,30 +23,15 @@ class GetTxsEventRequest extends \Google\Protobuf\Internal\Message
      */
     private $events;
     /**
-     * pagination defines a pagination for the request.
-     * Deprecated post v0.46.x: use page and limit instead.
+     * pagination defines an pagination for the request.
      *
-     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 2 [json_name = "pagination", deprecated = true];</code>
-     * @deprecated
+     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 2 [json_name = "pagination"];</code>
      */
     protected $pagination = null;
     /**
      * Generated from protobuf field <code>.cosmos.tx.v1beta1.OrderBy order_by = 3 [json_name = "orderBy"];</code>
      */
     protected $order_by = 0;
-    /**
-     * page is the page number to query, starts at 1. If not provided, will default to first page.
-     *
-     * Generated from protobuf field <code>uint64 page = 4 [json_name = "page"];</code>
-     */
-    protected $page = 0;
-    /**
-     * limit is the total number of results to be returned in the result page.
-     * If left empty it will default to a value to be set by each app.
-     *
-     * Generated from protobuf field <code>uint64 limit = 5 [json_name = "limit"];</code>
-     */
-    protected $limit = 0;
 
     /**
      * Constructor.
@@ -54,21 +39,15 @@ class GetTxsEventRequest extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $events
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $events
      *           events is the list of transaction event type.
      *     @type \Cosmos\Base\Query\V1beta1\PageRequest $pagination
-     *           pagination defines a pagination for the request.
-     *           Deprecated post v0.46.x: use page and limit instead.
+     *           pagination defines an pagination for the request.
      *     @type int $order_by
-     *     @type int|string $page
-     *           page is the page number to query, starts at 1. If not provided, will default to first page.
-     *     @type int|string $limit
-     *           limit is the total number of results to be returned in the result page.
-     *           If left empty it will default to a value to be set by each app.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\V1Beta1\Service::initOnce();
+        \Cosmos\Tx\V1beta1\GPBMetadata\Service::initOnce();
         parent::__construct($data);
     }
 
@@ -87,7 +66,7 @@ class GetTxsEventRequest extends \Google\Protobuf\Internal\Message
      * events is the list of transaction event type.
      *
      * Generated from protobuf field <code>repeated string events = 1 [json_name = "events"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEvents($var)
@@ -99,43 +78,35 @@ class GetTxsEventRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * pagination defines a pagination for the request.
-     * Deprecated post v0.46.x: use page and limit instead.
+     * pagination defines an pagination for the request.
      *
-     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 2 [json_name = "pagination", deprecated = true];</code>
+     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 2 [json_name = "pagination"];</code>
      * @return \Cosmos\Base\Query\V1beta1\PageRequest|null
-     * @deprecated
      */
     public function getPagination()
     {
-        @trigger_error('pagination is deprecated.', E_USER_DEPRECATED);
         return $this->pagination;
     }
 
     public function hasPagination()
     {
-        @trigger_error('pagination is deprecated.', E_USER_DEPRECATED);
         return isset($this->pagination);
     }
 
     public function clearPagination()
     {
-        @trigger_error('pagination is deprecated.', E_USER_DEPRECATED);
         unset($this->pagination);
     }
 
     /**
-     * pagination defines a pagination for the request.
-     * Deprecated post v0.46.x: use page and limit instead.
+     * pagination defines an pagination for the request.
      *
-     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 2 [json_name = "pagination", deprecated = true];</code>
+     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 2 [json_name = "pagination"];</code>
      * @param \Cosmos\Base\Query\V1beta1\PageRequest $var
      * @return $this
-     * @deprecated
      */
     public function setPagination($var)
     {
-        @trigger_error('pagination is deprecated.', E_USER_DEPRECATED);
         GPBUtil::checkMessage($var, \Cosmos\Base\Query\V1beta1\PageRequest::class);
         $this->pagination = $var;
 
@@ -160,60 +131,6 @@ class GetTxsEventRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Cosmos\Tx\V1beta1\OrderBy::class);
         $this->order_by = $var;
-
-        return $this;
-    }
-
-    /**
-     * page is the page number to query, starts at 1. If not provided, will default to first page.
-     *
-     * Generated from protobuf field <code>uint64 page = 4 [json_name = "page"];</code>
-     * @return int|string
-     */
-    public function getPage()
-    {
-        return $this->page;
-    }
-
-    /**
-     * page is the page number to query, starts at 1. If not provided, will default to first page.
-     *
-     * Generated from protobuf field <code>uint64 page = 4 [json_name = "page"];</code>
-     * @param int|string $var
-     * @return $this
-     */
-    public function setPage($var)
-    {
-        GPBUtil::checkUint64($var);
-        $this->page = $var;
-
-        return $this;
-    }
-
-    /**
-     * limit is the total number of results to be returned in the result page.
-     * If left empty it will default to a value to be set by each app.
-     *
-     * Generated from protobuf field <code>uint64 limit = 5 [json_name = "limit"];</code>
-     * @return int|string
-     */
-    public function getLimit()
-    {
-        return $this->limit;
-    }
-
-    /**
-     * limit is the total number of results to be returned in the result page.
-     * If left empty it will default to a value to be set by each app.
-     *
-     * Generated from protobuf field <code>uint64 limit = 5 [json_name = "limit"];</code>
-     * @param int|string $var
-     * @return $this
-     */
-    public function setLimit($var)
-    {
-        GPBUtil::checkUint64($var);
-        $this->limit = $var;
 
         return $this;
     }

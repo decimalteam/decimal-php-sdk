@@ -20,13 +20,13 @@ class DelegatorWithdrawInfo extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address is the address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      */
     protected $delegator_address = '';
     /**
      * withdraw_address is the address to withdraw the delegation rewards to.
      *
-     * Generated from protobuf field <code>string withdraw_address = 2 [json_name = "withdrawAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string withdraw_address = 2 [json_name = "withdrawAddress", (.gogoproto.moretags) = "yaml:\"withdraw_address\""];</code>
      */
     protected $withdraw_address = '';
 
@@ -43,14 +43,14 @@ class DelegatorWithdrawInfo extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Genesis::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * delegator_address is the address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @return string
      */
     public function getDelegatorAddress()
@@ -61,7 +61,7 @@ class DelegatorWithdrawInfo extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address is the address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -76,7 +76,7 @@ class DelegatorWithdrawInfo extends \Google\Protobuf\Internal\Message
     /**
      * withdraw_address is the address to withdraw the delegation rewards to.
      *
-     * Generated from protobuf field <code>string withdraw_address = 2 [json_name = "withdrawAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string withdraw_address = 2 [json_name = "withdrawAddress", (.gogoproto.moretags) = "yaml:\"withdraw_address\""];</code>
      * @return string
      */
     public function getWithdrawAddress()
@@ -87,7 +87,7 @@ class DelegatorWithdrawInfo extends \Google\Protobuf\Internal\Message
     /**
      * withdraw_address is the address to withdraw the delegation rewards to.
      *
-     * Generated from protobuf field <code>string withdraw_address = 2 [json_name = "withdrawAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string withdraw_address = 2 [json_name = "withdrawAddress", (.gogoproto.moretags) = "yaml:\"withdraw_address\""];</code>
      * @param string $var
      * @return $this
      */

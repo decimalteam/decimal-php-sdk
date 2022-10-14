@@ -62,10 +62,10 @@ class PeriodicAllowance extends \Google\Protobuf\Internal\Message
      *     @type \Google\Protobuf\Duration $period
      *           period specifies the time duration in which period_spend_limit coins can
      *           be spent before that allowance is reset
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $period_spend_limit
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $period_spend_limit
      *           period_spend_limit specifies the maximum number of coins that can be spent
      *           in the period
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $period_can_spend
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $period_can_spend
      *           period_can_spend is the number of coins left to be spent before the period_reset time
      *     @type \Google\Protobuf\Timestamp $period_reset
      *           period_reset is the time at which this period resets and a new one begins,
@@ -74,7 +74,7 @@ class PeriodicAllowance extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Feegrant\V1Beta1\Feegrant::initOnce();
+        \Cosmos\Feegrant\V1beta1\GPBMetadata\Feegrant::initOnce();
         parent::__construct($data);
     }
 
@@ -169,7 +169,7 @@ class PeriodicAllowance extends \Google\Protobuf\Internal\Message
      * in the period
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin period_spend_limit = 3 [json_name = "periodSpendLimit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPeriodSpendLimit($var)
@@ -195,7 +195,7 @@ class PeriodicAllowance extends \Google\Protobuf\Internal\Message
      * period_can_spend is the number of coins left to be spent before the period_reset time
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin period_can_spend = 4 [json_name = "periodCanSpend", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPeriodCanSpend($var)

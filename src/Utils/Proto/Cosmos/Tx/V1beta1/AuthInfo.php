@@ -34,15 +34,6 @@ class AuthInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.cosmos.tx.v1beta1.Fee fee = 2 [json_name = "fee"];</code>
      */
     protected $fee = null;
-    /**
-     * Tip is the optional tip used for transactions fees paid in another denom.
-     * This field is ignored if the chain didn't enable tips, i.e. didn't add the
-     * `TipDecorator` in its posthandler.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>.cosmos.tx.v1beta1.Tip tip = 3 [json_name = "tip"];</code>
-     */
-    protected $tip = null;
 
     /**
      * Constructor.
@@ -50,7 +41,7 @@ class AuthInfo extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Tx\V1beta1\SignerInfo[]|\Google\Protobuf\Internal\RepeatedField $signer_infos
+     *     @type array<\Cosmos\Tx\V1beta1\SignerInfo>|\Google\Protobuf\Internal\RepeatedField $signer_infos
      *           signer_infos defines the signing modes for the required signers. The number
      *           and order of elements must match the required signers from TxBody's
      *           messages. The first element is the primary signer and the one which pays
@@ -60,15 +51,10 @@ class AuthInfo extends \Google\Protobuf\Internal\Message
      *           primary signer and the one which pays the fee. The fee can be calculated
      *           based on the cost of evaluating the body and doing signature verification
      *           of the signers. This can be estimated via simulation.
-     *     @type \Cosmos\Tx\V1beta1\Tip $tip
-     *           Tip is the optional tip used for transactions fees paid in another denom.
-     *           This field is ignored if the chain didn't enable tips, i.e. didn't add the
-     *           `TipDecorator` in its posthandler.
-     *           Since: cosmos-sdk 0.46
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\V1Beta1\Tx::initOnce();
+        \Cosmos\Tx\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -93,7 +79,7 @@ class AuthInfo extends \Google\Protobuf\Internal\Message
      * the fee.
      *
      * Generated from protobuf field <code>repeated .cosmos.tx.v1beta1.SignerInfo signer_infos = 1 [json_name = "signerInfos"];</code>
-     * @param \Cosmos\Tx\V1beta1\SignerInfo[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Tx\V1beta1\SignerInfo>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSignerInfos($var)
@@ -142,48 +128,6 @@ class AuthInfo extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Cosmos\Tx\V1beta1\Fee::class);
         $this->fee = $var;
-
-        return $this;
-    }
-
-    /**
-     * Tip is the optional tip used for transactions fees paid in another denom.
-     * This field is ignored if the chain didn't enable tips, i.e. didn't add the
-     * `TipDecorator` in its posthandler.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>.cosmos.tx.v1beta1.Tip tip = 3 [json_name = "tip"];</code>
-     * @return \Cosmos\Tx\V1beta1\Tip|null
-     */
-    public function getTip()
-    {
-        return $this->tip;
-    }
-
-    public function hasTip()
-    {
-        return isset($this->tip);
-    }
-
-    public function clearTip()
-    {
-        unset($this->tip);
-    }
-
-    /**
-     * Tip is the optional tip used for transactions fees paid in another denom.
-     * This field is ignored if the chain didn't enable tips, i.e. didn't add the
-     * `TipDecorator` in its posthandler.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>.cosmos.tx.v1beta1.Tip tip = 3 [json_name = "tip"];</code>
-     * @param \Cosmos\Tx\V1beta1\Tip $var
-     * @return $this
-     */
-    public function setTip($var)
-    {
-        GPBUtil::checkMessage($var, \Cosmos\Tx\V1beta1\Tip::class);
-        $this->tip = $var;
 
         return $this;
     }

@@ -25,14 +25,14 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * signing_infos represents a map between validator addresses and their
      * signing infos.
      *
-     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.SigningInfo signing_infos = 2 [json_name = "signingInfos", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.SigningInfo signing_infos = 2 [json_name = "signingInfos", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"signing_infos\""];</code>
      */
     private $signing_infos;
     /**
      * missed_blocks represents a map between validator addresses and their
      * missed blocks.
      *
-     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.ValidatorMissedBlocks missed_blocks = 3 [json_name = "missedBlocks", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.ValidatorMissedBlocks missed_blocks = 3 [json_name = "missedBlocks", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"missed_blocks\""];</code>
      */
     private $missed_blocks;
 
@@ -44,16 +44,16 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      *
      *     @type \Cosmos\Slashing\V1beta1\Params $params
      *           params defines all the paramaters of related to deposit.
-     *     @type \Cosmos\Slashing\V1beta1\SigningInfo[]|\Google\Protobuf\Internal\RepeatedField $signing_infos
+     *     @type array<\Cosmos\Slashing\V1beta1\SigningInfo>|\Google\Protobuf\Internal\RepeatedField $signing_infos
      *           signing_infos represents a map between validator addresses and their
      *           signing infos.
-     *     @type \Cosmos\Slashing\V1beta1\ValidatorMissedBlocks[]|\Google\Protobuf\Internal\RepeatedField $missed_blocks
+     *     @type array<\Cosmos\Slashing\V1beta1\ValidatorMissedBlocks>|\Google\Protobuf\Internal\RepeatedField $missed_blocks
      *           missed_blocks represents a map between validator addresses and their
      *           missed blocks.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Genesis::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
@@ -97,7 +97,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * signing_infos represents a map between validator addresses and their
      * signing infos.
      *
-     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.SigningInfo signing_infos = 2 [json_name = "signingInfos", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.SigningInfo signing_infos = 2 [json_name = "signingInfos", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"signing_infos\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getSigningInfos()
@@ -109,8 +109,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * signing_infos represents a map between validator addresses and their
      * signing infos.
      *
-     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.SigningInfo signing_infos = 2 [json_name = "signingInfos", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Slashing\V1beta1\SigningInfo[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.SigningInfo signing_infos = 2 [json_name = "signingInfos", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"signing_infos\""];</code>
+     * @param array<\Cosmos\Slashing\V1beta1\SigningInfo>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSigningInfos($var)
@@ -125,7 +125,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * missed_blocks represents a map between validator addresses and their
      * missed blocks.
      *
-     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.ValidatorMissedBlocks missed_blocks = 3 [json_name = "missedBlocks", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.ValidatorMissedBlocks missed_blocks = 3 [json_name = "missedBlocks", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"missed_blocks\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getMissedBlocks()
@@ -137,8 +137,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * missed_blocks represents a map between validator addresses and their
      * missed blocks.
      *
-     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.ValidatorMissedBlocks missed_blocks = 3 [json_name = "missedBlocks", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Slashing\V1beta1\ValidatorMissedBlocks[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.slashing.v1beta1.ValidatorMissedBlocks missed_blocks = 3 [json_name = "missedBlocks", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"missed_blocks\""];</code>
+     * @param array<\Cosmos\Slashing\V1beta1\ValidatorMissedBlocks>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setMissedBlocks($var)

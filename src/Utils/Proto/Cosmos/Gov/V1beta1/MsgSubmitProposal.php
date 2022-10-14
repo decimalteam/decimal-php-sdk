@@ -21,11 +21,11 @@ class MsgSubmitProposal extends \Google\Protobuf\Internal\Message
      */
     protected $content = null;
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin initial_deposit = 2 [json_name = "initialDeposit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin initial_deposit = 2 [json_name = "initialDeposit", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"initial_deposit\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
     private $initial_deposit;
     /**
-     * Generated from protobuf field <code>string proposer = 3 [json_name = "proposer", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string proposer = 3 [json_name = "proposer"];</code>
      */
     protected $proposer = '';
 
@@ -36,12 +36,12 @@ class MsgSubmitProposal extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Google\Protobuf\Any $content
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $initial_deposit
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $initial_deposit
      *     @type string $proposer
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Tx::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -78,7 +78,7 @@ class MsgSubmitProposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin initial_deposit = 2 [json_name = "initialDeposit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin initial_deposit = 2 [json_name = "initialDeposit", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"initial_deposit\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getInitialDeposit()
@@ -87,8 +87,8 @@ class MsgSubmitProposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin initial_deposit = 2 [json_name = "initialDeposit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin initial_deposit = 2 [json_name = "initialDeposit", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"initial_deposit\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setInitialDeposit($var)
@@ -100,7 +100,7 @@ class MsgSubmitProposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string proposer = 3 [json_name = "proposer", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string proposer = 3 [json_name = "proposer"];</code>
      * @return string
      */
     public function getProposer()
@@ -109,7 +109,7 @@ class MsgSubmitProposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string proposer = 3 [json_name = "proposer", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string proposer = 3 [json_name = "proposer"];</code>
      * @param string $var
      * @return $this
      */

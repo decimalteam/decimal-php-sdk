@@ -9,8 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * GetValidatorSetByHeightResponse is the response type for the
- * Query/GetValidatorSetByHeight RPC method.
+ * GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
  *
  * Generated from protobuf message <code>cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse</code>
  */
@@ -38,13 +37,13 @@ class GetValidatorSetByHeightResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int|string $block_height
-     *     @type \Cosmos\Base\Tendermint\V1beta1\Validator[]|\Google\Protobuf\Internal\RepeatedField $validators
+     *     @type array<\Cosmos\Base\Tendermint\V1beta1\Validator>|\Google\Protobuf\Internal\RepeatedField $validators
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines an pagination for the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Tendermint\V1Beta1\Query::initOnce();
+        \Cosmos\Base\Tendermint\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -81,7 +80,7 @@ class GetValidatorSetByHeightResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.tendermint.v1beta1.Validator validators = 2 [json_name = "validators"];</code>
-     * @param \Cosmos\Base\Tendermint\V1beta1\Validator[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Tendermint\V1beta1\Validator>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValidators($var)

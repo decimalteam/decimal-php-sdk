@@ -32,7 +32,7 @@ class TallyParams extends \Google\Protobuf\Internal\Message
      *  Minimum value of Veto votes to Total votes ratio for proposal to be
      *  vetoed. Default value: 1/3.
      *
-     * Generated from protobuf field <code>bytes veto_threshold = 3 [json_name = "vetoThreshold", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.jsontag) = "veto_threshold,omitempty"];</code>
+     * Generated from protobuf field <code>bytes veto_threshold = 3 [json_name = "vetoThreshold", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.jsontag) = "veto_threshold,omitempty", (.gogoproto.moretags) = "yaml:\"veto_threshold\""];</code>
      */
     protected $veto_threshold = '';
 
@@ -53,7 +53,7 @@ class TallyParams extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Gov::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Gov::initOnce();
         parent::__construct($data);
     }
 
@@ -115,7 +115,7 @@ class TallyParams extends \Google\Protobuf\Internal\Message
      *  Minimum value of Veto votes to Total votes ratio for proposal to be
      *  vetoed. Default value: 1/3.
      *
-     * Generated from protobuf field <code>bytes veto_threshold = 3 [json_name = "vetoThreshold", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.jsontag) = "veto_threshold,omitempty"];</code>
+     * Generated from protobuf field <code>bytes veto_threshold = 3 [json_name = "vetoThreshold", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.jsontag) = "veto_threshold,omitempty", (.gogoproto.moretags) = "yaml:\"veto_threshold\""];</code>
      * @return string
      */
     public function getVetoThreshold()
@@ -127,7 +127,7 @@ class TallyParams extends \Google\Protobuf\Internal\Message
      *  Minimum value of Veto votes to Total votes ratio for proposal to be
      *  vetoed. Default value: 1/3.
      *
-     * Generated from protobuf field <code>bytes veto_threshold = 3 [json_name = "vetoThreshold", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.jsontag) = "veto_threshold,omitempty"];</code>
+     * Generated from protobuf field <code>bytes veto_threshold = 3 [json_name = "vetoThreshold", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.jsontag) = "veto_threshold,omitempty", (.gogoproto.moretags) = "yaml:\"veto_threshold\""];</code>
      * @param string $var
      * @return $this
      */

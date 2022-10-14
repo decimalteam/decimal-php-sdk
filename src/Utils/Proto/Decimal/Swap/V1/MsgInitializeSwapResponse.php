@@ -25,7 +25,7 @@ class MsgInitializeSwapResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Swap\V1\Tx::initOnce();
+        \Decimal\Swap\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

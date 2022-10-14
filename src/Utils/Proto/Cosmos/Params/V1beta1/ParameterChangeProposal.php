@@ -36,11 +36,11 @@ class ParameterChangeProposal extends \Google\Protobuf\Internal\Message
      *
      *     @type string $title
      *     @type string $description
-     *     @type \Cosmos\Params\V1beta1\ParamChange[]|\Google\Protobuf\Internal\RepeatedField $changes
+     *     @type array<\Cosmos\Params\V1beta1\ParamChange>|\Google\Protobuf\Internal\RepeatedField $changes
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Params\V1Beta1\Params::initOnce();
+        \Cosmos\Params\V1beta1\GPBMetadata\Params::initOnce();
         parent::__construct($data);
     }
 
@@ -99,7 +99,7 @@ class ParameterChangeProposal extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.params.v1beta1.ParamChange changes = 3 [json_name = "changes", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Params\V1beta1\ParamChange[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Params\V1beta1\ParamChange>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setChanges($var)

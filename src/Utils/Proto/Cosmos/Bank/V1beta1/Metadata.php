@@ -41,7 +41,6 @@ class Metadata extends \Google\Protobuf\Internal\Message
     protected $display = '';
     /**
      * name defines the name of the token (eg: Cosmos Atom)
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>string name = 5 [json_name = "name"];</code>
      */
@@ -49,26 +48,10 @@ class Metadata extends \Google\Protobuf\Internal\Message
     /**
      * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
      * be the same as the display.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>string symbol = 6 [json_name = "symbol"];</code>
      */
     protected $symbol = '';
-    /**
-     * URI to a document (on or off-chain) that contains additional information. Optional.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>string uri = 7 [json_name = "uri", (.gogoproto.customname) = "URI"];</code>
-     */
-    protected $uri = '';
-    /**
-     * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
-     * the document didn't change. Optional.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>string uri_hash = 8 [json_name = "uriHash", (.gogoproto.customname) = "URIHash"];</code>
-     */
-    protected $uri_hash = '';
 
     /**
      * Constructor.
@@ -77,7 +60,7 @@ class Metadata extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $description
-     *     @type \Cosmos\Bank\V1beta1\DenomUnit[]|\Google\Protobuf\Internal\RepeatedField $denom_units
+     *     @type array<\Cosmos\Bank\V1beta1\DenomUnit>|\Google\Protobuf\Internal\RepeatedField $denom_units
      *           denom_units represents the list of DenomUnit's for a given coin
      *     @type string $base
      *           base represents the base denom (should be the DenomUnit with exponent = 0).
@@ -86,22 +69,13 @@ class Metadata extends \Google\Protobuf\Internal\Message
      *           displayed in clients.
      *     @type string $name
      *           name defines the name of the token (eg: Cosmos Atom)
-     *           Since: cosmos-sdk 0.43
      *     @type string $symbol
      *           symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
      *           be the same as the display.
-     *           Since: cosmos-sdk 0.43
-     *     @type string $uri
-     *           URI to a document (on or off-chain) that contains additional information. Optional.
-     *           Since: cosmos-sdk 0.46
-     *     @type string $uri_hash
-     *           URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
-     *           the document didn't change. Optional.
-     *           Since: cosmos-sdk 0.46
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Bank::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Bank::initOnce();
         parent::__construct($data);
     }
 
@@ -142,7 +116,7 @@ class Metadata extends \Google\Protobuf\Internal\Message
      * denom_units represents the list of DenomUnit's for a given coin
      *
      * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.DenomUnit denom_units = 2 [json_name = "denomUnits"];</code>
-     * @param \Cosmos\Bank\V1beta1\DenomUnit[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Bank\V1beta1\DenomUnit>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setDenomUnits($var)
@@ -209,7 +183,6 @@ class Metadata extends \Google\Protobuf\Internal\Message
 
     /**
      * name defines the name of the token (eg: Cosmos Atom)
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>string name = 5 [json_name = "name"];</code>
      * @return string
@@ -221,7 +194,6 @@ class Metadata extends \Google\Protobuf\Internal\Message
 
     /**
      * name defines the name of the token (eg: Cosmos Atom)
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>string name = 5 [json_name = "name"];</code>
      * @param string $var
@@ -238,7 +210,6 @@ class Metadata extends \Google\Protobuf\Internal\Message
     /**
      * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
      * be the same as the display.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>string symbol = 6 [json_name = "symbol"];</code>
      * @return string
@@ -251,7 +222,6 @@ class Metadata extends \Google\Protobuf\Internal\Message
     /**
      * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
      * be the same as the display.
-     * Since: cosmos-sdk 0.43
      *
      * Generated from protobuf field <code>string symbol = 6 [json_name = "symbol"];</code>
      * @param string $var
@@ -261,64 +231,6 @@ class Metadata extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->symbol = $var;
-
-        return $this;
-    }
-
-    /**
-     * URI to a document (on or off-chain) that contains additional information. Optional.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>string uri = 7 [json_name = "uri", (.gogoproto.customname) = "URI"];</code>
-     * @return string
-     */
-    public function getUri()
-    {
-        return $this->uri;
-    }
-
-    /**
-     * URI to a document (on or off-chain) that contains additional information. Optional.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>string uri = 7 [json_name = "uri", (.gogoproto.customname) = "URI"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setUri($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->uri = $var;
-
-        return $this;
-    }
-
-    /**
-     * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
-     * the document didn't change. Optional.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>string uri_hash = 8 [json_name = "uriHash", (.gogoproto.customname) = "URIHash"];</code>
-     * @return string
-     */
-    public function getUriHash()
-    {
-        return $this->uri_hash;
-    }
-
-    /**
-     * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
-     * the document didn't change. Optional.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>string uri_hash = 8 [json_name = "uriHash", (.gogoproto.customname) = "URIHash"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setUriHash($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->uri_hash = $var;
 
         return $this;
     }

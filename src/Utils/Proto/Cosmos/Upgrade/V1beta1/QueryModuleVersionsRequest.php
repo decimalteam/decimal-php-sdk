@@ -11,7 +11,6 @@ use Google\Protobuf\Internal\GPBUtil;
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
  * RPC method.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.upgrade.v1beta1.QueryModuleVersionsRequest</code>
  */
@@ -39,7 +38,7 @@ class QueryModuleVersionsRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Upgrade\V1Beta1\Query::initOnce();
+        \Cosmos\Upgrade\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 

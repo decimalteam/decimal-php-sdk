@@ -29,7 +29,7 @@ class Equivocation extends \Google\Protobuf\Internal\Message
      */
     protected $power = 0;
     /**
-     * Generated from protobuf field <code>string consensus_address = 4 [json_name = "consensusAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string consensus_address = 4 [json_name = "consensusAddress", (.gogoproto.moretags) = "yaml:\"consensus_address\""];</code>
      */
     protected $consensus_address = '';
 
@@ -46,7 +46,7 @@ class Equivocation extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Evidence\V1Beta1\Evidence::initOnce();
+        \Cosmos\Evidence\V1beta1\GPBMetadata\Evidence::initOnce();
         parent::__construct($data);
     }
 
@@ -127,7 +127,7 @@ class Equivocation extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string consensus_address = 4 [json_name = "consensusAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string consensus_address = 4 [json_name = "consensusAddress", (.gogoproto.moretags) = "yaml:\"consensus_address\""];</code>
      * @return string
      */
     public function getConsensusAddress()
@@ -136,7 +136,7 @@ class Equivocation extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string consensus_address = 4 [json_name = "consensusAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string consensus_address = 4 [json_name = "consensusAddress", (.gogoproto.moretags) = "yaml:\"consensus_address\""];</code>
      * @param string $var
      * @return $this
      */

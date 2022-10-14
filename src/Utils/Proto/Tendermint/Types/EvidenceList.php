@@ -24,11 +24,11 @@ class EvidenceList extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Tendermint\Types\Evidence[]|\Google\Protobuf\Internal\RepeatedField $evidence
+     *     @type array<\Tendermint\Types\Evidence>|\Google\Protobuf\Internal\RepeatedField $evidence
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Evidence::initOnce();
+        \Tendermint\Types\GPBMetadata\Evidence::initOnce();
         parent::__construct($data);
     }
 
@@ -43,7 +43,7 @@ class EvidenceList extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.types.Evidence evidence = 1 [json_name = "evidence", (.gogoproto.nullable) = false];</code>
-     * @param \Tendermint\Types\Evidence[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Types\Evidence>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEvidence($var)

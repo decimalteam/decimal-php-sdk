@@ -18,19 +18,19 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * coins defines all existing coins.
      *
-     * Generated from protobuf field <code>repeated .decimal.coin.v1.Coin coins = 2 [json_name = "coins", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.coin.v1.Coin coins = 1 [json_name = "coins", (.gogoproto.nullable) = false];</code>
      */
     private $coins;
     /**
      * checks defines all redeemed checks.
      *
-     * Generated from protobuf field <code>repeated .decimal.coin.v1.Check checks = 3 [json_name = "checks", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.coin.v1.Check checks = 2 [json_name = "checks", (.gogoproto.nullable) = false];</code>
      */
     private $checks;
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.coin.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.coin.v1.Params params = 3 [json_name = "params", (.gogoproto.nullable) = false];</code>
      */
     protected $params = null;
 
@@ -40,23 +40,23 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Coin\V1\Coin[]|\Google\Protobuf\Internal\RepeatedField $coins
+     *     @type array<\Decimal\Coin\V1\Coin>|\Google\Protobuf\Internal\RepeatedField $coins
      *           coins defines all existing coins.
-     *     @type \Decimal\Coin\V1\Check[]|\Google\Protobuf\Internal\RepeatedField $checks
+     *     @type array<\Decimal\Coin\V1\Check>|\Google\Protobuf\Internal\RepeatedField $checks
      *           checks defines all redeemed checks.
      *     @type \Decimal\Coin\V1\Params $params
      *           params defines all the module's parameters.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Coin\V1\Genesis::initOnce();
+        \Decimal\Coin\V1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * coins defines all existing coins.
      *
-     * Generated from protobuf field <code>repeated .decimal.coin.v1.Coin coins = 2 [json_name = "coins", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.coin.v1.Coin coins = 1 [json_name = "coins", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getCoins()
@@ -67,8 +67,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * coins defines all existing coins.
      *
-     * Generated from protobuf field <code>repeated .decimal.coin.v1.Coin coins = 2 [json_name = "coins", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Coin\V1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .decimal.coin.v1.Coin coins = 1 [json_name = "coins", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Coin\V1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCoins($var)
@@ -82,7 +82,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * checks defines all redeemed checks.
      *
-     * Generated from protobuf field <code>repeated .decimal.coin.v1.Check checks = 3 [json_name = "checks", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.coin.v1.Check checks = 2 [json_name = "checks", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getChecks()
@@ -93,8 +93,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * checks defines all redeemed checks.
      *
-     * Generated from protobuf field <code>repeated .decimal.coin.v1.Check checks = 3 [json_name = "checks", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Coin\V1\Check[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .decimal.coin.v1.Check checks = 2 [json_name = "checks", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Coin\V1\Check>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setChecks($var)
@@ -108,7 +108,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.coin.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.coin.v1.Params params = 3 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @return \Decimal\Coin\V1\Params|null
      */
     public function getParams()
@@ -129,7 +129,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.coin.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.coin.v1.Params params = 3 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @param \Decimal\Coin\V1\Params $var
      * @return $this
      */

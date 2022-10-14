@@ -32,7 +32,7 @@ class DelayedVestingAccount extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Vesting\V1Beta1\Vesting::initOnce();
+        \Cosmos\Vesting\V1beta1\GPBMetadata\Vesting::initOnce();
         parent::__construct($data);
     }
 

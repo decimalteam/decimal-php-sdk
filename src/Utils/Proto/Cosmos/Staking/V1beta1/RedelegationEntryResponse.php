@@ -22,7 +22,7 @@ class RedelegationEntryResponse extends \Google\Protobuf\Internal\Message
      */
     protected $redelegation_entry = null;
     /**
-     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
      */
     protected $balance = '';
 
@@ -37,7 +37,7 @@ class RedelegationEntryResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
@@ -74,7 +74,7 @@ class RedelegationEntryResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
      * @return string
      */
     public function getBalance()
@@ -83,7 +83,7 @@ class RedelegationEntryResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string balance = 4 [json_name = "balance", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
      * @param string $var
      * @return $this
      */

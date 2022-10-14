@@ -20,7 +20,7 @@ class MsgEditValidator extends \Google\Protobuf\Internal\Message
      */
     protected $description = null;
     /**
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"address\""];</code>
      */
     protected $validator_address = '';
     /**
@@ -29,11 +29,11 @@ class MsgEditValidator extends \Google\Protobuf\Internal\Message
      * zero with no way to distinguish if an update was intended.
      * REF: #2373
      *
-     * Generated from protobuf field <code>string commission_rate = 3 [json_name = "commissionRate", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string commission_rate = 3 [json_name = "commissionRate", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"commission_rate\""];</code>
      */
     protected $commission_rate = '';
     /**
-     * Generated from protobuf field <code>string min_self_delegation = 4 [json_name = "minSelfDelegation", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string min_self_delegation = 4 [json_name = "minSelfDelegation", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"min_self_delegation\""];</code>
      */
     protected $min_self_delegation = '';
 
@@ -54,7 +54,7 @@ class MsgEditValidator extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Tx::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -91,7 +91,7 @@ class MsgEditValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -100,7 +100,7 @@ class MsgEditValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -118,7 +118,7 @@ class MsgEditValidator extends \Google\Protobuf\Internal\Message
      * zero with no way to distinguish if an update was intended.
      * REF: #2373
      *
-     * Generated from protobuf field <code>string commission_rate = 3 [json_name = "commissionRate", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string commission_rate = 3 [json_name = "commissionRate", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"commission_rate\""];</code>
      * @return string
      */
     public function getCommissionRate()
@@ -132,7 +132,7 @@ class MsgEditValidator extends \Google\Protobuf\Internal\Message
      * zero with no way to distinguish if an update was intended.
      * REF: #2373
      *
-     * Generated from protobuf field <code>string commission_rate = 3 [json_name = "commissionRate", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string commission_rate = 3 [json_name = "commissionRate", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"commission_rate\""];</code>
      * @param string $var
      * @return $this
      */
@@ -145,7 +145,7 @@ class MsgEditValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string min_self_delegation = 4 [json_name = "minSelfDelegation", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string min_self_delegation = 4 [json_name = "minSelfDelegation", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"min_self_delegation\""];</code>
      * @return string
      */
     public function getMinSelfDelegation()
@@ -154,7 +154,7 @@ class MsgEditValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string min_self_delegation = 4 [json_name = "minSelfDelegation", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string min_self_delegation = 4 [json_name = "minSelfDelegation", (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"min_self_delegation\""];</code>
      * @param string $var
      * @return $this
      */

@@ -50,7 +50,7 @@ class Snapshot extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Snapshots\V1Beta1\Snapshot::initOnce();
+        \Cosmos\Base\Snapshots\V1beta1\GPBMetadata\Snapshot::initOnce();
         parent::__construct($data);
     }
 

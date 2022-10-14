@@ -49,7 +49,7 @@ class Params extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Params::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Params::initOnce();
         parent::__construct($data);
     }
 

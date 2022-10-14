@@ -9,8 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC
- * method.
+ * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
  *
  * Generated from protobuf message <code>cosmos.base.tendermint.v1beta1.GetLatestBlockResponse</code>
  */
@@ -21,17 +20,9 @@ class GetLatestBlockResponse extends \Google\Protobuf\Internal\Message
      */
     protected $block_id = null;
     /**
-     * Deprecated: please use `sdk_block` instead
-     *
      * Generated from protobuf field <code>.tendermint.types.Block block = 2 [json_name = "block"];</code>
      */
     protected $block = null;
-    /**
-     * Since: cosmos-sdk 0.47
-     *
-     * Generated from protobuf field <code>.cosmos.base.tendermint.v1beta1.Block sdk_block = 3 [json_name = "sdkBlock"];</code>
-     */
-    protected $sdk_block = null;
 
     /**
      * Constructor.
@@ -41,13 +32,10 @@ class GetLatestBlockResponse extends \Google\Protobuf\Internal\Message
      *
      *     @type \Tendermint\Types\BlockID $block_id
      *     @type \Tendermint\Types\Block $block
-     *           Deprecated: please use `sdk_block` instead
-     *     @type \Cosmos\Base\Tendermint\V1beta1\Block $sdk_block
-     *           Since: cosmos-sdk 0.47
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Tendermint\V1Beta1\Query::initOnce();
+        \Cosmos\Base\Tendermint\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -84,8 +72,6 @@ class GetLatestBlockResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Deprecated: please use `sdk_block` instead
-     *
      * Generated from protobuf field <code>.tendermint.types.Block block = 2 [json_name = "block"];</code>
      * @return \Tendermint\Types\Block|null
      */
@@ -105,8 +91,6 @@ class GetLatestBlockResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Deprecated: please use `sdk_block` instead
-     *
      * Generated from protobuf field <code>.tendermint.types.Block block = 2 [json_name = "block"];</code>
      * @param \Tendermint\Types\Block $var
      * @return $this
@@ -115,42 +99,6 @@ class GetLatestBlockResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Tendermint\Types\Block::class);
         $this->block = $var;
-
-        return $this;
-    }
-
-    /**
-     * Since: cosmos-sdk 0.47
-     *
-     * Generated from protobuf field <code>.cosmos.base.tendermint.v1beta1.Block sdk_block = 3 [json_name = "sdkBlock"];</code>
-     * @return \Cosmos\Base\Tendermint\V1beta1\Block|null
-     */
-    public function getSdkBlock()
-    {
-        return $this->sdk_block;
-    }
-
-    public function hasSdkBlock()
-    {
-        return isset($this->sdk_block);
-    }
-
-    public function clearSdkBlock()
-    {
-        unset($this->sdk_block);
-    }
-
-    /**
-     * Since: cosmos-sdk 0.47
-     *
-     * Generated from protobuf field <code>.cosmos.base.tendermint.v1beta1.Block sdk_block = 3 [json_name = "sdkBlock"];</code>
-     * @param \Cosmos\Base\Tendermint\V1beta1\Block $var
-     * @return $this
-     */
-    public function setSdkBlock($var)
-    {
-        GPBUtil::checkMessage($var, \Cosmos\Base\Tendermint\V1beta1\Block::class);
-        $this->sdk_block = $var;
 
         return $this;
     }

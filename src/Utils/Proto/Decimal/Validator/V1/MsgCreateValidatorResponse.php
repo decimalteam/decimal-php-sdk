@@ -25,7 +25,7 @@ class MsgCreateValidatorResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Tx::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

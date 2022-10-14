@@ -36,7 +36,7 @@ class TextProposal extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Gov::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Gov::initOnce();
         parent::__construct($data);
     }
 

@@ -35,7 +35,7 @@ class Fee extends \Google\Protobuf\Internal\Message
      * the payer must be a tx signer (and thus have signed this field in AuthInfo).
      * setting this field does *not* change the ordering of required signers for the transaction.
      *
-     * Generated from protobuf field <code>string payer = 3 [json_name = "payer", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string payer = 3 [json_name = "payer"];</code>
      */
     protected $payer = '';
     /**
@@ -43,7 +43,7 @@ class Fee extends \Google\Protobuf\Internal\Message
      * to pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does
      * not support fee grants, this will fail
      *
-     * Generated from protobuf field <code>string granter = 4 [json_name = "granter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string granter = 4 [json_name = "granter"];</code>
      */
     protected $granter = '';
 
@@ -53,7 +53,7 @@ class Fee extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $amount
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $amount
      *           amount is the amount of coins to be paid as a fee
      *     @type int|string $gas_limit
      *           gas_limit is the maximum gas that can be used in transaction processing
@@ -69,7 +69,7 @@ class Fee extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\V1Beta1\Tx::initOnce();
+        \Cosmos\Tx\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -88,7 +88,7 @@ class Fee extends \Google\Protobuf\Internal\Message
      * amount is the amount of coins to be paid as a fee
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin amount = 1 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAmount($var)
@@ -132,7 +132,7 @@ class Fee extends \Google\Protobuf\Internal\Message
      * the payer must be a tx signer (and thus have signed this field in AuthInfo).
      * setting this field does *not* change the ordering of required signers for the transaction.
      *
-     * Generated from protobuf field <code>string payer = 3 [json_name = "payer", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string payer = 3 [json_name = "payer"];</code>
      * @return string
      */
     public function getPayer()
@@ -145,7 +145,7 @@ class Fee extends \Google\Protobuf\Internal\Message
      * the payer must be a tx signer (and thus have signed this field in AuthInfo).
      * setting this field does *not* change the ordering of required signers for the transaction.
      *
-     * Generated from protobuf field <code>string payer = 3 [json_name = "payer", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string payer = 3 [json_name = "payer"];</code>
      * @param string $var
      * @return $this
      */
@@ -162,7 +162,7 @@ class Fee extends \Google\Protobuf\Internal\Message
      * to pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does
      * not support fee grants, this will fail
      *
-     * Generated from protobuf field <code>string granter = 4 [json_name = "granter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string granter = 4 [json_name = "granter"];</code>
      * @return string
      */
     public function getGranter()
@@ -175,7 +175,7 @@ class Fee extends \Google\Protobuf\Internal\Message
      * to pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does
      * not support fee grants, this will fail
      *
-     * Generated from protobuf field <code>string granter = 4 [json_name = "granter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string granter = 4 [json_name = "granter"];</code>
      * @param string $var
      * @return $this
      */

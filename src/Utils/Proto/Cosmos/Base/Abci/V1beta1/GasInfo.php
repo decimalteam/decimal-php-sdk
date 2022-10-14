@@ -18,13 +18,13 @@ class GasInfo extends \Google\Protobuf\Internal\Message
     /**
      * GasWanted is the maximum units of work we allow this tx to perform.
      *
-     * Generated from protobuf field <code>uint64 gas_wanted = 1 [json_name = "gasWanted"];</code>
+     * Generated from protobuf field <code>uint64 gas_wanted = 1 [json_name = "gasWanted", (.gogoproto.moretags) = "yaml:\"gas_wanted\""];</code>
      */
     protected $gas_wanted = 0;
     /**
      * GasUsed is the amount of gas actually consumed.
      *
-     * Generated from protobuf field <code>uint64 gas_used = 2 [json_name = "gasUsed"];</code>
+     * Generated from protobuf field <code>uint64 gas_used = 2 [json_name = "gasUsed", (.gogoproto.moretags) = "yaml:\"gas_used\""];</code>
      */
     protected $gas_used = 0;
 
@@ -41,14 +41,14 @@ class GasInfo extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Abci\V1Beta1\Abci::initOnce();
+        \Cosmos\Base\Abci\V1beta1\GPBMetadata\Abci::initOnce();
         parent::__construct($data);
     }
 
     /**
      * GasWanted is the maximum units of work we allow this tx to perform.
      *
-     * Generated from protobuf field <code>uint64 gas_wanted = 1 [json_name = "gasWanted"];</code>
+     * Generated from protobuf field <code>uint64 gas_wanted = 1 [json_name = "gasWanted", (.gogoproto.moretags) = "yaml:\"gas_wanted\""];</code>
      * @return int|string
      */
     public function getGasWanted()
@@ -59,7 +59,7 @@ class GasInfo extends \Google\Protobuf\Internal\Message
     /**
      * GasWanted is the maximum units of work we allow this tx to perform.
      *
-     * Generated from protobuf field <code>uint64 gas_wanted = 1 [json_name = "gasWanted"];</code>
+     * Generated from protobuf field <code>uint64 gas_wanted = 1 [json_name = "gasWanted", (.gogoproto.moretags) = "yaml:\"gas_wanted\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -74,7 +74,7 @@ class GasInfo extends \Google\Protobuf\Internal\Message
     /**
      * GasUsed is the amount of gas actually consumed.
      *
-     * Generated from protobuf field <code>uint64 gas_used = 2 [json_name = "gasUsed"];</code>
+     * Generated from protobuf field <code>uint64 gas_used = 2 [json_name = "gasUsed", (.gogoproto.moretags) = "yaml:\"gas_used\""];</code>
      * @return int|string
      */
     public function getGasUsed()
@@ -85,7 +85,7 @@ class GasInfo extends \Google\Protobuf\Internal\Message
     /**
      * GasUsed is the amount of gas actually consumed.
      *
-     * Generated from protobuf field <code>uint64 gas_used = 2 [json_name = "gasUsed"];</code>
+     * Generated from protobuf field <code>uint64 gas_used = 2 [json_name = "gasUsed", (.gogoproto.moretags) = "yaml:\"gas_used\""];</code>
      * @param int|string $var
      * @return $this
      */

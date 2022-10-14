@@ -39,11 +39,11 @@ class Proof extends \Google\Protobuf\Internal\Message
      *     @type int|string $total
      *     @type int|string $index
      *     @type string $leaf_hash
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $aunts
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $aunts
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Crypto\Proof::initOnce();
+        \Tendermint\Crypto\GPBMetadata\Proof::initOnce();
         parent::__construct($data);
     }
 
@@ -124,7 +124,7 @@ class Proof extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated bytes aunts = 4 [json_name = "aunts"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAunts($var)

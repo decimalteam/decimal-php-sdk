@@ -28,7 +28,7 @@ class PublicKey extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Crypto\Keys::initOnce();
+        \Tendermint\Crypto\GPBMetadata\Keys::initOnce();
         parent::__construct($data);
     }
 

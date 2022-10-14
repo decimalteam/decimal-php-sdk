@@ -41,7 +41,7 @@ class MissedBlock extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Genesis::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 

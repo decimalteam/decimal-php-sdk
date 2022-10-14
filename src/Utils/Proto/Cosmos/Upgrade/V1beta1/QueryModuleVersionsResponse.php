@@ -11,7 +11,6 @@ use Google\Protobuf\Internal\GPBUtil;
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
  * RPC method.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.upgrade.v1beta1.QueryModuleVersionsResponse</code>
  */
@@ -30,12 +29,12 @@ class QueryModuleVersionsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Upgrade\V1beta1\ModuleVersion[]|\Google\Protobuf\Internal\RepeatedField $module_versions
+     *     @type array<\Cosmos\Upgrade\V1beta1\ModuleVersion>|\Google\Protobuf\Internal\RepeatedField $module_versions
      *           module_versions is a list of module names with their consensus versions.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Upgrade\V1Beta1\Query::initOnce();
+        \Cosmos\Upgrade\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -54,7 +53,7 @@ class QueryModuleVersionsResponse extends \Google\Protobuf\Internal\Message
      * module_versions is a list of module names with their consensus versions.
      *
      * Generated from protobuf field <code>repeated .cosmos.upgrade.v1beta1.ModuleVersion module_versions = 1 [json_name = "moduleVersions"];</code>
-     * @param \Cosmos\Upgrade\V1beta1\ModuleVersion[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Upgrade\V1beta1\ModuleVersion>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setModuleVersions($var)

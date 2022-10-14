@@ -18,11 +18,8 @@ class Result extends \Google\Protobuf\Internal\Message
     /**
      * Data is any data returned from message or handler execution. It MUST be
      * length prefixed in order to separate data from multiple message executions.
-     * Deprecated. This field is still populated, but prefer msg_response instead
-     * because it also contains the Msg response typeURL.
      *
-     * Generated from protobuf field <code>bytes data = 1 [json_name = "data", deprecated = true];</code>
-     * @deprecated
+     * Generated from protobuf field <code>bytes data = 1 [json_name = "data"];</code>
      */
     protected $data = '';
     /**
@@ -38,13 +35,6 @@ class Result extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 3 [json_name = "events", (.gogoproto.nullable) = false];</code>
      */
     private $events;
-    /**
-     * msg_responses contains the Msg handler responses type packed in Anys.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>repeated .google.protobuf.Any msg_responses = 4 [json_name = "msgResponses"];</code>
-     */
-    private $msg_responses;
 
     /**
      * Constructor.
@@ -55,53 +45,40 @@ class Result extends \Google\Protobuf\Internal\Message
      *     @type string $data
      *           Data is any data returned from message or handler execution. It MUST be
      *           length prefixed in order to separate data from multiple message executions.
-     *           Deprecated. This field is still populated, but prefer msg_response instead
-     *           because it also contains the Msg response typeURL.
      *     @type string $log
      *           Log contains the log information from message or handler execution.
-     *     @type \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $events
+     *     @type array<\Tendermint\Abci\Event>|\Google\Protobuf\Internal\RepeatedField $events
      *           Events contains a slice of Event objects that were emitted during message
      *           or handler execution.
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $msg_responses
-     *           msg_responses contains the Msg handler responses type packed in Anys.
-     *           Since: cosmos-sdk 0.46
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Abci\V1Beta1\Abci::initOnce();
+        \Cosmos\Base\Abci\V1beta1\GPBMetadata\Abci::initOnce();
         parent::__construct($data);
     }
 
     /**
      * Data is any data returned from message or handler execution. It MUST be
      * length prefixed in order to separate data from multiple message executions.
-     * Deprecated. This field is still populated, but prefer msg_response instead
-     * because it also contains the Msg response typeURL.
      *
-     * Generated from protobuf field <code>bytes data = 1 [json_name = "data", deprecated = true];</code>
+     * Generated from protobuf field <code>bytes data = 1 [json_name = "data"];</code>
      * @return string
-     * @deprecated
      */
     public function getData()
     {
-        @trigger_error('data is deprecated.', E_USER_DEPRECATED);
         return $this->data;
     }
 
     /**
      * Data is any data returned from message or handler execution. It MUST be
      * length prefixed in order to separate data from multiple message executions.
-     * Deprecated. This field is still populated, but prefer msg_response instead
-     * because it also contains the Msg response typeURL.
      *
-     * Generated from protobuf field <code>bytes data = 1 [json_name = "data", deprecated = true];</code>
+     * Generated from protobuf field <code>bytes data = 1 [json_name = "data"];</code>
      * @param string $var
      * @return $this
-     * @deprecated
      */
     public function setData($var)
     {
-        @trigger_error('data is deprecated.', E_USER_DEPRECATED);
         GPBUtil::checkString($var, False);
         $this->data = $var;
 
@@ -151,41 +128,13 @@ class Result extends \Google\Protobuf\Internal\Message
      * or handler execution.
      *
      * Generated from protobuf field <code>repeated .tendermint.abci.Event events = 3 [json_name = "events", (.gogoproto.nullable) = false];</code>
-     * @param \Tendermint\Abci\Event[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Abci\Event>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEvents($var)
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Tendermint\Abci\Event::class);
         $this->events = $arr;
-
-        return $this;
-    }
-
-    /**
-     * msg_responses contains the Msg handler responses type packed in Anys.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>repeated .google.protobuf.Any msg_responses = 4 [json_name = "msgResponses"];</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getMsgResponses()
-    {
-        return $this->msg_responses;
-    }
-
-    /**
-     * msg_responses contains the Msg handler responses type packed in Anys.
-     * Since: cosmos-sdk 0.46
-     *
-     * Generated from protobuf field <code>repeated .google.protobuf.Any msg_responses = 4 [json_name = "msgResponses"];</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setMsgResponses($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Any::class);
-        $this->msg_responses = $arr;
 
         return $this;
     }

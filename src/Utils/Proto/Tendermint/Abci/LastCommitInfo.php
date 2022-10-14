@@ -29,11 +29,11 @@ class LastCommitInfo extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int $round
-     *     @type \Tendermint\Abci\VoteInfo[]|\Google\Protobuf\Internal\RepeatedField $votes
+     *     @type array<\Tendermint\Abci\VoteInfo>|\Google\Protobuf\Internal\RepeatedField $votes
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Abci\Types::initOnce();
+        \Tendermint\Abci\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -70,7 +70,7 @@ class LastCommitInfo extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.abci.VoteInfo votes = 2 [json_name = "votes", (.gogoproto.nullable) = false];</code>
-     * @param \Tendermint\Abci\VoteInfo[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Abci\VoteInfo>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setVotes($var)

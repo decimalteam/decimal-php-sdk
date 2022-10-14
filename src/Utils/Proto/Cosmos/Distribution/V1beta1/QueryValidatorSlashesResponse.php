@@ -35,14 +35,14 @@ class QueryValidatorSlashesResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Distribution\V1beta1\ValidatorSlashEvent[]|\Google\Protobuf\Internal\RepeatedField $slashes
+     *     @type array<\Cosmos\Distribution\V1beta1\ValidatorSlashEvent>|\Google\Protobuf\Internal\RepeatedField $slashes
      *           slashes defines the slashes the validator received.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Query::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -61,7 +61,7 @@ class QueryValidatorSlashesResponse extends \Google\Protobuf\Internal\Message
      * slashes defines the slashes the validator received.
      *
      * Generated from protobuf field <code>repeated .cosmos.distribution.v1beta1.ValidatorSlashEvent slashes = 1 [json_name = "slashes", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Distribution\V1beta1\ValidatorSlashEvent[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Distribution\V1beta1\ValidatorSlashEvent>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSlashes($var)

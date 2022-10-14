@@ -34,14 +34,14 @@ class QueryAllowancesResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Feegrant\V1beta1\Grant[]|\Google\Protobuf\Internal\RepeatedField $allowances
+     *     @type array<\Cosmos\Feegrant\V1beta1\Grant>|\Google\Protobuf\Internal\RepeatedField $allowances
      *           allowances are allowance's granted for grantee by granter.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines an pagination for the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Feegrant\V1Beta1\Query::initOnce();
+        \Cosmos\Feegrant\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -60,7 +60,7 @@ class QueryAllowancesResponse extends \Google\Protobuf\Internal\Message
      * allowances are allowance's granted for grantee by granter.
      *
      * Generated from protobuf field <code>repeated .cosmos.feegrant.v1beta1.Grant allowances = 1 [json_name = "allowances"];</code>
-     * @param \Cosmos\Feegrant\V1beta1\Grant[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Feegrant\V1beta1\Grant>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAllowances($var)

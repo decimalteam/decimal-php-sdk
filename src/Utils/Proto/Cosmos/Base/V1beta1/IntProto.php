@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class IntProto extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string int = 1 [json_name = "int", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string int = 1 [json_name = "int", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Int"];</code>
      */
     protected $int = '';
 
@@ -30,12 +30,12 @@ class IntProto extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\V1Beta1\Coin::initOnce();
+        \Cosmos\Base\V1beta1\GPBMetadata\Coin::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string int = 1 [json_name = "int", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string int = 1 [json_name = "int", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Int"];</code>
      * @return string
      */
     public function getInt()
@@ -44,7 +44,7 @@ class IntProto extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string int = 1 [json_name = "int", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string int = 1 [json_name = "int", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Int"];</code>
      * @param string $var
      * @return $this
      */

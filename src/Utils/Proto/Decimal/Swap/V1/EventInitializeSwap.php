@@ -20,29 +20,29 @@ class EventInitializeSwap extends \Google\Protobuf\Internal\Message
      */
     protected $sender = '';
     /**
-     * Generated from protobuf field <code>string from = 2 [json_name = "from"];</code>
-     */
-    protected $from = '';
-    /**
-     * Generated from protobuf field <code>uint32 dest_chain = 3 [json_name = "destChain"];</code>
-     */
-    protected $dest_chain = 0;
-    /**
-     * Generated from protobuf field <code>string recipient = 4 [json_name = "recipient"];</code>
+     * Generated from protobuf field <code>string recipient = 5 [json_name = "recipient"];</code>
      */
     protected $recipient = '';
     /**
-     * Generated from protobuf field <code>string amount = 5 [json_name = "amount"];</code>
+     * Generated from protobuf field <code>string amount = 6 [json_name = "amount"];</code>
      */
     protected $amount = '';
     /**
-     * Generated from protobuf field <code>string transaction_number = 6 [json_name = "transactionNumber"];</code>
+     * Generated from protobuf field <code>string token_symbol = 8 [json_name = "tokenSymbol"];</code>
+     */
+    protected $token_symbol = '';
+    /**
+     * Generated from protobuf field <code>string transaction_number = 7 [json_name = "transactionNumber"];</code>
      */
     protected $transaction_number = '';
     /**
-     * Generated from protobuf field <code>string token_symbol = 7 [json_name = "tokenSymbol"];</code>
+     * Generated from protobuf field <code>uint32 from_chain = 3 [json_name = "fromChain"];</code>
      */
-    protected $token_symbol = '';
+    protected $from_chain = 0;
+    /**
+     * Generated from protobuf field <code>uint32 dest_chain = 4 [json_name = "destChain"];</code>
+     */
+    protected $dest_chain = 0;
 
     /**
      * Constructor.
@@ -51,16 +51,16 @@ class EventInitializeSwap extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $sender
-     *     @type string $from
-     *     @type int $dest_chain
      *     @type string $recipient
      *     @type string $amount
-     *     @type string $transaction_number
      *     @type string $token_symbol
+     *     @type string $transaction_number
+     *     @type int $from_chain
+     *     @type int $dest_chain
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Swap\V1\Events::initOnce();
+        \Decimal\Swap\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 
@@ -87,51 +87,7 @@ class EventInitializeSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string from = 2 [json_name = "from"];</code>
-     * @return string
-     */
-    public function getFrom()
-    {
-        return $this->from;
-    }
-
-    /**
-     * Generated from protobuf field <code>string from = 2 [json_name = "from"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setFrom($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->from = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>uint32 dest_chain = 3 [json_name = "destChain"];</code>
-     * @return int
-     */
-    public function getDestChain()
-    {
-        return $this->dest_chain;
-    }
-
-    /**
-     * Generated from protobuf field <code>uint32 dest_chain = 3 [json_name = "destChain"];</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setDestChain($var)
-    {
-        GPBUtil::checkUint32($var);
-        $this->dest_chain = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>string recipient = 4 [json_name = "recipient"];</code>
+     * Generated from protobuf field <code>string recipient = 5 [json_name = "recipient"];</code>
      * @return string
      */
     public function getRecipient()
@@ -140,7 +96,7 @@ class EventInitializeSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string recipient = 4 [json_name = "recipient"];</code>
+     * Generated from protobuf field <code>string recipient = 5 [json_name = "recipient"];</code>
      * @param string $var
      * @return $this
      */
@@ -153,7 +109,7 @@ class EventInitializeSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string amount = 5 [json_name = "amount"];</code>
+     * Generated from protobuf field <code>string amount = 6 [json_name = "amount"];</code>
      * @return string
      */
     public function getAmount()
@@ -162,7 +118,7 @@ class EventInitializeSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string amount = 5 [json_name = "amount"];</code>
+     * Generated from protobuf field <code>string amount = 6 [json_name = "amount"];</code>
      * @param string $var
      * @return $this
      */
@@ -175,7 +131,29 @@ class EventInitializeSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string transaction_number = 6 [json_name = "transactionNumber"];</code>
+     * Generated from protobuf field <code>string token_symbol = 8 [json_name = "tokenSymbol"];</code>
+     * @return string
+     */
+    public function getTokenSymbol()
+    {
+        return $this->token_symbol;
+    }
+
+    /**
+     * Generated from protobuf field <code>string token_symbol = 8 [json_name = "tokenSymbol"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setTokenSymbol($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->token_symbol = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string transaction_number = 7 [json_name = "transactionNumber"];</code>
      * @return string
      */
     public function getTransactionNumber()
@@ -184,7 +162,7 @@ class EventInitializeSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string transaction_number = 6 [json_name = "transactionNumber"];</code>
+     * Generated from protobuf field <code>string transaction_number = 7 [json_name = "transactionNumber"];</code>
      * @param string $var
      * @return $this
      */
@@ -197,23 +175,45 @@ class EventInitializeSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string token_symbol = 7 [json_name = "tokenSymbol"];</code>
-     * @return string
+     * Generated from protobuf field <code>uint32 from_chain = 3 [json_name = "fromChain"];</code>
+     * @return int
      */
-    public function getTokenSymbol()
+    public function getFromChain()
     {
-        return $this->token_symbol;
+        return $this->from_chain;
     }
 
     /**
-     * Generated from protobuf field <code>string token_symbol = 7 [json_name = "tokenSymbol"];</code>
-     * @param string $var
+     * Generated from protobuf field <code>uint32 from_chain = 3 [json_name = "fromChain"];</code>
+     * @param int $var
      * @return $this
      */
-    public function setTokenSymbol($var)
+    public function setFromChain($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->token_symbol = $var;
+        GPBUtil::checkUint32($var);
+        $this->from_chain = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>uint32 dest_chain = 4 [json_name = "destChain"];</code>
+     * @return int
+     */
+    public function getDestChain()
+    {
+        return $this->dest_chain;
+    }
+
+    /**
+     * Generated from protobuf field <code>uint32 dest_chain = 4 [json_name = "destChain"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setDestChain($var)
+    {
+        GPBUtil::checkUint32($var);
+        $this->dest_chain = $var;
 
         return $this;
     }

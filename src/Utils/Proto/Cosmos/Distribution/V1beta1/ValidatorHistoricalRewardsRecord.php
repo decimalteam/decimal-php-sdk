@@ -19,7 +19,7 @@ class ValidatorHistoricalRewardsRecord extends \Google\Protobuf\Internal\Message
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      */
     protected $validator_address = '';
     /**
@@ -31,7 +31,7 @@ class ValidatorHistoricalRewardsRecord extends \Google\Protobuf\Internal\Message
     /**
      * rewards defines the historical rewards of a validator.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorHistoricalRewards rewards = 3 [json_name = "rewards", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorHistoricalRewards rewards = 3 [json_name = "rewards", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"rewards\""];</code>
      */
     protected $rewards = null;
 
@@ -50,14 +50,14 @@ class ValidatorHistoricalRewardsRecord extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Genesis::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -68,7 +68,7 @@ class ValidatorHistoricalRewardsRecord extends \Google\Protobuf\Internal\Message
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -109,7 +109,7 @@ class ValidatorHistoricalRewardsRecord extends \Google\Protobuf\Internal\Message
     /**
      * rewards defines the historical rewards of a validator.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorHistoricalRewards rewards = 3 [json_name = "rewards", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorHistoricalRewards rewards = 3 [json_name = "rewards", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"rewards\""];</code>
      * @return \Cosmos\Distribution\V1beta1\ValidatorHistoricalRewards|null
      */
     public function getRewards()
@@ -130,7 +130,7 @@ class ValidatorHistoricalRewardsRecord extends \Google\Protobuf\Internal\Message
     /**
      * rewards defines the historical rewards of a validator.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorHistoricalRewards rewards = 3 [json_name = "rewards", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorHistoricalRewards rewards = 3 [json_name = "rewards", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"rewards\""];</code>
      * @param \Cosmos\Distribution\V1beta1\ValidatorHistoricalRewards $var
      * @return $this
      */

@@ -25,13 +25,13 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * operator_address defines the address of the validator's operator; bech encoded in JSON.
      *
-     * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.gogoproto.moretags) = "yaml:\"operator_address\""];</code>
      */
     protected $operator_address = '';
     /**
      * consensus_pubkey is the consensus public key of the validator, as a Protobuf Any.
      *
-     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 2 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 2 [json_name = "consensusPubkey", (.gogoproto.moretags) = "yaml:\"consensus_pubkey\"", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
      */
     protected $consensus_pubkey = null;
     /**
@@ -49,13 +49,13 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * tokens define the delegated tokens (incl. self-delegation).
      *
-     * Generated from protobuf field <code>string tokens = 5 [json_name = "tokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string tokens = 5 [json_name = "tokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
      */
     protected $tokens = '';
     /**
      * delegator_shares defines total shares issued to a validator's delegators.
      *
-     * Generated from protobuf field <code>string delegator_shares = 6 [json_name = "delegatorShares", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string delegator_shares = 6 [json_name = "delegatorShares", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"delegator_shares\""];</code>
      */
     protected $delegator_shares = '';
     /**
@@ -67,13 +67,13 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
      *
-     * Generated from protobuf field <code>int64 unbonding_height = 8 [json_name = "unbondingHeight"];</code>
+     * Generated from protobuf field <code>int64 unbonding_height = 8 [json_name = "unbondingHeight", (.gogoproto.moretags) = "yaml:\"unbonding_height\""];</code>
      */
     protected $unbonding_height = 0;
     /**
      * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 9 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 9 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"unbonding_time\"", (.gogoproto.stdtime) = true];</code>
      */
     protected $unbonding_time = null;
     /**
@@ -84,9 +84,8 @@ class Validator extends \Google\Protobuf\Internal\Message
     protected $commission = null;
     /**
      * min_self_delegation is the validator's self declared minimum self delegation.
-     * Since: cosmos-sdk 0.46
      *
-     * Generated from protobuf field <code>string min_self_delegation = 11 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string min_self_delegation = 11 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"min_self_delegation\""];</code>
      */
     protected $min_self_delegation = '';
 
@@ -118,18 +117,17 @@ class Validator extends \Google\Protobuf\Internal\Message
      *           commission defines the commission parameters.
      *     @type string $min_self_delegation
      *           min_self_delegation is the validator's self declared minimum self delegation.
-     *           Since: cosmos-sdk 0.46
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
     /**
      * operator_address defines the address of the validator's operator; bech encoded in JSON.
      *
-     * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.gogoproto.moretags) = "yaml:\"operator_address\""];</code>
      * @return string
      */
     public function getOperatorAddress()
@@ -140,7 +138,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * operator_address defines the address of the validator's operator; bech encoded in JSON.
      *
-     * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.gogoproto.moretags) = "yaml:\"operator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -155,7 +153,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * consensus_pubkey is the consensus public key of the validator, as a Protobuf Any.
      *
-     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 2 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 2 [json_name = "consensusPubkey", (.gogoproto.moretags) = "yaml:\"consensus_pubkey\"", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
      * @return \Google\Protobuf\Any|null
      */
     public function getConsensusPubkey()
@@ -176,7 +174,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * consensus_pubkey is the consensus public key of the validator, as a Protobuf Any.
      *
-     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 2 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 2 [json_name = "consensusPubkey", (.gogoproto.moretags) = "yaml:\"consensus_pubkey\"", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
      * @param \Google\Protobuf\Any $var
      * @return $this
      */
@@ -243,7 +241,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * tokens define the delegated tokens (incl. self-delegation).
      *
-     * Generated from protobuf field <code>string tokens = 5 [json_name = "tokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string tokens = 5 [json_name = "tokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
      * @return string
      */
     public function getTokens()
@@ -254,7 +252,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * tokens define the delegated tokens (incl. self-delegation).
      *
-     * Generated from protobuf field <code>string tokens = 5 [json_name = "tokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string tokens = 5 [json_name = "tokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int"];</code>
      * @param string $var
      * @return $this
      */
@@ -269,7 +267,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * delegator_shares defines total shares issued to a validator's delegators.
      *
-     * Generated from protobuf field <code>string delegator_shares = 6 [json_name = "delegatorShares", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string delegator_shares = 6 [json_name = "delegatorShares", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"delegator_shares\""];</code>
      * @return string
      */
     public function getDelegatorShares()
@@ -280,7 +278,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * delegator_shares defines total shares issued to a validator's delegators.
      *
-     * Generated from protobuf field <code>string delegator_shares = 6 [json_name = "delegatorShares", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string delegator_shares = 6 [json_name = "delegatorShares", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"delegator_shares\""];</code>
      * @param string $var
      * @return $this
      */
@@ -331,7 +329,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
      *
-     * Generated from protobuf field <code>int64 unbonding_height = 8 [json_name = "unbondingHeight"];</code>
+     * Generated from protobuf field <code>int64 unbonding_height = 8 [json_name = "unbondingHeight", (.gogoproto.moretags) = "yaml:\"unbonding_height\""];</code>
      * @return int|string
      */
     public function getUnbondingHeight()
@@ -342,7 +340,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
      *
-     * Generated from protobuf field <code>int64 unbonding_height = 8 [json_name = "unbondingHeight"];</code>
+     * Generated from protobuf field <code>int64 unbonding_height = 8 [json_name = "unbondingHeight", (.gogoproto.moretags) = "yaml:\"unbonding_height\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -357,7 +355,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 9 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 9 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"unbonding_time\"", (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getUnbondingTime()
@@ -378,7 +376,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 9 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 9 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"unbonding_time\"", (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */
@@ -428,9 +426,8 @@ class Validator extends \Google\Protobuf\Internal\Message
 
     /**
      * min_self_delegation is the validator's self declared minimum self delegation.
-     * Since: cosmos-sdk 0.46
      *
-     * Generated from protobuf field <code>string min_self_delegation = 11 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string min_self_delegation = 11 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"min_self_delegation\""];</code>
      * @return string
      */
     public function getMinSelfDelegation()
@@ -440,9 +437,8 @@ class Validator extends \Google\Protobuf\Internal\Message
 
     /**
      * min_self_delegation is the validator's self declared minimum self delegation.
-     * Since: cosmos-sdk 0.46
      *
-     * Generated from protobuf field <code>string min_self_delegation = 11 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string min_self_delegation = 11 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"min_self_delegation\""];</code>
      * @param string $var
      * @return $this
      */

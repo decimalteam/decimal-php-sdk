@@ -44,13 +44,13 @@ class LightClientAttackEvidence extends \Google\Protobuf\Internal\Message
      *
      *     @type \Tendermint\Types\LightBlock $conflicting_block
      *     @type int|string $common_height
-     *     @type \Tendermint\Types\Validator[]|\Google\Protobuf\Internal\RepeatedField $byzantine_validators
+     *     @type array<\Tendermint\Types\Validator>|\Google\Protobuf\Internal\RepeatedField $byzantine_validators
      *     @type int|string $total_voting_power
      *     @type \Google\Protobuf\Timestamp $timestamp
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Evidence::initOnce();
+        \Tendermint\Types\GPBMetadata\Evidence::initOnce();
         parent::__construct($data);
     }
 
@@ -119,7 +119,7 @@ class LightClientAttackEvidence extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.types.Validator byzantine_validators = 3 [json_name = "byzantineValidators"];</code>
-     * @param \Tendermint\Types\Validator[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Types\Validator>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setByzantineValidators($var)

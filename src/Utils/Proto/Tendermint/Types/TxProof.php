@@ -40,7 +40,7 @@ class TxProof extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Types::initOnce();
+        \Tendermint\Types\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 

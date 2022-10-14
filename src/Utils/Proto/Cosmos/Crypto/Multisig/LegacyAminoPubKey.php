@@ -18,11 +18,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class LegacyAminoPubKey extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint32 threshold = 1 [json_name = "threshold"];</code>
+     * Generated from protobuf field <code>uint32 threshold = 1 [json_name = "threshold", (.gogoproto.moretags) = "yaml:\"threshold\""];</code>
      */
     protected $threshold = 0;
     /**
-     * Generated from protobuf field <code>repeated .google.protobuf.Any public_keys = 2 [json_name = "publicKeys", (.gogoproto.customname) = "PubKeys"];</code>
+     * Generated from protobuf field <code>repeated .google.protobuf.Any public_keys = 2 [json_name = "publicKeys", (.gogoproto.customname) = "PubKeys", (.gogoproto.moretags) = "yaml:\"pubkeys\""];</code>
      */
     private $public_keys;
 
@@ -33,16 +33,16 @@ class LegacyAminoPubKey extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int $threshold
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $public_keys
+     *     @type array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $public_keys
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Crypto\Multisig\Keys::initOnce();
+        \Cosmos\Crypto\Multisig\GPBMetadata\Keys::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint32 threshold = 1 [json_name = "threshold"];</code>
+     * Generated from protobuf field <code>uint32 threshold = 1 [json_name = "threshold", (.gogoproto.moretags) = "yaml:\"threshold\""];</code>
      * @return int
      */
     public function getThreshold()
@@ -51,7 +51,7 @@ class LegacyAminoPubKey extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint32 threshold = 1 [json_name = "threshold"];</code>
+     * Generated from protobuf field <code>uint32 threshold = 1 [json_name = "threshold", (.gogoproto.moretags) = "yaml:\"threshold\""];</code>
      * @param int $var
      * @return $this
      */
@@ -64,7 +64,7 @@ class LegacyAminoPubKey extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .google.protobuf.Any public_keys = 2 [json_name = "publicKeys", (.gogoproto.customname) = "PubKeys"];</code>
+     * Generated from protobuf field <code>repeated .google.protobuf.Any public_keys = 2 [json_name = "publicKeys", (.gogoproto.customname) = "PubKeys", (.gogoproto.moretags) = "yaml:\"pubkeys\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getPublicKeys()
@@ -73,8 +73,8 @@ class LegacyAminoPubKey extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .google.protobuf.Any public_keys = 2 [json_name = "publicKeys", (.gogoproto.customname) = "PubKeys"];</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .google.protobuf.Any public_keys = 2 [json_name = "publicKeys", (.gogoproto.customname) = "PubKeys", (.gogoproto.moretags) = "yaml:\"pubkeys\""];</code>
+     * @param array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPublicKeys($var)

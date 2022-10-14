@@ -30,7 +30,7 @@ class QueryParamsResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Query::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 

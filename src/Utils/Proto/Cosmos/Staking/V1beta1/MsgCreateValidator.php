@@ -24,15 +24,15 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
      */
     protected $commission = null;
     /**
-     * Generated from protobuf field <code>string min_self_delegation = 3 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string min_self_delegation = 3 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"min_self_delegation\""];</code>
      */
     protected $min_self_delegation = '';
     /**
-     * Generated from protobuf field <code>string delegator_address = 4 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 4 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      */
     protected $delegator_address = '';
     /**
-     * Generated from protobuf field <code>string validator_address = 5 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 5 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      */
     protected $validator_address = '';
     /**
@@ -60,7 +60,7 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Tx::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -129,7 +129,7 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string min_self_delegation = 3 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string min_self_delegation = 3 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"min_self_delegation\""];</code>
      * @return string
      */
     public function getMinSelfDelegation()
@@ -138,7 +138,7 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string min_self_delegation = 3 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string min_self_delegation = 3 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (.gogoproto.moretags) = "yaml:\"min_self_delegation\""];</code>
      * @param string $var
      * @return $this
      */
@@ -151,7 +151,7 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string delegator_address = 4 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 4 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @return string
      */
     public function getDelegatorAddress()
@@ -160,7 +160,7 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string delegator_address = 4 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 4 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -173,7 +173,7 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 5 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 5 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -182,7 +182,7 @@ class MsgCreateValidator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 5 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 5 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @param string $var
      * @return $this
      */

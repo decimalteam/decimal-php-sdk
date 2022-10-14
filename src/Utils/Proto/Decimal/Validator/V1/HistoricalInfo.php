@@ -10,8 +10,7 @@ use Google\Protobuf\Internal\GPBUtil;
 
 /**
  * HistoricalInfo contains header and validator information for a given block.
- * It is stored as part of validator module's state, which persists the `n` most
- * recent HistoricalInfo
+ * It is stored as part of validator module's state, which persists the `n` most recent HistoricalInfo
  * (`n` is set by the validator module's `historical_entries` parameter).
  *
  * Generated from protobuf message <code>decimal.validator.v1.HistoricalInfo</code>
@@ -34,11 +33,11 @@ class HistoricalInfo extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Tendermint\Types\Header $header
-     *     @type \Decimal\Validator\V1\Validator[]|\Google\Protobuf\Internal\RepeatedField $valset
+     *     @type array<\Decimal\Validator\V1\Validator>|\Google\Protobuf\Internal\RepeatedField $valset
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Validator::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Validator::initOnce();
         parent::__construct($data);
     }
 
@@ -85,7 +84,7 @@ class HistoricalInfo extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .decimal.validator.v1.Validator valset = 2 [json_name = "valset", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Validator\V1\Validator[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Validator\V1\Validator>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValset($var)

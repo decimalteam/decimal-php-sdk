@@ -19,13 +19,13 @@ class UnbondingDelegation extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address is the bech32-encoded address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      */
     protected $delegator_address = '';
     /**
      * validator_address is the bech32-encoded address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      */
     protected $validator_address = '';
     /**
@@ -45,19 +45,19 @@ class UnbondingDelegation extends \Google\Protobuf\Internal\Message
      *           delegator_address is the bech32-encoded address of the delegator.
      *     @type string $validator_address
      *           validator_address is the bech32-encoded address of the validator.
-     *     @type \Cosmos\Staking\V1beta1\UnbondingDelegationEntry[]|\Google\Protobuf\Internal\RepeatedField $entries
+     *     @type array<\Cosmos\Staking\V1beta1\UnbondingDelegationEntry>|\Google\Protobuf\Internal\RepeatedField $entries
      *           entries are the unbonding delegation entries.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
     /**
      * delegator_address is the bech32-encoded address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @return string
      */
     public function getDelegatorAddress()
@@ -68,7 +68,7 @@ class UnbondingDelegation extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address is the bech32-encoded address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -83,7 +83,7 @@ class UnbondingDelegation extends \Google\Protobuf\Internal\Message
     /**
      * validator_address is the bech32-encoded address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -94,7 +94,7 @@ class UnbondingDelegation extends \Google\Protobuf\Internal\Message
     /**
      * validator_address is the bech32-encoded address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -121,7 +121,7 @@ class UnbondingDelegation extends \Google\Protobuf\Internal\Message
      * entries are the unbonding delegation entries.
      *
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.UnbondingDelegationEntry entries = 3 [json_name = "entries", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\UnbondingDelegationEntry[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\UnbondingDelegationEntry>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEntries($var)

@@ -25,7 +25,7 @@ class ListAllInterfacesRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V1Beta1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V1beta1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 

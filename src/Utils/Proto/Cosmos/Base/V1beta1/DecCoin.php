@@ -22,7 +22,7 @@ class DecCoin extends \Google\Protobuf\Internal\Message
      */
     protected $denom = '';
     /**
-     * Generated from protobuf field <code>string amount = 2 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string amount = 2 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Dec"];</code>
      */
     protected $amount = '';
 
@@ -37,7 +37,7 @@ class DecCoin extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\V1Beta1\Coin::initOnce();
+        \Cosmos\Base\V1beta1\GPBMetadata\Coin::initOnce();
         parent::__construct($data);
     }
 
@@ -64,7 +64,7 @@ class DecCoin extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string amount = 2 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string amount = 2 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Dec"];</code>
      * @return string
      */
     public function getAmount()
@@ -73,7 +73,7 @@ class DecCoin extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string amount = 2 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string amount = 2 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "Dec"];</code>
      * @param string $var
      * @return $this
      */

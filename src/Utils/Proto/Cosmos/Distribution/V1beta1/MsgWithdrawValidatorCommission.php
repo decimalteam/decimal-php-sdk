@@ -17,7 +17,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgWithdrawValidatorCommission extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      */
     protected $validator_address = '';
 
@@ -31,12 +31,12 @@ class MsgWithdrawValidatorCommission extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Tx::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -45,7 +45,7 @@ class MsgWithdrawValidatorCommission extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @param string $var
      * @return $this
      */

@@ -33,13 +33,13 @@ class QueryValidatorDelegationsResponse extends \Google\Protobuf\Internal\Messag
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Staking\V1beta1\DelegationResponse[]|\Google\Protobuf\Internal\RepeatedField $delegation_responses
+     *     @type array<\Cosmos\Staking\V1beta1\DelegationResponse>|\Google\Protobuf\Internal\RepeatedField $delegation_responses
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Query::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -54,7 +54,7 @@ class QueryValidatorDelegationsResponse extends \Google\Protobuf\Internal\Messag
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.DelegationResponse delegation_responses = 1 [json_name = "delegationResponses", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "DelegationResponses"];</code>
-     * @param \Cosmos\Staking\V1beta1\DelegationResponse[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\DelegationResponse>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setDelegationResponses($var)

@@ -34,7 +34,7 @@ class QueryTokenResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Query::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 

@@ -41,7 +41,7 @@ class Single extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Tx\Signing\V1Beta1\Signing::initOnce();
+        \Cosmos\Tx\Signing\V1beta1\GPBMetadata\Signing::initOnce();
         parent::__construct($data);
     }
 

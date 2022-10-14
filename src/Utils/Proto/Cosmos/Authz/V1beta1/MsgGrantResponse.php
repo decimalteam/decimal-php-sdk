@@ -25,7 +25,7 @@ class MsgGrantResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Authz\V1Beta1\Tx::initOnce();
+        \Cosmos\Authz\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

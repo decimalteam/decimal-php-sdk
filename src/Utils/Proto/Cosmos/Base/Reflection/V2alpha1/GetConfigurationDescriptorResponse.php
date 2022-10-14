@@ -33,7 +33,7 @@ class GetConfigurationDescriptorResponse extends \Google\Protobuf\Internal\Messa
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V2Alpha1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V2alpha1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 

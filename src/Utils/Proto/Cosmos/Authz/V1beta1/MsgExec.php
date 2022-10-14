@@ -18,7 +18,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgExec extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee"];</code>
      */
     protected $grantee = '';
     /**
@@ -37,19 +37,19 @@ class MsgExec extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $grantee
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $msgs
+     *     @type array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $msgs
      *           Authorization Msg requests to execute. Each msg must implement Authorization interface
      *           The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
      *           triple and validate it.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Authz\V1Beta1\Tx::initOnce();
+        \Cosmos\Authz\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee"];</code>
      * @return string
      */
     public function getGrantee()
@@ -58,7 +58,7 @@ class MsgExec extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string grantee = 1 [json_name = "grantee"];</code>
      * @param string $var
      * @return $this
      */
@@ -89,7 +89,7 @@ class MsgExec extends \Google\Protobuf\Internal\Message
      * triple and validate it.
      *
      * Generated from protobuf field <code>repeated .google.protobuf.Any msgs = 2 [json_name = "msgs", (.cosmos_proto.accepts_interface) = "sdk.Msg, authz.Authorization"];</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setMsgs($var)

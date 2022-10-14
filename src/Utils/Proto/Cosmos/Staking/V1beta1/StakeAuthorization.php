@@ -10,7 +10,6 @@ use Google\Protobuf\Internal\GPBUtil;
 
 /**
  * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.staking.v1beta1.StakeAuthorization</code>
  */
@@ -50,7 +49,7 @@ class StakeAuthorization extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Authz::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Authz::initOnce();
         parent::__construct($data);
     }
 

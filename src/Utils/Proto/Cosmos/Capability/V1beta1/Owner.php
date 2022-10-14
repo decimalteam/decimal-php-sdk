@@ -17,11 +17,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class Owner extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string module = 1 [json_name = "module"];</code>
+     * Generated from protobuf field <code>string module = 1 [json_name = "module", (.gogoproto.moretags) = "yaml:\"module\""];</code>
      */
     protected $module = '';
     /**
-     * Generated from protobuf field <code>string name = 2 [json_name = "name"];</code>
+     * Generated from protobuf field <code>string name = 2 [json_name = "name", (.gogoproto.moretags) = "yaml:\"name\""];</code>
      */
     protected $name = '';
 
@@ -36,12 +36,12 @@ class Owner extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Capability\V1Beta1\Capability::initOnce();
+        \Cosmos\Capability\V1beta1\GPBMetadata\Capability::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string module = 1 [json_name = "module"];</code>
+     * Generated from protobuf field <code>string module = 1 [json_name = "module", (.gogoproto.moretags) = "yaml:\"module\""];</code>
      * @return string
      */
     public function getModule()
@@ -50,7 +50,7 @@ class Owner extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string module = 1 [json_name = "module"];</code>
+     * Generated from protobuf field <code>string module = 1 [json_name = "module", (.gogoproto.moretags) = "yaml:\"module\""];</code>
      * @param string $var
      * @return $this
      */
@@ -63,7 +63,7 @@ class Owner extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string name = 2 [json_name = "name"];</code>
+     * Generated from protobuf field <code>string name = 2 [json_name = "name", (.gogoproto.moretags) = "yaml:\"name\""];</code>
      * @return string
      */
     public function getName()
@@ -72,7 +72,7 @@ class Owner extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string name = 2 [json_name = "name"];</code>
+     * Generated from protobuf field <code>string name = 2 [json_name = "name", (.gogoproto.moretags) = "yaml:\"name\""];</code>
      * @param string $var
      * @return $this
      */

@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class ModuleAccount extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>.cosmos.auth.v1beta1.BaseAccount base_account = 1 [json_name = "baseAccount", (.gogoproto.embed) = true];</code>
+     * Generated from protobuf field <code>.cosmos.auth.v1beta1.BaseAccount base_account = 1 [json_name = "baseAccount", (.gogoproto.embed) = true, (.gogoproto.moretags) = "yaml:\"base_account\""];</code>
      */
     protected $base_account = null;
     /**
@@ -36,16 +36,16 @@ class ModuleAccount extends \Google\Protobuf\Internal\Message
      *
      *     @type \Cosmos\Auth\V1beta1\BaseAccount $base_account
      *     @type string $name
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $permissions
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $permissions
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Auth\V1Beta1\Auth::initOnce();
+        \Cosmos\Auth\V1beta1\GPBMetadata\Auth::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>.cosmos.auth.v1beta1.BaseAccount base_account = 1 [json_name = "baseAccount", (.gogoproto.embed) = true];</code>
+     * Generated from protobuf field <code>.cosmos.auth.v1beta1.BaseAccount base_account = 1 [json_name = "baseAccount", (.gogoproto.embed) = true, (.gogoproto.moretags) = "yaml:\"base_account\""];</code>
      * @return \Cosmos\Auth\V1beta1\BaseAccount|null
      */
     public function getBaseAccount()
@@ -64,7 +64,7 @@ class ModuleAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cosmos.auth.v1beta1.BaseAccount base_account = 1 [json_name = "baseAccount", (.gogoproto.embed) = true];</code>
+     * Generated from protobuf field <code>.cosmos.auth.v1beta1.BaseAccount base_account = 1 [json_name = "baseAccount", (.gogoproto.embed) = true, (.gogoproto.moretags) = "yaml:\"base_account\""];</code>
      * @param \Cosmos\Auth\V1beta1\BaseAccount $var
      * @return $this
      */
@@ -109,7 +109,7 @@ class ModuleAccount extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated string permissions = 3 [json_name = "permissions"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPermissions($var)

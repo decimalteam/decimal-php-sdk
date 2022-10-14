@@ -34,7 +34,7 @@ class PubKey extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Crypto\Ed25519\Keys::initOnce();
+        \Cosmos\Crypto\Ed25519\GPBMetadata\Keys::initOnce();
         parent::__construct($data);
     }
 

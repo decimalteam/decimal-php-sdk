@@ -41,7 +41,7 @@ class CoinVR extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Coin\V1\Coin::initOnce();
+        \Decimal\Coin\V1\GPBMetadata\Coin::initOnce();
         parent::__construct($data);
     }
 

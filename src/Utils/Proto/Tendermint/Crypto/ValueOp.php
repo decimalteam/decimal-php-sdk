@@ -39,7 +39,7 @@ class ValueOp extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Crypto\Proof::initOnce();
+        \Tendermint\Crypto\GPBMetadata\Proof::initOnce();
         parent::__construct($data);
     }
 

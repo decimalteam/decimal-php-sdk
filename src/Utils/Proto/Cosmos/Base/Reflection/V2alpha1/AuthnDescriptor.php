@@ -29,12 +29,12 @@ class AuthnDescriptor extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\Reflection\V2alpha1\SigningModeDescriptor[]|\Google\Protobuf\Internal\RepeatedField $sign_modes
+     *     @type array<\Cosmos\Base\Reflection\V2alpha1\SigningModeDescriptor>|\Google\Protobuf\Internal\RepeatedField $sign_modes
      *           sign_modes defines the supported signature algorithm
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V2Alpha1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V2alpha1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 
@@ -53,7 +53,7 @@ class AuthnDescriptor extends \Google\Protobuf\Internal\Message
      * sign_modes defines the supported signature algorithm
      *
      * Generated from protobuf field <code>repeated .cosmos.base.reflection.v2alpha1.SigningModeDescriptor sign_modes = 1 [json_name = "signModes"];</code>
-     * @param \Cosmos\Base\Reflection\V2alpha1\SigningModeDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Reflection\V2alpha1\SigningModeDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSignModes($var)

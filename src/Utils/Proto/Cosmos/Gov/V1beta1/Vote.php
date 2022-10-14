@@ -17,11 +17,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class Vote extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "id"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      */
     protected $proposal_id = 0;
     /**
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      */
     protected $voter = '';
     /**
@@ -34,8 +34,6 @@ class Vote extends \Google\Protobuf\Internal\Message
      */
     protected $option = 0;
     /**
-     * Since: cosmos-sdk 0.43
-     *
      * Generated from protobuf field <code>repeated .cosmos.gov.v1beta1.WeightedVoteOption options = 4 [json_name = "options", (.gogoproto.nullable) = false];</code>
      */
     private $options;
@@ -52,17 +50,16 @@ class Vote extends \Google\Protobuf\Internal\Message
      *           Deprecated: Prefer to use `options` instead. This field is set in queries
      *           if and only if `len(options) == 1` and that option has weight 1. In all
      *           other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
-     *     @type \Cosmos\Gov\V1beta1\WeightedVoteOption[]|\Google\Protobuf\Internal\RepeatedField $options
-     *           Since: cosmos-sdk 0.43
+     *     @type array<\Cosmos\Gov\V1beta1\WeightedVoteOption>|\Google\Protobuf\Internal\RepeatedField $options
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Gov::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Gov::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "id"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @return int|string
      */
     public function getProposalId()
@@ -71,7 +68,7 @@ class Vote extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "id"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.moretags) = "yaml:\"proposal_id\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -84,7 +81,7 @@ class Vote extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @return string
      */
     public function getVoter()
@@ -93,7 +90,7 @@ class Vote extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @param string $var
      * @return $this
      */
@@ -140,8 +137,6 @@ class Vote extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Since: cosmos-sdk 0.43
-     *
      * Generated from protobuf field <code>repeated .cosmos.gov.v1beta1.WeightedVoteOption options = 4 [json_name = "options", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
@@ -151,10 +146,8 @@ class Vote extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Since: cosmos-sdk 0.43
-     *
      * Generated from protobuf field <code>repeated .cosmos.gov.v1beta1.WeightedVoteOption options = 4 [json_name = "options", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Gov\V1beta1\WeightedVoteOption[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Gov\V1beta1\WeightedVoteOption>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOptions($var)

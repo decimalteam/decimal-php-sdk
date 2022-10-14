@@ -34,14 +34,14 @@ class QueryValidatorsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Staking\V1beta1\Validator[]|\Google\Protobuf\Internal\RepeatedField $validators
+     *     @type array<\Cosmos\Staking\V1beta1\Validator>|\Google\Protobuf\Internal\RepeatedField $validators
      *           validators contains all the queried validators.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Query::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -60,7 +60,7 @@ class QueryValidatorsResponse extends \Google\Protobuf\Internal\Message
      * validators contains all the queried validators.
      *
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.Validator validators = 1 [json_name = "validators", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\Validator[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\Validator>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValidators($var)

@@ -10,7 +10,6 @@ use Google\Protobuf\Internal\GPBUtil;
 
 /**
  * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.gov.v1beta1.MsgVoteWeightedResponse</code>
  */
@@ -26,7 +25,7 @@ class MsgVoteWeightedResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Tx::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 

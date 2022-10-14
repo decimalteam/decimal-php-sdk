@@ -18,7 +18,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * starting_proposal_id is the ID of the starting proposal.
      *
-     * Generated from protobuf field <code>uint64 starting_proposal_id = 1 [json_name = "startingProposalId"];</code>
+     * Generated from protobuf field <code>uint64 starting_proposal_id = 1 [json_name = "startingProposalId", (.gogoproto.moretags) = "yaml:\"starting_proposal_id\""];</code>
      */
     protected $starting_proposal_id = 0;
     /**
@@ -42,19 +42,19 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the paramaters of related to deposit.
      *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.DepositParams deposit_params = 5 [json_name = "depositParams", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.DepositParams deposit_params = 5 [json_name = "depositParams", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"deposit_params\""];</code>
      */
     protected $deposit_params = null;
     /**
      * params defines all the paramaters of related to voting.
      *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.VotingParams voting_params = 6 [json_name = "votingParams", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.VotingParams voting_params = 6 [json_name = "votingParams", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"voting_params\""];</code>
      */
     protected $voting_params = null;
     /**
      * params defines all the paramaters of related to tally.
      *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyParams tally_params = 7 [json_name = "tallyParams", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyParams tally_params = 7 [json_name = "tallyParams", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"tally_params\""];</code>
      */
     protected $tally_params = null;
 
@@ -66,11 +66,11 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      *
      *     @type int|string $starting_proposal_id
      *           starting_proposal_id is the ID of the starting proposal.
-     *     @type \Cosmos\Gov\V1beta1\Deposit[]|\Google\Protobuf\Internal\RepeatedField $deposits
+     *     @type array<\Cosmos\Gov\V1beta1\Deposit>|\Google\Protobuf\Internal\RepeatedField $deposits
      *           deposits defines all the deposits present at genesis.
-     *     @type \Cosmos\Gov\V1beta1\Vote[]|\Google\Protobuf\Internal\RepeatedField $votes
+     *     @type array<\Cosmos\Gov\V1beta1\Vote>|\Google\Protobuf\Internal\RepeatedField $votes
      *           votes defines all the votes present at genesis.
-     *     @type \Cosmos\Gov\V1beta1\Proposal[]|\Google\Protobuf\Internal\RepeatedField $proposals
+     *     @type array<\Cosmos\Gov\V1beta1\Proposal>|\Google\Protobuf\Internal\RepeatedField $proposals
      *           proposals defines all the proposals present at genesis.
      *     @type \Cosmos\Gov\V1beta1\DepositParams $deposit_params
      *           params defines all the paramaters of related to deposit.
@@ -81,14 +81,14 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Genesis::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * starting_proposal_id is the ID of the starting proposal.
      *
-     * Generated from protobuf field <code>uint64 starting_proposal_id = 1 [json_name = "startingProposalId"];</code>
+     * Generated from protobuf field <code>uint64 starting_proposal_id = 1 [json_name = "startingProposalId", (.gogoproto.moretags) = "yaml:\"starting_proposal_id\""];</code>
      * @return int|string
      */
     public function getStartingProposalId()
@@ -99,7 +99,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * starting_proposal_id is the ID of the starting proposal.
      *
-     * Generated from protobuf field <code>uint64 starting_proposal_id = 1 [json_name = "startingProposalId"];</code>
+     * Generated from protobuf field <code>uint64 starting_proposal_id = 1 [json_name = "startingProposalId", (.gogoproto.moretags) = "yaml:\"starting_proposal_id\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -126,7 +126,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * deposits defines all the deposits present at genesis.
      *
      * Generated from protobuf field <code>repeated .cosmos.gov.v1beta1.Deposit deposits = 2 [json_name = "deposits", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "Deposits"];</code>
-     * @param \Cosmos\Gov\V1beta1\Deposit[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Gov\V1beta1\Deposit>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setDeposits($var)
@@ -152,7 +152,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * votes defines all the votes present at genesis.
      *
      * Generated from protobuf field <code>repeated .cosmos.gov.v1beta1.Vote votes = 3 [json_name = "votes", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "Votes"];</code>
-     * @param \Cosmos\Gov\V1beta1\Vote[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Gov\V1beta1\Vote>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setVotes($var)
@@ -178,7 +178,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * proposals defines all the proposals present at genesis.
      *
      * Generated from protobuf field <code>repeated .cosmos.gov.v1beta1.Proposal proposals = 4 [json_name = "proposals", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "Proposals"];</code>
-     * @param \Cosmos\Gov\V1beta1\Proposal[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Gov\V1beta1\Proposal>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setProposals($var)
@@ -192,7 +192,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the paramaters of related to deposit.
      *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.DepositParams deposit_params = 5 [json_name = "depositParams", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.DepositParams deposit_params = 5 [json_name = "depositParams", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"deposit_params\""];</code>
      * @return \Cosmos\Gov\V1beta1\DepositParams|null
      */
     public function getDepositParams()
@@ -213,7 +213,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the paramaters of related to deposit.
      *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.DepositParams deposit_params = 5 [json_name = "depositParams", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.DepositParams deposit_params = 5 [json_name = "depositParams", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"deposit_params\""];</code>
      * @param \Cosmos\Gov\V1beta1\DepositParams $var
      * @return $this
      */
@@ -228,7 +228,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the paramaters of related to voting.
      *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.VotingParams voting_params = 6 [json_name = "votingParams", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.VotingParams voting_params = 6 [json_name = "votingParams", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"voting_params\""];</code>
      * @return \Cosmos\Gov\V1beta1\VotingParams|null
      */
     public function getVotingParams()
@@ -249,7 +249,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the paramaters of related to voting.
      *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.VotingParams voting_params = 6 [json_name = "votingParams", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.VotingParams voting_params = 6 [json_name = "votingParams", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"voting_params\""];</code>
      * @param \Cosmos\Gov\V1beta1\VotingParams $var
      * @return $this
      */
@@ -264,7 +264,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the paramaters of related to tally.
      *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyParams tally_params = 7 [json_name = "tallyParams", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyParams tally_params = 7 [json_name = "tallyParams", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"tally_params\""];</code>
      * @return \Cosmos\Gov\V1beta1\TallyParams|null
      */
     public function getTallyParams()
@@ -285,7 +285,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the paramaters of related to tally.
      *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyParams tally_params = 7 [json_name = "tallyParams", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyParams tally_params = 7 [json_name = "tallyParams", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"tally_params\""];</code>
      * @param \Cosmos\Gov\V1beta1\TallyParams $var
      * @return $this
      */

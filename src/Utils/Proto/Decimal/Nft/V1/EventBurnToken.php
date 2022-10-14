@@ -44,11 +44,11 @@ class EventBurnToken extends \Google\Protobuf\Internal\Message
      *     @type string $id
      *     @type string $return
      *           coin that was returned in total per transaction for all NFT sub-tokens
-     *     @type int[]|\Google\Protobuf\Internal\RepeatedField $sub_token_ids
+     *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $sub_token_ids
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Events::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 
@@ -133,7 +133,7 @@ class EventBurnToken extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated uint32 sub_token_ids = 4 [json_name = "subTokenIds", (.gogoproto.customname) = "SubTokenIDs"];</code>
-     * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<int>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSubTokenIds($var)

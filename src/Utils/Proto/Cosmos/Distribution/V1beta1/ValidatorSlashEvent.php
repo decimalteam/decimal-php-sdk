@@ -19,11 +19,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class ValidatorSlashEvent extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 validator_period = 1 [json_name = "validatorPeriod"];</code>
+     * Generated from protobuf field <code>uint64 validator_period = 1 [json_name = "validatorPeriod", (.gogoproto.moretags) = "yaml:\"validator_period\""];</code>
      */
     protected $validator_period = 0;
     /**
-     * Generated from protobuf field <code>string fraction = 2 [json_name = "fraction", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string fraction = 2 [json_name = "fraction", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      */
     protected $fraction = '';
 
@@ -38,12 +38,12 @@ class ValidatorSlashEvent extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Distribution::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Distribution::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint64 validator_period = 1 [json_name = "validatorPeriod"];</code>
+     * Generated from protobuf field <code>uint64 validator_period = 1 [json_name = "validatorPeriod", (.gogoproto.moretags) = "yaml:\"validator_period\""];</code>
      * @return int|string
      */
     public function getValidatorPeriod()
@@ -52,7 +52,7 @@ class ValidatorSlashEvent extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 validator_period = 1 [json_name = "validatorPeriod"];</code>
+     * Generated from protobuf field <code>uint64 validator_period = 1 [json_name = "validatorPeriod", (.gogoproto.moretags) = "yaml:\"validator_period\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -65,7 +65,7 @@ class ValidatorSlashEvent extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string fraction = 2 [json_name = "fraction", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string fraction = 2 [json_name = "fraction", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      * @return string
      */
     public function getFraction()
@@ -74,7 +74,7 @@ class ValidatorSlashEvent extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string fraction = 2 [json_name = "fraction", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string fraction = 2 [json_name = "fraction", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
      * @param string $var
      * @return $this
      */

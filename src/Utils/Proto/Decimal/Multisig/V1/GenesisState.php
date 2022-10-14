@@ -18,19 +18,19 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * wallets defines all registered multisig wallets.
      *
-     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Wallet wallets = 2 [json_name = "wallets", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Wallet wallets = 1 [json_name = "wallets", (.gogoproto.nullable) = false];</code>
      */
     private $wallets;
     /**
      * transactions defines all registered multisig transactions.
      *
-     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 3 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 2 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
      */
     private $transactions;
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.multisig.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.multisig.v1.Params params = 3 [json_name = "params", (.gogoproto.nullable) = false];</code>
      */
     protected $params = null;
 
@@ -40,23 +40,23 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Multisig\V1\Wallet[]|\Google\Protobuf\Internal\RepeatedField $wallets
+     *     @type array<\Decimal\Multisig\V1\Wallet>|\Google\Protobuf\Internal\RepeatedField $wallets
      *           wallets defines all registered multisig wallets.
-     *     @type \Decimal\Multisig\V1\Transaction[]|\Google\Protobuf\Internal\RepeatedField $transactions
+     *     @type array<\Decimal\Multisig\V1\Transaction>|\Google\Protobuf\Internal\RepeatedField $transactions
      *           transactions defines all registered multisig transactions.
      *     @type \Decimal\Multisig\V1\Params $params
      *           params defines all the module's parameters.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Multisig\V1\Genesis::initOnce();
+        \Decimal\Multisig\V1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * wallets defines all registered multisig wallets.
      *
-     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Wallet wallets = 2 [json_name = "wallets", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Wallet wallets = 1 [json_name = "wallets", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getWallets()
@@ -67,8 +67,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * wallets defines all registered multisig wallets.
      *
-     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Wallet wallets = 2 [json_name = "wallets", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Multisig\V1\Wallet[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Wallet wallets = 1 [json_name = "wallets", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Multisig\V1\Wallet>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setWallets($var)
@@ -82,7 +82,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * transactions defines all registered multisig transactions.
      *
-     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 3 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 2 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getTransactions()
@@ -93,8 +93,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * transactions defines all registered multisig transactions.
      *
-     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 3 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Multisig\V1\Transaction[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 2 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Multisig\V1\Transaction>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTransactions($var)
@@ -108,7 +108,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.multisig.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.multisig.v1.Params params = 3 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @return \Decimal\Multisig\V1\Params|null
      */
     public function getParams()
@@ -129,7 +129,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.multisig.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.multisig.v1.Params params = 3 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @param \Decimal\Multisig\V1\Params $var
      * @return $this
      */

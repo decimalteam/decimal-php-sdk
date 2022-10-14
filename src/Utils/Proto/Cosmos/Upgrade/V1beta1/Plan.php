@@ -55,7 +55,7 @@ class Plan extends \Google\Protobuf\Internal\Message
      * moved to the IBC module in the sub module 02-client.
      * If this field is not empty, an error will be thrown.
      *
-     * Generated from protobuf field <code>.google.protobuf.Any upgraded_client_state = 5 [json_name = "upgradedClientState", deprecated = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any upgraded_client_state = 5 [json_name = "upgradedClientState", deprecated = true, (.gogoproto.moretags) = "yaml:\"upgraded_client_state\""];</code>
      * @deprecated
      */
     protected $upgraded_client_state = null;
@@ -91,7 +91,7 @@ class Plan extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Upgrade\V1Beta1\Upgrade::initOnce();
+        \Cosmos\Upgrade\V1beta1\GPBMetadata\Upgrade::initOnce();
         parent::__construct($data);
     }
 
@@ -240,7 +240,7 @@ class Plan extends \Google\Protobuf\Internal\Message
      * moved to the IBC module in the sub module 02-client.
      * If this field is not empty, an error will be thrown.
      *
-     * Generated from protobuf field <code>.google.protobuf.Any upgraded_client_state = 5 [json_name = "upgradedClientState", deprecated = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any upgraded_client_state = 5 [json_name = "upgradedClientState", deprecated = true, (.gogoproto.moretags) = "yaml:\"upgraded_client_state\""];</code>
      * @return \Google\Protobuf\Any|null
      * @deprecated
      */
@@ -267,7 +267,7 @@ class Plan extends \Google\Protobuf\Internal\Message
      * moved to the IBC module in the sub module 02-client.
      * If this field is not empty, an error will be thrown.
      *
-     * Generated from protobuf field <code>.google.protobuf.Any upgraded_client_state = 5 [json_name = "upgradedClientState", deprecated = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any upgraded_client_state = 5 [json_name = "upgradedClientState", deprecated = true, (.gogoproto.moretags) = "yaml:\"upgraded_client_state\""];</code>
      * @param \Google\Protobuf\Any $var
      * @return $this
      * @deprecated

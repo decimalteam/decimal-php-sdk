@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgUnjail extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string validator_addr = 1 [json_name = "validatorAddr", (.gogoproto.jsontag) = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_addr = 1 [json_name = "validatorAddr", (.gogoproto.jsontag) = "address", (.gogoproto.moretags) = "yaml:\"address\""];</code>
      */
     protected $validator_addr = '';
 
@@ -30,12 +30,12 @@ class MsgUnjail extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Tx::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string validator_addr = 1 [json_name = "validatorAddr", (.gogoproto.jsontag) = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_addr = 1 [json_name = "validatorAddr", (.gogoproto.jsontag) = "address", (.gogoproto.moretags) = "yaml:\"address\""];</code>
      * @return string
      */
     public function getValidatorAddr()
@@ -44,7 +44,7 @@ class MsgUnjail extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_addr = 1 [json_name = "validatorAddr", (.gogoproto.jsontag) = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_addr = 1 [json_name = "validatorAddr", (.gogoproto.jsontag) = "address", (.gogoproto.moretags) = "yaml:\"address\""];</code>
      * @param string $var
      * @return $this
      */

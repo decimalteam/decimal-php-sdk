@@ -8,7 +8,6 @@ use UnexpectedValueException;
 
 /**
  * AuthorizationType defines the type of staking module authorization type
- * Since: cosmos-sdk 0.43
  *
  * Protobuf type <code>cosmos.staking.v1beta1.AuthorizationType</code>
  */

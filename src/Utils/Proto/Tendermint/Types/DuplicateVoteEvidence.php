@@ -50,7 +50,7 @@ class DuplicateVoteEvidence extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Evidence::initOnce();
+        \Tendermint\Types\GPBMetadata\Evidence::initOnce();
         parent::__construct($data);
     }
 

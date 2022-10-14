@@ -19,19 +19,19 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
     /**
      * delegator_addr defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr"];</code>
      */
     protected $delegator_addr = '';
     /**
      * src_validator_addr defines the validator address to redelegate from.
      *
-     * Generated from protobuf field <code>string src_validator_addr = 2 [json_name = "srcValidatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string src_validator_addr = 2 [json_name = "srcValidatorAddr"];</code>
      */
     protected $src_validator_addr = '';
     /**
      * dst_validator_addr defines the validator address to redelegate to.
      *
-     * Generated from protobuf field <code>string dst_validator_addr = 3 [json_name = "dstValidatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string dst_validator_addr = 3 [json_name = "dstValidatorAddr"];</code>
      */
     protected $dst_validator_addr = '';
     /**
@@ -58,14 +58,14 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Query::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
     /**
      * delegator_addr defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr"];</code>
      * @return string
      */
     public function getDelegatorAddr()
@@ -76,7 +76,7 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
     /**
      * delegator_addr defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_addr = 1 [json_name = "delegatorAddr"];</code>
      * @param string $var
      * @return $this
      */
@@ -91,7 +91,7 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
     /**
      * src_validator_addr defines the validator address to redelegate from.
      *
-     * Generated from protobuf field <code>string src_validator_addr = 2 [json_name = "srcValidatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string src_validator_addr = 2 [json_name = "srcValidatorAddr"];</code>
      * @return string
      */
     public function getSrcValidatorAddr()
@@ -102,7 +102,7 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
     /**
      * src_validator_addr defines the validator address to redelegate from.
      *
-     * Generated from protobuf field <code>string src_validator_addr = 2 [json_name = "srcValidatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string src_validator_addr = 2 [json_name = "srcValidatorAddr"];</code>
      * @param string $var
      * @return $this
      */
@@ -117,7 +117,7 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
     /**
      * dst_validator_addr defines the validator address to redelegate to.
      *
-     * Generated from protobuf field <code>string dst_validator_addr = 3 [json_name = "dstValidatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string dst_validator_addr = 3 [json_name = "dstValidatorAddr"];</code>
      * @return string
      */
     public function getDstValidatorAddr()
@@ -128,7 +128,7 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
     /**
      * dst_validator_addr defines the validator address to redelegate to.
      *
-     * Generated from protobuf field <code>string dst_validator_addr = 3 [json_name = "dstValidatorAddr", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string dst_validator_addr = 3 [json_name = "dstValidatorAddr"];</code>
      * @param string $var
      * @return $this
      */

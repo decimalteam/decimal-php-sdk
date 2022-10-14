@@ -52,11 +52,11 @@ class EventUpdateReserve extends \Google\Protobuf\Internal\Message
      *           coin that defines new reserve for all updating NFT-subtokens
      *     @type string $refill
      *           coin that was added in total per transaction for all NFT sub-tokens
-     *     @type int[]|\Google\Protobuf\Internal\RepeatedField $sub_token_ids
+     *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $sub_token_ids
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Events::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 
@@ -167,7 +167,7 @@ class EventUpdateReserve extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated uint32 sub_token_ids = 5 [json_name = "subTokenIds", (.gogoproto.customname) = "SubTokenIDs"];</code>
-     * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<int>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSubTokenIds($var)

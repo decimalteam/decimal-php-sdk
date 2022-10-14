@@ -25,7 +25,7 @@ class Params extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Legacy\V1\Params::initOnce();
+        \Decimal\Legacy\V1\GPBMetadata\Params::initOnce();
         parent::__construct($data);
     }
 

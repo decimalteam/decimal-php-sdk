@@ -22,9 +22,9 @@ class QueryVoteRequest extends \Google\Protobuf\Internal\Message
      */
     protected $proposal_id = 0;
     /**
-     * voter defines the voter address for the proposals.
+     * voter defines the oter address for the proposals.
      *
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      */
     protected $voter = '';
 
@@ -37,11 +37,11 @@ class QueryVoteRequest extends \Google\Protobuf\Internal\Message
      *     @type int|string $proposal_id
      *           proposal_id defines the unique id of the proposal.
      *     @type string $voter
-     *           voter defines the voter address for the proposals.
+     *           voter defines the oter address for the proposals.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Query::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -72,9 +72,9 @@ class QueryVoteRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * voter defines the voter address for the proposals.
+     * voter defines the oter address for the proposals.
      *
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @return string
      */
     public function getVoter()
@@ -83,9 +83,9 @@ class QueryVoteRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * voter defines the voter address for the proposals.
+     * voter defines the oter address for the proposals.
      *
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @param string $var
      * @return $this
      */

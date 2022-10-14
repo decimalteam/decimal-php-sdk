@@ -37,13 +37,13 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      *
      *     @type int|string $index
      *           index is the capability global index.
-     *     @type \Cosmos\Capability\V1beta1\GenesisOwners[]|\Google\Protobuf\Internal\RepeatedField $owners
+     *     @type array<\Cosmos\Capability\V1beta1\GenesisOwners>|\Google\Protobuf\Internal\RepeatedField $owners
      *           owners represents a map from index to owners of the capability index
      *           index key is string to allow amino marshalling.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Capability\V1Beta1\Genesis::initOnce();
+        \Cosmos\Capability\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
@@ -90,7 +90,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * index key is string to allow amino marshalling.
      *
      * Generated from protobuf field <code>repeated .cosmos.capability.v1beta1.GenesisOwners owners = 2 [json_name = "owners", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Capability\V1beta1\GenesisOwners[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Capability\V1beta1\GenesisOwners>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOwners($var)

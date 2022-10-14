@@ -32,13 +32,13 @@ class QueryDepositsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Gov\V1beta1\Deposit[]|\Google\Protobuf\Internal\RepeatedField $deposits
+     *     @type array<\Cosmos\Gov\V1beta1\Deposit>|\Google\Protobuf\Internal\RepeatedField $deposits
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Query::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -53,7 +53,7 @@ class QueryDepositsResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.gov.v1beta1.Deposit deposits = 1 [json_name = "deposits", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Gov\V1beta1\Deposit[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Gov\V1beta1\Deposit>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setDeposits($var)

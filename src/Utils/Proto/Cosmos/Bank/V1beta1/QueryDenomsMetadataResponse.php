@@ -35,14 +35,14 @@ class QueryDenomsMetadataResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Bank\V1beta1\Metadata[]|\Google\Protobuf\Internal\RepeatedField $metadatas
+     *     @type array<\Cosmos\Bank\V1beta1\Metadata>|\Google\Protobuf\Internal\RepeatedField $metadatas
      *           metadata provides the client information for all the registered tokens.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Query::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -61,7 +61,7 @@ class QueryDenomsMetadataResponse extends \Google\Protobuf\Internal\Message
      * metadata provides the client information for all the registered tokens.
      *
      * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.Metadata metadatas = 1 [json_name = "metadatas", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Bank\V1beta1\Metadata[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Bank\V1beta1\Metadata>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setMetadatas($var)

@@ -18,39 +18,33 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_time is the time duration of unbonding.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration unbonding_time = 1 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration unbonding_time = 1 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"unbonding_time\"", (.gogoproto.stdduration) = true];</code>
      */
     protected $unbonding_time = null;
     /**
      * max_validators is the maximum number of validators.
      *
-     * Generated from protobuf field <code>uint32 max_validators = 2 [json_name = "maxValidators"];</code>
+     * Generated from protobuf field <code>uint32 max_validators = 2 [json_name = "maxValidators", (.gogoproto.moretags) = "yaml:\"max_validators\""];</code>
      */
     protected $max_validators = 0;
     /**
      * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
      *
-     * Generated from protobuf field <code>uint32 max_entries = 3 [json_name = "maxEntries"];</code>
+     * Generated from protobuf field <code>uint32 max_entries = 3 [json_name = "maxEntries", (.gogoproto.moretags) = "yaml:\"max_entries\""];</code>
      */
     protected $max_entries = 0;
     /**
      * historical_entries is the number of historical entries to persist.
      *
-     * Generated from protobuf field <code>uint32 historical_entries = 4 [json_name = "historicalEntries"];</code>
+     * Generated from protobuf field <code>uint32 historical_entries = 4 [json_name = "historicalEntries", (.gogoproto.moretags) = "yaml:\"historical_entries\""];</code>
      */
     protected $historical_entries = 0;
     /**
      * bond_denom defines the bondable coin denomination.
      *
-     * Generated from protobuf field <code>string bond_denom = 5 [json_name = "bondDenom"];</code>
+     * Generated from protobuf field <code>string bond_denom = 5 [json_name = "bondDenom", (.gogoproto.moretags) = "yaml:\"bond_denom\""];</code>
      */
     protected $bond_denom = '';
-    /**
-     * min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators
-     *
-     * Generated from protobuf field <code>string min_commission_rate = 6 [json_name = "minCommissionRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"min_commission_rate\""];</code>
-     */
-    protected $min_commission_rate = '';
 
     /**
      * Constructor.
@@ -68,19 +62,17 @@ class Params extends \Google\Protobuf\Internal\Message
      *           historical_entries is the number of historical entries to persist.
      *     @type string $bond_denom
      *           bond_denom defines the bondable coin denomination.
-     *     @type string $min_commission_rate
-     *           min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
     /**
      * unbonding_time is the time duration of unbonding.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration unbonding_time = 1 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration unbonding_time = 1 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"unbonding_time\"", (.gogoproto.stdduration) = true];</code>
      * @return \Google\Protobuf\Duration|null
      */
     public function getUnbondingTime()
@@ -101,7 +93,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * unbonding_time is the time duration of unbonding.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration unbonding_time = 1 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration unbonding_time = 1 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"unbonding_time\"", (.gogoproto.stdduration) = true];</code>
      * @param \Google\Protobuf\Duration $var
      * @return $this
      */
@@ -116,7 +108,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * max_validators is the maximum number of validators.
      *
-     * Generated from protobuf field <code>uint32 max_validators = 2 [json_name = "maxValidators"];</code>
+     * Generated from protobuf field <code>uint32 max_validators = 2 [json_name = "maxValidators", (.gogoproto.moretags) = "yaml:\"max_validators\""];</code>
      * @return int
      */
     public function getMaxValidators()
@@ -127,7 +119,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * max_validators is the maximum number of validators.
      *
-     * Generated from protobuf field <code>uint32 max_validators = 2 [json_name = "maxValidators"];</code>
+     * Generated from protobuf field <code>uint32 max_validators = 2 [json_name = "maxValidators", (.gogoproto.moretags) = "yaml:\"max_validators\""];</code>
      * @param int $var
      * @return $this
      */
@@ -142,7 +134,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
      *
-     * Generated from protobuf field <code>uint32 max_entries = 3 [json_name = "maxEntries"];</code>
+     * Generated from protobuf field <code>uint32 max_entries = 3 [json_name = "maxEntries", (.gogoproto.moretags) = "yaml:\"max_entries\""];</code>
      * @return int
      */
     public function getMaxEntries()
@@ -153,7 +145,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
      *
-     * Generated from protobuf field <code>uint32 max_entries = 3 [json_name = "maxEntries"];</code>
+     * Generated from protobuf field <code>uint32 max_entries = 3 [json_name = "maxEntries", (.gogoproto.moretags) = "yaml:\"max_entries\""];</code>
      * @param int $var
      * @return $this
      */
@@ -168,7 +160,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * historical_entries is the number of historical entries to persist.
      *
-     * Generated from protobuf field <code>uint32 historical_entries = 4 [json_name = "historicalEntries"];</code>
+     * Generated from protobuf field <code>uint32 historical_entries = 4 [json_name = "historicalEntries", (.gogoproto.moretags) = "yaml:\"historical_entries\""];</code>
      * @return int
      */
     public function getHistoricalEntries()
@@ -179,7 +171,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * historical_entries is the number of historical entries to persist.
      *
-     * Generated from protobuf field <code>uint32 historical_entries = 4 [json_name = "historicalEntries"];</code>
+     * Generated from protobuf field <code>uint32 historical_entries = 4 [json_name = "historicalEntries", (.gogoproto.moretags) = "yaml:\"historical_entries\""];</code>
      * @param int $var
      * @return $this
      */
@@ -194,7 +186,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * bond_denom defines the bondable coin denomination.
      *
-     * Generated from protobuf field <code>string bond_denom = 5 [json_name = "bondDenom"];</code>
+     * Generated from protobuf field <code>string bond_denom = 5 [json_name = "bondDenom", (.gogoproto.moretags) = "yaml:\"bond_denom\""];</code>
      * @return string
      */
     public function getBondDenom()
@@ -205,7 +197,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * bond_denom defines the bondable coin denomination.
      *
-     * Generated from protobuf field <code>string bond_denom = 5 [json_name = "bondDenom"];</code>
+     * Generated from protobuf field <code>string bond_denom = 5 [json_name = "bondDenom", (.gogoproto.moretags) = "yaml:\"bond_denom\""];</code>
      * @param string $var
      * @return $this
      */
@@ -213,32 +205,6 @@ class Params extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->bond_denom = $var;
-
-        return $this;
-    }
-
-    /**
-     * min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators
-     *
-     * Generated from protobuf field <code>string min_commission_rate = 6 [json_name = "minCommissionRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"min_commission_rate\""];</code>
-     * @return string
-     */
-    public function getMinCommissionRate()
-    {
-        return $this->min_commission_rate;
-    }
-
-    /**
-     * min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators
-     *
-     * Generated from protobuf field <code>string min_commission_rate = 6 [json_name = "minCommissionRate", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"min_commission_rate\""];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setMinCommissionRate($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->min_commission_rate = $var;
 
         return $this;
     }

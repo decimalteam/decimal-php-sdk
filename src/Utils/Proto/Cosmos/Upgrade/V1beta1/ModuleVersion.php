@@ -10,7 +10,6 @@ use Google\Protobuf\Internal\GPBUtil;
 
 /**
  * ModuleVersion specifies a module and its consensus version.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.upgrade.v1beta1.ModuleVersion</code>
  */
@@ -42,7 +41,7 @@ class ModuleVersion extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Upgrade\V1Beta1\Upgrade::initOnce();
+        \Cosmos\Upgrade\V1beta1\GPBMetadata\Upgrade::initOnce();
         parent::__construct($data);
     }
 

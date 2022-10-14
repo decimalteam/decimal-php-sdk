@@ -52,12 +52,12 @@ class Collection extends \Google\Protobuf\Internal\Message
      *           denom defines the NFT collection name.
      *     @type int $supply
      *           supply defines total count of NFT tokens containing in the collection.
-     *     @type \Decimal\Nft\V1\Token[]|\Google\Protobuf\Internal\RepeatedField $tokens
+     *     @type array<\Decimal\Nft\V1\Token>|\Google\Protobuf\Internal\RepeatedField $tokens
      *           tokens defines the list of NFT tokens containing in the NFT collection.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Nft::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Nft::initOnce();
         parent::__construct($data);
     }
 
@@ -154,7 +154,7 @@ class Collection extends \Google\Protobuf\Internal\Message
      * tokens defines the list of NFT tokens containing in the NFT collection.
      *
      * Generated from protobuf field <code>repeated .decimal.nft.v1.Token tokens = 4 [json_name = "tokens", (.gogoproto.castrepeated) = "Tokens"];</code>
-     * @param \Decimal\Nft\V1\Token[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Nft\V1\Token>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTokens($var)

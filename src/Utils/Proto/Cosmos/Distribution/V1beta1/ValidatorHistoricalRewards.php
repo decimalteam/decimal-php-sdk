@@ -27,11 +27,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class ValidatorHistoricalRewards extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin cumulative_reward_ratio = 1 [json_name = "cumulativeRewardRatio", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin cumulative_reward_ratio = 1 [json_name = "cumulativeRewardRatio", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"cumulative_reward_ratio\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
      */
     private $cumulative_reward_ratio;
     /**
-     * Generated from protobuf field <code>uint32 reference_count = 2 [json_name = "referenceCount"];</code>
+     * Generated from protobuf field <code>uint32 reference_count = 2 [json_name = "referenceCount", (.gogoproto.moretags) = "yaml:\"reference_count\""];</code>
      */
     protected $reference_count = 0;
 
@@ -41,17 +41,17 @@ class ValidatorHistoricalRewards extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\V1beta1\DecCoin[]|\Google\Protobuf\Internal\RepeatedField $cumulative_reward_ratio
+     *     @type array<\Cosmos\Base\V1beta1\DecCoin>|\Google\Protobuf\Internal\RepeatedField $cumulative_reward_ratio
      *     @type int $reference_count
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Distribution::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Distribution::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin cumulative_reward_ratio = 1 [json_name = "cumulativeRewardRatio", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin cumulative_reward_ratio = 1 [json_name = "cumulativeRewardRatio", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"cumulative_reward_ratio\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getCumulativeRewardRatio()
@@ -60,8 +60,8 @@ class ValidatorHistoricalRewards extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin cumulative_reward_ratio = 1 [json_name = "cumulativeRewardRatio", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
-     * @param \Cosmos\Base\V1beta1\DecCoin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin cumulative_reward_ratio = 1 [json_name = "cumulativeRewardRatio", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"cumulative_reward_ratio\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\DecCoin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCumulativeRewardRatio($var)
@@ -73,7 +73,7 @@ class ValidatorHistoricalRewards extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint32 reference_count = 2 [json_name = "referenceCount"];</code>
+     * Generated from protobuf field <code>uint32 reference_count = 2 [json_name = "referenceCount", (.gogoproto.moretags) = "yaml:\"reference_count\""];</code>
      * @return int
      */
     public function getReferenceCount()
@@ -82,7 +82,7 @@ class ValidatorHistoricalRewards extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint32 reference_count = 2 [json_name = "referenceCount"];</code>
+     * Generated from protobuf field <code>uint32 reference_count = 2 [json_name = "referenceCount", (.gogoproto.moretags) = "yaml:\"reference_count\""];</code>
      * @param int $var
      * @return $this
      */

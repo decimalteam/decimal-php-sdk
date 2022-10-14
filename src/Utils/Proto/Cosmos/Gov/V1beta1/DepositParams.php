@@ -18,14 +18,14 @@ class DepositParams extends \Google\Protobuf\Internal\Message
     /**
      *  Minimum deposit for a proposal to enter voting period.
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin min_deposit = 1 [json_name = "minDeposit", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "min_deposit,omitempty", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin min_deposit = 1 [json_name = "minDeposit", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "min_deposit,omitempty", (.gogoproto.moretags) = "yaml:\"min_deposit\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
     private $min_deposit;
     /**
      *  Maximum period for Atom holders to deposit on a proposal. Initial value: 2
      *  months.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration max_deposit_period = 2 [json_name = "maxDepositPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "max_deposit_period,omitempty", (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration max_deposit_period = 2 [json_name = "maxDepositPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "max_deposit_period,omitempty", (.gogoproto.moretags) = "yaml:\"max_deposit_period\"", (.gogoproto.stdduration) = true];</code>
      */
     protected $max_deposit_period = null;
 
@@ -35,7 +35,7 @@ class DepositParams extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $min_deposit
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $min_deposit
      *            Minimum deposit for a proposal to enter voting period.
      *     @type \Google\Protobuf\Duration $max_deposit_period
      *            Maximum period for Atom holders to deposit on a proposal. Initial value: 2
@@ -43,14 +43,14 @@ class DepositParams extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Gov::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Gov::initOnce();
         parent::__construct($data);
     }
 
     /**
      *  Minimum deposit for a proposal to enter voting period.
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin min_deposit = 1 [json_name = "minDeposit", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "min_deposit,omitempty", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin min_deposit = 1 [json_name = "minDeposit", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "min_deposit,omitempty", (.gogoproto.moretags) = "yaml:\"min_deposit\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getMinDeposit()
@@ -61,8 +61,8 @@ class DepositParams extends \Google\Protobuf\Internal\Message
     /**
      *  Minimum deposit for a proposal to enter voting period.
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin min_deposit = 1 [json_name = "minDeposit", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "min_deposit,omitempty", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin min_deposit = 1 [json_name = "minDeposit", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "min_deposit,omitempty", (.gogoproto.moretags) = "yaml:\"min_deposit\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setMinDeposit($var)
@@ -77,7 +77,7 @@ class DepositParams extends \Google\Protobuf\Internal\Message
      *  Maximum period for Atom holders to deposit on a proposal. Initial value: 2
      *  months.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration max_deposit_period = 2 [json_name = "maxDepositPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "max_deposit_period,omitempty", (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration max_deposit_period = 2 [json_name = "maxDepositPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "max_deposit_period,omitempty", (.gogoproto.moretags) = "yaml:\"max_deposit_period\"", (.gogoproto.stdduration) = true];</code>
      * @return \Google\Protobuf\Duration|null
      */
     public function getMaxDepositPeriod()
@@ -99,7 +99,7 @@ class DepositParams extends \Google\Protobuf\Internal\Message
      *  Maximum period for Atom holders to deposit on a proposal. Initial value: 2
      *  months.
      *
-     * Generated from protobuf field <code>.google.protobuf.Duration max_deposit_period = 2 [json_name = "maxDepositPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "max_deposit_period,omitempty", (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration max_deposit_period = 2 [json_name = "maxDepositPeriod", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "max_deposit_period,omitempty", (.gogoproto.moretags) = "yaml:\"max_deposit_period\"", (.gogoproto.stdduration) = true];</code>
      * @param \Google\Protobuf\Duration $var
      * @return $this
      */

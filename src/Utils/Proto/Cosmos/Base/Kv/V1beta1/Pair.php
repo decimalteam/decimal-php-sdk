@@ -35,7 +35,7 @@ class Pair extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Kv\V1Beta1\Kv::initOnce();
+        \Cosmos\Base\Kv\V1beta1\GPBMetadata\Kv::initOnce();
         parent::__construct($data);
     }
 

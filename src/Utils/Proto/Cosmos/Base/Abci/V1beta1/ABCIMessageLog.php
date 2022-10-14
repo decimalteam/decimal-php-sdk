@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class ABCIMessageLog extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint32 msg_index = 1 [json_name = "msgIndex", (.gogoproto.jsontag) = "msg_index"];</code>
+     * Generated from protobuf field <code>uint32 msg_index = 1 [json_name = "msgIndex"];</code>
      */
     protected $msg_index = 0;
     /**
@@ -39,18 +39,18 @@ class ABCIMessageLog extends \Google\Protobuf\Internal\Message
      *
      *     @type int $msg_index
      *     @type string $log
-     *     @type \Cosmos\Base\Abci\V1beta1\StringEvent[]|\Google\Protobuf\Internal\RepeatedField $events
+     *     @type array<\Cosmos\Base\Abci\V1beta1\StringEvent>|\Google\Protobuf\Internal\RepeatedField $events
      *           Events contains a slice of Event objects that were emitted during some
      *           execution.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Abci\V1Beta1\Abci::initOnce();
+        \Cosmos\Base\Abci\V1beta1\GPBMetadata\Abci::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint32 msg_index = 1 [json_name = "msgIndex", (.gogoproto.jsontag) = "msg_index"];</code>
+     * Generated from protobuf field <code>uint32 msg_index = 1 [json_name = "msgIndex"];</code>
      * @return int
      */
     public function getMsgIndex()
@@ -59,7 +59,7 @@ class ABCIMessageLog extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint32 msg_index = 1 [json_name = "msgIndex", (.gogoproto.jsontag) = "msg_index"];</code>
+     * Generated from protobuf field <code>uint32 msg_index = 1 [json_name = "msgIndex"];</code>
      * @param int $var
      * @return $this
      */
@@ -110,7 +110,7 @@ class ABCIMessageLog extends \Google\Protobuf\Internal\Message
      * execution.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.abci.v1beta1.StringEvent events = 3 [json_name = "events", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "StringEvents"];</code>
-     * @param \Cosmos\Base\Abci\V1beta1\StringEvent[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Abci\V1beta1\StringEvent>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEvents($var)

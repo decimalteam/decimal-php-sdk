@@ -21,15 +21,15 @@ use Google\Protobuf\Internal\GPBUtil;
 class DelegatorStartingInfo extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 previous_period = 1 [json_name = "previousPeriod"];</code>
+     * Generated from protobuf field <code>uint64 previous_period = 1 [json_name = "previousPeriod", (.gogoproto.moretags) = "yaml:\"previous_period\""];</code>
      */
     protected $previous_period = 0;
     /**
-     * Generated from protobuf field <code>string stake = 2 [json_name = "stake", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string stake = 2 [json_name = "stake", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"stake\""];</code>
      */
     protected $stake = '';
     /**
-     * Generated from protobuf field <code>uint64 height = 3 [json_name = "height", (.gogoproto.jsontag) = "creation_height"];</code>
+     * Generated from protobuf field <code>uint64 height = 3 [json_name = "height", (.gogoproto.jsontag) = "creation_height", (.gogoproto.moretags) = "yaml:\"creation_height\""];</code>
      */
     protected $height = 0;
 
@@ -45,12 +45,12 @@ class DelegatorStartingInfo extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Distribution::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Distribution::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint64 previous_period = 1 [json_name = "previousPeriod"];</code>
+     * Generated from protobuf field <code>uint64 previous_period = 1 [json_name = "previousPeriod", (.gogoproto.moretags) = "yaml:\"previous_period\""];</code>
      * @return int|string
      */
     public function getPreviousPeriod()
@@ -59,7 +59,7 @@ class DelegatorStartingInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 previous_period = 1 [json_name = "previousPeriod"];</code>
+     * Generated from protobuf field <code>uint64 previous_period = 1 [json_name = "previousPeriod", (.gogoproto.moretags) = "yaml:\"previous_period\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -72,7 +72,7 @@ class DelegatorStartingInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string stake = 2 [json_name = "stake", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string stake = 2 [json_name = "stake", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"stake\""];</code>
      * @return string
      */
     public function getStake()
@@ -81,7 +81,7 @@ class DelegatorStartingInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string stake = 2 [json_name = "stake", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string stake = 2 [json_name = "stake", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"stake\""];</code>
      * @param string $var
      * @return $this
      */
@@ -94,7 +94,7 @@ class DelegatorStartingInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 height = 3 [json_name = "height", (.gogoproto.jsontag) = "creation_height"];</code>
+     * Generated from protobuf field <code>uint64 height = 3 [json_name = "height", (.gogoproto.jsontag) = "creation_height", (.gogoproto.moretags) = "yaml:\"creation_height\""];</code>
      * @return int|string
      */
     public function getHeight()
@@ -103,7 +103,7 @@ class DelegatorStartingInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 height = 3 [json_name = "height", (.gogoproto.jsontag) = "creation_height"];</code>
+     * Generated from protobuf field <code>uint64 height = 3 [json_name = "height", (.gogoproto.jsontag) = "creation_height", (.gogoproto.moretags) = "yaml:\"creation_height\""];</code>
      * @param int|string $var
      * @return $this
      */

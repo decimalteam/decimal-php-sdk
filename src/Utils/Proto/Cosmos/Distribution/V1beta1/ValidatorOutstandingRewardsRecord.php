@@ -18,13 +18,13 @@ class ValidatorOutstandingRewardsRecord extends \Google\Protobuf\Internal\Messag
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      */
     protected $validator_address = '';
     /**
      * outstanding_rewards represents the oustanding rewards of a validator.
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin outstanding_rewards = 2 [json_name = "outstandingRewards", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin outstanding_rewards = 2 [json_name = "outstandingRewards", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"outstanding_rewards\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
      */
     private $outstanding_rewards;
 
@@ -36,19 +36,19 @@ class ValidatorOutstandingRewardsRecord extends \Google\Protobuf\Internal\Messag
      *
      *     @type string $validator_address
      *           validator_address is the address of the validator.
-     *     @type \Cosmos\Base\V1beta1\DecCoin[]|\Google\Protobuf\Internal\RepeatedField $outstanding_rewards
+     *     @type array<\Cosmos\Base\V1beta1\DecCoin>|\Google\Protobuf\Internal\RepeatedField $outstanding_rewards
      *           outstanding_rewards represents the oustanding rewards of a validator.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Genesis::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -59,7 +59,7 @@ class ValidatorOutstandingRewardsRecord extends \Google\Protobuf\Internal\Messag
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -74,7 +74,7 @@ class ValidatorOutstandingRewardsRecord extends \Google\Protobuf\Internal\Messag
     /**
      * outstanding_rewards represents the oustanding rewards of a validator.
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin outstanding_rewards = 2 [json_name = "outstandingRewards", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin outstanding_rewards = 2 [json_name = "outstandingRewards", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"outstanding_rewards\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getOutstandingRewards()
@@ -85,8 +85,8 @@ class ValidatorOutstandingRewardsRecord extends \Google\Protobuf\Internal\Messag
     /**
      * outstanding_rewards represents the oustanding rewards of a validator.
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin outstanding_rewards = 2 [json_name = "outstandingRewards", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
-     * @param \Cosmos\Base\V1beta1\DecCoin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.DecCoin outstanding_rewards = 2 [json_name = "outstandingRewards", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"outstanding_rewards\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.DecCoins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\DecCoin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOutstandingRewards($var)

@@ -35,14 +35,14 @@ class QueryCollectionsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Nft\V1\Collection[]|\Google\Protobuf\Internal\RepeatedField $collections
+     *     @type array<\Decimal\Nft\V1\Collection>|\Google\Protobuf\Internal\RepeatedField $collections
      *           collections contains all the queried collections.
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Nft\V1\Query::initOnce();
+        \Decimal\Nft\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -61,7 +61,7 @@ class QueryCollectionsResponse extends \Google\Protobuf\Internal\Message
      * collections contains all the queried collections.
      *
      * Generated from protobuf field <code>repeated .decimal.nft.v1.Collection collections = 1 [json_name = "collections", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Nft\V1\Collection[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Nft\V1\Collection>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCollections($var)

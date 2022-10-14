@@ -28,9 +28,9 @@ class EventCreateTransaction extends \Google\Protobuf\Internal\Message
      */
     protected $receiver = '';
     /**
-     * Generated from protobuf field <code>string coins = 4 [json_name = "coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 4 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
-    protected $coins = '';
+    private $coins;
     /**
      * Generated from protobuf field <code>string transaction = 5 [json_name = "transaction"];</code>
      */
@@ -45,12 +45,12 @@ class EventCreateTransaction extends \Google\Protobuf\Internal\Message
      *     @type string $sender
      *     @type string $wallet
      *     @type string $receiver
-     *     @type string $coins
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $coins
      *     @type string $transaction
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Multisig\V1\Events::initOnce();
+        \Decimal\Multisig\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 
@@ -121,8 +121,8 @@ class EventCreateTransaction extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string coins = 4 [json_name = "coins"];</code>
-     * @return string
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 4 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getCoins()
     {
@@ -130,14 +130,14 @@ class EventCreateTransaction extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string coins = 4 [json_name = "coins"];</code>
-     * @param string $var
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 4 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCoins($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->coins = $var;
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cosmos\Base\V1beta1\Coin::class);
+        $this->coins = $arr;
 
         return $this;
     }

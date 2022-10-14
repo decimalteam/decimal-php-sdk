@@ -28,11 +28,11 @@ class MultiSignature extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $signatures
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $signatures
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Crypto\Multisig\V1Beta1\Multisig::initOnce();
+        \Cosmos\Crypto\Multisig\V1beta1\GPBMetadata\Multisig::initOnce();
         parent::__construct($data);
     }
 
@@ -47,7 +47,7 @@ class MultiSignature extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated bytes signatures = 1 [json_name = "signatures"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSignatures($var)

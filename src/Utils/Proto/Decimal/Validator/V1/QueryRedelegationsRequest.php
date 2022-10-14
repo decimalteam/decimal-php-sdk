@@ -16,29 +16,17 @@ use Google\Protobuf\Internal\GPBUtil;
 class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
 {
     /**
+     * validator defines the validator address to query for.
+     *
+     * Generated from protobuf field <code>string validator = 1 [json_name = "validator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     */
+    protected $validator = '';
+    /**
      * delegator defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator = 1 [json_name = "delegator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator = 2 [json_name = "delegator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      */
     protected $delegator = '';
-    /**
-     * src_validator defines the validator address to redelegate from.
-     *
-     * Generated from protobuf field <code>string src_validator = 2 [json_name = "srcValidator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     */
-    protected $src_validator = '';
-    /**
-     * dst_validator defines the validator address to redelegate to.
-     *
-     * Generated from protobuf field <code>string dst_validator = 3 [json_name = "dstValidator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     */
-    protected $dst_validator = '';
-    /**
-     * pagination defines an optional pagination for the request.
-     *
-     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 4 [json_name = "pagination"];</code>
-     */
-    protected $pagination = null;
 
     /**
      * Constructor.
@@ -46,25 +34,47 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
+     *     @type string $validator
+     *           validator defines the validator address to query for.
      *     @type string $delegator
      *           delegator defines the delegator address to query for.
-     *     @type string $src_validator
-     *           src_validator defines the validator address to redelegate from.
-     *     @type string $dst_validator
-     *           dst_validator defines the validator address to redelegate to.
-     *     @type \Cosmos\Base\Query\V1beta1\PageRequest $pagination
-     *           pagination defines an optional pagination for the request.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Query::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
+    }
+
+    /**
+     * validator defines the validator address to query for.
+     *
+     * Generated from protobuf field <code>string validator = 1 [json_name = "validator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @return string
+     */
+    public function getValidator()
+    {
+        return $this->validator;
+    }
+
+    /**
+     * validator defines the validator address to query for.
+     *
+     * Generated from protobuf field <code>string validator = 1 [json_name = "validator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setValidator($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->validator = $var;
+
+        return $this;
     }
 
     /**
      * delegator defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator = 1 [json_name = "delegator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator = 2 [json_name = "delegator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @return string
      */
     public function getDelegator()
@@ -75,7 +85,7 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
     /**
      * delegator defines the delegator address to query for.
      *
-     * Generated from protobuf field <code>string delegator = 1 [json_name = "delegator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator = 2 [json_name = "delegator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @param string $var
      * @return $this
      */
@@ -83,94 +93,6 @@ class QueryRedelegationsRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->delegator = $var;
-
-        return $this;
-    }
-
-    /**
-     * src_validator defines the validator address to redelegate from.
-     *
-     * Generated from protobuf field <code>string src_validator = 2 [json_name = "srcValidator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @return string
-     */
-    public function getSrcValidator()
-    {
-        return $this->src_validator;
-    }
-
-    /**
-     * src_validator defines the validator address to redelegate from.
-     *
-     * Generated from protobuf field <code>string src_validator = 2 [json_name = "srcValidator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setSrcValidator($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->src_validator = $var;
-
-        return $this;
-    }
-
-    /**
-     * dst_validator defines the validator address to redelegate to.
-     *
-     * Generated from protobuf field <code>string dst_validator = 3 [json_name = "dstValidator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @return string
-     */
-    public function getDstValidator()
-    {
-        return $this->dst_validator;
-    }
-
-    /**
-     * dst_validator defines the validator address to redelegate to.
-     *
-     * Generated from protobuf field <code>string dst_validator = 3 [json_name = "dstValidator", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setDstValidator($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->dst_validator = $var;
-
-        return $this;
-    }
-
-    /**
-     * pagination defines an optional pagination for the request.
-     *
-     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 4 [json_name = "pagination"];</code>
-     * @return \Cosmos\Base\Query\V1beta1\PageRequest|null
-     */
-    public function getPagination()
-    {
-        return $this->pagination;
-    }
-
-    public function hasPagination()
-    {
-        return isset($this->pagination);
-    }
-
-    public function clearPagination()
-    {
-        unset($this->pagination);
-    }
-
-    /**
-     * pagination defines an optional pagination for the request.
-     *
-     * Generated from protobuf field <code>.cosmos.base.query.v1beta1.PageRequest pagination = 4 [json_name = "pagination"];</code>
-     * @param \Cosmos\Base\Query\V1beta1\PageRequest $var
-     * @return $this
-     */
-    public function setPagination($var)
-    {
-        GPBUtil::checkMessage($var, \Cosmos\Base\Query\V1beta1\PageRequest::class);
-        $this->pagination = $var;
 
         return $this;
     }

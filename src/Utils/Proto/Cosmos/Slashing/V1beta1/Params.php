@@ -16,23 +16,23 @@ use Google\Protobuf\Internal\GPBUtil;
 class Params extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>int64 signed_blocks_window = 1 [json_name = "signedBlocksWindow"];</code>
+     * Generated from protobuf field <code>int64 signed_blocks_window = 1 [json_name = "signedBlocksWindow", (.gogoproto.moretags) = "yaml:\"signed_blocks_window\""];</code>
      */
     protected $signed_blocks_window = 0;
     /**
-     * Generated from protobuf field <code>bytes min_signed_per_window = 2 [json_name = "minSignedPerWindow", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * Generated from protobuf field <code>bytes min_signed_per_window = 2 [json_name = "minSignedPerWindow", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"min_signed_per_window\""];</code>
      */
     protected $min_signed_per_window = '';
     /**
-     * Generated from protobuf field <code>.google.protobuf.Duration downtime_jail_duration = 3 [json_name = "downtimeJailDuration", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration downtime_jail_duration = 3 [json_name = "downtimeJailDuration", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"downtime_jail_duration\"", (.gogoproto.stdduration) = true];</code>
      */
     protected $downtime_jail_duration = null;
     /**
-     * Generated from protobuf field <code>bytes slash_fraction_double_sign = 4 [json_name = "slashFractionDoubleSign", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * Generated from protobuf field <code>bytes slash_fraction_double_sign = 4 [json_name = "slashFractionDoubleSign", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"slash_fraction_double_sign\""];</code>
      */
     protected $slash_fraction_double_sign = '';
     /**
-     * Generated from protobuf field <code>bytes slash_fraction_downtime = 5 [json_name = "slashFractionDowntime", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * Generated from protobuf field <code>bytes slash_fraction_downtime = 5 [json_name = "slashFractionDowntime", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"slash_fraction_downtime\""];</code>
      */
     protected $slash_fraction_downtime = '';
 
@@ -50,12 +50,12 @@ class Params extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Slashing\V1Beta1\Slashing::initOnce();
+        \Cosmos\Slashing\V1beta1\GPBMetadata\Slashing::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>int64 signed_blocks_window = 1 [json_name = "signedBlocksWindow"];</code>
+     * Generated from protobuf field <code>int64 signed_blocks_window = 1 [json_name = "signedBlocksWindow", (.gogoproto.moretags) = "yaml:\"signed_blocks_window\""];</code>
      * @return int|string
      */
     public function getSignedBlocksWindow()
@@ -64,7 +64,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 signed_blocks_window = 1 [json_name = "signedBlocksWindow"];</code>
+     * Generated from protobuf field <code>int64 signed_blocks_window = 1 [json_name = "signedBlocksWindow", (.gogoproto.moretags) = "yaml:\"signed_blocks_window\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -77,7 +77,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bytes min_signed_per_window = 2 [json_name = "minSignedPerWindow", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * Generated from protobuf field <code>bytes min_signed_per_window = 2 [json_name = "minSignedPerWindow", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"min_signed_per_window\""];</code>
      * @return string
      */
     public function getMinSignedPerWindow()
@@ -86,7 +86,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bytes min_signed_per_window = 2 [json_name = "minSignedPerWindow", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * Generated from protobuf field <code>bytes min_signed_per_window = 2 [json_name = "minSignedPerWindow", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"min_signed_per_window\""];</code>
      * @param string $var
      * @return $this
      */
@@ -99,7 +99,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Duration downtime_jail_duration = 3 [json_name = "downtimeJailDuration", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration downtime_jail_duration = 3 [json_name = "downtimeJailDuration", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"downtime_jail_duration\"", (.gogoproto.stdduration) = true];</code>
      * @return \Google\Protobuf\Duration|null
      */
     public function getDowntimeJailDuration()
@@ -118,7 +118,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Duration downtime_jail_duration = 3 [json_name = "downtimeJailDuration", (.gogoproto.nullable) = false, (.gogoproto.stdduration) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Duration downtime_jail_duration = 3 [json_name = "downtimeJailDuration", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"downtime_jail_duration\"", (.gogoproto.stdduration) = true];</code>
      * @param \Google\Protobuf\Duration $var
      * @return $this
      */
@@ -131,7 +131,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bytes slash_fraction_double_sign = 4 [json_name = "slashFractionDoubleSign", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * Generated from protobuf field <code>bytes slash_fraction_double_sign = 4 [json_name = "slashFractionDoubleSign", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"slash_fraction_double_sign\""];</code>
      * @return string
      */
     public function getSlashFractionDoubleSign()
@@ -140,7 +140,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bytes slash_fraction_double_sign = 4 [json_name = "slashFractionDoubleSign", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * Generated from protobuf field <code>bytes slash_fraction_double_sign = 4 [json_name = "slashFractionDoubleSign", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"slash_fraction_double_sign\""];</code>
      * @param string $var
      * @return $this
      */
@@ -153,7 +153,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bytes slash_fraction_downtime = 5 [json_name = "slashFractionDowntime", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * Generated from protobuf field <code>bytes slash_fraction_downtime = 5 [json_name = "slashFractionDowntime", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"slash_fraction_downtime\""];</code>
      * @return string
      */
     public function getSlashFractionDowntime()
@@ -162,7 +162,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bytes slash_fraction_downtime = 5 [json_name = "slashFractionDowntime", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];</code>
+     * Generated from protobuf field <code>bytes slash_fraction_downtime = 5 [json_name = "slashFractionDowntime", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"slash_fraction_downtime\""];</code>
      * @param string $var
      * @return $this
      */

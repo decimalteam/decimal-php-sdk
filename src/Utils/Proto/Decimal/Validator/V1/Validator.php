@@ -9,109 +9,86 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Validator defines a validator, together with the total amount of the
- * Validator's bond shares and their exchange rate to coins. Slashing results in
- * a decrease in the exchange rate, allowing correct calculation of future
- * undelegations without iterating over delegators. When coins are delegated to
- * this validator, the validator is credited with a delegation whose number of
- * bond shares is based on the amount of coins delegated divided by the current
- * exchange rate. Voting power can be calculated as total bonded shares
- * multiplied by exchange rate.
+ * Validator defines a validator.
  *
  * Generated from protobuf message <code>decimal.validator.v1.Validator</code>
  */
 class Validator extends \Google\Protobuf\Internal\Message
 {
     /**
-     * operator_address defines the address of the validator's operator; bech encoded in JSON.
+     * operator_address defines the address of the validator's operator (bech encoded in JSON).
      *
      * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      */
     protected $operator_address = '';
     /**
-     * consensus_pubkey is the consensus public key of the validator, as a
-     * Protobuf Any.
+     * reward_address defines the address of the account for withdrawing rewards (bech encoded in JSON).
      *
-     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 2 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
+     * Generated from protobuf field <code>string reward_address = 2 [json_name = "rewardAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     */
+    protected $reward_address = '';
+    /**
+     * consensus_pubkey is the consensus public key of the validator (as google.protobuf.Any).
+     *
+     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 3 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
      */
     protected $consensus_pubkey = null;
     /**
-     * jailed defined whether the validator has been jailed from bonded status or
-     * not.
-     *
-     * Generated from protobuf field <code>bool jailed = 3 [json_name = "jailed"];</code>
-     */
-    protected $jailed = false;
-    /**
-     * status is the validator status (bonded/unbonding/unbonded).
-     *
-     * Generated from protobuf field <code>.decimal.validator.v1.BondStatus status = 4 [json_name = "status"];</code>
-     */
-    protected $status = 0;
-    /**
-     * tokens define the delegated tokens (incl. self-delegation).
-     *
-     * Generated from protobuf field <code>string tokens = 5 [json_name = "tokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     */
-    protected $tokens = '';
-    /**
-     * delegator_shares defines total shares issued to a validator's delegators.
-     *
-     * Generated from protobuf field <code>string delegator_shares = 6 [json_name = "delegatorShares", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
-     */
-    protected $delegator_shares = '';
-    /**
      * description defines the description terms for the validator.
      *
-     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 7 [json_name = "description", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 4 [json_name = "description", (.gogoproto.nullable) = false];</code>
      */
     protected $description = null;
     /**
-     * unbonding_height defines, if unbonding, the height at which this validator
-     * has begun unbonding.
+     * commission defines the commission rate, as a fraction.
      *
-     * Generated from protobuf field <code>int64 unbonding_height = 8 [json_name = "unbondingHeight"];</code>
+     * Generated from protobuf field <code>string commission = 5 [json_name = "commission", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     */
+    protected $commission = '';
+    /**
+     * status is the validator status (bonded/unbonding/unbonded).
+     *
+     * Generated from protobuf field <code>.decimal.validator.v1.BondStatus status = 6 [json_name = "status"];</code>
+     */
+    protected $status = 0;
+    /**
+     * online is true if the validator participates in the consensus (validator is bonded).
+     *
+     * Generated from protobuf field <code>bool online = 7 [json_name = "online"];</code>
+     */
+    protected $online = false;
+    /**
+     * jailed defined whether the validator has been jailed from bonded status or not.
+     *
+     * Generated from protobuf field <code>bool jailed = 8 [json_name = "jailed"];</code>
+     */
+    protected $jailed = false;
+    /**
+     * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
+     *
+     * Generated from protobuf field <code>int64 unbonding_height = 9 [json_name = "unbondingHeight"];</code>
      */
     protected $unbonding_height = 0;
     /**
-     * unbonding_time defines, if unbonding, the min time for the validator to
-     * complete unbonding.
+     * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 9 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 10 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
      */
     protected $unbonding_time = null;
     /**
-     * commission defines the commission parameters.
+     * rewards defines accumulated amount of collected rewards that are not yet distributed to a delegators.
+     * NOTE: It is stored separately in the KVStore.
      *
-     * Generated from protobuf field <code>.decimal.validator.v1.Commission commission = 10 [json_name = "commission", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>string rewards = 11 [json_name = "rewards", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
      */
-    protected $commission = null;
+    protected $rewards = '';
     /**
-     * min_self_delegation is the validator's self declared minimum self
-     * delegation.
-     *
-     * Generated from protobuf field <code>string min_self_delegation = 11 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     */
-    protected $min_self_delegation = '';
-    /**
-     * total_rewards is the pool of all collected rewards.
+     * total_rewards defines total amount of all collected rewards.
+     * NOTE: It is stored separately in the KVStore.
      *
      * Generated from protobuf field <code>string total_rewards = 12 [json_name = "totalRewards", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
      */
     protected $total_rewards = '';
-    /**
-     * reward_address defines the address of the account for withdrawing rewards;
-     * bech encoded in JSON.
-     *
-     * Generated from protobuf field <code>string reward_address = 13 [json_name = "rewardAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     */
-    protected $reward_address = '';
-    /**
-     * online is true if the validator participates in the consensus.
-     *
-     * Generated from protobuf field <code>bool online = 14 [json_name = "online"];</code>
-     */
-    protected $online = false;
 
     /**
      * Constructor.
@@ -120,48 +97,40 @@ class Validator extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $operator_address
-     *           operator_address defines the address of the validator's operator; bech encoded in JSON.
+     *           operator_address defines the address of the validator's operator (bech encoded in JSON).
+     *     @type string $reward_address
+     *           reward_address defines the address of the account for withdrawing rewards (bech encoded in JSON).
      *     @type \Google\Protobuf\Any $consensus_pubkey
-     *           consensus_pubkey is the consensus public key of the validator, as a
-     *           Protobuf Any.
-     *     @type bool $jailed
-     *           jailed defined whether the validator has been jailed from bonded status or
-     *           not.
-     *     @type int $status
-     *           status is the validator status (bonded/unbonding/unbonded).
-     *     @type string $tokens
-     *           tokens define the delegated tokens (incl. self-delegation).
-     *     @type string $delegator_shares
-     *           delegator_shares defines total shares issued to a validator's delegators.
+     *           consensus_pubkey is the consensus public key of the validator (as google.protobuf.Any).
      *     @type \Decimal\Validator\V1\Description $description
      *           description defines the description terms for the validator.
-     *     @type int|string $unbonding_height
-     *           unbonding_height defines, if unbonding, the height at which this validator
-     *           has begun unbonding.
-     *     @type \Google\Protobuf\Timestamp $unbonding_time
-     *           unbonding_time defines, if unbonding, the min time for the validator to
-     *           complete unbonding.
-     *     @type \Decimal\Validator\V1\Commission $commission
-     *           commission defines the commission parameters.
-     *     @type string $min_self_delegation
-     *           min_self_delegation is the validator's self declared minimum self
-     *           delegation.
-     *     @type string $total_rewards
-     *           total_rewards is the pool of all collected rewards.
-     *     @type string $reward_address
-     *           reward_address defines the address of the account for withdrawing rewards;
-     *           bech encoded in JSON.
+     *     @type string $commission
+     *           commission defines the commission rate, as a fraction.
+     *     @type int $status
+     *           status is the validator status (bonded/unbonding/unbonded).
      *     @type bool $online
-     *           online is true if the validator participates in the consensus.
+     *           online is true if the validator participates in the consensus (validator is bonded).
+     *     @type bool $jailed
+     *           jailed defined whether the validator has been jailed from bonded status or not.
+     *     @type int|string $unbonding_height
+     *           unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
+     *     @type \Google\Protobuf\Timestamp $unbonding_time
+     *           unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
+     *     @type string $rewards
+     *           rewards defines accumulated amount of collected rewards that are not yet distributed to a delegators.
+     *           NOTE: It is stored separately in the KVStore.
+     *     @type string $total_rewards
+     *           total_rewards defines total amount of all collected rewards.
+     *           NOTE: It is stored separately in the KVStore.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Validator::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Validator::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * operator_address defines the address of the validator's operator; bech encoded in JSON.
+     * operator_address defines the address of the validator's operator (bech encoded in JSON).
      *
      * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @return string
@@ -172,7 +141,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * operator_address defines the address of the validator's operator; bech encoded in JSON.
+     * operator_address defines the address of the validator's operator (bech encoded in JSON).
      *
      * Generated from protobuf field <code>string operator_address = 1 [json_name = "operatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @param string $var
@@ -187,10 +156,35 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * consensus_pubkey is the consensus public key of the validator, as a
-     * Protobuf Any.
+     * reward_address defines the address of the account for withdrawing rewards (bech encoded in JSON).
      *
-     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 2 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
+     * Generated from protobuf field <code>string reward_address = 2 [json_name = "rewardAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @return string
+     */
+    public function getRewardAddress()
+    {
+        return $this->reward_address;
+    }
+
+    /**
+     * reward_address defines the address of the account for withdrawing rewards (bech encoded in JSON).
+     *
+     * Generated from protobuf field <code>string reward_address = 2 [json_name = "rewardAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRewardAddress($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->reward_address = $var;
+
+        return $this;
+    }
+
+    /**
+     * consensus_pubkey is the consensus public key of the validator (as google.protobuf.Any).
+     *
+     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 3 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
      * @return \Google\Protobuf\Any|null
      */
     public function getConsensusPubkey()
@@ -209,10 +203,9 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * consensus_pubkey is the consensus public key of the validator, as a
-     * Protobuf Any.
+     * consensus_pubkey is the consensus public key of the validator (as google.protobuf.Any).
      *
-     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 2 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any consensus_pubkey = 3 [json_name = "consensusPubkey", (.cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];</code>
      * @param \Google\Protobuf\Any $var
      * @return $this
      */
@@ -225,115 +218,9 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * jailed defined whether the validator has been jailed from bonded status or
-     * not.
-     *
-     * Generated from protobuf field <code>bool jailed = 3 [json_name = "jailed"];</code>
-     * @return bool
-     */
-    public function getJailed()
-    {
-        return $this->jailed;
-    }
-
-    /**
-     * jailed defined whether the validator has been jailed from bonded status or
-     * not.
-     *
-     * Generated from protobuf field <code>bool jailed = 3 [json_name = "jailed"];</code>
-     * @param bool $var
-     * @return $this
-     */
-    public function setJailed($var)
-    {
-        GPBUtil::checkBool($var);
-        $this->jailed = $var;
-
-        return $this;
-    }
-
-    /**
-     * status is the validator status (bonded/unbonding/unbonded).
-     *
-     * Generated from protobuf field <code>.decimal.validator.v1.BondStatus status = 4 [json_name = "status"];</code>
-     * @return int
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * status is the validator status (bonded/unbonding/unbonded).
-     *
-     * Generated from protobuf field <code>.decimal.validator.v1.BondStatus status = 4 [json_name = "status"];</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setStatus($var)
-    {
-        GPBUtil::checkEnum($var, \Decimal\Validator\V1\BondStatus::class);
-        $this->status = $var;
-
-        return $this;
-    }
-
-    /**
-     * tokens define the delegated tokens (incl. self-delegation).
-     *
-     * Generated from protobuf field <code>string tokens = 5 [json_name = "tokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     * @return string
-     */
-    public function getTokens()
-    {
-        return $this->tokens;
-    }
-
-    /**
-     * tokens define the delegated tokens (incl. self-delegation).
-     *
-     * Generated from protobuf field <code>string tokens = 5 [json_name = "tokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setTokens($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->tokens = $var;
-
-        return $this;
-    }
-
-    /**
-     * delegator_shares defines total shares issued to a validator's delegators.
-     *
-     * Generated from protobuf field <code>string delegator_shares = 6 [json_name = "delegatorShares", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
-     * @return string
-     */
-    public function getDelegatorShares()
-    {
-        return $this->delegator_shares;
-    }
-
-    /**
-     * delegator_shares defines total shares issued to a validator's delegators.
-     *
-     * Generated from protobuf field <code>string delegator_shares = 6 [json_name = "delegatorShares", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setDelegatorShares($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->delegator_shares = $var;
-
-        return $this;
-    }
-
-    /**
      * description defines the description terms for the validator.
      *
-     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 7 [json_name = "description", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 4 [json_name = "description", (.gogoproto.nullable) = false];</code>
      * @return \Decimal\Validator\V1\Description|null
      */
     public function getDescription()
@@ -354,7 +241,7 @@ class Validator extends \Google\Protobuf\Internal\Message
     /**
      * description defines the description terms for the validator.
      *
-     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 7 [json_name = "description", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.validator.v1.Description description = 4 [json_name = "description", (.gogoproto.nullable) = false];</code>
      * @param \Decimal\Validator\V1\Description $var
      * @return $this
      */
@@ -367,10 +254,113 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * unbonding_height defines, if unbonding, the height at which this validator
-     * has begun unbonding.
+     * commission defines the commission rate, as a fraction.
      *
-     * Generated from protobuf field <code>int64 unbonding_height = 8 [json_name = "unbondingHeight"];</code>
+     * Generated from protobuf field <code>string commission = 5 [json_name = "commission", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * @return string
+     */
+    public function getCommission()
+    {
+        return $this->commission;
+    }
+
+    /**
+     * commission defines the commission rate, as a fraction.
+     *
+     * Generated from protobuf field <code>string commission = 5 [json_name = "commission", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCommission($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->commission = $var;
+
+        return $this;
+    }
+
+    /**
+     * status is the validator status (bonded/unbonding/unbonded).
+     *
+     * Generated from protobuf field <code>.decimal.validator.v1.BondStatus status = 6 [json_name = "status"];</code>
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * status is the validator status (bonded/unbonding/unbonded).
+     *
+     * Generated from protobuf field <code>.decimal.validator.v1.BondStatus status = 6 [json_name = "status"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setStatus($var)
+    {
+        GPBUtil::checkEnum($var, \Decimal\Validator\V1\BondStatus::class);
+        $this->status = $var;
+
+        return $this;
+    }
+
+    /**
+     * online is true if the validator participates in the consensus (validator is bonded).
+     *
+     * Generated from protobuf field <code>bool online = 7 [json_name = "online"];</code>
+     * @return bool
+     */
+    public function getOnline()
+    {
+        return $this->online;
+    }
+
+    /**
+     * online is true if the validator participates in the consensus (validator is bonded).
+     *
+     * Generated from protobuf field <code>bool online = 7 [json_name = "online"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setOnline($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->online = $var;
+
+        return $this;
+    }
+
+    /**
+     * jailed defined whether the validator has been jailed from bonded status or not.
+     *
+     * Generated from protobuf field <code>bool jailed = 8 [json_name = "jailed"];</code>
+     * @return bool
+     */
+    public function getJailed()
+    {
+        return $this->jailed;
+    }
+
+    /**
+     * jailed defined whether the validator has been jailed from bonded status or not.
+     *
+     * Generated from protobuf field <code>bool jailed = 8 [json_name = "jailed"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setJailed($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->jailed = $var;
+
+        return $this;
+    }
+
+    /**
+     * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
+     *
+     * Generated from protobuf field <code>int64 unbonding_height = 9 [json_name = "unbondingHeight"];</code>
      * @return int|string
      */
     public function getUnbondingHeight()
@@ -379,10 +369,9 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * unbonding_height defines, if unbonding, the height at which this validator
-     * has begun unbonding.
+     * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
      *
-     * Generated from protobuf field <code>int64 unbonding_height = 8 [json_name = "unbondingHeight"];</code>
+     * Generated from protobuf field <code>int64 unbonding_height = 9 [json_name = "unbondingHeight"];</code>
      * @param int|string $var
      * @return $this
      */
@@ -395,10 +384,9 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * unbonding_time defines, if unbonding, the min time for the validator to
-     * complete unbonding.
+     * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 9 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 10 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getUnbondingTime()
@@ -417,10 +405,9 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * unbonding_time defines, if unbonding, the min time for the validator to
-     * complete unbonding.
+     * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
      *
-     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 9 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp unbonding_time = 10 [json_name = "unbondingTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */
@@ -433,71 +420,36 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * commission defines the commission parameters.
+     * rewards defines accumulated amount of collected rewards that are not yet distributed to a delegators.
+     * NOTE: It is stored separately in the KVStore.
      *
-     * Generated from protobuf field <code>.decimal.validator.v1.Commission commission = 10 [json_name = "commission", (.gogoproto.nullable) = false];</code>
-     * @return \Decimal\Validator\V1\Commission|null
-     */
-    public function getCommission()
-    {
-        return $this->commission;
-    }
-
-    public function hasCommission()
-    {
-        return isset($this->commission);
-    }
-
-    public function clearCommission()
-    {
-        unset($this->commission);
-    }
-
-    /**
-     * commission defines the commission parameters.
-     *
-     * Generated from protobuf field <code>.decimal.validator.v1.Commission commission = 10 [json_name = "commission", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Validator\V1\Commission $var
-     * @return $this
-     */
-    public function setCommission($var)
-    {
-        GPBUtil::checkMessage($var, \Decimal\Validator\V1\Commission::class);
-        $this->commission = $var;
-
-        return $this;
-    }
-
-    /**
-     * min_self_delegation is the validator's self declared minimum self
-     * delegation.
-     *
-     * Generated from protobuf field <code>string min_self_delegation = 11 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string rewards = 11 [json_name = "rewards", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
      * @return string
      */
-    public function getMinSelfDelegation()
+    public function getRewards()
     {
-        return $this->min_self_delegation;
+        return $this->rewards;
     }
 
     /**
-     * min_self_delegation is the validator's self declared minimum self
-     * delegation.
+     * rewards defines accumulated amount of collected rewards that are not yet distributed to a delegators.
+     * NOTE: It is stored separately in the KVStore.
      *
-     * Generated from protobuf field <code>string min_self_delegation = 11 [json_name = "minSelfDelegation", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * Generated from protobuf field <code>string rewards = 11 [json_name = "rewards", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
      * @param string $var
      * @return $this
      */
-    public function setMinSelfDelegation($var)
+    public function setRewards($var)
     {
         GPBUtil::checkString($var, True);
-        $this->min_self_delegation = $var;
+        $this->rewards = $var;
 
         return $this;
     }
 
     /**
-     * total_rewards is the pool of all collected rewards.
+     * total_rewards defines total amount of all collected rewards.
+     * NOTE: It is stored separately in the KVStore.
      *
      * Generated from protobuf field <code>string total_rewards = 12 [json_name = "totalRewards", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
      * @return string
@@ -508,7 +460,8 @@ class Validator extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * total_rewards is the pool of all collected rewards.
+     * total_rewards defines total amount of all collected rewards.
+     * NOTE: It is stored separately in the KVStore.
      *
      * Generated from protobuf field <code>string total_rewards = 12 [json_name = "totalRewards", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
      * @param string $var
@@ -518,60 +471,6 @@ class Validator extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->total_rewards = $var;
-
-        return $this;
-    }
-
-    /**
-     * reward_address defines the address of the account for withdrawing rewards;
-     * bech encoded in JSON.
-     *
-     * Generated from protobuf field <code>string reward_address = 13 [json_name = "rewardAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @return string
-     */
-    public function getRewardAddress()
-    {
-        return $this->reward_address;
-    }
-
-    /**
-     * reward_address defines the address of the account for withdrawing rewards;
-     * bech encoded in JSON.
-     *
-     * Generated from protobuf field <code>string reward_address = 13 [json_name = "rewardAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setRewardAddress($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->reward_address = $var;
-
-        return $this;
-    }
-
-    /**
-     * online is true if the validator participates in the consensus.
-     *
-     * Generated from protobuf field <code>bool online = 14 [json_name = "online"];</code>
-     * @return bool
-     */
-    public function getOnline()
-    {
-        return $this->online;
-    }
-
-    /**
-     * online is true if the validator participates in the consensus.
-     *
-     * Generated from protobuf field <code>bool online = 14 [json_name = "online"];</code>
-     * @param bool $var
-     * @return $this
-     */
-    public function setOnline($var)
-    {
-        GPBUtil::checkBool($var);
-        $this->online = $var;
 
         return $this;
     }

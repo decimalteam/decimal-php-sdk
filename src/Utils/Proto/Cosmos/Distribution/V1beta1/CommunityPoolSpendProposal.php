@@ -43,11 +43,11 @@ class CommunityPoolSpendProposal extends \Google\Protobuf\Internal\Message
      *     @type string $title
      *     @type string $description
      *     @type string $recipient
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $amount
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $amount
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Distribution::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Distribution::initOnce();
         parent::__construct($data);
     }
 
@@ -128,7 +128,7 @@ class CommunityPoolSpendProposal extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin amount = 4 [json_name = "amount", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAmount($var)

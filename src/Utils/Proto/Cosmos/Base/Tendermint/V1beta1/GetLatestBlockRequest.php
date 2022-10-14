@@ -9,8 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC
- * method.
+ * GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method.
  *
  * Generated from protobuf message <code>cosmos.base.tendermint.v1beta1.GetLatestBlockRequest</code>
  */
@@ -26,7 +25,7 @@ class GetLatestBlockRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Tendermint\V1Beta1\Query::initOnce();
+        \Cosmos\Base\Tendermint\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 

@@ -43,15 +43,15 @@ class InterfaceDescriptor extends \Google\Protobuf\Internal\Message
      *
      *     @type string $fullname
      *           fullname is the name of the interface
-     *     @type \Cosmos\Base\Reflection\V2alpha1\InterfaceAcceptingMessageDescriptor[]|\Google\Protobuf\Internal\RepeatedField $interface_accepting_messages
+     *     @type array<\Cosmos\Base\Reflection\V2alpha1\InterfaceAcceptingMessageDescriptor>|\Google\Protobuf\Internal\RepeatedField $interface_accepting_messages
      *           interface_accepting_messages contains information regarding the proto messages which contain the interface as
      *           google.protobuf.Any field
-     *     @type \Cosmos\Base\Reflection\V2alpha1\InterfaceImplementerDescriptor[]|\Google\Protobuf\Internal\RepeatedField $interface_implementers
+     *     @type array<\Cosmos\Base\Reflection\V2alpha1\InterfaceImplementerDescriptor>|\Google\Protobuf\Internal\RepeatedField $interface_implementers
      *           interface_implementers is a list of the descriptors of the interface implementers
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V2Alpha1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V2alpha1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 
@@ -98,7 +98,7 @@ class InterfaceDescriptor extends \Google\Protobuf\Internal\Message
      * google.protobuf.Any field
      *
      * Generated from protobuf field <code>repeated .cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor interface_accepting_messages = 2 [json_name = "interfaceAcceptingMessages"];</code>
-     * @param \Cosmos\Base\Reflection\V2alpha1\InterfaceAcceptingMessageDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Reflection\V2alpha1\InterfaceAcceptingMessageDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setInterfaceAcceptingMessages($var)
@@ -124,7 +124,7 @@ class InterfaceDescriptor extends \Google\Protobuf\Internal\Message
      * interface_implementers is a list of the descriptors of the interface implementers
      *
      * Generated from protobuf field <code>repeated .cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor interface_implementers = 3 [json_name = "interfaceImplementers"];</code>
-     * @param \Cosmos\Base\Reflection\V2alpha1\InterfaceImplementerDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Reflection\V2alpha1\InterfaceImplementerDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setInterfaceImplementers($var)

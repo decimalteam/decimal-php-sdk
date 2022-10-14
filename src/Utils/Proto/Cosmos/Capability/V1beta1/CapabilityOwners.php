@@ -27,11 +27,11 @@ class CapabilityOwners extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Capability\V1beta1\Owner[]|\Google\Protobuf\Internal\RepeatedField $owners
+     *     @type array<\Cosmos\Capability\V1beta1\Owner>|\Google\Protobuf\Internal\RepeatedField $owners
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Capability\V1Beta1\Capability::initOnce();
+        \Cosmos\Capability\V1beta1\GPBMetadata\Capability::initOnce();
         parent::__construct($data);
     }
 
@@ -46,7 +46,7 @@ class CapabilityOwners extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.capability.v1beta1.Owner owners = 1 [json_name = "owners", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Capability\V1beta1\Owner[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Capability\V1beta1\Owner>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOwners($var)

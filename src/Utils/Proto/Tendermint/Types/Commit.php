@@ -41,11 +41,11 @@ class Commit extends \Google\Protobuf\Internal\Message
      *     @type int|string $height
      *     @type int $round
      *     @type \Tendermint\Types\BlockID $block_id
-     *     @type \Tendermint\Types\CommitSig[]|\Google\Protobuf\Internal\RepeatedField $signatures
+     *     @type array<\Tendermint\Types\CommitSig>|\Google\Protobuf\Internal\RepeatedField $signatures
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Types::initOnce();
+        \Tendermint\Types\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -136,7 +136,7 @@ class Commit extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.types.CommitSig signatures = 4 [json_name = "signatures", (.gogoproto.nullable) = false];</code>
-     * @param \Tendermint\Types\CommitSig[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Types\CommitSig>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSignatures($var)

@@ -26,11 +26,11 @@ class QueryCoinPricesResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Fee\V1\CoinPrice[]|\Google\Protobuf\Internal\RepeatedField $prices
+     *     @type array<\Decimal\Fee\V1\CoinPrice>|\Google\Protobuf\Internal\RepeatedField $prices
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Fee\V1\Query::initOnce();
+        \Decimal\Fee\V1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -45,7 +45,7 @@ class QueryCoinPricesResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .decimal.fee.v1.CoinPrice prices = 1 [json_name = "prices", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Fee\V1\CoinPrice[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Fee\V1\CoinPrice>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPrices($var)

@@ -16,7 +16,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class Proposal extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "id", (.gogoproto.moretags) = "yaml:\"id\""];</code>
      */
     protected $proposal_id = 0;
     /**
@@ -24,35 +24,31 @@ class Proposal extends \Google\Protobuf\Internal\Message
      */
     protected $content = null;
     /**
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.ProposalStatus status = 3 [json_name = "status"];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.ProposalStatus status = 3 [json_name = "status", (.gogoproto.moretags) = "yaml:\"proposal_status\""];</code>
      */
     protected $status = 0;
     /**
-     * final_tally_result is the final tally result of the proposal. When
-     * querying a proposal via gRPC, this field is not populated until the
-     * proposal's voting period has ended.
-     *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyResult final_tally_result = 4 [json_name = "finalTallyResult", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyResult final_tally_result = 4 [json_name = "finalTallyResult", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"final_tally_result\""];</code>
      */
     protected $final_tally_result = null;
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp submit_time = 5 [json_name = "submitTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp submit_time = 5 [json_name = "submitTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"submit_time\"", (.gogoproto.stdtime) = true];</code>
      */
     protected $submit_time = null;
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp deposit_end_time = 6 [json_name = "depositEndTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp deposit_end_time = 6 [json_name = "depositEndTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"deposit_end_time\"", (.gogoproto.stdtime) = true];</code>
      */
     protected $deposit_end_time = null;
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin total_deposit = 7 [json_name = "totalDeposit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin total_deposit = 7 [json_name = "totalDeposit", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"total_deposit\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
     private $total_deposit;
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_start_time = 8 [json_name = "votingStartTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_start_time = 8 [json_name = "votingStartTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"voting_start_time\"", (.gogoproto.stdtime) = true];</code>
      */
     protected $voting_start_time = null;
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_end_time = 9 [json_name = "votingEndTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_end_time = 9 [json_name = "votingEndTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"voting_end_time\"", (.gogoproto.stdtime) = true];</code>
      */
     protected $voting_end_time = null;
 
@@ -66,23 +62,20 @@ class Proposal extends \Google\Protobuf\Internal\Message
      *     @type \Google\Protobuf\Any $content
      *     @type int $status
      *     @type \Cosmos\Gov\V1beta1\TallyResult $final_tally_result
-     *           final_tally_result is the final tally result of the proposal. When
-     *           querying a proposal via gRPC, this field is not populated until the
-     *           proposal's voting period has ended.
      *     @type \Google\Protobuf\Timestamp $submit_time
      *     @type \Google\Protobuf\Timestamp $deposit_end_time
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $total_deposit
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $total_deposit
      *     @type \Google\Protobuf\Timestamp $voting_start_time
      *     @type \Google\Protobuf\Timestamp $voting_end_time
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Gov::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Gov::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "id", (.gogoproto.moretags) = "yaml:\"id\""];</code>
      * @return int|string
      */
     public function getProposalId()
@@ -91,7 +84,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId"];</code>
+     * Generated from protobuf field <code>uint64 proposal_id = 1 [json_name = "proposalId", (.gogoproto.jsontag) = "id", (.gogoproto.moretags) = "yaml:\"id\""];</code>
      * @param int|string $var
      * @return $this
      */
@@ -136,7 +129,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.ProposalStatus status = 3 [json_name = "status"];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.ProposalStatus status = 3 [json_name = "status", (.gogoproto.moretags) = "yaml:\"proposal_status\""];</code>
      * @return int
      */
     public function getStatus()
@@ -145,7 +138,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.ProposalStatus status = 3 [json_name = "status"];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.ProposalStatus status = 3 [json_name = "status", (.gogoproto.moretags) = "yaml:\"proposal_status\""];</code>
      * @param int $var
      * @return $this
      */
@@ -158,11 +151,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * final_tally_result is the final tally result of the proposal. When
-     * querying a proposal via gRPC, this field is not populated until the
-     * proposal's voting period has ended.
-     *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyResult final_tally_result = 4 [json_name = "finalTallyResult", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyResult final_tally_result = 4 [json_name = "finalTallyResult", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"final_tally_result\""];</code>
      * @return \Cosmos\Gov\V1beta1\TallyResult|null
      */
     public function getFinalTallyResult()
@@ -181,11 +170,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * final_tally_result is the final tally result of the proposal. When
-     * querying a proposal via gRPC, this field is not populated until the
-     * proposal's voting period has ended.
-     *
-     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyResult final_tally_result = 4 [json_name = "finalTallyResult", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.gov.v1beta1.TallyResult final_tally_result = 4 [json_name = "finalTallyResult", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"final_tally_result\""];</code>
      * @param \Cosmos\Gov\V1beta1\TallyResult $var
      * @return $this
      */
@@ -198,7 +183,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp submit_time = 5 [json_name = "submitTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp submit_time = 5 [json_name = "submitTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"submit_time\"", (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getSubmitTime()
@@ -217,7 +202,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp submit_time = 5 [json_name = "submitTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp submit_time = 5 [json_name = "submitTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"submit_time\"", (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */
@@ -230,7 +215,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp deposit_end_time = 6 [json_name = "depositEndTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp deposit_end_time = 6 [json_name = "depositEndTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"deposit_end_time\"", (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getDepositEndTime()
@@ -249,7 +234,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp deposit_end_time = 6 [json_name = "depositEndTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp deposit_end_time = 6 [json_name = "depositEndTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"deposit_end_time\"", (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */
@@ -262,7 +247,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin total_deposit = 7 [json_name = "totalDeposit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin total_deposit = 7 [json_name = "totalDeposit", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"total_deposit\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getTotalDeposit()
@@ -271,8 +256,8 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin total_deposit = 7 [json_name = "totalDeposit", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin total_deposit = 7 [json_name = "totalDeposit", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"total_deposit\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTotalDeposit($var)
@@ -284,7 +269,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_start_time = 8 [json_name = "votingStartTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_start_time = 8 [json_name = "votingStartTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"voting_start_time\"", (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getVotingStartTime()
@@ -303,7 +288,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_start_time = 8 [json_name = "votingStartTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_start_time = 8 [json_name = "votingStartTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"voting_start_time\"", (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */
@@ -316,7 +301,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_end_time = 9 [json_name = "votingEndTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_end_time = 9 [json_name = "votingEndTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"voting_end_time\"", (.gogoproto.stdtime) = true];</code>
      * @return \Google\Protobuf\Timestamp|null
      */
     public function getVotingEndTime()
@@ -335,7 +320,7 @@ class Proposal extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_end_time = 9 [json_name = "votingEndTime", (.gogoproto.nullable) = false, (.gogoproto.stdtime) = true];</code>
+     * Generated from protobuf field <code>.google.protobuf.Timestamp voting_end_time = 9 [json_name = "votingEndTime", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"voting_end_time\"", (.gogoproto.stdtime) = true];</code>
      * @param \Google\Protobuf\Timestamp $var
      * @return $this
      */

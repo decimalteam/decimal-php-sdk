@@ -33,11 +33,11 @@ class Event extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $type
-     *     @type \Tendermint\Abci\EventAttribute[]|\Google\Protobuf\Internal\RepeatedField $attributes
+     *     @type array<\Tendermint\Abci\EventAttribute>|\Google\Protobuf\Internal\RepeatedField $attributes
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Abci\Types::initOnce();
+        \Tendermint\Abci\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -74,7 +74,7 @@ class Event extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .tendermint.abci.EventAttribute attributes = 2 [json_name = "attributes", (.gogoproto.nullable) = false, (.gogoproto.jsontag) = "attributes,omitempty"];</code>
-     * @param \Tendermint\Abci\EventAttribute[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Tendermint\Abci\EventAttribute>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAttributes($var)

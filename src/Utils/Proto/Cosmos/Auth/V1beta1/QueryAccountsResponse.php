@@ -10,7 +10,6 @@ use Google\Protobuf\Internal\GPBUtil;
 
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.auth.v1beta1.QueryAccountsResponse</code>
  */
@@ -35,14 +34,14 @@ class QueryAccountsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $accounts
+     *     @type array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $accounts
      *           accounts are the existing accounts
      *     @type \Cosmos\Base\Query\V1beta1\PageResponse $pagination
      *           pagination defines the pagination in the response.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Auth\V1Beta1\Query::initOnce();
+        \Cosmos\Auth\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -61,7 +60,7 @@ class QueryAccountsResponse extends \Google\Protobuf\Internal\Message
      * accounts are the existing accounts
      *
      * Generated from protobuf field <code>repeated .google.protobuf.Any accounts = 1 [json_name = "accounts", (.cosmos_proto.accepts_interface) = "AccountI"];</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAccounts($var)

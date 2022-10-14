@@ -24,13 +24,13 @@ class QueryProposalsRequest extends \Google\Protobuf\Internal\Message
     /**
      * voter defines the voter address for the proposals.
      *
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      */
     protected $voter = '';
     /**
      * depositor defines the deposit addresses from the proposals.
      *
-     * Generated from protobuf field <code>string depositor = 3 [json_name = "depositor", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string depositor = 3 [json_name = "depositor"];</code>
      */
     protected $depositor = '';
     /**
@@ -57,7 +57,7 @@ class QueryProposalsRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Query::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -90,7 +90,7 @@ class QueryProposalsRequest extends \Google\Protobuf\Internal\Message
     /**
      * voter defines the voter address for the proposals.
      *
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @return string
      */
     public function getVoter()
@@ -101,7 +101,7 @@ class QueryProposalsRequest extends \Google\Protobuf\Internal\Message
     /**
      * voter defines the voter address for the proposals.
      *
-     * Generated from protobuf field <code>string voter = 2 [json_name = "voter", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string voter = 2 [json_name = "voter"];</code>
      * @param string $var
      * @return $this
      */
@@ -116,7 +116,7 @@ class QueryProposalsRequest extends \Google\Protobuf\Internal\Message
     /**
      * depositor defines the deposit addresses from the proposals.
      *
-     * Generated from protobuf field <code>string depositor = 3 [json_name = "depositor", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string depositor = 3 [json_name = "depositor"];</code>
      * @return string
      */
     public function getDepositor()
@@ -127,7 +127,7 @@ class QueryProposalsRequest extends \Google\Protobuf\Internal\Message
     /**
      * depositor defines the deposit addresses from the proposals.
      *
-     * Generated from protobuf field <code>string depositor = 3 [json_name = "depositor", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string depositor = 3 [json_name = "depositor"];</code>
      * @param string $var
      * @return $this
      */

@@ -19,7 +19,7 @@ class Balance extends \Google\Protobuf\Internal\Message
     /**
      * address is the address of the balance holder.
      *
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      */
     protected $address = '';
     /**
@@ -37,19 +37,19 @@ class Balance extends \Google\Protobuf\Internal\Message
      *
      *     @type string $address
      *           address is the address of the balance holder.
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $coins
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $coins
      *           coins defines the different coins this balance holds.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Genesis::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * address is the address of the balance holder.
      *
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @return string
      */
     public function getAddress()
@@ -60,7 +60,7 @@ class Balance extends \Google\Protobuf\Internal\Message
     /**
      * address is the address of the balance holder.
      *
-     * Generated from protobuf field <code>string address = 1 [json_name = "address", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string address = 1 [json_name = "address"];</code>
      * @param string $var
      * @return $this
      */
@@ -87,7 +87,7 @@ class Balance extends \Google\Protobuf\Internal\Message
      * coins defines the different coins this balance holds.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 2 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCoins($var)

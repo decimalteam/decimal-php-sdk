@@ -37,14 +37,14 @@ class ResponseApplySnapshotChunk extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int $result
-     *     @type int[]|\Google\Protobuf\Internal\RepeatedField $refetch_chunks
+     *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $refetch_chunks
      *           Chunks to refetch and reapply
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $reject_senders
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $reject_senders
      *           Chunk senders to reject and ban
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Abci\Types::initOnce();
+        \Tendermint\Abci\GPBMetadata\Types::initOnce();
         parent::__construct($data);
     }
 
@@ -85,7 +85,7 @@ class ResponseApplySnapshotChunk extends \Google\Protobuf\Internal\Message
      * Chunks to refetch and reapply
      *
      * Generated from protobuf field <code>repeated uint32 refetch_chunks = 2 [json_name = "refetchChunks"];</code>
-     * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<int>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRefetchChunks($var)
@@ -111,7 +111,7 @@ class ResponseApplySnapshotChunk extends \Google\Protobuf\Internal\Message
      * Chunk senders to reject and ban
      *
      * Generated from protobuf field <code>repeated string reject_senders = 3 [json_name = "rejectSenders"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRejectSenders($var)

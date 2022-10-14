@@ -9,21 +9,24 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Pool is used for tracking bonded and not-bonded token supply of the bond
- * denomination.
+ * Pool is used for tracking bonded and not-bonded token supply of the bond denomination.
  *
  * Generated from protobuf message <code>decimal.validator.v1.Pool</code>
  */
 class Pool extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string not_bonded_tokens = 1 [json_name = "notBondedTokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.gogoproto.jsontag) = "not_bonded_tokens", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * bonded defines complete list of coins delegated and currently bonded.
+     *
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin bonded = 1 [json_name = "bonded", (.gogoproto.nullable) = false];</code>
      */
-    protected $not_bonded_tokens = '';
+    private $bonded;
     /**
-     * Generated from protobuf field <code>string bonded_tokens = 2 [json_name = "bondedTokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.gogoproto.jsontag) = "bonded_tokens", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
+     * not_bonded defines complete list of coins delegated but not bonded (redelegating or undelegating).
+     *
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin not_bonded = 2 [json_name = "notBonded", (.gogoproto.nullable) = false];</code>
      */
-    protected $bonded_tokens = '';
+    private $not_bonded;
 
     /**
      * Constructor.
@@ -31,55 +34,65 @@ class Pool extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $not_bonded_tokens
-     *     @type string $bonded_tokens
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $bonded
+     *           bonded defines complete list of coins delegated and currently bonded.
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $not_bonded
+     *           not_bonded defines complete list of coins delegated but not bonded (redelegating or undelegating).
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Validator::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Validator::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string not_bonded_tokens = 1 [json_name = "notBondedTokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.gogoproto.jsontag) = "not_bonded_tokens", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     * @return string
+     * bonded defines complete list of coins delegated and currently bonded.
+     *
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin bonded = 1 [json_name = "bonded", (.gogoproto.nullable) = false];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
      */
-    public function getNotBondedTokens()
+    public function getBonded()
     {
-        return $this->not_bonded_tokens;
+        return $this->bonded;
     }
 
     /**
-     * Generated from protobuf field <code>string not_bonded_tokens = 1 [json_name = "notBondedTokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.gogoproto.jsontag) = "not_bonded_tokens", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     * @param string $var
+     * bonded defines complete list of coins delegated and currently bonded.
+     *
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin bonded = 1 [json_name = "bonded", (.gogoproto.nullable) = false];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
-    public function setNotBondedTokens($var)
+    public function setBonded($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->not_bonded_tokens = $var;
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cosmos\Base\V1beta1\Coin::class);
+        $this->bonded = $arr;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>string bonded_tokens = 2 [json_name = "bondedTokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.gogoproto.jsontag) = "bonded_tokens", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     * @return string
+     * not_bonded defines complete list of coins delegated but not bonded (redelegating or undelegating).
+     *
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin not_bonded = 2 [json_name = "notBonded", (.gogoproto.nullable) = false];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
      */
-    public function getBondedTokens()
+    public function getNotBonded()
     {
-        return $this->bonded_tokens;
+        return $this->not_bonded;
     }
 
     /**
-     * Generated from protobuf field <code>string bonded_tokens = 2 [json_name = "bondedTokens", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.gogoproto.jsontag) = "bonded_tokens", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
-     * @param string $var
+     * not_bonded defines complete list of coins delegated but not bonded (redelegating or undelegating).
+     *
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin not_bonded = 2 [json_name = "notBonded", (.gogoproto.nullable) = false];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
-    public function setBondedTokens($var)
+    public function setNotBonded($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->bonded_tokens = $var;
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cosmos\Base\V1beta1\Coin::class);
+        $this->not_bonded = $arr;
 
         return $this;
     }

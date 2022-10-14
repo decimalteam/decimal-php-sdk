@@ -52,11 +52,11 @@ class MsgRedeemSwap extends \Google\Protobuf\Internal\Message
      */
     protected $v = 0;
     /**
-     * Generated from protobuf field <code>string r = 10 [json_name = "r", (.gogoproto.customtype) = "Hash"];</code>
+     * Generated from protobuf field <code>string r = 10 [json_name = "r"];</code>
      */
     protected $r = '';
     /**
-     * Generated from protobuf field <code>string s = 11 [json_name = "s", (.gogoproto.customtype) = "Hash"];</code>
+     * Generated from protobuf field <code>string s = 11 [json_name = "s"];</code>
      */
     protected $s = '';
 
@@ -80,7 +80,7 @@ class MsgRedeemSwap extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Swap\V1\Tx::initOnce();
+        \Decimal\Swap\V1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
@@ -283,7 +283,7 @@ class MsgRedeemSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string r = 10 [json_name = "r", (.gogoproto.customtype) = "Hash"];</code>
+     * Generated from protobuf field <code>string r = 10 [json_name = "r"];</code>
      * @return string
      */
     public function getR()
@@ -292,7 +292,7 @@ class MsgRedeemSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string r = 10 [json_name = "r", (.gogoproto.customtype) = "Hash"];</code>
+     * Generated from protobuf field <code>string r = 10 [json_name = "r"];</code>
      * @param string $var
      * @return $this
      */
@@ -305,7 +305,7 @@ class MsgRedeemSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string s = 11 [json_name = "s", (.gogoproto.customtype) = "Hash"];</code>
+     * Generated from protobuf field <code>string s = 11 [json_name = "s"];</code>
      * @return string
      */
     public function getS()
@@ -314,7 +314,7 @@ class MsgRedeemSwap extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string s = 11 [json_name = "s", (.gogoproto.customtype) = "Hash"];</code>
+     * Generated from protobuf field <code>string s = 11 [json_name = "s"];</code>
      * @param string $var
      * @return $this
      */

@@ -18,13 +18,13 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * records defines compelete list of legacy records to be returned to actual owner.
      *
-     * Generated from protobuf field <code>repeated .decimal.legacy.v1.Record records = 2 [json_name = "records", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.legacy.v1.Record records = 1 [json_name = "records", (.gogoproto.nullable) = false];</code>
      */
     private $records;
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.legacy.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.legacy.v1.Params params = 2 [json_name = "params", (.gogoproto.nullable) = false];</code>
      */
     protected $params = null;
 
@@ -34,21 +34,21 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Legacy\V1\Record[]|\Google\Protobuf\Internal\RepeatedField $records
+     *     @type array<\Decimal\Legacy\V1\Record>|\Google\Protobuf\Internal\RepeatedField $records
      *           records defines compelete list of legacy records to be returned to actual owner.
      *     @type \Decimal\Legacy\V1\Params $params
      *           params defines all the module's parameters.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Legacy\V1\Genesis::initOnce();
+        \Decimal\Legacy\V1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * records defines compelete list of legacy records to be returned to actual owner.
      *
-     * Generated from protobuf field <code>repeated .decimal.legacy.v1.Record records = 2 [json_name = "records", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.legacy.v1.Record records = 1 [json_name = "records", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getRecords()
@@ -59,8 +59,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * records defines compelete list of legacy records to be returned to actual owner.
      *
-     * Generated from protobuf field <code>repeated .decimal.legacy.v1.Record records = 2 [json_name = "records", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Legacy\V1\Record[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .decimal.legacy.v1.Record records = 1 [json_name = "records", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Legacy\V1\Record>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRecords($var)
@@ -74,7 +74,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.legacy.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.legacy.v1.Params params = 2 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @return \Decimal\Legacy\V1\Params|null
      */
     public function getParams()
@@ -95,7 +95,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.legacy.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.legacy.v1.Params params = 2 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @param \Decimal\Legacy\V1\Params $var
      * @return $this
      */

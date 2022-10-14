@@ -48,16 +48,16 @@ class Record extends \Google\Protobuf\Internal\Message
      *
      *     @type string $legacy_address
      *           legacy_address defines legacy address which is not valid anymore so cannot be used.
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $coins
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $coins
      *           coins defines complete list of tokens to be returned.
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $wallets
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $wallets
      *           wallets defines complete list of multisig wallets to be returned.
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $nfts
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $nfts
      *           nfts defines list of token ids to be returned
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Legacy\V1\Legacy::initOnce();
+        \Decimal\Legacy\V1\GPBMetadata\Legacy::initOnce();
         parent::__construct($data);
     }
 
@@ -102,7 +102,7 @@ class Record extends \Google\Protobuf\Internal\Message
      * coins defines complete list of tokens to be returned.
      *
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 2 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCoins($var)
@@ -128,7 +128,7 @@ class Record extends \Google\Protobuf\Internal\Message
      * wallets defines complete list of multisig wallets to be returned.
      *
      * Generated from protobuf field <code>repeated string wallets = 3 [json_name = "wallets"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setWallets($var)
@@ -154,7 +154,7 @@ class Record extends \Google\Protobuf\Internal\Message
      * nfts defines list of token ids to be returned
      *
      * Generated from protobuf field <code>repeated string nfts = 4 [json_name = "nfts", (.gogoproto.customname) = "NFTs"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setNfts($var)

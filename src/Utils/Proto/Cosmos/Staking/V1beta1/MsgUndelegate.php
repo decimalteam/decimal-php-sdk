@@ -17,11 +17,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgUndelegate extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      */
     protected $delegator_address = '';
     /**
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      */
     protected $validator_address = '';
     /**
@@ -41,12 +41,12 @@ class MsgUndelegate extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Tx::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @return string
      */
     public function getDelegatorAddress()
@@ -55,7 +55,7 @@ class MsgUndelegate extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -68,7 +68,7 @@ class MsgUndelegate extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -77,7 +77,7 @@ class MsgUndelegate extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 2 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @param string $var
      * @return $this
      */

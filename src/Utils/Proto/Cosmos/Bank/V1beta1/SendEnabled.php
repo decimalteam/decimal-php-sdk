@@ -36,7 +36,7 @@ class SendEnabled extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Bank::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Bank::initOnce();
         parent::__construct($data);
     }
 

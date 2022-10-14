@@ -16,15 +16,15 @@ use Google\Protobuf\Internal\GPBUtil;
 class MsgVerifyInvariant extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string sender = 1 [json_name = "sender", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string sender = 1 [json_name = "sender"];</code>
      */
     protected $sender = '';
     /**
-     * Generated from protobuf field <code>string invariant_module_name = 2 [json_name = "invariantModuleName"];</code>
+     * Generated from protobuf field <code>string invariant_module_name = 2 [json_name = "invariantModuleName", (.gogoproto.moretags) = "yaml:\"invariant_module_name\""];</code>
      */
     protected $invariant_module_name = '';
     /**
-     * Generated from protobuf field <code>string invariant_route = 3 [json_name = "invariantRoute"];</code>
+     * Generated from protobuf field <code>string invariant_route = 3 [json_name = "invariantRoute", (.gogoproto.moretags) = "yaml:\"invariant_route\""];</code>
      */
     protected $invariant_route = '';
 
@@ -40,12 +40,12 @@ class MsgVerifyInvariant extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Crisis\V1Beta1\Tx::initOnce();
+        \Cosmos\Crisis\V1beta1\GPBMetadata\Tx::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>string sender = 1 [json_name = "sender", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string sender = 1 [json_name = "sender"];</code>
      * @return string
      */
     public function getSender()
@@ -54,7 +54,7 @@ class MsgVerifyInvariant extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string sender = 1 [json_name = "sender", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string sender = 1 [json_name = "sender"];</code>
      * @param string $var
      * @return $this
      */
@@ -67,7 +67,7 @@ class MsgVerifyInvariant extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string invariant_module_name = 2 [json_name = "invariantModuleName"];</code>
+     * Generated from protobuf field <code>string invariant_module_name = 2 [json_name = "invariantModuleName", (.gogoproto.moretags) = "yaml:\"invariant_module_name\""];</code>
      * @return string
      */
     public function getInvariantModuleName()
@@ -76,7 +76,7 @@ class MsgVerifyInvariant extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string invariant_module_name = 2 [json_name = "invariantModuleName"];</code>
+     * Generated from protobuf field <code>string invariant_module_name = 2 [json_name = "invariantModuleName", (.gogoproto.moretags) = "yaml:\"invariant_module_name\""];</code>
      * @param string $var
      * @return $this
      */
@@ -89,7 +89,7 @@ class MsgVerifyInvariant extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string invariant_route = 3 [json_name = "invariantRoute"];</code>
+     * Generated from protobuf field <code>string invariant_route = 3 [json_name = "invariantRoute", (.gogoproto.moretags) = "yaml:\"invariant_route\""];</code>
      * @return string
      */
     public function getInvariantRoute()
@@ -98,7 +98,7 @@ class MsgVerifyInvariant extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string invariant_route = 3 [json_name = "invariantRoute"];</code>
+     * Generated from protobuf field <code>string invariant_route = 3 [json_name = "invariantRoute", (.gogoproto.moretags) = "yaml:\"invariant_route\""];</code>
      * @param string $var
      * @return $this
      */

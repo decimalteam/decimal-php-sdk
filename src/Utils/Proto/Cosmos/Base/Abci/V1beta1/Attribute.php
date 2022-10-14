@@ -36,7 +36,7 @@ class Attribute extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Abci\V1Beta1\Abci::initOnce();
+        \Cosmos\Base\Abci\V1beta1\GPBMetadata\Abci::initOnce();
         parent::__construct($data);
     }
 

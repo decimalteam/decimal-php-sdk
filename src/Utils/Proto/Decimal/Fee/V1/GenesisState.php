@@ -18,13 +18,13 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * prices defines complete list of initial coin prices.
      *
-     * Generated from protobuf field <code>repeated .decimal.fee.v1.CoinPrice prices = 2 [json_name = "prices", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.fee.v1.CoinPrice prices = 1 [json_name = "prices", (.gogoproto.nullable) = false];</code>
      */
     private $prices;
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.fee.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.fee.v1.Params params = 2 [json_name = "params", (.gogoproto.nullable) = false];</code>
      */
     protected $params = null;
 
@@ -34,21 +34,21 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Decimal\Fee\V1\CoinPrice[]|\Google\Protobuf\Internal\RepeatedField $prices
+     *     @type array<\Decimal\Fee\V1\CoinPrice>|\Google\Protobuf\Internal\RepeatedField $prices
      *           prices defines complete list of initial coin prices.
      *     @type \Decimal\Fee\V1\Params $params
      *           params defines all the module's parameters.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Fee\V1\Genesis::initOnce();
+        \Decimal\Fee\V1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * prices defines complete list of initial coin prices.
      *
-     * Generated from protobuf field <code>repeated .decimal.fee.v1.CoinPrice prices = 2 [json_name = "prices", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.fee.v1.CoinPrice prices = 1 [json_name = "prices", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getPrices()
@@ -59,8 +59,8 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * prices defines complete list of initial coin prices.
      *
-     * Generated from protobuf field <code>repeated .decimal.fee.v1.CoinPrice prices = 2 [json_name = "prices", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Fee\V1\CoinPrice[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .decimal.fee.v1.CoinPrice prices = 1 [json_name = "prices", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Fee\V1\CoinPrice>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPrices($var)
@@ -74,7 +74,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.fee.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.fee.v1.Params params = 2 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @return \Decimal\Fee\V1\Params|null
      */
     public function getParams()
@@ -95,7 +95,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * params defines all the module's parameters.
      *
-     * Generated from protobuf field <code>.decimal.fee.v1.Params params = 1 [json_name = "params", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.decimal.fee.v1.Params params = 2 [json_name = "params", (.gogoproto.nullable) = false];</code>
      * @param \Decimal\Fee\V1\Params $var
      * @return $this
      */

@@ -32,11 +32,11 @@ class StringEvent extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $type
-     *     @type \Cosmos\Base\Abci\V1beta1\Attribute[]|\Google\Protobuf\Internal\RepeatedField $attributes
+     *     @type array<\Cosmos\Base\Abci\V1beta1\Attribute>|\Google\Protobuf\Internal\RepeatedField $attributes
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Abci\V1Beta1\Abci::initOnce();
+        \Cosmos\Base\Abci\V1beta1\GPBMetadata\Abci::initOnce();
         parent::__construct($data);
     }
 
@@ -73,7 +73,7 @@ class StringEvent extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.base.abci.v1beta1.Attribute attributes = 2 [json_name = "attributes", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Base\Abci\V1beta1\Attribute[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Abci\V1beta1\Attribute>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAttributes($var)

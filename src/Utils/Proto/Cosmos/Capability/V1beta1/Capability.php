@@ -17,7 +17,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class Capability extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 index = 1 [json_name = "index"];</code>
+     * Generated from protobuf field <code>uint64 index = 1 [json_name = "index", (.gogoproto.moretags) = "yaml:\"index\""];</code>
      */
     protected $index = 0;
 
@@ -31,12 +31,12 @@ class Capability extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Capability\V1Beta1\Capability::initOnce();
+        \Cosmos\Capability\V1beta1\GPBMetadata\Capability::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>uint64 index = 1 [json_name = "index"];</code>
+     * Generated from protobuf field <code>uint64 index = 1 [json_name = "index", (.gogoproto.moretags) = "yaml:\"index\""];</code>
      * @return int|string
      */
     public function getIndex()
@@ -45,7 +45,7 @@ class Capability extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 index = 1 [json_name = "index"];</code>
+     * Generated from protobuf field <code>uint64 index = 1 [json_name = "index", (.gogoproto.moretags) = "yaml:\"index\""];</code>
      * @param int|string $var
      * @return $this
      */

@@ -31,11 +31,11 @@ class EventUpdateCoinPrices extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $oracle
-     *     @type \Decimal\Fee\V1\CoinPrice[]|\Google\Protobuf\Internal\RepeatedField $prices
+     *     @type array<\Decimal\Fee\V1\CoinPrice>|\Google\Protobuf\Internal\RepeatedField $prices
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Fee\V1\Events::initOnce();
+        \Decimal\Fee\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 
@@ -72,7 +72,7 @@ class EventUpdateCoinPrices extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .decimal.fee.v1.CoinPrice prices = 2 [json_name = "prices", (.gogoproto.nullable) = false];</code>
-     * @param \Decimal\Fee\V1\CoinPrice[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Decimal\Fee\V1\CoinPrice>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setPrices($var)

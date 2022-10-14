@@ -19,13 +19,13 @@ class ValidatorAccumulatedCommissionRecord extends \Google\Protobuf\Internal\Mes
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      */
     protected $validator_address = '';
     /**
      * accumulated is the accumulated commission of a validator.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorAccumulatedCommission accumulated = 2 [json_name = "accumulated", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorAccumulatedCommission accumulated = 2 [json_name = "accumulated", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"accumulated\""];</code>
      */
     protected $accumulated = null;
 
@@ -42,14 +42,14 @@ class ValidatorAccumulatedCommissionRecord extends \Google\Protobuf\Internal\Mes
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Distribution\V1Beta1\Genesis::initOnce();
+        \Cosmos\Distribution\V1beta1\GPBMetadata\Genesis::initOnce();
         parent::__construct($data);
     }
 
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @return string
      */
     public function getValidatorAddress()
@@ -60,7 +60,7 @@ class ValidatorAccumulatedCommissionRecord extends \Google\Protobuf\Internal\Mes
     /**
      * validator_address is the address of the validator.
      *
-     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_address = 1 [json_name = "validatorAddress", (.gogoproto.moretags) = "yaml:\"validator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -75,7 +75,7 @@ class ValidatorAccumulatedCommissionRecord extends \Google\Protobuf\Internal\Mes
     /**
      * accumulated is the accumulated commission of a validator.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorAccumulatedCommission accumulated = 2 [json_name = "accumulated", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorAccumulatedCommission accumulated = 2 [json_name = "accumulated", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"accumulated\""];</code>
      * @return \Cosmos\Distribution\V1beta1\ValidatorAccumulatedCommission|null
      */
     public function getAccumulated()
@@ -96,7 +96,7 @@ class ValidatorAccumulatedCommissionRecord extends \Google\Protobuf\Internal\Mes
     /**
      * accumulated is the accumulated commission of a validator.
      *
-     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorAccumulatedCommission accumulated = 2 [json_name = "accumulated", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>.cosmos.distribution.v1beta1.ValidatorAccumulatedCommission accumulated = 2 [json_name = "accumulated", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"accumulated\""];</code>
      * @param \Cosmos\Distribution\V1beta1\ValidatorAccumulatedCommission $var
      * @return $this
      */

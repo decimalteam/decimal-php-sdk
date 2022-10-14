@@ -65,7 +65,7 @@ class Description extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Validator\V1\Validator::initOnce();
+        \Decimal\Validator\V1\GPBMetadata\Validator::initOnce();
         parent::__construct($data);
     }
 

@@ -28,12 +28,12 @@ class CodecDescriptor extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Base\Reflection\V2alpha1\InterfaceDescriptor[]|\Google\Protobuf\Internal\RepeatedField $interfaces
+     *     @type array<\Cosmos\Base\Reflection\V2alpha1\InterfaceDescriptor>|\Google\Protobuf\Internal\RepeatedField $interfaces
      *           interfaces is a list of the registerted interfaces descriptors
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V2Alpha1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V2alpha1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 
@@ -52,7 +52,7 @@ class CodecDescriptor extends \Google\Protobuf\Internal\Message
      * interfaces is a list of the registerted interfaces descriptors
      *
      * Generated from protobuf field <code>repeated .cosmos.base.reflection.v2alpha1.InterfaceDescriptor interfaces = 1 [json_name = "interfaces"];</code>
-     * @param \Cosmos\Base\Reflection\V2alpha1\InterfaceDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Base\Reflection\V2alpha1\InterfaceDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setInterfaces($var)

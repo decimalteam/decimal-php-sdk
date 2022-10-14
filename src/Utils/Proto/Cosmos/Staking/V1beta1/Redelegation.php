@@ -19,19 +19,19 @@ class Redelegation extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address is the bech32-encoded address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      */
     protected $delegator_address = '';
     /**
      * validator_src_address is the validator redelegation source operator address.
      *
-     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.gogoproto.moretags) = "yaml:\"validator_src_address\""];</code>
      */
     protected $validator_src_address = '';
     /**
      * validator_dst_address is the validator redelegation destination operator address.
      *
-     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.gogoproto.moretags) = "yaml:\"validator_dst_address\""];</code>
      */
     protected $validator_dst_address = '';
     /**
@@ -53,19 +53,19 @@ class Redelegation extends \Google\Protobuf\Internal\Message
      *           validator_src_address is the validator redelegation source operator address.
      *     @type string $validator_dst_address
      *           validator_dst_address is the validator redelegation destination operator address.
-     *     @type \Cosmos\Staking\V1beta1\RedelegationEntry[]|\Google\Protobuf\Internal\RepeatedField $entries
+     *     @type array<\Cosmos\Staking\V1beta1\RedelegationEntry>|\Google\Protobuf\Internal\RepeatedField $entries
      *           entries are the redelegation entries.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
     /**
      * delegator_address is the bech32-encoded address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @return string
      */
     public function getDelegatorAddress()
@@ -76,7 +76,7 @@ class Redelegation extends \Google\Protobuf\Internal\Message
     /**
      * delegator_address is the bech32-encoded address of the delegator.
      *
-     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string delegator_address = 1 [json_name = "delegatorAddress", (.gogoproto.moretags) = "yaml:\"delegator_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -91,7 +91,7 @@ class Redelegation extends \Google\Protobuf\Internal\Message
     /**
      * validator_src_address is the validator redelegation source operator address.
      *
-     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.gogoproto.moretags) = "yaml:\"validator_src_address\""];</code>
      * @return string
      */
     public function getValidatorSrcAddress()
@@ -102,7 +102,7 @@ class Redelegation extends \Google\Protobuf\Internal\Message
     /**
      * validator_src_address is the validator redelegation source operator address.
      *
-     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_src_address = 2 [json_name = "validatorSrcAddress", (.gogoproto.moretags) = "yaml:\"validator_src_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -117,7 +117,7 @@ class Redelegation extends \Google\Protobuf\Internal\Message
     /**
      * validator_dst_address is the validator redelegation destination operator address.
      *
-     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.gogoproto.moretags) = "yaml:\"validator_dst_address\""];</code>
      * @return string
      */
     public function getValidatorDstAddress()
@@ -128,7 +128,7 @@ class Redelegation extends \Google\Protobuf\Internal\Message
     /**
      * validator_dst_address is the validator redelegation destination operator address.
      *
-     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string validator_dst_address = 3 [json_name = "validatorDstAddress", (.gogoproto.moretags) = "yaml:\"validator_dst_address\""];</code>
      * @param string $var
      * @return $this
      */
@@ -155,7 +155,7 @@ class Redelegation extends \Google\Protobuf\Internal\Message
      * entries are the redelegation entries.
      *
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.RedelegationEntry entries = 4 [json_name = "entries", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\RedelegationEntry[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\RedelegationEntry>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setEntries($var)

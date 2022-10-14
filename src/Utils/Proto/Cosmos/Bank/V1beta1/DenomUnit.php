@@ -25,7 +25,7 @@ class DenomUnit extends \Google\Protobuf\Internal\Message
     /**
      * exponent represents power of 10 exponent that one must
      * raise the base_denom to in order to equal the given DenomUnit's denom
-     * 1 denom = 10^exponent base_denom
+     * 1 denom = 1^exponent base_denom
      * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
      * exponent = 6, thus: 1 atom = 10^6 uatom).
      *
@@ -50,15 +50,15 @@ class DenomUnit extends \Google\Protobuf\Internal\Message
      *     @type int $exponent
      *           exponent represents power of 10 exponent that one must
      *           raise the base_denom to in order to equal the given DenomUnit's denom
-     *           1 denom = 10^exponent base_denom
+     *           1 denom = 1^exponent base_denom
      *           (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
      *           exponent = 6, thus: 1 atom = 10^6 uatom).
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $aliases
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $aliases
      *           aliases is a list of string aliases for the given denom
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Bank::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Bank::initOnce();
         parent::__construct($data);
     }
 
@@ -91,7 +91,7 @@ class DenomUnit extends \Google\Protobuf\Internal\Message
     /**
      * exponent represents power of 10 exponent that one must
      * raise the base_denom to in order to equal the given DenomUnit's denom
-     * 1 denom = 10^exponent base_denom
+     * 1 denom = 1^exponent base_denom
      * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
      * exponent = 6, thus: 1 atom = 10^6 uatom).
      *
@@ -106,7 +106,7 @@ class DenomUnit extends \Google\Protobuf\Internal\Message
     /**
      * exponent represents power of 10 exponent that one must
      * raise the base_denom to in order to equal the given DenomUnit's denom
-     * 1 denom = 10^exponent base_denom
+     * 1 denom = 1^exponent base_denom
      * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
      * exponent = 6, thus: 1 atom = 10^6 uatom).
      *
@@ -137,7 +137,7 @@ class DenomUnit extends \Google\Protobuf\Internal\Message
      * aliases is a list of string aliases for the given denom
      *
      * Generated from protobuf field <code>repeated string aliases = 3 [json_name = "aliases"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAliases($var)

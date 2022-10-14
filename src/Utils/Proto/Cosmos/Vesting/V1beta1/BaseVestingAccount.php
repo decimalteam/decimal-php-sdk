@@ -21,19 +21,19 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
      */
     protected $base_account = null;
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin original_vesting = 2 [json_name = "originalVesting", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin original_vesting = 2 [json_name = "originalVesting", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"original_vesting\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
     private $original_vesting;
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_free = 3 [json_name = "delegatedFree", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_free = 3 [json_name = "delegatedFree", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"delegated_free\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
     private $delegated_free;
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_vesting = 4 [json_name = "delegatedVesting", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_vesting = 4 [json_name = "delegatedVesting", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"delegated_vesting\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
     private $delegated_vesting;
     /**
-     * Generated from protobuf field <code>int64 end_time = 5 [json_name = "endTime"];</code>
+     * Generated from protobuf field <code>int64 end_time = 5 [json_name = "endTime", (.gogoproto.moretags) = "yaml:\"end_time\""];</code>
      */
     protected $end_time = 0;
 
@@ -44,14 +44,14 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Cosmos\Auth\V1beta1\BaseAccount $base_account
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $original_vesting
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $delegated_free
-     *     @type \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $delegated_vesting
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $original_vesting
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $delegated_free
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $delegated_vesting
      *     @type int|string $end_time
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Vesting\V1Beta1\Vesting::initOnce();
+        \Cosmos\Vesting\V1beta1\GPBMetadata\Vesting::initOnce();
         parent::__construct($data);
     }
 
@@ -88,7 +88,7 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin original_vesting = 2 [json_name = "originalVesting", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin original_vesting = 2 [json_name = "originalVesting", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"original_vesting\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getOriginalVesting()
@@ -97,8 +97,8 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin original_vesting = 2 [json_name = "originalVesting", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin original_vesting = 2 [json_name = "originalVesting", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"original_vesting\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOriginalVesting($var)
@@ -110,7 +110,7 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_free = 3 [json_name = "delegatedFree", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_free = 3 [json_name = "delegatedFree", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"delegated_free\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getDelegatedFree()
@@ -119,8 +119,8 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_free = 3 [json_name = "delegatedFree", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_free = 3 [json_name = "delegatedFree", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"delegated_free\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setDelegatedFree($var)
@@ -132,7 +132,7 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_vesting = 4 [json_name = "delegatedVesting", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_vesting = 4 [json_name = "delegatedVesting", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"delegated_vesting\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getDelegatedVesting()
@@ -141,8 +141,8 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_vesting = 4 [json_name = "delegatedVesting", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param \Cosmos\Base\V1beta1\Coin[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin delegated_vesting = 4 [json_name = "delegatedVesting", (.gogoproto.nullable) = false, (.gogoproto.moretags) = "yaml:\"delegated_vesting\"", (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setDelegatedVesting($var)
@@ -154,7 +154,7 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 end_time = 5 [json_name = "endTime"];</code>
+     * Generated from protobuf field <code>int64 end_time = 5 [json_name = "endTime", (.gogoproto.moretags) = "yaml:\"end_time\""];</code>
      * @return int|string
      */
     public function getEndTime()
@@ -163,7 +163,7 @@ class BaseVestingAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 end_time = 5 [json_name = "endTime"];</code>
+     * Generated from protobuf field <code>int64 end_time = 5 [json_name = "endTime", (.gogoproto.moretags) = "yaml:\"end_time\""];</code>
      * @param int|string $var
      * @return $this
      */

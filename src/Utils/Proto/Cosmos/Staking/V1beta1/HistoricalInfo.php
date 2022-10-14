@@ -34,11 +34,11 @@ class HistoricalInfo extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Tendermint\Types\Header $header
-     *     @type \Cosmos\Staking\V1beta1\Validator[]|\Google\Protobuf\Internal\RepeatedField $valset
+     *     @type array<\Cosmos\Staking\V1beta1\Validator>|\Google\Protobuf\Internal\RepeatedField $valset
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Staking\V1Beta1\Staking::initOnce();
+        \Cosmos\Staking\V1beta1\GPBMetadata\Staking::initOnce();
         parent::__construct($data);
     }
 
@@ -85,7 +85,7 @@ class HistoricalInfo extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .cosmos.staking.v1beta1.Validator valset = 2 [json_name = "valset", (.gogoproto.nullable) = false];</code>
-     * @param \Cosmos\Staking\V1beta1\Validator[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Cosmos\Staking\V1beta1\Validator>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setValset($var)

@@ -10,7 +10,6 @@ use Google\Protobuf\Internal\GPBUtil;
 
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
- * Since: cosmos-sdk 0.43
  *
  * Generated from protobuf message <code>cosmos.gov.v1beta1.WeightedVoteOption</code>
  */
@@ -21,7 +20,7 @@ class WeightedVoteOption extends \Google\Protobuf\Internal\Message
      */
     protected $option = 0;
     /**
-     * Generated from protobuf field <code>string weight = 2 [json_name = "weight", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string weight = 2 [json_name = "weight", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"weight\""];</code>
      */
     protected $weight = '';
 
@@ -36,7 +35,7 @@ class WeightedVoteOption extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Gov::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Gov::initOnce();
         parent::__construct($data);
     }
 
@@ -63,7 +62,7 @@ class WeightedVoteOption extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string weight = 2 [json_name = "weight", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string weight = 2 [json_name = "weight", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"weight\""];</code>
      * @return string
      */
     public function getWeight()
@@ -72,7 +71,7 @@ class WeightedVoteOption extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string weight = 2 [json_name = "weight", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string weight = 2 [json_name = "weight", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.gogoproto.moretags) = "yaml:\"weight\""];</code>
      * @param string $var
      * @return $this
      */

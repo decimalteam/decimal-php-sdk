@@ -40,7 +40,7 @@ class EventReturnMultisigWallet extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Legacy\V1\Events::initOnce();
+        \Decimal\Legacy\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 

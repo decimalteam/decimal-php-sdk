@@ -16,11 +16,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class Params extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.SendEnabled send_enabled = 1 [json_name = "sendEnabled"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.SendEnabled send_enabled = 1 [json_name = "sendEnabled", (.gogoproto.moretags) = "yaml:\"send_enabled,omitempty\""];</code>
      */
     private $send_enabled;
     /**
-     * Generated from protobuf field <code>bool default_send_enabled = 2 [json_name = "defaultSendEnabled"];</code>
+     * Generated from protobuf field <code>bool default_send_enabled = 2 [json_name = "defaultSendEnabled", (.gogoproto.moretags) = "yaml:\"default_send_enabled,omitempty\""];</code>
      */
     protected $default_send_enabled = false;
 
@@ -30,17 +30,17 @@ class Params extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Cosmos\Bank\V1beta1\SendEnabled[]|\Google\Protobuf\Internal\RepeatedField $send_enabled
+     *     @type array<\Cosmos\Bank\V1beta1\SendEnabled>|\Google\Protobuf\Internal\RepeatedField $send_enabled
      *     @type bool $default_send_enabled
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Bank\V1Beta1\Bank::initOnce();
+        \Cosmos\Bank\V1beta1\GPBMetadata\Bank::initOnce();
         parent::__construct($data);
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.SendEnabled send_enabled = 1 [json_name = "sendEnabled"];</code>
+     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.SendEnabled send_enabled = 1 [json_name = "sendEnabled", (.gogoproto.moretags) = "yaml:\"send_enabled,omitempty\""];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getSendEnabled()
@@ -49,8 +49,8 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.SendEnabled send_enabled = 1 [json_name = "sendEnabled"];</code>
-     * @param \Cosmos\Bank\V1beta1\SendEnabled[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cosmos.bank.v1beta1.SendEnabled send_enabled = 1 [json_name = "sendEnabled", (.gogoproto.moretags) = "yaml:\"send_enabled,omitempty\""];</code>
+     * @param array<\Cosmos\Bank\V1beta1\SendEnabled>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSendEnabled($var)
@@ -62,7 +62,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bool default_send_enabled = 2 [json_name = "defaultSendEnabled"];</code>
+     * Generated from protobuf field <code>bool default_send_enabled = 2 [json_name = "defaultSendEnabled", (.gogoproto.moretags) = "yaml:\"default_send_enabled,omitempty\""];</code>
      * @return bool
      */
     public function getDefaultSendEnabled()
@@ -71,7 +71,7 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bool default_send_enabled = 2 [json_name = "defaultSendEnabled"];</code>
+     * Generated from protobuf field <code>bool default_send_enabled = 2 [json_name = "defaultSendEnabled", (.gogoproto.moretags) = "yaml:\"default_send_enabled,omitempty\""];</code>
      * @param bool $var
      * @return $this
      */

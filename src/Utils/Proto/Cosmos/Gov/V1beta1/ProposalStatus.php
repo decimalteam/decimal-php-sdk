@@ -14,7 +14,7 @@ use UnexpectedValueException;
 class ProposalStatus
 {
     /**
-     * PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.
+     * PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.
      *
      * Generated from protobuf enum <code>PROPOSAL_STATUS_UNSPECIFIED = 0 [(.gogoproto.enumvalue_customname) = "StatusNil"];</code>
      */

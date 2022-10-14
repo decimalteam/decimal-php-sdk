@@ -28,12 +28,12 @@ class ListAllInterfacesResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $interface_names
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $interface_names
      *           interface_names is an array of all the registered interfaces.
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Base\Reflection\V1Beta1\Reflection::initOnce();
+        \Cosmos\Base\Reflection\V1beta1\GPBMetadata\Reflection::initOnce();
         parent::__construct($data);
     }
 
@@ -52,7 +52,7 @@ class ListAllInterfacesResponse extends \Google\Protobuf\Internal\Message
      * interface_names is an array of all the registered interfaces.
      *
      * Generated from protobuf field <code>repeated string interface_names = 1 [json_name = "interfaceNames"];</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setInterfaceNames($var)

@@ -40,7 +40,7 @@ class EventSendCoin extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Decimal\Coin\V1\Events::initOnce();
+        \Decimal\Coin\V1\GPBMetadata\Events::initOnce();
         parent::__construct($data);
     }
 

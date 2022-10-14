@@ -43,7 +43,7 @@ class Block extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Tendermint\Types\Block::initOnce();
+        \Tendermint\Types\GPBMetadata\Block::initOnce();
         parent::__construct($data);
     }
 

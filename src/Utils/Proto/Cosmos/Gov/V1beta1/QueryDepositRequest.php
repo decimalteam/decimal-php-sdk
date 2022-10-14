@@ -24,7 +24,7 @@ class QueryDepositRequest extends \Google\Protobuf\Internal\Message
     /**
      * depositor defines the deposit addresses from the proposals.
      *
-     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor"];</code>
      */
     protected $depositor = '';
 
@@ -41,7 +41,7 @@ class QueryDepositRequest extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Cosmos\Gov\V1Beta1\Query::initOnce();
+        \Cosmos\Gov\V1beta1\GPBMetadata\Query::initOnce();
         parent::__construct($data);
     }
 
@@ -74,7 +74,7 @@ class QueryDepositRequest extends \Google\Protobuf\Internal\Message
     /**
      * depositor defines the deposit addresses from the proposals.
      *
-     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor"];</code>
      * @return string
      */
     public function getDepositor()
@@ -85,7 +85,7 @@ class QueryDepositRequest extends \Google\Protobuf\Internal\Message
     /**
      * depositor defines the deposit addresses from the proposals.
      *
-     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string depositor = 2 [json_name = "depositor"];</code>
      * @param string $var
      * @return $this
      */
