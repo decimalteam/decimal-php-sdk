@@ -280,7 +280,13 @@ class Transaction
 
     }
 
-    public function sendCoin($recipient, $denom, $amount) {
+    public function sendCoin($payload) {
+        [
+            'recipient' => $recipient,
+            'denom' => $denom,
+            'amount' => $amount
+        ] = $payload;
+
         $msg = $this->protoManager->getMsgSendCoin(
             $this->wallet->getAddress(),
             $recipient,strtolower(trim($denom)),
@@ -292,20 +298,34 @@ class Transaction
     }
 
 
-    public function sellCoin($sellCoin,$getCoin, $amount,$minBuyLimit) {
+    public function sellCoin($payload) {
+        [ 
+            'denomSell'     => $denomSell,
+            'denomBuy'      => $denomBuy,
+            'amountSell'    => $amountSell,
+            'amountBuy'     => $amountBuy
+        ] = $payload;
+
         $msg = $this->protoManager->getMsgSellCoin(
             $this->wallet->getAddress(),
-            strtolower(trim($sellCoin)),
-            amountUNIRecalculate($amount),
-            strtolower(trim($getCoin)),
-            amountUNIRecalculate($minBuyLimit)
+            strtolower(trim($denomSell)),
+            amountUNIRecalculate($amountSell),
+            strtolower(trim($denomBuy)),
+            amountUNIRecalculate($amountBuy)
         );
 
         $result = $this->sendTransaction($msg, []);
         return $result;
     }
 
-    public function buyCoin($denomBuy,$denomSell, $amountBuy,$amountSell){
+    public function buyCoin($payload){
+        [ 
+            'denomSell'     => $denomSell,
+            'denomBuy'      => $denomBuy,
+            'amountSell'    => $amountSell,
+            'amountBuy'     => $amountBuy
+        ] = $payload;
+    
         $msg = $this->protoManager->getMsgBuyCoin(
             $this->wallet->getAddress(),
                 strtolower(trim($denomBuy)),
@@ -318,7 +338,13 @@ class Transaction
         return $result;
     }
 
-    public function sellAllCoin($denomSell,$denomBuy,$amountBuy){
+    public function sellAllCoin($payload){
+        [
+            'denomSell' => $denomSell,
+            'denomBuy'  => $denomBuy,
+            'minCoinToBuy' => $amountBuy
+        ] = $payload;
+
         $msg = $this->protoManager->getMsgSellAllCoin(
             $this->wallet->getAddress(),
                 strtolower(trim($denomSell)),
@@ -484,7 +510,13 @@ class Transaction
      * @throws DecimalException
      */
 
-     public function validatorDelegate($validator, $denom, $stake){
+     public function validatorDelegate($payload){
+        [
+            'address'   => $validator,
+            'coin'      => $denom,
+            'stake'     => $stake
+        ] = $payload;
+
         $msg = $this->protoManager->getMsgValidatorDelegate(
             $this->wallet->getAddress(),
             $validator,
@@ -496,7 +528,13 @@ class Transaction
         return $result;
     }
 
-    public function validatorUnbound($validator, $denom, $stake) {
+    public function validatorUnbound($payload) {
+        [
+            'address'   => $validator,
+            'coin'      => $denom,
+            'stake'     => $stake
+        ] = $payload;
+
         $msg = $this->protoManager->getMsgValidatorUnbound(
             $this->wallet->getAddress(),
             $validator,

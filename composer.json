@@ -33,9 +33,10 @@
             "Ethermint\\": "src/Utils/Proto/Ethermint/",
             "Gogoproto\\": "src/Utils/Proto/Gogoproto",
             "CosmosProto\\": "src/Utils/Proto/CosmosProto",
-            "Tendermint\\": "src/Utils/Proto/Tendermint"
-
+            "Tendermint\\": "src/Utils/Proto/Tendermint",
+            "Google\\": "src/Utils/Proto/Google"
         },
+
         "files": [
             "src/helpers.php"
         ]

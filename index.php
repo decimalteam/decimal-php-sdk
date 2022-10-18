@@ -19,9 +19,14 @@ require __DIR__.'/vendor/autoload.php';
     ]);
 
     while(true) {
+        $payload = [
+            'recipient' => 'dx184qe86tyhurv5fxlxgvcwa6znfg3ugk8ajn4r3',
+            'denom' => 'del',
+            'amount' => 0.0005
+        ];
 
-    $transaction->sendCoin('dx184qe86tyhurv5fxlxgvcwa6znfg3ugk8ajn4r3', 'del', 0.0005);
-    $transaction->sendCoin('dx184qe86tyhurv5fxlxgvcwa6znfg3ugk8ajn4r3', 'del', 0.0005);
+    $transaction->sendCoin($payload);
+    $transaction->sendCoin($payload);
 
 
     sleep(10);

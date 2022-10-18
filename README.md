@@ -104,11 +104,13 @@ Test::runTest($wallet, [
 
 ```php
 
-$recipient = 'dx14x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj';
-$denom = 'del';
-$amount = 3;
+$payload = [
+  'recipient' = 'dx14x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj';
+  'denom' = 'del';
+  'amount' = 3;
+];
 
-$result = $transaction->sendCoins($recipient,$denom,$amount);
+$result = $transaction->sendCoin($payload);
 // => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
 ```
 
@@ -125,54 +127,65 @@ $result = $transaction->burnCoins($txPayload);
 ## Sell coins
 
 ```php
+$payload = [
+  'denomSell' = 'del';
+  'denomBuy' = 'a1111111';
+  'amountSell' = 10;
+  'amountBuy' = 2;
+];
 
-$denomSell = 'del';
-$denomBuy = 'a1111111';
-$amountSell = 10;
-$amountBuy = 2;
-
-$result = $transaction->sellCoin($denomSell, $denomBuy,$amountSell, $amountBuy);
+$result = $transaction->sellCoin($payload);
 ```
 
 ## Buy Coins
 
 ```php
-$denomSell = 'del';
-$denomBuy = 'a1111111';
-$amountBuy = 10;
-$amountSell = 10;
+$payload = [
+  'denomSell' = 'del';
+  'denomBuy' = 'a1111111';
+  'amountBuy' = 10;
+  'amountSell' = 10;
+];
 
-$result = $transaction->buyCoin($denomSell,$denomBuy, $amountBuy,$amountSell);
+$result = $transaction->buyCoin($payload);
 ```
 
 ## Sell all coins
 
 ```php
-$denomSell = 'A1111111';
-$denomBuy = 'del';
-$minCoinToBuy = 2;
 
-$result = $transaction->sellAllCoin($denomSell,$denomBuy,$minCoinToBuy);
+$payload = [
+  'denomSell' = 'A1111111';
+  'denomBuy' = 'del';
+  'minCoinToBuy' = 2;
+];
+
+$result = $transaction->sellAllCoin($payload);
 ```
 
 ## Validator delegate
 
 ```php
-$address = 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
-$coin = 'tdel';
-$stake = '10';
 
-$result = $transaction->validatorDelegate($address,$coin,$stake);
+$payload = [
+'address' = 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
+'coin' = 'tdel';
+'stake' = '10';
+];
+
+$result = $transaction->validatorDelegate($payload);
 ```
 
 ## Validator unbound
 
 ```php
-$address = 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
-$coin = 'tdel';
-$stake = '10';
+$payload = [
+  'address' = 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
+  'coin' = 'tdel';
+  'stake' = '10';
+];
 
-$result = $transaction->validatorUnbound($address,$coin,$stake);
+$result = $transaction->validatorUnbound($payload);
 ```
 
 ## Validator declare
