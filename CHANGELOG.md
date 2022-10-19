@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-### [v0.12]() - 2022-10-19
+### [v0.12](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/v0.12%0D0.11?topic=0) - 2022-10-19
 ###
 * Added protobufs files and redoing work with node through protobuff files [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/61)
 
