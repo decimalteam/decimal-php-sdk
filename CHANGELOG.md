@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+### [v0.12]() - 2022-10-19
+###
+* Added protobufs files and redoing work with node through protobuff files [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/61)
+
 ### [v0.11](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/0.11..0.10.13) - 2022-06-30
 #### Features
 * Added transactions: in decimal api added new transaction type burn coins  [`COMMIT`](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/83f68661bcbd3255e39d5a40318e0a4c2fdcb1ea)
