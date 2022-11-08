@@ -9,11 +9,11 @@ use GuzzleHttp\Client as GClient;
 
 class ApiRequester
 {
-	const TEST_GATE_API = 'https://devnet-dec2.console.decimalchain.com/api/';
+	const TEST_GATE_API = 'https://devnet-gate.decimalchain.com/api/';
     const GET = 'get';
     const POST = 'post';
 	const TIMEOUT = 5.0;
-	const DEFAULT_NODE_URL = 'https://devnet-dec2-node-01.decimalchain.com/';
+	const DEFAULT_NODE_URL = 'https://devnet-gate.decimalchain.com/api/rpc/broadcast';
     const DEFAULT_DEFAULT_NODE_RPC_PORT = '26657';
     const DEFAULT_DEFAULT_NODE_REST_PORT = '1317';
 
@@ -138,7 +138,7 @@ class ApiRequester
 		}
 
 		//todo temp fix
-		$response = file_get_contents("https://devnet-dec2-node-01.decimalchain.com/rest/cosmos/auth/v1beta1/accounts/". $address);
+		$response = file_get_contents("https://devnet-val.decimalchain.com/rest/cosmos/auth/v1beta1/accounts/". $address);
 
 		return json_decode($response);
 	}
@@ -479,14 +479,16 @@ class ApiRequester
         try {
             $res = $this->client->get($url);
             $body = $res->getBody();
-            return json_decode($body->getContents(), true);
+            $response = json_decode($body->getContents(), true); 
+
+            return $response;
         } catch (\Exception $exception) {
             return $this->getError(json_encode($exception->getMessage()));
         }
     }
 
     public function sendTxToBroadcast($broadcastPayload) {
-		$response = $this->post('http://185.242.122.118/rest/cosmos/tx/v1beta1/txs',$broadcastPayload);
+		$response = $this->post('https://devnet-val.decimalchain.com/rest/cosmos/tx/v1beta1/txs',$broadcastPayload);
 		return $response;
 	}
 	

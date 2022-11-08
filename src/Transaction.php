@@ -289,11 +289,13 @@ class Transaction
 
         $msg = $this->protoManager->getMsgSendCoin(
             $this->wallet->getAddress(),
-            $recipient,strtolower(trim($denom)),
+            $recipient,
+            strtolower(trim($denom)),
             amountUNIRecalculate($amount)
         );
 
         $result = $this->sendTransaction($msg, []);
+        var_dump($result);
         return $result;
     }
 
@@ -400,15 +402,14 @@ class Transaction
     }
 
     private function sendTransaction($msg, $options, $simulate = false) {
-
-
         $sequence = $this->wallet->getSequence();
         
         $memo = isset($options['message']) ? $options['message'] : '';
-
         $txBody = $this->protoManager->getTxBody($msg, $memo);
+
         $feeCoin = $this->protoManager->getCoin('del', '0');
         $fee = $this->protoManager->getFee('180000', $feeCoin);
+
         $signObj = $this->singTransaction($txBody, $fee);
 
         $txRaw = $this->protoManager->getTxRaw(
@@ -417,24 +418,26 @@ class Transaction
             [$signObj['signature']],
         );
 
-
         $txBytes = $txRaw->serializeToString();
-
         
         $payload = [
             'tx_bytes' => base64_encode($txBytes),
             'feeCoin' => $feeCoin->getDenom()
         ];
 
-        $predictedFee = $this->requester->post('rpc/simulate_fee', $payload);
 
-        if (!is_int($predictedFee)) {
-            throw new DecimalException($predictedFee['error']['errorMessage']);
-        }
+        // TODO need fix format 
+        
+        // $predictedFee = $this->requester->post('rpc/simulate_fee', $payload);
+
+        // if (!is_int($predictedFee)) {
+        //     var_dump('------------------');
+        //     throw new DecimalException($predictedFee['error']['errorMessage']);
+        // }
         
         $this->wallet->setSequence($sequence++);
 
-        $fee = $this->protoManager->getFee("180000", $this->protoManager->getCoin('del', $predictedFee));
+        $fee = $this->protoManager->getFee("180000", $this->protoManager->getCoin('del', 0));
 
         $signObj = $this->singTransaction($txBody, $fee);
         $txRaw = $this->protoManager->getTxRaw(          
@@ -464,12 +467,12 @@ class Transaction
 
         $publicKey = $this->protoManager->getPubKey(hex2bin($bitcoinECDSA->getPubKey()));
         $signerInfo = $this->protoManager->getSignerInfo($publicKey, $this->wallet->getSequence());
-        $authInfo = $this->protoManager->getAuthInfo();
-        $authInfo->setSignerInfos([$signerInfo]);
 
         $feeCoin = $this->protoManager->getCoin('del', 0);
         $fee = $this->protoManager->getFee('180000', $feeCoin);
-        $authInfo->setFee($fee);
+
+        $authInfo = $this->protoManager->getAuthInfo($signerInfo, $fee);
+
         $authInfoBytes = $authInfo->serializeToString();
         $signBytes = $this->protoManager->getSignDoc(
             $txBody->serializeToString(),

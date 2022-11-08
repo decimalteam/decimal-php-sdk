@@ -15,6 +15,7 @@ use Cosmos\Tx\V1beta1\SignDoc;
 use Cosmos\Tx\V1beta1\SignerInfo;
 use Cosmos\Tx\V1beta1\TxRaw;
 use Cosmos\Tx\V1beta1\ModeInfo\Single;
+use Cosmos\Tx\V1beta1\SimulateRequest;
 use Ethermint\Crypto\V1\Ethsecp256k1\PubKey;
 use Decimal\Coin\V1\MsgBuyCoin;
 use Decimal\Coin\V1\MsgMultiSendCoin;
@@ -213,7 +214,6 @@ class ProtoManager
         $msg->setSender($sender);
         $msg->setCoinDenomToSell($denomSell);
         $msg->setMinCoinToBuy($this->getCoin($denomBuy, $amountBuy));
-        var_dump($msg->serializeToString());
 
         return $this->getAny([
             'type_url' => TxTypes::COIN_SELL_ALL,
@@ -256,9 +256,11 @@ class ProtoManager
         ]);
     }
 
-    public function getAuthInfo($payload = null)
-    {
-        return new AuthInfo($payload);
+    public function getAuthInfo($signerInfo,$fee) {
+        $authInfo = new AuthInfo(); 
+        $authInfo->setSignerInfos([$signerInfo]);
+        $authInfo->setFee($fee);
+        return $authInfo;
     }
 
     public function getSignerInfo($pubKey, $sequence)
@@ -310,5 +312,12 @@ class ProtoManager
         $broadcastRequest->setTxBytes($txBytes);
         $broadcastRequest->setMode(BroadcastMode::BROADCAST_MODE_SYNC); // always sync mode for now
         return $broadcastRequest;
+    }
+
+    public function getSimulateFeePayload($payload){
+        $feePayload = new SimulateRequest();
+        $feePayload->setTxBytes($payload);
+
+        return $feePayload;
     }
 }
