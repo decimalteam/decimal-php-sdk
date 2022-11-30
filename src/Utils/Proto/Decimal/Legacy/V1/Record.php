@@ -39,6 +39,12 @@ class Record extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated string nfts = 4 [json_name = "nfts", (.gogoproto.customname) = "NFTs"];</code>
      */
     private $nfts;
+    /**
+     * validators defines complete list of validators with reward address = legacy address.
+     *
+     * Generated from protobuf field <code>repeated string validators = 5 [json_name = "validators"];</code>
+     */
+    private $validators;
 
     /**
      * Constructor.
@@ -54,6 +60,8 @@ class Record extends \Google\Protobuf\Internal\Message
      *           wallets defines complete list of multisig wallets to be returned.
      *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $nfts
      *           nfts defines list of token ids to be returned
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $validators
+     *           validators defines complete list of validators with reward address = legacy address.
      * }
      */
     public function __construct($data = NULL) {
@@ -161,6 +169,32 @@ class Record extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
         $this->nfts = $arr;
+
+        return $this;
+    }
+
+    /**
+     * validators defines complete list of validators with reward address = legacy address.
+     *
+     * Generated from protobuf field <code>repeated string validators = 5 [json_name = "validators"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getValidators()
+    {
+        return $this->validators;
+    }
+
+    /**
+     * validators defines complete list of validators with reward address = legacy address.
+     *
+     * Generated from protobuf field <code>repeated string validators = 5 [json_name = "validators"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setValidators($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->validators = $arr;
 
         return $this;
     }

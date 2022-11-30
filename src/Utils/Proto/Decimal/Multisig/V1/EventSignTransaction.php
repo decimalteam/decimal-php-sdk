@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * EventSignTransaction defines event emitted when the multisig transaction is signed.
+ * EventSignTransaction defines event emitted when existing multisig transaction is signed by another owner.
  *
  * Generated from protobuf message <code>decimal.multisig.v1.EventSignTransaction</code>
  */

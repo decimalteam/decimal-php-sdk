@@ -48,7 +48,7 @@ class MsgCancelRedelegationNFT extends \Google\Protobuf\Internal\Message
     /**
      * sub_token_ids defines list of NFT sub-token IDs.
      *
-     * Generated from protobuf field <code>repeated int64 sub_token_ids = 6 [json_name = "subTokenIds", (.gogoproto.customname) = "SubTokenIDs"];</code>
+     * Generated from protobuf field <code>repeated uint32 sub_token_ids = 6 [json_name = "subTokenIds", (.gogoproto.customname) = "SubTokenIDs"];</code>
      */
     private $sub_token_ids;
 
@@ -68,7 +68,7 @@ class MsgCancelRedelegationNFT extends \Google\Protobuf\Internal\Message
      *           creation_height defines number of the block at which redelegation was beginned.
      *     @type string $token_id
      *           token_id defines the NFT token ID.
-     *     @type array<int>|array<string>|\Google\Protobuf\Internal\RepeatedField $sub_token_ids
+     *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $sub_token_ids
      *           sub_token_ids defines list of NFT sub-token IDs.
      * }
      */
@@ -210,7 +210,7 @@ class MsgCancelRedelegationNFT extends \Google\Protobuf\Internal\Message
     /**
      * sub_token_ids defines list of NFT sub-token IDs.
      *
-     * Generated from protobuf field <code>repeated int64 sub_token_ids = 6 [json_name = "subTokenIds", (.gogoproto.customname) = "SubTokenIDs"];</code>
+     * Generated from protobuf field <code>repeated uint32 sub_token_ids = 6 [json_name = "subTokenIds", (.gogoproto.customname) = "SubTokenIDs"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getSubTokenIds()
@@ -221,13 +221,13 @@ class MsgCancelRedelegationNFT extends \Google\Protobuf\Internal\Message
     /**
      * sub_token_ids defines list of NFT sub-token IDs.
      *
-     * Generated from protobuf field <code>repeated int64 sub_token_ids = 6 [json_name = "subTokenIds", (.gogoproto.customname) = "SubTokenIDs"];</code>
-     * @param array<int>|array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated uint32 sub_token_ids = 6 [json_name = "subTokenIds", (.gogoproto.customname) = "SubTokenIDs"];</code>
+     * @param array<int>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setSubTokenIds($var)
     {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::INT64);
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::UINT32);
         $this->sub_token_ids = $arr;
 
         return $this;

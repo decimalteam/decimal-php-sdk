@@ -334,8 +334,8 @@ trait TransactionHelpers
             case $this->txSchemes['NFT_DELEGATE']['type'];
                 return $this->nftDelegatePayload($payload);
                 break;
-            case $this->txSchemes['NFT_UNBOND']['type'];
-                return $this->nftUnbondPayload($payload);
+            case $this->txSchemes['NFT_UNBOUND']['type'];
+                return $this->nftUnboundPayload($payload);
                 break;
             case  $this->txSchemes['PROPOSAL_VOTE']['type'];
                 return $this->proposalVotePayload($payload);
@@ -615,7 +615,7 @@ trait TransactionHelpers
         ];
     }
 
-    public function nftUnbondPayload($payload)
+    public function nftUnboundPayload($payload)
     {
         return [
             'id' => $payload['id'],

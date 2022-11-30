@@ -23,6 +23,10 @@ class EventPayCommission extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 2 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
     private $coins;
+    /**
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin burnt = 3 [json_name = "burnt", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     */
+    private $burnt;
 
     /**
      * Constructor.
@@ -32,6 +36,7 @@ class EventPayCommission extends \Google\Protobuf\Internal\Message
      *
      *     @type string $payer
      *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $coins
+     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $burnt
      * }
      */
     public function __construct($data = NULL) {
@@ -79,6 +84,28 @@ class EventPayCommission extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cosmos\Base\V1beta1\Coin::class);
         $this->coins = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin burnt = 3 [json_name = "burnt", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getBurnt()
+    {
+        return $this->burnt;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin burnt = 3 [json_name = "burnt", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
+     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setBurnt($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cosmos\Base\V1beta1\Coin::class);
+        $this->burnt = $arr;
 
         return $this;
     }

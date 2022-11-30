@@ -1,17 +1,20 @@
 <?php
 
-
 namespace DecimalSDK;
 
+use stdClass;
 use BitcoinPHP\BitcoinECDSA\BitcoinECDSA;
 use \DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Utils\ProtoManager;
 use DecimalSDK\Utils\ApiRequester;
 use DecimalSDK\Utils\Crypto\Encrypt;
+use DecimalSDK\Utils\ProtoManagerAddition;
 use DecimalSDK\Utils\TransactionHelpers;
 use DecimalSDK\Wallet;
 use Elliptic\EC;
 use Exception;
+use Google\Protobuf\StringValue;
+use GPBMetadata\Google\Protobuf\Timestamp;
 use kornrunner\Keccak;
 use Web3\Web3;
 use Web3\Providers\HttpProvider;
@@ -44,7 +47,7 @@ class TransactionDecimal
     const SWAP_REDEEM = 0;
     const NFT_TRANSFER = 0;
     const NFT_DELEGATE = 0;
-    const NFT_UNBOND = 0;
+    const NFT_UNBOUND = 0;
 
     const MAX_SPEND_LIMIT = '100000000000';
     const ADDITIONAL_COMISSION = 20;
@@ -63,6 +66,7 @@ class TransactionDecimal
     private $requester;
     private $nodeMeta;
     private $protoManager;
+    private $protoManagerAddition;
 
 
     protected $txSchemes = [
@@ -305,24 +309,9 @@ class TransactionDecimal
         $this->requester = new ApiRequester($wallet, $options);
         $this->signMeta = $this->requester->getSignMeta($this->wallet);
         $this->protoManager = ProtoManager::instance();
+        $this->protoManagerAddition = ProtoManagerAddition::instance();
 
     }
-
-    // /**
-    //  * @param $payload
-    //  * @return array|mixed
-    //  * @throws DecimalException
-    //  */
-
-    // public function createCoin($payload)
-    // {
-    //     $type = $this->txSchemes['COIN_CREATE']['type'];
-    //     $result = $this->checkRequiredFields('COIN_CREATE', $payload);
-    //     $payload['fee'] = $this->txSchemes['COIN_CREATE']['fee'];
-    //     $prePayload = $this->formatePrepayload($type, $payload);
-    //     $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-    //     return $this->requester->sendTx($preparedTx);
-    // }
 
     public function createCoin($payload, $options = [])
     {
@@ -349,21 +338,31 @@ class TransactionDecimal
         return $result;
     }
 
+    public function updateCoin($payload, $options = [])
+    {
+        [
+            'maxSupply' => $maxSupply,
+            'ticker' => $denom,
+            'identity' => $identity,
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgUpdateCoin(
+                $this->wallet->getAddress(),
+            strtolower(trim($denom)),
+            amountUNIRecalculate($maxSupply),
+            $denom
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+    }
+
     public function burnCoins($payload, $options = [])
     {
         [
-            'recipient' => $recipient,
             'denom' => $denom,
             'amount' => $amount
         ] = $payload;
-
-        try {
-            if (!isBech32($recipient)) {
-                return new Exception('Invalid address.');
-            }
-        } catch (Exception $er) {
-            return $er;
-        }
 
         $msg = $this->protoManager->getMsgBurnCoin(
                 $this->wallet->getAddress(),
@@ -460,6 +459,21 @@ class TransactionDecimal
         return $result;
     }
 
+    public function coinRedeemCheck($payload, $options = []){
+        [
+            'check' => $check,
+            'proof'  => $proof
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgCoinRedeemCheck(
+            $this->wallet->getAddress(),
+                strtolower(trim($check)),
+                strtolower(trim($proof))
+            );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+    }
 
     public function multiSendCoins($payload, $options = []) {
         $sendsPrepare = [];
@@ -486,8 +500,25 @@ class TransactionDecimal
         return $result;
     }
 
-    public function mintNft($id, $denom, $tokenUri, $quantity, $reserve, $allowMint, $recipient = null , $options = [])
+    public function mintNft($payload, $recipient = null , $options = [])
     {
+        [
+            'id' => $id,
+            'denom' => $denom,
+            'tokenUri' => $tokenUri,
+            'quantity' => $quantity,
+            'reserveDenom' => $reserveDenom,
+            'reserveAmount' => $reserveAmount,
+            'allowMint' => $allowMint,
+        ] = $payload;
+        if($recipient == null) {
+            $recipient= $this->wallet->getAddress();
+        }
+        $reserve = [
+            'denom' => strtolower(trim($reserveDenom)),
+            'amount' => $reserveAmount
+        ];
+
         try {
             if (!isBech32($recipient) && ($recipient != null)) {
                 return new Exception('Invalid address.');
@@ -496,32 +527,66 @@ class TransactionDecimal
             return $er;
         }
         $msg = $this->protoManager->getMsgMintNft(
-                $this->wallet->getAddress(),
+            $this->wallet->getAddress(),
             $recipient,
             strtolower(trim($denom)),
             $id,
             $tokenUri,
-            amountUNIRecalculate($allowMint),
+            $allowMint,
             $reserve,
-            amountUNIRecalculate($quantity)
+            $quantity
         );
-
-        $tokenUrlArray = explode('/', $tokenUri);
-        $slug = end($tokenUrlArray);
-
-        $activeNft = $this->requester->post("https://devnet-dec2.console.decimalchain.com/api/nfts/service/$slug/activate", ['tokenId' => $id]);
-
-        if (!$activeNft['success']) {
-            throw new DecimalException(json_decode($activeNft['error']['errorMessage']));
-        }
 
         $result = $this->sendTransaction($msg, $options);
         return $result;
     }
 
-    private function sendTransaction($msg, $options, $simulated = false) {
+    public function burnNft($payload, $options = [])
+    {
+        [
+            'id' => $id,
+            'subtokenIds' => $subtokenIds,
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgBurnNft(
+                $this->wallet->getAddress(),
+            $id,
+            $subtokenIds
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+    }
+
+    public function nftEditMetadata($payload, $options = [])
+    {
+        [
+            'tokenId' => $tokenId,
+            'tokenURI' => $tokenURI,
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgNftEditMetadata(
+                $this->wallet->getAddress(),
+            $tokenId,
+            $tokenURI
+        );
+
+        //  $tokenUrlArray = explode('/', $tokenURI);
+        // $slug = end($tokenUrlArray);
+
+        // $activeNft = $this->requester->post("https://devnet-dec2.console.decimalchain.com/api/nfts/service/$slug/activate", ['tokenId' => $id]);
+
+        // if (!$activeNft['success']) {
+        //     throw new DecimalException(json_decode($activeNft['error']['errorMessage']));
+        // }
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+    }
+
+    private function sendTransaction($msg, $options) {
         $sequence = $this->wallet->getSequence();
-        
+        var_dump($sequence);
         $memo = isset($options['message']) ? $options['message'] : '';
         $txBody = $this->protoManager->getTxBody($msg, $memo);
 
@@ -529,7 +594,7 @@ class TransactionDecimal
         if (!isset($options['feeCoin'])) {
             $fee = $this->protoManager->getDefaultFee();
         } else {
-            $feeCoin = $this->protoManager->getCoin($options['feeCoin'], '000000000000000000000000');
+            $feeCoin = $this->protoManager->getCoin($options['feeCoin'], '0000000000000000000000000000');
             $fee = $this->protoManager->getFee(self::DEFAULT_GAS_LIMIT, $feeCoin);
 
             $signObj = $this->singTransaction($txBody, $fee);
@@ -541,14 +606,18 @@ class TransactionDecimal
             );
 
             $txBytes = $txRaw->serializeToString();
-            $arrayBytes = unpack('C*', $txBytes);
 
             $payload = [
-                'tx_bytes' => array_values($arrayBytes),
-                'feeCoin' => $feeCoin->getDenom()
+                'tx_bytes' => bin2hex($txBytes),
+                'denom' => $feeCoin->getDenom()
             ];
-            $predictedFee = $this->requester->post('rpc/simulate_fee', $payload);
-            $feeCoin = $this->protoManager->getCoin($options['feeCoin'], $predictedFee);
+            $predictedFee = $this->requester->post('tx/estimate', $payload);
+            if(isset($options['simulate'])) {
+                if ($options['simulate'] == 'true') {
+                    return $predictedFee->result->commission;
+                }
+            }
+            $feeCoin = $this->protoManager->getCoin($options['feeCoin'], $predictedFee->result->commission);
             $fee = $this->protoManager->getFee(self::DEFAULT_GAS_LIMIT, $feeCoin);
         }
         
@@ -567,7 +636,12 @@ class TransactionDecimal
 
         $response = $this->requester->sendTxToBroadcast($broadcastPreparedPayload);
 
-        if($response->tx_response->txhash) {
+        // if($response->tx_response->txhash) {
+        //     $tx = $this->requester->getTransaction("56078AF64D254724952D0A9F4290F7B8BFF4F21997674F024B29E43FFA13FC33");
+        //     var_dump($tx);
+        // }
+
+        if($response->tx_response->code == 0) {
             $this->wallet->setSequence(++$sequence);
         }
 
@@ -899,15 +973,16 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-     public function validatorDelegate($payload, $options = []){
+    public function validatorDelegate($payload, $options = [])
+    {
         [
-            'address'   => $validator,
-            'coin'      => $denom,
-            'stake'     => $stake
+            'address' => $validator,
+            'coin' => $denom,
+            'stake' => $stake
         ] = $payload;
 
         $msg = $this->protoManager->getMsgValidatorDelegate(
-            $this->wallet->getAddress(),
+                $this->wallet->getAddress(),
             $validator,
             strtolower(trim($denom)),
             amountUNIRecalculate($stake)
@@ -915,6 +990,74 @@ class TransactionDecimal
 
         $result = $this->sendTransaction($msg, $options);
         return $result;
+    }
+
+    public function validatorRedelegate($payload, $options = [])
+    {
+        [
+            'old_validator' => $old_validator,
+            'new_validator' => $new_validator,
+            'coin' => $denom,
+            'stake' => $stake
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgValidatorRedelegate(
+                $this->wallet->getAddress(),
+            $old_validator,
+            $new_validator,
+            strtolower(trim($denom)),
+            amountUNIRecalculate($stake)
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    public function validatorCancelRedelegate($payload, $options = [])
+    {
+        [
+            'old_validator' => $old_validator,
+            'new_validator' => $new_validator,
+            'creation_height' => $creation_height,
+            'coin' => $denom,
+            'stake' => $stake
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgValidatorCancelRedelegate(
+                $this->wallet->getAddress(),
+            $old_validator,
+            $new_validator,
+            $creation_height,
+            strtolower(trim($denom)),
+            amountUNIRecalculate($stake)
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    public function validatorCancelUndelegate($payload, $options = [])
+    {
+        [
+            'validator' => $validator,
+            'creation_height' => $creation_height,
+            'coin' => $denom,
+            'stake' => $stake
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgValidatorCancelUndelegate(
+                $this->wallet->getAddress(),
+            $validator,
+            $creation_height,
+            strtolower(trim($denom)),
+            amountUNIRecalculate($stake)
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
     }
 
     public function validatorUnbound($payload, $options = []) {
@@ -924,7 +1067,7 @@ class TransactionDecimal
             'stake'     => $stake
         ] = $payload;
 
-        $msg = $this->protoManager->getMsgValidatorUnbound(
+        $msg = $this->protoManager->getMsgValidatorUnbond(
             $this->wallet->getAddress(),
             $validator,
             strtolower(trim($denom)),
@@ -941,14 +1084,42 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-    public function validatorDeclare($payload)
+    public function validatorDeclare($payload, $options = [])
     {
-        $type = $this->txSchemes['VALIDATOR_CANDIDATE']['type'];
-        $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE', $payload);
-        $payload['fee'] = $this->txSchemes['VALIDATOR_CANDIDATE']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
+        [
+            'rewardAddress' => $rewardAddress,
+            'stake' => $stake,
+            'coin' => $coin,
+            'pubKey' => $pubKey,
+            'commission' => $commission,
+            'moniker' => $moniker,
+            'identity' => $identity,
+            'website' => $website,
+            'securityContact' => $securityContact,
+            'details' => $details,
+        ] = $payload;
+
+        $pubKeyEd25519 = $this->protoManagerAddition->getPubKey(base64_decode($pubKey));
+
+        $serializedPubKey = $pubKeyEd25519->serializeToString();
+
+        $msg = $this->protoManager->getMsgValidatorDeclare(
+                $this->wallet->getValidatorAddress(),
+            $rewardAddress,
+            $stake,
+            $coin,
+            $serializedPubKey,
+            $commission,
+            $moniker,
+            $identity,
+            $website,
+            $securityContact,
+            $details
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
     }
 
     /**
@@ -957,14 +1128,30 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-    public function validatorEdit($payload)
+    public function validatorEdit($payload, $options = [])
     {
-        $type = $this->txSchemes['VALIDATOR_CANDIDATE_EDIT']['type'];
-        $result = $this->checkRequiredFields('VALIDATOR_CANDIDATE_EDIT', $payload);
-        $payload['fee'] = $this->txSchemes['VALIDATOR_CANDIDATE_EDIT']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
+        [
+            'rewardAddress' => $rewardAddress,
+            'moniker' => $moniker,
+            'identity' => $identity,
+            'website' => $website,
+            'securityContact' => $securityContact,
+            'details' => $details,
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgEditValidator(
+                $this->wallet->getValidatorAddress(),
+                $rewardAddress,
+                $moniker,
+                $identity,
+                $website,
+                $securityContact,
+                $details
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
     }
 
     /**
@@ -972,14 +1159,18 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-    public function disableValidator()
+    public function disableValidator($payload, $options = [])
     {
-        $type = $this->txSchemes['VALIDATOR_SET_OFFLINE']['type'];
+        [
+            'validator' => $validator,
+        ] = $payload;
+        $msg = $this->protoManager->getMsgValidatorDisable(
+            $validator
+        );
 
-        $prePayload = $this->formatePrepayload($type);
-        $payload['fee'] = $this->txSchemes['VALIDATOR_SET_OFFLINE']['fee'];
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
-        return $this->requester->sendTx($preparedTx);
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
     }
 
     /**
@@ -987,45 +1178,18 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-    public function enableValidator()
+    public function enableValidator($payload, $options = [])
     {
-        $type = $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
-        $prePayload = $this->formatePrepayload($type);
-        $payload['fee'] = $this->txSchemes['VALIDATOR_SET_ONLINE']['fee'];
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
-        return $this->requester->sendTx($preparedTx);
-    }
+        [
+            'validator' => $validator,
+        ] = $payload;
+        $msg = $this->protoManager->getMsgValidatorEnable(
+            $validator
+        );
 
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
-    public function multisigCreate($payload)
-    {
-        $type = $this->txSchemes['MULTISIG_CREATE_WALLET']['type'];
-        $result = $this->checkRequiredFields('MULTISIG_CREATE_WALLET', $payload);
-        $payload['fee'] = $this->txSchemes['MULTISIG_CREATE_WALLET']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
-    }
-
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
-
-    public function multisigCreateTX($payload)
-    {
-        $type = $this->txSchemes['MULTISIG_CREATE_TX']['type'];
-        $result = $this->checkRequiredFields('MULTISIG_CREATE_TX', $payload);
-        $payload['fee'] = $this->txSchemes['MULTISIG_CREATE_TX']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
     }
 
     /**
@@ -1034,32 +1198,24 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-    public function multisigSignTX($payload)
+    public function multisigCreate($payload, $options = [])
     {
-        $type = $this->txSchemes['MULTISIG_SIGN_TX']['type'];
-        $result = $this->checkRequiredFields('MULTISIG_SIGN_TX', $payload);
-        $payload['fee'] = $this->txSchemes['MULTISIG_SIGN_TX']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
-    }
-    /**
-     * @param $payload
-     * @return array|mixed
-     * @throws DecimalException
-     */
+        [
+            'threshold' => $threshold,
+            'owners' => $owners,
+            'weights' => $weights,
+        ] = $payload;
+        // var_dump(intval($threshold));
+        $msg = $this->protoManager->getMsgMultisigCreate(
+            $this->wallet->getAddress(),
+            $threshold,
+            $owners,
+            $weights
+        );
 
-
-    public function nftUnbond($payload)
-    {
-        $type = $this->txSchemes['NFT_UNBOND']['type'];
-        $result = $this->checkRequiredFields('NFT_UNBOND', $payload);
-
-        $payload['fee'] = $this->txSchemes['NFT_UNBOND']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload);
-
-        return $this->requester->sendTx($preparedTx);
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
     }
 
     /**
@@ -1068,16 +1224,34 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-    public function proposalVote($payload)
+    public function multisigCreateTX($payload, $options = [])
     {
-        $type = $this->txSchemes['PROPOSAL_VOTE']['type'];
-        $result = $this->checkRequiredFields('PROPOSAL_VOTE', $payload);
-        $payload['fee'] = $this->txSchemes['PROPOSAL_VOTE']['fee'];
+        [
+            'from' => $from,
+            'to' => $to,
+            'coin' => $coin,
+            'amount' => $amount,
+        ] = $payload;
 
-        $prePayload = $this->formatePrepayload($type, $payload);
+        $type = '/decimal.coin.v1.MsgSendCoin';
 
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
+        $preparedData = [
+            'sender' => $from,
+            'recipient' => $to,
+            'amount' => $amount,
+            'coin' => $coin,
+        ];
+
+        $msg = $this->protoManager->getMsgMultisigCreateTx(
+                $this->wallet->getAddress(),
+            $from,
+            $type,
+            $preparedData
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
     }
 
     /**
@@ -1086,14 +1260,191 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-    public function msgSwapInit($payload)
+    public function multisigSignTX($payload, $options = [])
     {
-        $type = $this->txSchemes['SWAP_INIT']['type'];
-        $result = $this->checkRequiredFields('SWAP_INIT', $payload);
-        $payload['fee'] = $this->txSchemes['SWAP_INIT']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
+        [
+            'txId' => $txId,
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgMultisigSignTx(
+                $this->wallet->getAddress(),
+                $txId
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    
+     /**
+     * @param $payload
+     * @return array|mixed
+     * @throws DecimalException
+     */
+    public function nftTransfer($payload, $options = [])
+    {
+        [
+            'id' => $id,
+            'sub_token_ids' => $sub_token_ids,
+            'recipient' => $recipeint
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgTransferNft(
+                $this->wallet->getAddress(),
+            $recipeint,
+            $id,
+            $sub_token_ids
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    /**
+     * @param $payload
+     * @return array|mixed
+     * @throws DecimalException
+     */
+    public function nftDelegate($payload, $options = [])
+    {
+        [
+            'id' => $id,
+            'sub_token_ids' => $sub_token_ids,
+            'validator_address' => $validator_address
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgNftDelegate(
+                $this->wallet->getAddress(),
+            $validator_address,
+            $id,
+            $sub_token_ids
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    /**
+     * @param $payload
+     * @return array|mixed
+     * @throws DecimalException
+     */
+    public function nftUndelegate($payload, $options = [])
+    {
+        [
+            'id' => $id,
+            'sub_token_ids' => $sub_token_ids,
+            'validator_address' => $validator_address
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgNftUndelegate(
+                $this->wallet->getAddress(),
+            $validator_address,
+            $id,
+            $sub_token_ids
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    /**
+     * @param $payload
+     * @return array|mixed
+     * @throws DecimalException
+     */
+    public function nftUpdateReserves($payload, $options = [])
+    {
+        [
+            'id' => $id,
+            'denom' => $denom,
+            'sub_token_ids' => $sub_token_ids,
+            'reserve' => $reserve
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgUpdateReserve(
+                $this->wallet->getAddress(),
+            $id,
+            $sub_token_ids,
+            $reserve,
+            $denom,
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    public function nftRedelegate($payload, $options = [])
+    {
+        [
+            'id' => $id,
+            'sub_token_ids' => $sub_token_ids,
+            'old_validator' => $old_validator,
+            'new_validator' => $new_validator
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgNFTRedelegate(
+                $this->wallet->getAddress(),
+            $old_validator,
+            $new_validator,
+            $id,
+            $sub_token_ids
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    public function nftCancelRedelegate($payload, $options = [])
+    {
+        [
+            'id' => $id,
+            'sub_token_ids' => $sub_token_ids,
+            'old_validator' => $old_validator,
+            'new_validator' => $new_validator,
+            'creation_height' => $creation_height
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgCancelNFTRedelegate(
+                $this->wallet->getAddress(),
+            $old_validator,
+            $new_validator,
+            $creation_height,
+            $id,
+            $sub_token_ids
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    public function nftCancelUndelegate($payload, $options = [])
+    {
+        [
+            'id' => $id,
+            'sub_token_ids' => $sub_token_ids,
+            'validator' => $validator,
+            'creation_height' => $creation_height
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgCancelNFTUndelegate(
+                $this->wallet->getAddress(),
+            $validator,
+            $creation_height,
+            $id,
+            $sub_token_ids
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
     }
 
     /**
@@ -1102,16 +1453,160 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-    public function msgSwapRedeem($payload)
+    private function chainActivate($payload, $options = [])
     {
-        $type = $this->txSchemes['SWAP_REDEEM']['type'];
-        $result = $this->checkRequiredFields('SWAP_REDEEM', $payload);
-        $payload['fee'] = $this->txSchemes['SWAP_REDEEM']['fee'];
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $payload);
-        return $this->requester->sendTx($preparedTx);
+        [
+            'chain_id' => $chain_id,
+            'name' => $name
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgChainActivate(
+                $this->wallet->getAddress(),
+            $chain_id,
+            $name,
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        //EDITED
     }
 
+    /**
+     * @param $payload
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    private function chainDeactivate($payload, $options = [])
+    {
+        [
+            'chain_id' => $chain_id
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgChainDeactivate(
+                $this->wallet->getAddress(),
+            $chain_id
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        //EDITED
+    }
+
+    /**
+     * @param $payload
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    public function swapInit($payload, $options = [])
+    {
+         [
+            'recipient' => $recipient,
+            'tokenSymbol' => $tokenSymbol,
+            'amount' => $amount,
+            'destChain' => $destChain
+        ] = $payload;
+
+        $transactionNumber = time();
+
+        $msg = $this->protoManager->getMsgSwapInit(
+                $this->wallet->getAddress(),
+                $recipient,
+                $tokenSymbol,
+                $amount,
+                $destChain,
+                $transactionNumber,
+                1
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        //EDITED
+    }
+
+    /**
+     * @param $payload
+     * @return array|mixed
+     * @throws DecimalException
+     */
+
+    public function swapRedeem($payload, $options = [])
+    {
+        [
+            'from' => $from,
+            'recipient' => $recipient,
+            'amount' => $amount,
+            'tokenSymbol' => $tokenSymbol,
+            'transactionNumber' => $transactionNumber,
+            'fromChain' => $fromChain,
+            'v' => $v,
+            'r' => $r,
+            's' => $s
+        ] = $payload;
+
+        $msg = $this->protoManager->getMsgSwapRedeem(
+                $this->wallet->getAddress(),
+                $from,
+            $recipient,
+            $amount,
+            $tokenSymbol,
+            $transactionNumber,
+            $fromChain,
+            1,
+            hexdec($v),
+            substr($r, 2, 64),
+            substr($s, 2, 64)
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        
+    }
+
+    public function updateCoinPrices($payload, $options = [])
+    {
+         [
+            'oracle' => $oracle,
+            'denoms' => $denoms,
+            'quotes' => $quotes,
+            'prices' => $prices,
+            'updatedAt' => $updatedAt
+        ] = $payload;
+
+        $preparedCoinPrices = [];
+        for ($i = 0; $i < count($denoms); $i++) {
+            array_push($preparedCoinPrices, $this->protoManager->getCoinPrice($denoms[$i], $quotes[$i], $prices[$i], $this->protoManager->getTimestamp($updatedAt[$i])));
+        }
+
+        $msg = $this->protoManager->getMsgUpdateCoinPrices(
+            $oracle,
+            $preparedCoinPrices
+        );
+
+        $result = $this->sendTransaction($msg, $options);
+        return $result;
+        //EDITED
+    }
+
+    public function reownLegacy($payload, $options = [])
+    {
+        [ 'pubKey' => $pubKey ] = $payload;
+        // $privateKey = $this->wallet->getPrivateKey();
+        // $bitcoinECDSA = new BitcoinECDSA();
+        // $bitcoinECDSA->setPrivateKey($privateKey);
+
+        $result = $this->requester->post('rpc/check-legacy', (object) ['pubKey' => $pubKey]);
+
+        // $msg = $this->protoManager->getMsgReturnLegacy(
+        //         $this->wallet->getAddress(),
+        //     hex2bin($bitcoinECDSA->getPubKey())
+        // );
+
+        // $result = $this->sendTransaction($msg, $options);
+        return $result;
+        //EDITED
+    }
 
     /**
      * @param $type
@@ -1246,8 +1741,7 @@ class TransactionDecimal
 
     public function getNftStakesByAddress($address)
     {
-        $params = $this->checkWalletAddressNft($address);
-        return $this->requester->getNftStakesByAddress($address, $params);
+        return $this->requester->getNftStakesByAddress($address);
     }
 
     /**
@@ -1290,27 +1784,6 @@ class TransactionDecimal
         }
 
         return true;
-    }
-
-    /**
-     * @param null $data
-     * @return string
-     * @throws \Exception
-     */
-
-    private function guidv4($data = null)
-    {
-        // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
-        $data = $data ?? random_bytes(16);
-        assert(strlen($data) == 16);
-
-        // Set version to 0100
-        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
-        // Set bits 6-7 to 10
-        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
-
-        // Output the 36 character UUID.
-        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
     /**

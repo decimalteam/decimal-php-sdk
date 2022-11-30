@@ -24,7 +24,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * transactions defines all registered multisig transactions.
      *
-     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 2 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.multisig.v1.GenesisTransaction transactions = 2 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
      */
     private $transactions;
     /**
@@ -42,7 +42,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
      *
      *     @type array<\Decimal\Multisig\V1\Wallet>|\Google\Protobuf\Internal\RepeatedField $wallets
      *           wallets defines all registered multisig wallets.
-     *     @type array<\Decimal\Multisig\V1\Transaction>|\Google\Protobuf\Internal\RepeatedField $transactions
+     *     @type array<\Decimal\Multisig\V1\GenesisTransaction>|\Google\Protobuf\Internal\RepeatedField $transactions
      *           transactions defines all registered multisig transactions.
      *     @type \Decimal\Multisig\V1\Params $params
      *           params defines all the module's parameters.
@@ -82,7 +82,7 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * transactions defines all registered multisig transactions.
      *
-     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 2 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .decimal.multisig.v1.GenesisTransaction transactions = 2 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getTransactions()
@@ -93,13 +93,13 @@ class GenesisState extends \Google\Protobuf\Internal\Message
     /**
      * transactions defines all registered multisig transactions.
      *
-     * Generated from protobuf field <code>repeated .decimal.multisig.v1.Transaction transactions = 2 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
-     * @param array<\Decimal\Multisig\V1\Transaction>|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .decimal.multisig.v1.GenesisTransaction transactions = 2 [json_name = "transactions", (.gogoproto.nullable) = false];</code>
+     * @param array<\Decimal\Multisig\V1\GenesisTransaction>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setTransactions($var)
     {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Decimal\Multisig\V1\Transaction::class);
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Decimal\Multisig\V1\GenesisTransaction::class);
         $this->transactions = $arr;
 
         return $this;

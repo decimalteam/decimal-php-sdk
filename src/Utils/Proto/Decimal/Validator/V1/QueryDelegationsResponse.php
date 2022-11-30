@@ -18,7 +18,7 @@ class QueryDelegationsResponse extends \Google\Protobuf\Internal\Message
     /**
      * delegations defines the delegations list.
      *
-     * Generated from protobuf field <code>repeated .decimal.validator.v1.Delegation delegations = 1 [json_name = "delegations"];</code>
+     * Generated from protobuf field <code>repeated .decimal.validator.v1.Delegation delegations = 1 [json_name = "delegations", (.gogoproto.nullable) = false];</code>
      */
     private $delegations;
 
@@ -40,7 +40,7 @@ class QueryDelegationsResponse extends \Google\Protobuf\Internal\Message
     /**
      * delegations defines the delegations list.
      *
-     * Generated from protobuf field <code>repeated .decimal.validator.v1.Delegation delegations = 1 [json_name = "delegations"];</code>
+     * Generated from protobuf field <code>repeated .decimal.validator.v1.Delegation delegations = 1 [json_name = "delegations", (.gogoproto.nullable) = false];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getDelegations()
@@ -51,7 +51,7 @@ class QueryDelegationsResponse extends \Google\Protobuf\Internal\Message
     /**
      * delegations defines the delegations list.
      *
-     * Generated from protobuf field <code>repeated .decimal.validator.v1.Delegation delegations = 1 [json_name = "delegations"];</code>
+     * Generated from protobuf field <code>repeated .decimal.validator.v1.Delegation delegations = 1 [json_name = "delegations", (.gogoproto.nullable) = false];</code>
      * @param array<\Decimal\Validator\V1\Delegation>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */

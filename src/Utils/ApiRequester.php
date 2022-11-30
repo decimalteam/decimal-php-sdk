@@ -226,7 +226,7 @@ class ApiRequester
             throw new DecimalException('hash is required');
         }
 
-        $url = "https://devnet-dec2-explorer-api.decimalchain.com/api/tx/$hash";
+        $url = "https://devnet-gate.decimalchain.com/api/tx/$hash";
 
         $response = $this->_request($url, self::GET, false);
         return $response;

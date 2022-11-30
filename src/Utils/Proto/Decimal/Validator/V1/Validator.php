@@ -89,6 +89,13 @@ class Validator extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string total_rewards = 12 [json_name = "totalRewards", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "cosmossdk.io/math.Int", (.cosmos_proto.scalar) = "cosmos.Int"];</code>
      */
     protected $total_rewards = '';
+    /**
+     * stake is power of all delegations stake
+     * NOTE: It is stored separately in the KVStore.
+     *
+     * Generated from protobuf field <code>int64 stake = 13 [json_name = "stake"];</code>
+     */
+    protected $stake = 0;
 
     /**
      * Constructor.
@@ -121,6 +128,9 @@ class Validator extends \Google\Protobuf\Internal\Message
      *           NOTE: It is stored separately in the KVStore.
      *     @type string $total_rewards
      *           total_rewards defines total amount of all collected rewards.
+     *           NOTE: It is stored separately in the KVStore.
+     *     @type int|string $stake
+     *           stake is power of all delegations stake
      *           NOTE: It is stored separately in the KVStore.
      * }
      */
@@ -471,6 +481,34 @@ class Validator extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->total_rewards = $var;
+
+        return $this;
+    }
+
+    /**
+     * stake is power of all delegations stake
+     * NOTE: It is stored separately in the KVStore.
+     *
+     * Generated from protobuf field <code>int64 stake = 13 [json_name = "stake"];</code>
+     * @return int|string
+     */
+    public function getStake()
+    {
+        return $this->stake;
+    }
+
+    /**
+     * stake is power of all delegations stake
+     * NOTE: It is stored separately in the KVStore.
+     *
+     * Generated from protobuf field <code>int64 stake = 13 [json_name = "stake"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setStake($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->stake = $var;
 
         return $this;
     }

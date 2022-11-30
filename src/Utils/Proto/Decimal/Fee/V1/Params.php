@@ -174,15 +174,21 @@ class Params extends \Google\Protobuf\Internal\Message
      */
     protected $validator_set_offline = '';
     /**
+     * commission burn factor
+     *
+     * Generated from protobuf field <code>string commission_burn_factor = 61 [json_name = "commissionBurnFactor", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     */
+    protected $commission_burn_factor = '';
+    /**
      * evm tx commissions
      *
-     * Generated from protobuf field <code>string evm_gas_price = 61 [json_name = "evmGasPrice", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string evm_gas_price = 62 [json_name = "evmGasPrice", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
      */
     protected $evm_gas_price = '';
     /**
      * oracle defines address empowered to update coin prices.
      *
-     * Generated from protobuf field <code>string oracle = 62 [json_name = "oracle", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string oracle = 63 [json_name = "oracle", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      */
     protected $oracle = '';
 
@@ -235,6 +241,8 @@ class Params extends \Google\Protobuf\Internal\Message
      *     @type string $validator_undelegate_nft
      *     @type string $validator_set_online
      *     @type string $validator_set_offline
+     *     @type string $commission_burn_factor
+     *           commission burn factor
      *     @type string $evm_gas_price
      *           evm tx commissions
      *     @type string $oracle
@@ -1067,9 +1075,35 @@ class Params extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * commission burn factor
+     *
+     * Generated from protobuf field <code>string commission_burn_factor = 61 [json_name = "commissionBurnFactor", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * @return string
+     */
+    public function getCommissionBurnFactor()
+    {
+        return $this->commission_burn_factor;
+    }
+
+    /**
+     * commission burn factor
+     *
+     * Generated from protobuf field <code>string commission_burn_factor = 61 [json_name = "commissionBurnFactor", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCommissionBurnFactor($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->commission_burn_factor = $var;
+
+        return $this;
+    }
+
+    /**
      * evm tx commissions
      *
-     * Generated from protobuf field <code>string evm_gas_price = 61 [json_name = "evmGasPrice", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string evm_gas_price = 62 [json_name = "evmGasPrice", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
      * @return string
      */
     public function getEvmGasPrice()
@@ -1080,7 +1114,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * evm tx commissions
      *
-     * Generated from protobuf field <code>string evm_gas_price = 61 [json_name = "evmGasPrice", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
+     * Generated from protobuf field <code>string evm_gas_price = 62 [json_name = "evmGasPrice", (.gogoproto.nullable) = false, (.gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (.cosmos_proto.scalar) = "cosmos.Dec"];</code>
      * @param string $var
      * @return $this
      */
@@ -1095,7 +1129,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * oracle defines address empowered to update coin prices.
      *
-     * Generated from protobuf field <code>string oracle = 62 [json_name = "oracle", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string oracle = 63 [json_name = "oracle", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @return string
      */
     public function getOracle()
@@ -1106,7 +1140,7 @@ class Params extends \Google\Protobuf\Internal\Message
     /**
      * oracle defines address empowered to update coin prices.
      *
-     * Generated from protobuf field <code>string oracle = 62 [json_name = "oracle", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>string oracle = 63 [json_name = "oracle", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
      * @param string $var
      * @return $this
      */

@@ -112,11 +112,30 @@ $txPayload = [
     'reserve' => '12000',
     'crr' => '45'
 ];
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+// For all functions that sends transactions, You can provide address of custom coin that should be used as fee in 'options'.
+// Also You can provide 'simulate' flag for estimate fee value. Can be estimated, only if 'feeCoin' set.
+// To simulate fee in DEL, set 'feeCoin' => 'del'.
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = [] and using DEL as fee coin.
 $result = $transaction->createCoin($payload, $options);
+// => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
+```
+
+## Update coin
+
+```php
+
+$payload = [
+    'maxSupply' => '270000',
+    'ticker' => 'testsdk10',
+    'identity' => '2a3f8bbdbed335aa7544836a9ff57a79'
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->updateCoin($payload, $options);
 // => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
 ```
 
@@ -130,10 +149,9 @@ $payload = [
   'amount' = 3;
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->sendCoin($payload, $options);
 // => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
 ```
@@ -146,10 +164,9 @@ $txPayload = [
     'amount' => '100', // 100 tDEL
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->burnCoins($txPayload, $options);
 ```
 
@@ -163,10 +180,9 @@ $payload = [
   'amountBuy' = 2;
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->sellCoin($payload, $options);
 ```
 
@@ -180,10 +196,9 @@ $payload = [
   'amountSell' = 10;
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->buyCoin($payload, $options);
 ```
 
@@ -196,11 +211,26 @@ $payload = [
   'denomBuy' = 'del';
   'minCoinToBuy' = 2;
 ];
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->sellAllCoin($payload, $options);
+```
+
+## Coin redeem check
+
+```php
+
+$payload = [
+    'check' => 'KBnu4unsSvYD2f6kovxxBiTNY3eMiWT3MF8Y2ptBsVVJyGxwnLtT3D4BcW8uewF2Bg6TAKCX9gM8qjpVeayvXBZ6XaGk62xY1fZ4sVhptDbME8dPKhDf74G5LXjmnFYqju4xx5HEbrfRQQ3qZ38gSo4jJ2p6k566fgwR8xvgBbgPvZuZxUNRZAY9ScMcJRG3Ly2YzHZZw4DJqAny6nyqEkT4BzUb3fEqXmf7DVtdtfAULRhV59',
+    'proof' => 'asd'
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->coinRedeemCheck($payload, $options);
 ```
 
 ## Validator delegate
@@ -212,14 +242,14 @@ $payload = [
 'coin' = 'tdel';
 'stake' = '10';
 ];
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->validatorDelegate($payload, $options);
 ```
 
-## Validator unbound
+## Validator undelegate
 
 ```php
 $payload = [
@@ -227,11 +257,27 @@ $payload = [
   'coin' = 'tdel';
   'stake' = '10';
 ];
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
-$result = $transaction->validatorUnbound($payload, $options);
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->validatorUndelegate($payload, $options);
+```
+
+## Validator redelegate
+
+```php
+$payload = [
+    'old_validator' => 'dxvaloper14elhyzmq95f98wrkvujtsr5cyudffp6qk9wmzm',
+    'new_validator' => 'dxvaloper1yvgq6uh35a395hexhxcde2zfpwwafzpaxvupmc',
+    'stake' => '1',
+    'coin' => 'del'
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->validatorRedelegate($payload, $options);
 ```
 
 ## Validator declare
@@ -249,8 +295,11 @@ $txPayload = [
     'securityContact' => 'test@test.com',
     'details' => 'details node',
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->validatorDeclare($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->validatorDeclare($txPayload, $options);
 ```
 
 ## Validator edit
@@ -264,22 +313,36 @@ $txPayload = [
     'securityContact' => 'test@test.com',
     'details' => 'details node',
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->validatorEdit($txPayload);
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->validatorEdit($txPayload, $options);
 ```
 
 ## Disable validator
 
 ```php
-// Custom fee isn't implemented yet.
-$result = $transaction->disableValidator($txPayload);
+$payload = [
+    'validator' => 'dxvaloper1fatzsagt96pfglxlq245th252mv3necksyuy0v',
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->disableValidator($payload, $options);
 ```
 
 ## Enable validator
 
 ```php
-// Custom fee isn't implemented yet.
-$result = $transaction->enableValidator($txPayload);
+$payload = [
+    'validator' => 'dxvaloper1fatzsagt96pfglxlq245th252mv3necksyuy0v',
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->enableValidator($payload, $options);
 ```
 
 ## Multisig create
@@ -290,8 +353,11 @@ $txPayload = [
     'owners' => ['dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', 'dx1v9macmluxh7rk3zsd69v7dwv9fsjhctn2jfhz9'],
     'weights' => ['1', '1'],
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->multisigCreate($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->multisigCreate($txPayload, $options);
 ```
 
 ## Multisig create tx
@@ -303,8 +369,11 @@ $txPayload = [
     'coin' => 'tdel',
     'amount' => '10',
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->multisigCreateTX($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->multisigCreateTX($txPayload, $options);
 ```
 
 ## Multisig Sign tx
@@ -313,8 +382,11 @@ $result = $transaction->multisigCreateTX($txPayload);
 $txPayload = [
     'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->multisigSignTX($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->multisigSignTX($txPayload, $options);
 ```
 
 ## Multisend Coins
@@ -336,24 +408,11 @@ $txPayload = [
         'memo' => 'message' // optional
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->multiSendCoins($txPayload, $options);
 
-```
-
-## Proposal vote
-
-```php
-$txPayload = [
-    'id' => 1,
-   'decision'=> 'Yes'//Yes or No
-    ];
-
-// Custom fee isn't implemented yet.
-$result = $transaction->proposalVote($txPayload);
 ```
 
 ## Swap init
@@ -365,8 +424,11 @@ $txPayload = [
       'tokenSymbol'=> 'DEL',
       'destChain'=> '2'
      ];
-// Custom fee isn't implemented yet.
-$result = $transaction->msgSwapInit($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->swapInit($txPayload, $options);
 ```
 
 ## Swap redeem
@@ -376,7 +438,6 @@ $txPayload = [
     'from'=> '0x45376AD024c767577714C7B92882578aE8B7f98C',
     'amount'=> '1',
     'recipient'=> 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
-    'tokenName'=> 'decimal',
     'transactionNumber'=> 'lksdnd-asvkla-SDCds',
     'tokenSymbol'=> 'del',
     'fromChain'=> '2',
@@ -384,8 +445,11 @@ $txPayload = [
      'r'=> '0x0e0eb6089caa52794f7ad64a5ad7ab500b12cc7b640180e30b30b48a19c296e1',
      's'=> '0x2005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3',
      ];
-// Custom fee isn't implemented yet.
-$result = $transaction->msgSwapRedeem($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->swapRedeem($txPayload, $options);
 ```
 
 ## NFT mint
@@ -437,10 +501,9 @@ $reserve = ['denom' => 'del', 'amount'=> 1];
 $quantity = '1';
 $allow_mint = true;
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->mintNft($id,
         $recipient, // optional
         $denom,
@@ -455,17 +518,30 @@ $result = $transaction->mintNft($id,
 ## NFT burn
 
 ```php
-$result = $transaction->burnNft('f98a662205beea30b3c90a95723f320b902919c8', [1]);
+$payload = [
+    'id' => '90b6dc232e040d38a1bb2ec7711ab35629b9ca5e',
+    'subtokenIds' => ['1', '2']
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->burnNft($payload, $options);
 ```
 
 ## NFT edit metadata
 
 ```php
 
-$id = 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689';
-$tokenUri ='https://develop.nft.decimalchain.com/api/nfts/pepe1111';
+$payload = [
+        'tokenId' => 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689',
+        'tokenURI' => 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689'
+    ];
 
-$result = $transaction->editNftMetadata($id,$tokenUri);
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->editNftMetadata($payload, $options);
 ```
 
 ## NFT transfer
@@ -474,47 +550,90 @@ $result = $transaction->editNftMetadata($id,$tokenUri);
 
 $recipient = 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v';
 $id ='c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689';
-$subTokenId = [1];
+$payload = [
+        'id' => 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689',
+        'recipient' => 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
+        'sub_token_ids' => [1]
+    ];
 
-$result = $transaction->transferNft($recipient, $id, $subTokenId);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->transferNft($payload, $options);
 ```
 
 ## NFT delegate
 
 ```php
 $txPayload = [
-    'denom'=> 'timPhone',
     'id'=> '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
     'sub_token_ids'=> [1,2],
     'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
 
-$result = $transaction->nftDelegate($txPayload);
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->nftDelegate($payload, $options);
 ```
 
-## NFT unbond
+## NFT undelegate
 
 ```php
 $txPayload = [
-    'denom'=> 'timPhone',
     'id'=> '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
     'sub_token_ids'=> [1,2],
     'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
-// Custom fee isn't implemented yet.
-$result = $transaction->nftUnbond($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->nftUndelegate($payload, $options);
+```
+
+## NFT redelegate
+
+```php
+$payload = [
+    'id' => '90b6dc232e040d38a1bb2ec7711ab35629b9ca5e',
+    'old_validator' => 'dxvaloper14elhyzmq95f98wrkvujtsr5cyudffp6qk9wmzm',
+    'new_validator' => 'dxvaloper1yvgq6uh35a395hexhxcde2zfpwwafzpaxvupmc',
+    'sub_token_ids' => ['2']
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->nftRedelegate($payload, $options);
 ```
 
 ## NFT reserve update
 
 ```php
+$payload = [
+        'id' => '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
+        'sub_token_ids' => ['1'],
+        'denom' => 'timPhone',
+        'reserve' => '1'
+    ];
 
-$id => '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
-$reserve => '1',
-$denom => 'timPhone',
-$sub_token_ids => ['1']
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-$result = $transaction->nftUpdateReserve($id,$sub_token_ids, $reserve, $denom);
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->nftUpdateReserves($payload, $options);
+```
+
+## Reown legacy
+
+```php
+$payload = [
+    'pubKey' => '04b7a5dcb1cd9078a6e55ff2dbeb58afad5f235065d5b82ff15e18e89394cc2cf3ae2e200c897045d7fd9ae1a9029578d07419b6fc52ca6124c71ff88002f1d2cb'
+];
+
+// This function make call to backend, not to blockchain, so it's free.
+$result = $transaction->reownLegacy($id,$sub_token_ids, $reserve, $denom);
 ```
 
 ## get NFT metadata
