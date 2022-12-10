@@ -8,7 +8,7 @@ use Cosmos\Crypto\Ed25519\PubKey;
 // Firstly created because of the same name of class for pubKey with Ed25519 crypto.
 class ProtoManagerAddition
 {
-    const DEFAULT_GAS_LIMIT = '9000000000000000000';
+    const DEFAULT_GAS_LIMIT = '180000';
     private static $instance;
     private $classesByType = [];
 

@@ -29,8 +29,8 @@ class Wallet
         if (!$mnemonics)
             $mnemonics = WalletHelpers::createNewMnemonics();
         $this->mnemonics = $mnemonics;
-        $this->arguments = WalletHelpers::generateNewAddress('dx', $mnemonics, $path_key);
-        $this->validatorAddress = WalletHelpers::generateNewAddress('dxvaloper', $mnemonics, $path_key);
+        $this->arguments = WalletHelpers::generateNewAddress('d0', $mnemonics, $path_key);
+        $this->validatorAddress = WalletHelpers::generateNewAddress('d0valoper', $mnemonics, $path_key);
         $this->currentNonce = $currentNonce;
     }
 
@@ -86,7 +86,7 @@ class Wallet
         $this->sequence = $sequence;
     }
 
-    public function verifyAddress($prefix = "dx")
+    public function verifyAddress($prefix = "d0")
     {
         $decoded = Encrypt::decodedBech32($this->getAddress());
         return $decoded[0] === $prefix;

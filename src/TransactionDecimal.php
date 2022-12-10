@@ -2,8 +2,8 @@
 
 namespace DecimalSDK;
 
-use stdClass;
 use BitcoinPHP\BitcoinECDSA\BitcoinECDSA;
+use Cosmos\Tx\V1beta1\BroadcastMode;
 use \DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Utils\ProtoManager;
 use DecimalSDK\Utils\ApiRequester;
@@ -12,54 +12,32 @@ use DecimalSDK\Utils\ProtoManagerAddition;
 use DecimalSDK\Utils\TransactionHelpers;
 use DecimalSDK\Wallet;
 use Elliptic\EC;
+use EllipticCurve\PrivateKey;
 use Exception;
-use Google\Protobuf\StringValue;
-use GPBMetadata\Google\Protobuf\Timestamp;
 use kornrunner\Keccak;
+use kornrunner\Secp256k1;
 use Web3\Web3;
 use Web3\Providers\HttpProvider;
 use Web3\RequestManagers\HttpRequestManager;
 use Web3\Contract;
 use DecimalSDK\Utils\Abis;
 use Web3p\EthereumTx\Transaction;
-use Web3\Utils;
+use Web3p\RLP\RLP;
+use EllipticCurve\Ecdsa;
+
 
 class TransactionDecimal
 {
     use TransactionHelpers;
-    const DXVALOPER = 'dxvaloper';
+    const D0VALOPER = 'd0valoper';
 
-    //constants for fee
-    const COIN_REDEEM_CHECK = 30;
-    const COIN_ISSUE_CHECK = 0;
-    const VALIDATOR_CANDIDATE = 10000;
-    const VALIDATOR_DELEGATE = 200;
-    const VALIDATOR_SET_ONLINE = 100;
-    const VALIDATOR_SET_OFFLINE = 100;
-    const VALIDATOR_UNBOND = 200;
-    const VALIDATOR_CANDIDATE_EDIT = 10000;
-    const MULTISIG_CREATE_WALLET = 100;
-    const MULTISIG_CREATE_TX = 100;
-    const MULTISIG_SIGN_TX = 100;
-    const PROPOSAL_SUBMIT = 0;
-    const PROPOSAL_VOTE = 0;
-    const SWAP_INIT = 0;
-    const SWAP_REDEEM = 0;
-    const NFT_TRANSFER = 0;
-    const NFT_DELEGATE = 0;
-    const NFT_UNBOUND = 0;
-
-    const MAX_SPEND_LIMIT = '100000000000';
-    const ADDITIONAL_COMISSION = 20;
-    const UNIT = 0.001;
-    const PUB_KEY_TYPE = 'tendermint/PubKeySecp256k1';
-    const DEFAULT_GAS_LIMIT = '9000000000000000000';
+    const DEFAULT_GAS_LIMIT = '180000';
     const DEFAULT_ORDER_FIELD = 'createdAt';
     const DEFAULT_ORDER_DIRECTION = 'DESC';
     const DEFAULT_ORDER = 'order[' . self::DEFAULT_ORDER_FIELD . ']=' . self::DEFAULT_ORDER_DIRECTION;
     const CHAIN_ID = 2020;
     const SECONDS_TO_WAIT_FOR_RECEIPT = 15;
-    const WEB3_RPC_NODE = 'https://devnet-val.decimalchain.com/web3/';
+   
 
     private $account;
     private $wallet;
@@ -67,230 +45,8 @@ class TransactionDecimal
     private $nodeMeta;
     private $protoManager;
     private $protoManagerAddition;
+    private $web3RpcNode = 'https://devnet-val.decimalchain.com/web3/';
 
-
-    protected $txSchemes = [
-        'COIN_REDEEM_CHECK' => [
-            'fee' => self::COIN_REDEEM_CHECK,
-            'type' => 'coin/redeem_check',
-            'scheme' => [
-                'fieldTypes' => [
-                    'check' => 'string',
-                    'password' => 'string',
-                ],
-                'requiredFields' => [
-                    'check',
-                    'password',
-                ],
-            ],
-        ],
-        'COIN_ISSUE_CHECK' => [
-            'fee' => self::COIN_ISSUE_CHECK,
-            'type' => 'coin/issue_check',
-            'scheme' => [
-                'fieldTypes' => [
-                    'nonce' => 'number',
-                    'coin' => 'string',
-                    'amount' => 'number',
-                    'password' => 'string',
-                    'dueBlock' => 'number',
-                ],
-                'requiredFields' => [
-                    'nonce',
-                    'coin',
-                    'amount',
-                    'password',
-                    'dueBlock'
-                ],
-            ],
-        ],
-        'VALIDATOR_CANDIDATE' => [
-            'fee' => self::VALIDATOR_CANDIDATE,
-            'type' => 'validator/declare_candidate',
-            'scheme' => [
-                'fieldTypes' => [
-                    'rewardAddress' => 'string',
-                    'stake' => 'number',
-                    'coin' => 'string',
-                    'pubKey' => 'string',
-                    'commission' => 'number',
-                    'moniker' => 'string',
-                    'identity' => 'string',
-                    'website' => 'string',
-                    'securityContact' => 'string',
-                    'details' => 'string',
-                ],
-                'requiredFields' => [
-                    'rewardAddress',
-                    'stake',
-                    'coin',
-                    'pubKey',
-                    'commission',
-                    'moniker',
-                    'identity',
-                    'website',
-                    'securityContact',
-                    'details',
-                ],
-            ],
-        ],
-        'VALIDATOR_SET_ONLINE' => [
-            'fee' => self::VALIDATOR_SET_ONLINE,
-            'type' => 'validator/set_online'
-        ],
-        'VALIDATOR_SET_OFFLINE' => [
-            'fee' => self::VALIDATOR_SET_OFFLINE,
-            'type' => 'validator/set_offline'
-        ],
-        'VALIDATOR_CANDIDATE_EDIT' => [
-            'fee' => self::VALIDATOR_CANDIDATE_EDIT,
-            'type' => 'validator/edit_candidate',
-            'scheme' => [
-                'fieldTypes' => [
-                    'rewardAddress' => 'string',
-                    'moniker' => 'string',
-                    'identity' => 'string',
-                    'website' => 'string',
-                    'securityContact' => 'string',
-                    'details' => 'string',
-                ],
-                'requiredFields' => [
-                    'rewardAddress',
-                    'moniker',
-                    'identity',
-                    'website',
-                    'securityContact',
-                    'details',
-                ],
-            ],
-        ],
-        'MULTISIG_CREATE_WALLET' => [
-            'fee' => self::MULTISIG_CREATE_WALLET,
-            'type' => 'multisig/create_wallet',
-            'scheme' => [
-                'fieldTypes' => [
-                    'threshold' => 'string',
-                    'owners' => 'array',
-                    'weights' => 'array',
-                ],
-                'requiredFields' => [
-                    'threshold',
-                    'owners',
-                    'weights',
-                ],
-            ],
-        ],
-        'MULTISIG_CREATE_TX' => [
-            'fee' => self::MULTISIG_CREATE_TX,
-            'type' => 'multisig/create_transaction',
-            'scheme' => [
-                'fieldTypes' => [
-                    'from' => 'string',
-                    'to' => 'string',
-                    'coin' => 'string',
-                    'amount' => 'number',
-                ],
-                'requiredFields' => [
-                    'from',
-                    'to',
-                    'coin',
-                    'amount',
-                ],
-            ],
-        ],
-        'MULTISIG_SIGN_TX' => [
-            'fee' => self::MULTISIG_SIGN_TX,
-            'type' => 'multisig/sign_transaction',
-            'scheme' => [
-                'fieldTypes' => [
-                    'txId' => 'string',
-                ],
-                'requiredFields' => [
-                    'txId',
-                ],
-            ],
-        ],
-        'PROPOSAL_VOTE' => [
-            'fee' => self::PROPOSAL_VOTE,
-            'type' => 'cosmos-sdk/MsgVote',
-            'scheme' => [
-                'fieldTypes' => [
-                    'id' => 'number',
-                    'decision' => 'string'
-                ],
-                'requiredFields' => [
-                    'id',
-                    'decision'
-                ],
-            ]
-        ],
-        'SWAP_INIT' => [
-            'fee' => self::SWAP_INIT,
-            'type' => 'swap/msg_initialize',
-            'scheme' => [
-                'fieldTypes' => [
-                    'recipient' => 'string',
-                    'amount' => 'number',
-                    'tokenSymbol' => 'string',
-                    'destChain' => 'number'
-                ],
-                'requiredFields' => [
-                    'recipient',
-                    'amount',
-                    'tokenSymbol',
-                    'destChain'
-                ],
-            ]
-        ],
-        'CREATE_COIN' => [
-            'fee' => self::SWAP_INIT,
-            'type' => 'swap/msg_initialize',
-            'scheme' => [
-                'fieldTypes' => [
-                    'recipient' => 'string',
-                    'amount' => 'number',
-                    'tokenSymbol' => 'string',
-                    'destChain' => 'number'
-                ],
-                'requiredFields' => [
-                    'recipient',
-                    'amount',
-                    'tokenSymbol',
-                    'destChain'
-                ],
-            ]
-        ],
-        'SWAP_REDEEM' => [
-            'fee' => self::SWAP_REDEEM,
-            'type' => 'swap/msg_redeem',
-            'scheme' => [
-                'fieldTypes' => [
-                    'from' => 'string',
-                    'amount' => 'number',
-                    'recipient' => 'string',
-                    'tokenName' => 'string',
-                    'transactionNumber' => 'string',
-                    'tokenSymbol' => 'string',
-                    'fromChain' => 'number',
-                    'v' => 'number',
-                    'r' => 'string',
-                    's' => 'string'
-                ],
-                'requiredFields' => [
-                    'from',
-                    'amount',
-                    'recipient',
-                    'tokenName',
-                    'transactionNumber',
-                    'tokenSymbol',
-                    'fromChain',
-                    'v',
-                    'r',
-                    's'
-                ],
-            ]
-        ],
-    ];
 
     /**
      * Transaction constructor.
@@ -307,6 +63,7 @@ class TransactionDecimal
 
         $this->wallet = $wallet;
         $this->requester = new ApiRequester($wallet, $options);
+        $this->web3RpcNode = 'https://' . $this->requester->getChain() . 'net-val.decimalchain.com/web3/';
         $this->signMeta = $this->requester->getSignMeta($this->wallet);
         $this->protoManager = ProtoManager::instance();
         $this->protoManagerAddition = ProtoManagerAddition::instance();
@@ -445,30 +202,14 @@ class TransactionDecimal
         [
             'denomSell' => $denomSell,
             'denomBuy'  => $denomBuy,
-            'minCoinToBuy' => $amountBuy
+            // 'minCoinToBuy' => $amountBuy
         ] = $payload;
 
         $msg = $this->protoManager->getMsgSellAllCoin(
             $this->wallet->getAddress(),
                 strtolower(trim($denomSell)),
                 strtolower(trim($denomBuy)),
-                amountUNIRecalculate($amountBuy)
-            );
-
-        $result = $this->sendTransaction($msg, $options);
-        return $result;
-    }
-
-    public function coinRedeemCheck($payload, $options = []){
-        [
-            'check' => $check,
-            'proof'  => $proof
-        ] = $payload;
-
-        $msg = $this->protoManager->getMsgCoinRedeemCheck(
-            $this->wallet->getAddress(),
-                strtolower(trim($check)),
-                strtolower(trim($proof))
+                1
             );
 
         $result = $this->sendTransaction($msg, $options);
@@ -571,22 +312,12 @@ class TransactionDecimal
             $tokenURI
         );
 
-        //  $tokenUrlArray = explode('/', $tokenURI);
-        // $slug = end($tokenUrlArray);
-
-        // $activeNft = $this->requester->post("https://devnet-dec2.console.decimalchain.com/api/nfts/service/$slug/activate", ['tokenId' => $id]);
-
-        // if (!$activeNft['success']) {
-        //     throw new DecimalException(json_decode($activeNft['error']['errorMessage']));
-        // }
-
         $result = $this->sendTransaction($msg, $options);
         return $result;
     }
 
-    private function sendTransaction($msg, $options) {
+    private function sendTransaction($msg, $options, $tryTimes = 2) {
         $sequence = $this->wallet->getSequence();
-        var_dump($sequence);
         $memo = isset($options['message']) ? $options['message'] : '';
         $txBody = $this->protoManager->getTxBody($msg, $memo);
 
@@ -594,7 +325,8 @@ class TransactionDecimal
         if (!isset($options['feeCoin'])) {
             $fee = $this->protoManager->getDefaultFee();
         } else {
-            $feeCoin = $this->protoManager->getCoin($options['feeCoin'], '0000000000000000000000000000');
+            $denom = strtolower(trim($options['feeCoin']));
+            $feeCoin = $this->protoManager->getCoin($denom, '0000000000000000000000000000');
             $fee = $this->protoManager->getFee(self::DEFAULT_GAS_LIMIT, $feeCoin);
 
             $signObj = $this->singTransaction($txBody, $fee);
@@ -611,17 +343,22 @@ class TransactionDecimal
                 'tx_bytes' => bin2hex($txBytes),
                 'denom' => $feeCoin->getDenom()
             ];
+            
             $predictedFee = $this->requester->post('tx/estimate', $payload);
+            
             if(isset($options['simulate'])) {
                 if ($options['simulate'] == 'true') {
-                    return $predictedFee->result->commission;
+                    return [
+                        'amount' => $predictedFee->result->commission,
+                        'coin' => $denom
+                    ];
                 }
             }
-            $feeCoin = $this->protoManager->getCoin($options['feeCoin'], $predictedFee->result->commission);
+            $feeCoin = $this->protoManager->getCoin($denom, $predictedFee->result->commission);
             $fee = $this->protoManager->getFee(self::DEFAULT_GAS_LIMIT, $feeCoin);
         }
         
-        $signObj = $this->singTransaction($txBody, $fee);
+        $signObj = $this->singTransaction($txBody, $fee, $tryTimes);
         $txRaw = $this->protoManager->getTxRaw(          
             $txBody->serializeToString(),
             $signObj['authInfoBytes'],
@@ -630,31 +367,66 @@ class TransactionDecimal
 
         $txBytes = $txRaw->serializeToString();
 
-        $broadcast = $this->protoManager->getBroadcastRequest($txBytes);
+        $broadcastMode = BroadcastMode::BROADCAST_MODE_SYNC;
+        if (isset($options['txBroadcastMode'])) {
+            switch ($options['txBroadcastMode']) {
+                case 'block':
+                    $broadcastMode = BroadcastMode::BROADCAST_MODE_BLOCK;
+                    break;
+                case 'async':
+                    $broadcastMode = BroadcastMode::BROADCAST_MODE_ASYNC;
+                    break;
+                    
+            }
+        }
+        $broadcast = $this->protoManager->getBroadcastRequest($txBytes, $broadcastMode);
 
         $broadcastPreparedPayload = json_decode($broadcast->serializeToJsonString());
 
-        $response = $this->requester->sendTxToBroadcast($broadcastPreparedPayload);
+        try {
+            $response = $this->requester->sendTxToBroadcast($broadcastPreparedPayload);
+            
+            if($broadcastMode == BroadcastMode::BROADCAST_MODE_ASYNC) {
+                $this->wallet->setSequence(++$sequence);
+                return true;
+            }
 
-        // if($response->tx_response->txhash) {
-        //     $tx = $this->requester->getTransaction("56078AF64D254724952D0A9F4290F7B8BFF4F21997674F024B29E43FFA13FC33");
-        //     var_dump($tx);
-        // }
-
+            $secondsWaited = 0;
+            while (!isset($response->tx_response)) {
+                sleep(1);
+                $secondsWaited++;
+                if ($secondsWaited > 10) {
+                    if (!isset($response->tx_response)) {
+                        throw new DecimalException('Your transaction was not found on the chain yet. There was a wait of ' . $secondsWaited . ' seconds.');
+                    }
+                    break;
+                }
+            }
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
         if($response->tx_response->code == 0) {
             $this->wallet->setSequence(++$sequence);
+        } elseif ($response->tx_response->code == 32) {
+            $str = $response->tx_response->raw_log;
+            preg_match('!\d+!', $str, $matches);
+            $this->wallet->setSequence($matches[0]);
+            if ($tryTimes > 0) {
+                $response = $this->sendTransaction($msg, $options, $tryTimes - 1);
+            }
         }
 
         return $response;
     }
 
-    private function singTransaction($txBody, $fee) {
+    private function singTransaction($txBody, $fee, $tryTimes = 2) {
         $privateKey = $this->wallet->getPrivateKey();
         $bitcoinECDSA = new BitcoinECDSA();
         $bitcoinECDSA->setPrivateKey($privateKey);
 
         $publicKey = $this->protoManager->getPubKey(hex2bin($bitcoinECDSA->getPubKey()));
-        $signerInfo = $this->protoManager->getSignerInfo($publicKey, $this->wallet->getSequence());
+        $sequence = $this->wallet->getSequence();
+        $signerInfo = $this->protoManager->getSignerInfo($publicKey, $sequence);
 
         $authInfo = $this->protoManager->getAuthInfo($signerInfo, $fee);
 
@@ -784,7 +556,7 @@ class TransactionDecimal
             'tokenAddress' => $tokenAddress,
         ] = $payload;
 
-        $web3 = new Web3(new HttpProvider(new HttpRequestManager(self::WEB3_RPC_NODE)));
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager($this->web3RpcNode)));
         $abi = Abis::ERC20_ABI;
         $contract = new Contract($web3->provider, $abi);
 
@@ -811,7 +583,7 @@ class TransactionDecimal
             'tokenAddress' => $tokenAddress,
         ] = $payload;
 
-        $web3 = new Web3(new HttpProvider(new HttpRequestManager(self::WEB3_RPC_NODE)));
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager($this->web3RpcNode)));
         $abi = Abis::ERC20_ABI;
         $contract = new Contract($web3->provider, $abi);
 
@@ -836,7 +608,7 @@ class TransactionDecimal
             'tokenAddress' => $tokenAddress,
         ] = $payload;
 
-        $web3 = new Web3(new HttpProvider(new HttpRequestManager(self::WEB3_RPC_NODE)));
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager($this->web3RpcNode)));
         $abi = Abis::ERC20_ABI;
         $contract = new Contract($web3->provider, $abi);
 
@@ -889,7 +661,7 @@ class TransactionDecimal
 
     private function sendRawEvmTransaction($to, $rawTransactionData)
     {
-        $web3 = new Web3(new HttpProvider(new HttpRequestManager(self::WEB3_RPC_NODE)));
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager($this->web3RpcNode)));
         $sequence = $this->wallet->getSequence();
 
         $publicKey = $this->wallet->getPublicKey();
@@ -1014,7 +786,7 @@ class TransactionDecimal
         
     }
 
-    public function validatorCancelRedelegate($payload, $options = [])
+    private function validatorCancelRedelegate($payload, $options = [])
     {
         [
             'old_validator' => $old_validator,
@@ -1038,7 +810,7 @@ class TransactionDecimal
         
     }
 
-    public function validatorCancelUndelegate($payload, $options = [])
+    private function validatorCancelUndelegate($payload, $options = [])
     {
         [
             'validator' => $validator,
@@ -1103,13 +875,17 @@ class TransactionDecimal
 
         $serializedPubKey = $pubKeyEd25519->serializeToString();
 
+        if ($stake == 0) {
+            throw new DecimalException('Stake too low.');
+        }
+
         $msg = $this->protoManager->getMsgValidatorDeclare(
                 $this->wallet->getValidatorAddress(),
             $rewardAddress,
-            $stake,
+            amountUNIRecalculate($stake),
             $coin,
             $serializedPubKey,
-            $commission,
+            getCommissionToUNI($commission),
             $moniker,
             $identity,
             $website,
@@ -1205,7 +981,6 @@ class TransactionDecimal
             'owners' => $owners,
             'weights' => $weights,
         ] = $payload;
-        // var_dump(intval($threshold));
         $msg = $this->protoManager->getMsgMultisigCreate(
             $this->wallet->getAddress(),
             $threshold,
@@ -1233,15 +1008,14 @@ class TransactionDecimal
             'amount' => $amount,
         ] = $payload;
 
-        $type = '/decimal.coin.v1.MsgSendCoin';
+        $type = "/decimal.coin.v1.MsgSendCoin";
 
         $preparedData = [
-            'sender' => $from,
             'recipient' => $to,
-            'amount' => $amount,
-            'coin' => $coin,
+            'amount' => amountUNIRecalculate($amount),
+            'coin' => strtolower(trim($coin)),
         ];
-
+        
         $msg = $this->protoManager->getMsgMultisigCreateTx(
                 $this->wallet->getAddress(),
             $from,
@@ -1371,7 +1145,7 @@ class TransactionDecimal
             $id,
             $sub_token_ids,
             $reserve,
-            $denom,
+            strtolower(trim($denom)),
         );
 
         $result = $this->sendTransaction($msg, $options);
@@ -1401,7 +1175,7 @@ class TransactionDecimal
         
     }
 
-    public function nftCancelRedelegate($payload, $options = [])
+    private function nftCancelRedelegate($payload, $options = [])
     {
         [
             'id' => $id,
@@ -1425,7 +1199,7 @@ class TransactionDecimal
         
     }
 
-    public function nftCancelUndelegate($payload, $options = [])
+    private function nftCancelUndelegate($payload, $options = [])
     {
         [
             'id' => $id,
@@ -1468,7 +1242,7 @@ class TransactionDecimal
 
         $result = $this->sendTransaction($msg, $options);
         return $result;
-        //EDITED
+        
     }
 
     /**
@@ -1490,7 +1264,7 @@ class TransactionDecimal
 
         $result = $this->sendTransaction($msg, $options);
         return $result;
-        //EDITED
+        
     }
 
     /**
@@ -1514,7 +1288,7 @@ class TransactionDecimal
                 $this->wallet->getAddress(),
                 $recipient,
                 $tokenSymbol,
-                $amount,
+                amountUNIRecalculate($amount),
                 $destChain,
                 $transactionNumber,
                 1
@@ -1522,7 +1296,7 @@ class TransactionDecimal
 
         $result = $this->sendTransaction($msg, $options);
         return $result;
-        //EDITED
+        
     }
 
     /**
@@ -1564,7 +1338,7 @@ class TransactionDecimal
         
     }
 
-    public function updateCoinPrices($payload, $options = [])
+    private function updateCoinPrices($payload, $options = [])
     {
          [
             'oracle' => $oracle,
@@ -1586,7 +1360,7 @@ class TransactionDecimal
 
         $result = $this->sendTransaction($msg, $options);
         return $result;
-        //EDITED
+        
     }
 
     public function reownLegacy($payload, $options = [])
@@ -1605,35 +1379,9 @@ class TransactionDecimal
 
         // $result = $this->sendTransaction($msg, $options);
         return $result;
-        //EDITED
+        
     }
 
-    /**
-     * @param $type
-     * @param $payload
-     * @param $options
-     * @return float
-     * @throws DecimalException
-     */
-
-    public function estimateTxFee($type, $payload, $options)
-    {
-        foreach ($this->txSchemes as $key => $value) {
-            if ($type == $this->txSchemes[$key]['type']) {
-                $typeTrans = $key;
-                $result = $this->checkRequiredFields($key, $payload);
-            }
-        }
-        $payload['fee'] = $this->txSchemes[$typeTrans]['fee'];
-
-        $prePayload = $this->formatePrepayload($type, $payload);
-        $flag = ['estimateTxFee' => true];
-        $preparedTx = $this->prepareTransaction($type, $prePayload, $flag);
-
-        $fee = $this->getCommission($preparedTx, $options['feeCoin'], $payload['fee']);
-
-        return $fee['value'] * 0.001;
-    }
 
     /**
      * @param $addresssNft
@@ -1762,31 +1510,6 @@ class TransactionDecimal
     }
 
     /**
-     * @param $name
-     * @param $payload
-     * @return bool
-     * @throws DecimalException
-     */
-
-    private function checkRequiredFields($name, $payload)
-    {
-        if (!$this->txSchemes[$name] || !$this->txSchemes[$name]['scheme']) {
-            throw new DecimalException('Called scheme not exists');
-        }
-
-        $scheme = $this->txSchemes[$name]['scheme'];
-        $errors = $this->fieldsValidation($scheme, $payload);
-        if (count($scheme['requiredFields'])) {
-            $errors = array_merge(array_fill_keys($scheme['requiredFields'], 'field is required'), $errors);
-        }
-        if (count($errors)) {
-            throw new DecimalException("payload validation fails " . json_encode($errors, JSON_UNESCAPED_SLASHES));
-        }
-
-        return true;
-    }
-
-    /**
      * @param $object
      * @return mixed
      */
@@ -1843,5 +1566,11 @@ class TransactionDecimal
             // 48 bits for "node"
             mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
         );
+    }
+
+    private function rlpHash($hash) {
+        $rlp = new RLP;
+        $result = Keccak::hash($rlp->encode($hash), '256');
+        return $result;
     }
 }?>

@@ -63,7 +63,7 @@ use Google\Protobuf\Timestamp;
 
 class ProtoManager
 {
-    const DEFAULT_GAS_LIMIT = '9000000000000000000';
+    const DEFAULT_GAS_LIMIT = '180000';
     private static $instance;
     private $classesByType = [];
 
@@ -140,13 +140,10 @@ class ProtoManager
         $msg->setSender($sender);
         $msg->setWallet($from);
 
-        $sendCoinMsg = $this->getMsgSendCoin($content['sender'], $content['recipient'], $content['coin'], $content['amount']);
-        
-        $msg->setContent($this->getAny([
-            'type_url' => $type,
-            'value' => $sendCoinMsg->serializeToString(),
-        ]));
+        $sendCoinMsg = $this->getMsgSendCoin($from, $content['recipient'], $content['coin'], $content['amount']);
 
+        $msg->setContent($sendCoinMsg);
+        
         return $this->getAny([
             'type_url' => TxTypes::MULTISIG_CREATE_TX,
             'value' => $msg->serializeToString(),
@@ -551,7 +548,7 @@ class ProtoManager
         $msg->setSender($sender);
         $msg->setTokenId($tokenId);
         $msg->setSubTokenIds($subTokenIds);
-        $msg->setReserve($this->getCoin($denom, $reserve));
+        $msg->setReserve($this->getCoin($denom, amountUNIRecalculate($reserve)));
 
         return $this->getAny([
             'type_url' => TxTypes::NFT_UPDATE_RESERVE,
@@ -692,6 +689,7 @@ class ProtoManager
     public function getMsgSendCoin($sender, $recipient, $denom, $amount)
     {
         $msg = new MsgSendCoin();
+
         $msg->setSender($sender);
         $msg->setRecipient($recipient);
         $msg->setCoin($this->getCoin($denom, $amount));
@@ -772,11 +770,11 @@ class ProtoManager
         return $txRaw;
     }
 
-    public function getBroadcastRequest($txBytes)
+    public function getBroadcastRequest($txBytes, $broadcastMode = BroadcastMode::BROADCAST_MODE_SYNC)
     {
         $broadcastRequest = new BroadcastTxRequest();
         $broadcastRequest->setTxBytes($txBytes);
-        $broadcastRequest->setMode(BroadcastMode::BROADCAST_MODE_SYNC); // always sync mode for now
+        $broadcastRequest->setMode($broadcastMode);
         return $broadcastRequest;
     }
 

@@ -1,7 +1,5 @@
 <?php
 
-use bitwasp\Bech32;
-
 if (!function_exists('sortPayload')) {
 
     function sortPayload($payload)
@@ -30,6 +28,19 @@ if (!function_exists('amountUNIRecalculate')) {
         $preparednum = number_format($numb, 0, ',', '');
         return $preparednum;
 
+    }
+}
+
+if (!function_exists('getCommissionToUNI')) {
+
+    function getCommissionToUNI($amount, $from = false)
+    {
+        $exp = 16;
+        if ($from)
+            $exp = -16;
+        $numb = $amount * pow(10, $exp);
+        $preparednum = number_format($numb, 0, ',', '');
+        return $preparednum;
     }
 }
 
@@ -75,19 +86,14 @@ if (!function_exists('pretty_p')) {
 if (!function_exists('isBech32')) {
     function isBech32($address)
     {
-        $prefix = 'dx';
+        $prefix = 'd0';
         $expr = sprintf(
             '/^((%s)(0([ac-hj-np-z02-9]{39}|[ac-hj-np-z02-9]{59})|1[ac-hj-np-z02-9]{8,87}))$/',
             $prefix
         );
 
         if (preg_match($expr, $address, $match) === 1) {
-            try {
-                // var_dump(\Bitwasp\Bech32\decode($address));
-                return true;
-            } catch (\Throwable $th) {
-                throw $th;
-            }
+            return true;
         }
 
         return false;
