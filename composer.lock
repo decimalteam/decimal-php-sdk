@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be04bfc693425fbf9ae5354fd8f74df1",
+    "content-hash": "81082f6d665edfe741154d0b99ec81c9",
     "packages": [
         {
             "name": "bitcoin-php/bitcoin-ecdsa",
@@ -367,16 +367,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.21.9",
+            "version": "v3.21.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "1bf02c57f260c5eea5e75a35c1a943fe943a188a"
+                "reference": "8f8dc48540aed2c96eb3febcc4816f1321f66b85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/1bf02c57f260c5eea5e75a35c1a943fe943a188a",
-                "reference": "1bf02c57f260c5eea5e75a35c1a943fe943a188a",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/8f8dc48540aed2c96eb3febcc4816f1321f66b85",
+                "reference": "8f8dc48540aed2c96eb3febcc4816f1321f66b85",
                 "shasum": ""
             },
             "require": {
@@ -405,9 +405,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.21.9"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.21.11"
             },
-            "time": "2022-10-26T20:30:45+00:00"
+            "time": "2022-12-08T06:36:59+00:00"
         },
         {
             "name": "grpc/grpc",
@@ -1924,16 +1924,16 @@
         },
         {
             "name": "web3p/web3.php",
-            "version": "dev-master",
+            "version": "0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web3p/web3.php.git",
-                "reference": "cede0cc410363ec6182a732e98bb017e421352f4"
+                "reference": "2eafffbbe50b79b819088c6a72baf3780d672e11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web3p/web3.php/zipball/cede0cc410363ec6182a732e98bb017e421352f4",
-                "reference": "cede0cc410363ec6182a732e98bb017e421352f4",
+                "url": "https://api.github.com/repos/web3p/web3.php/zipball/2eafffbbe50b79b819088c6a72baf3780d672e11",
+                "reference": "2eafffbbe50b79b819088c6a72baf3780d672e11",
                 "shasum": ""
             },
             "require": {
@@ -1946,7 +1946,6 @@
             "require-dev": {
                 "phpunit/phpunit": "~8.0|~9.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1966,17 +1965,15 @@
             "description": "Ethereum web3 interface.",
             "support": {
                 "issues": "https://github.com/web3p/web3.php/issues",
-                "source": "https://github.com/web3p/web3.php/tree/master"
+                "source": "https://github.com/web3p/web3.php/tree/0.1.6"
             },
-            "time": "2022-03-07T04:41:49+00:00"
+            "time": "2022-03-07T03:26:51+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "web3p/web3.php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

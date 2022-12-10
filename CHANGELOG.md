@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+### v0.13 - 2022-12-10
+###
+* Added functions to create and interact with ERC20 tokens. [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/67)
+* Updated protobufs files. Added option to choose broadcast mode. [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/68)
+
 ### [v0.12](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/v0.12%0D0.11?topic=0) - 2022-10-19
 ###
 * Added protobufs files and redoing work with node through protobuff files [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/61)
@@ -61,3 +66,5 @@ All notable changes to this project will be documented in this file. Dates are d
 #### Fixes
 * Changed url for method getAccountInfo, now using only 'auth/accounts-with-unconfirmed-nonce/$address' [`COMMIT`](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/0820d8dd336e45d2d4ba177b71ef56c4131290d9)
 * Removed flag 'createNonce' from Transaction option, because using one url in getAccountInfo [`COMMIT`](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/0820d8dd336e45d2d4ba177b71ef56c4131290d9)
+
+curl -XPOST -H'content-type:application/json' 'https://packagist.org/api/update-package?username=deathwing00000&apiToken=e82b3950868ac52fe624' -d'{"repository":{"url":"https://packagist.org/packages/decimalteam/decimal-php-sdk"}}'
