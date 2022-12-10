@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-### [v0.13](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/v0.12%0D0.11?topic=0) - 2022-10-19
+### v0.13 - 2022-12-10
 ###
 * Added functions to create and interact with ERC20 tokens. [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/67)
 * Updated protobufs files. Added option to choose broadcast mode. [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/68)
