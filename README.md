@@ -70,21 +70,21 @@ echo $wallet->getPrivateKey();
 
 ```php
 use DecimalSDK\Wallet;
-use DecimalSDK\Transaction;
+use DecimalSDK\TransactionDecimal;
 
 // Use wallet instance to init transaction
 // gateUrl - mainnet/devnet
 // nodeUrl - if not set using http://localhost
-// rpcPort - default 26657 
+// rpcPort - default 26657
 // restPort - default 1317
 $wallet = new Wallet();
 // Enter your address node http://your-address.node/api
-$transaction = new Transaction($wallet, [
+$transaction = new TransactionDecimal($wallet, [
     'gateUrl' => 'http://your-address.node/api',
     'useGate' => true/false,
     'mode' => 'sync', // Broadcast tx mode (sync | async | block) (default value sync)
     'setNonceAutomatically' => true/false, // (optional) Automatically calculate nonce within a small transaction pool, after getting the first one from blockchain (default value true)
-     'nonce' => '100' // (optional)  Custom nonce for the transaction {valid number string}. If you don't set nonce, sdk get it from blockchain 
+     'nonce' => '100' // (optional)  Custom nonce for the transaction {valid number string}. If you don't set nonce, sdk get it from blockchain
 ]);
 ```
 
@@ -100,6 +100,26 @@ Test::runTest($wallet, [
             ]);
 ```
 
+## Create coins
+
+```php
+
+$txPayload = [
+    'title' => 'Test coin',
+    'ticker' => 'TESTTT',
+    'initSupply' => '50000',
+    'maxSupply' => '100000',
+    'reserve' => '12000',
+    'crr' => '45'
+];
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
+
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->createCoin($payload, $options);
+// => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
+```
+
 ## Send coins
 
 ```php
@@ -110,7 +130,11 @@ $payload = [
   'amount' = 3;
 ];
 
-$result = $transaction->sendCoin($payload);
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
+
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->sendCoin($payload, $options);
 // => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
 ```
 
@@ -119,9 +143,14 @@ $result = $transaction->sendCoin($payload);
 ```php
 $txPayload = [
     'coin' => 'tDEL', //coin
-    'amount' => '800', // 100 tDEL
+    'amount' => '100', // 100 tDEL
 ];
-$result = $transaction->burnCoins($txPayload);
+
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
+
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->burnCoins($txPayload, $options);
 ```
 
 ## Sell coins
@@ -134,7 +163,11 @@ $payload = [
   'amountBuy' = 2;
 ];
 
-$result = $transaction->sellCoin($payload);
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
+
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->sellCoin($payload, $options);
 ```
 
 ## Buy Coins
@@ -147,7 +180,11 @@ $payload = [
   'amountSell' = 10;
 ];
 
-$result = $transaction->buyCoin($payload);
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
+
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->buyCoin($payload, $options);
 ```
 
 ## Sell all coins
@@ -159,8 +196,11 @@ $payload = [
   'denomBuy' = 'del';
   'minCoinToBuy' = 2;
 ];
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
 
-$result = $transaction->sellAllCoin($payload);
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->sellAllCoin($payload, $options);
 ```
 
 ## Validator delegate
@@ -172,8 +212,11 @@ $payload = [
 'coin' = 'tdel';
 'stake' = '10';
 ];
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
 
-$result = $transaction->validatorDelegate($payload);
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->validatorDelegate($payload, $options);
 ```
 
 ## Validator unbound
@@ -184,8 +227,11 @@ $payload = [
   'coin' = 'tdel';
   'stake' = '10';
 ];
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
 
-$result = $transaction->validatorUnbound($payload);
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->validatorUnbound($payload, $options);
 ```
 
 ## Validator declare
@@ -203,7 +249,7 @@ $txPayload = [
     'securityContact' => 'test@test.com',
     'details' => 'details node',
 ];
-
+// Custom fee isn't implemented yet.
 $result = $transaction->validatorDeclare($txPayload);
 ```
 
@@ -218,47 +264,22 @@ $txPayload = [
     'securityContact' => 'test@test.com',
     'details' => 'details node',
 ];
-
+// Custom fee isn't implemented yet.
 $result = $transaction->validatorEdit($txPayload);
 ```
 
 ## Disable validator
 
 ```php
+// Custom fee isn't implemented yet.
 $result = $transaction->disableValidator($txPayload);
 ```
 
 ## Enable validator
 
 ```php
+// Custom fee isn't implemented yet.
 $result = $transaction->enableValidator($txPayload);
-```
-
-## Create coin
-
-```php
-$txPayload = [
-    'title' => 'Test coin',
-    'ticker' => 'TESTTT',
-    'initSupply' => '50000',
-    'maxSupply' => '100000',
-    'reserve' => '12000',
-    'crr' => '45'
-];
-
-$result = $transaction->createCoin($txPayload);
-```
-
-## Update coin
-
-```php
-$txPayload = [
-    'ticker' => 'TESTTT',
-    'maxSupply' => '1000000',
-    'identity'=>'e353b89e0de0a78974f9ecaf033721ac'
-];
-
-$result = $transaction->updateCoin($txPayload);
 ```
 
 ## Multisig create
@@ -269,7 +290,7 @@ $txPayload = [
     'owners' => ['dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', 'dx1v9macmluxh7rk3zsd69v7dwv9fsjhctn2jfhz9'],
     'weights' => ['1', '1'],
 ];
-
+// Custom fee isn't implemented yet.
 $result = $transaction->multisigCreate($txPayload);
 ```
 
@@ -282,7 +303,7 @@ $txPayload = [
     'coin' => 'tdel',
     'amount' => '10',
 ];
-
+// Custom fee isn't implemented yet.
 $result = $transaction->multisigCreateTX($txPayload);
 ```
 
@@ -292,7 +313,7 @@ $result = $transaction->multisigCreateTX($txPayload);
 $txPayload = [
     'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
 ];
-
+// Custom fee isn't implemented yet.
 $result = $transaction->multisigSignTX($txPayload);
 ```
 
@@ -315,7 +336,11 @@ $txPayload = [
         'memo' => 'message' // optional
 ];
 
-$result = $transaction->multiSendCoins($txPayload);
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
+
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->multiSendCoins($txPayload, $options);
 
 ```
 
@@ -327,6 +352,7 @@ $txPayload = [
    'decision'=> 'Yes'//Yes or No
     ];
 
+// Custom fee isn't implemented yet.
 $result = $transaction->proposalVote($txPayload);
 ```
 
@@ -339,7 +365,7 @@ $txPayload = [
       'tokenSymbol'=> 'DEL',
       'destChain'=> '2'
      ];
-
+// Custom fee isn't implemented yet.
 $result = $transaction->msgSwapInit($txPayload);
 ```
 
@@ -358,7 +384,7 @@ $txPayload = [
      'r'=> '0x0e0eb6089caa52794f7ad64a5ad7ab500b12cc7b640180e30b30b48a19c296e1',
      's'=> '0x2005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3',
      ];
-
+// Custom fee isn't implemented yet.
 $result = $transaction->msgSwapRedeem($txPayload);
 ```
 
@@ -411,13 +437,19 @@ $reserve = ['denom' => 'del', 'amount'=> 1];
 $quantity = '1';
 $allow_mint = true;
 
-$result = $transaction->createNftMint($id,
+// You can provide address of coin that should be used as fee via 'options'.
+$options = ['feeCoin' => 'testtt'];
+
+// 'options' is optional argument that equal ampty array by default $options = []
+$result = $transaction->mintNft($id,
         $recipient, // optional
         $denom,
         $tokenUri,
         $quantity,
         $reserve,
-        true);
+        $allow_mint,
+        $options // optional
+        );
 ```
 
 ## NFT burn
@@ -469,7 +501,7 @@ $txPayload = [
     'sub_token_ids'=> [1,2],
     'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
-
+// Custom fee isn't implemented yet.
 $result = $transaction->nftUnbond($txPayload);
 ```
 
@@ -497,7 +529,7 @@ $result = $transaction->getNftMetadata('ba3b4bbf39cfb042fad0eaec4e3496c48e1c04a6
 $result = $transaction->getNft('49501d55a30944bf7b3b72e618c1cc564cdeaeee');
 /*
 
-common fields for all users 
+common fields for all users
 
 {
   allowMint: false
@@ -551,7 +583,7 @@ $query = '2ff8d64694c05777770'; // nft id or nft collection to search
 $result = $transaction->getNfts($address, $limit, $offset, $query);
 /*
 
-common fields for all users 
+common fields for all users
 
 {
   count: 1,
@@ -795,7 +827,7 @@ $order = 'order[createdAt]=DESC'; // sort field and direction in format order[FI
 $result = $transaction->getNftsTxes($address, $limit, $offset, $order);
 /*
 
-common fields for all users 
+common fields for all users
 
 {
   count: 1,
@@ -856,7 +888,7 @@ $result = $transaction->getNftTxes($id, $limit, $offset, $order);
 
 /*
 
-common fields for all users 
+common fields for all users
 
 {
   count: 1,
@@ -904,7 +936,7 @@ if not user's nft
 }
 
 */
-````
+```
 
 ## get stakes
 
@@ -1045,12 +1077,12 @@ $txPayload = [
     'amount'=>'1'
      ];
 $options=[
-    'freeCoin'=> 'del',
+    'feeCoin'=> 'del',
     'message'=> 'message text',
     'gasLimit'=> '9000000000000000000',
     'mode' => 'sync'
     ];
-$transaction = new Transaction($wallet);
+$transaction = new TransactionDecimal($wallet);
 $result = $transaction->estimateTxFee($type ,$txPayload,$options); //0.44
 ```
 
@@ -1058,4 +1090,126 @@ $result = $transaction->estimateTxFee($type ,$txPayload,$options); //0.44
 
 ```php
 $result = $transaction->checkRequiredFields($data ,$txPayload);
+```
+
+## ERC20 Token creation
+
+```php
+$payload = [
+        'name' => 'testR',
+        'symbol' => 'RTTA',
+        'supply' => '100',
+        'maxSupply' => '1000000', // Matters only if `capped` set as `true`
+        'mintable' => 'true',
+        'burnable' => 'true',
+        'capped' => 'false'
+    ];
+
+// If executed successfully, returns tx object.
+$result = $transaction->createToken($txPayload);
+```
+
+## ERC20 Token transfer
+
+```php
+$payload = [
+            'recipient' => '0x8A7798E68Ebc792971510DaF1Bdc2B4538e6f0cD',
+            'tokenAddress' => '0x10a8CB653ad9d7a22d334607FE301BB407d50C10',
+            'amount' => 0.5
+        ];
+
+// If executed successfully, returns tx object.
+$result = $transaction->transferTokens($txPayload);
+```
+
+## ERC20 Token approve
+
+```php
+$payload = [
+        'spender' => '0x8A7798E68Ebc792971510DaF1Bdc2B4538e6f0cD',
+        'amount' => 170,
+        'tokenAddress' => '0x10a8CB653ad9d7a22d334607FE301BB407d50C10',
+    ];
+
+// If executed successfully, returns tx object.
+$result = $transaction->approveTokens($txPayload);
+```
+
+## ERC20 Token transferFrom
+
+```php
+// Allowance must be greater than `amount`.
+$payload = [
+            'from' => '0x8A7798E68Ebc792971510DaF1Bdc2B4538e6f0cD',
+            'to' => '0xC8419191Cb1A3bF4FfC022D01f857D5AFdeD01ba',
+            'tokenAddress' => '0x10a8CB653ad9d7a22d334607FE301BB407d50C10',
+            'amount' => 2
+        ];
+
+// If executed successfully, returns tx object.
+$result = $transaction->transferTokensFrom($txPayload);
+```
+
+## ERC20 Token mint
+
+```php
+// Only if token is mintable.
+$payload = [
+            'recipient' => '0x8A7798E68Ebc792971510DaF1Bdc2B4538e6f0cD',
+            'tokenAddress' => '0x10a8CB653ad9d7a22d334607FE301BB407d50C10',
+            'amount' => 0.5
+        ];
+
+// If executed successfully, returns tx object.
+$result = $transaction->mintTokens($txPayload);
+```
+
+## ERC20 Token burn
+
+```php
+// Only if token is burnable.
+$payload = [
+            'recipient' => '0x8A7798E68Ebc792971510DaF1Bdc2B4538e6f0cD',
+            'tokenAddress' => '0x10a8CB653ad9d7a22d334607FE301BB407d50C10',
+            'amount' => 0.5
+        ];
+
+// If executed successfully, returns tx object.
+$result = $transaction->burnTokens($txPayload);
+```
+
+## ERC20 balanceOf
+
+```php
+$payload = [
+        'account' => '0xC8419191Cb1A3bF4FfC022D01f857D5AFdeD01ba',
+        'tokenAddress' => '0x10a8CB653ad9d7a22d334607FE301BB407d50C10'
+    ];
+
+// Returns token balance of given account.
+$result = $transaction->balanceOfToken($txPayload);
+```
+
+## ERC20 allowance
+
+```php
+$payload = [
+        'owner' => '0xC8419191Cb1A3bF4FfC022D01f857D5AFdeD01ba',
+        'spender' => '0x8A7798E68Ebc792971510DaF1Bdc2B4538e6f0cD',
+        'tokenAddress' => '0x10a8CB653ad9d7a22d334607FE301BB407d50C10'
+    ];
+
+// Returns allowance of given account.
+$result = $transaction->allowanceOfToken($txPayload);
+```
+
+## ERC20 Token info
+
+```php
+$payload = [
+        'tokenAddress' => '0x10a8CB653ad9d7a22d334607FE301BB407d50C10'
+    ];
+
+// Returns name, symbol, decimal and total supply of given ERC20 contract.
+$result = $transaction->tokenInfo($txPayload);
 ```

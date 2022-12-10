@@ -9,11 +9,11 @@ use GuzzleHttp\Client as GClient;
 
 class ApiRequester
 {
-	const TEST_GATE_API = 'https://devnet-dec2.console.decimalchain.com/api/';
+    const TEST_GATE_API = 'https://devnet-gate.decimalchain.com/api/';
     const GET = 'get';
     const POST = 'post';
-	const TIMEOUT = 5.0;
-	const DEFAULT_NODE_URL = 'https://devnet-dec2-node-01.decimalchain.com/';
+    const TIMEOUT = 5.0;
+    const DEFAULT_NODE_URL = 'https://devnet-gate.decimalchain.com/api/rpc/broadcast';
     const DEFAULT_DEFAULT_NODE_RPC_PORT = '26657';
     const DEFAULT_DEFAULT_NODE_REST_PORT = '1317';
 
@@ -102,51 +102,51 @@ class ApiRequester
         $this->client = new GClient($params);
     }
 
-	protected function getRpcPrefix()
-	{
-		return $this->options['useGate'] ? 'rpc/' : 'rest/';
-	}
+    protected function getRpcPrefix()
+    {
+        return $this->options['useGate'] ? 'rpc/' : 'rest/';
+    }
 
-	public function getSignMeta(Wallet $wallet)
-	{
-		$nodeInfo = $this->getNodeInfo();
-		$accountInfo = (object)$this->getAccountInfo($wallet->getAddress());
+    public function getSignMeta(Wallet $wallet)
+    {
+        $nodeInfo = $this->getNodeInfo();
+        $accountInfo = (object) $this->getAccountInfo($wallet->getAddress());
 
-		$meta = [
-			'account_number' => $accountInfo->account->base_account->account_number ?? 0,
-			'chain_id' => $nodeInfo->default_node_info->network ?? 0,
-		];
+        $meta = [
+            'account_number' => $accountInfo->account->base_account->account_number ?? 0,
+            'chain_id' => $nodeInfo->default_node_info->network ?? 0,
+        ];
 
-		$wallet->setSequence($accountInfo->account->base_account->sequence ?? 0);
-		return $meta;
-	}
+        $wallet->setSequence($accountInfo->account->base_account->sequence ?? 0);
+        return $meta;
+    }
 
-	public function getNodeInfo()
-	{
-		$url = 'rpc/node_info';
-		$response = $this->_request($url, self::GET, false);
-		return $response;
-	}
+    public function getNodeInfo()
+    {
+        $url = 'rpc/node_info';
+        $response = $this->_request($url, self::GET, false);
+        return $response;
+    }
 
-	public function getAccountInfo($address)
-	{
-		//todo check it
-		if (isset($this->options['createNonce'])) {
-			$url = "/accounts/$address";
-		} else {
-			$url = "accounts/$address";
-		}
+    public function getAccountInfo($address)
+    {
+        //todo check it
+        if (isset($this->options['createNonce'])) {
+            $url = "/accounts/$address";
+        } else {
+            $url = "accounts/$address";
+        }
 
-		//todo temp fix
-		$response = file_get_contents("https://devnet-dec2-node-01.decimalchain.com/rest/cosmos/auth/v1beta1/accounts/". $address);
+        //todo temp fix
+        $response = file_get_contents("https://devnet-val.decimalchain.com/rest/cosmos/auth/v1beta1/accounts/" . $address);
 
-		return json_decode($response);
-	}
+        return json_decode($response);
+    }
 
-	public function getCoinsList($address, $limit = 1, $offset = 0, $query = null)
-	{
-		//todo this coin to coins
-		$url = "address/$address/coins?limit=$limit&offset=$offset";
+    public function getCoinsList($address, $limit = 1, $offset = 0, $query = null)
+    {
+        //todo this coin to coins
+        $url = "address/$address/coins?limit=$limit&offset=$offset";
 
         if ($query) {
             $url += "&$query";
@@ -220,56 +220,59 @@ class ApiRequester
         return $res;
     }
 
-	public function getTransaction($hash) {
-		if (!$hash) {
-			throw new DecimalException('hash is required');
-		}
+    public function getTransaction($hash)
+    {
+        if (!$hash) {
+            throw new DecimalException('hash is required');
+        }
 
-		$url = "https://devnet-dec2-explorer-api.decimalchain.com/api/tx/$hash";
+        $url = "https://devnet-dec2-explorer-api.decimalchain.com/api/tx/$hash";
 
-		$response = $this->_request($url, self::GET, false);
-		return $response;
-	}
+        $response = $this->_request($url, self::GET, false);
+        return $response;
+    }
 
 
-	public function getEstimateTxFee($type, $data,$options=null){
-		var_dump("Estimate TX Fee");
-		var_dump("Type:", $type);
-		var_dump("Data: ", $data);
-		
-		return 0.453;
-	}
+    public function getEstimateTxFee($type, $data, $options = null)
+    {
+        var_dump("Estimate TX Fee");
+        var_dump("Type:", $type);
+        var_dump("Data: ", $data);
 
-	public function getNftMetadata($addressNft)
-	{
-		if (!$addressNft) {
-			throw new DecimalException('address is required');
-		}
-		$url = "nfts/$addressNft";
-		$res = $this->_request($url, self::GET, false);
-		return $res;
-	}
+        return 0.453;
+    }
 
-	public function getNftList($address, $limit=1, $offset=0, $query = 0) {
-		if(!$address) {
-			throw new DecimalException('address is required');
-		}
+    public function getNftMetadata($addressNft)
+    {
+        if (!$addressNft) {
+            throw new DecimalException('address is required');
+        }
+        $url = "nfts/$addressNft";
+        $res = $this->_request($url, self::GET, false);
+        return $res;
+    }
 
-		$url = "address/$address/nfts?limit=$limit&offset=$offset";
+    public function getNftList($address, $limit = 1, $offset = 0, $query = 0)
+    {
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
-		if ($query) {
-			$url += "&$query";
-		}
+        $url = "address/$address/nfts?limit=$limit&offset=$offset";
 
-		$response = $this->_request($url, self::GET. false);
-		return $response;
-	}
+        if ($query) {
+            $url += "&$query";
+        }
 
-	public function getMultiSigsByAddress($address)
-	{
-		if (!$address) {
-			throw new DecimalException('address is required');
-		}
+        $response = $this->_request($url, self::GET . false);
+        return $response;
+    }
+
+    public function getMultiSigsByAddress($address)
+    {
+        if (!$address) {
+            throw new DecimalException('address is required');
+        }
 
         $url = "address/$address/multisigs";
 
@@ -344,6 +347,26 @@ class ApiRequester
         }
     }
 
+    public function getTokenCreationBytecode($payload)
+    {
+        [
+            'name' => $name,
+            'symbol' => $symbol,
+            'supply' => $supply,
+            'maxSupply' => $maxSupply,
+            'mintable' => $mintable,
+            'burnable' => $burnable,
+            'capped' => $capped
+        ] = $payload;
+
+        $url = "https://devnet-gate.decimalchain.com/api/evm-token/data?name=" . $name . "&symbol=" . $symbol . "&supply=" . $supply .
+            '&maxSupply=' . $maxSupply . '&mintable=' . $mintable . '&burnable=' . $burnable . '&capped=' . $capped;
+
+        $res = $this->_request($url, self::GET);
+
+        return $res->result;
+    }
+
     public function checkTransaction($hash)
     {
         try {
@@ -358,16 +381,21 @@ class ApiRequester
 
     public function sendTx($tx, $rpc = false, $options = [], $method = self::POST)
     {
-        $url = $this->getRpcPrefix() . 'txs';
-        $tx = ['tx' => $tx, 'mode' => $this->options['mode']];
+        try {
+            $url = $this->getRpcPrefix() . 'txs';
+            $tx = ['tx' => $tx, 'mode' => $this->options['mode']];
 
-		return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
+            return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
+        } catch (\Exception $exception) {
+            return $this->getError(json_encode($exception->getMessage()));
+        }
     }
 
 
-	public function post($url, $payload, $rpc = false) {
-		return $this->_request($url, self::POST,$rpc, $payload);
-	}
+    public function post($url, $payload, $rpc = false)
+    {
+        return $this->_request($url, self::POST, $rpc, $payload);
+    }
 
     private function _request($url, $method, $rpc = false, $payload = null, $optional = [])
     {
@@ -430,7 +458,7 @@ class ApiRequester
         ];
 
         if (boolval($this->wallet->currentNonce)) {
-            WalletHelpers::updateNonce($this->wallet, $jsonResp->code ? null : (int)$this->wallet->currentNonce + 1);
+            WalletHelpers::updateNonce($this->wallet, $jsonResp->code ? null : (int) $this->wallet->currentNonce + 1);
         }
 
 
@@ -438,27 +466,27 @@ class ApiRequester
 
     }
 
-	/**
-	 *  get error body
-	 *
-	 * @param $exception
-	 * @param  null  $txhash
-	 * @return array
-	 */
-	protected function getError($exception, $code = null, $txhash = null)
-	{
-		//todo log errors
-		return [
-			'hash' => $txhash,
-			'success' => false,
-			'error' => [
-				'errorCode' => $code,
-				'errorMessage' => $exception,
-			]
-		];
-	}
+    /**
+     *  get error body
+     *
+     * @param $exception
+     * @param  null  $txhash
+     * @return array
+     */
+    protected function getError($exception, $code = null, $txhash = null)
+    {
+        //todo log errors
+        return [
+            'hash' => $txhash,
+            'success' => false,
+            'error' => [
+                'errorCode' => $code,
+                'errorMessage' => $exception,
+            ]
+        ];
+    }
 
-	public function getNfts($address, $timestamp, $signature, $limit = 10, $offset = 0, $query = null)
+    public function getNfts($address, $timestamp, $signature, $limit = 10, $offset = 0, $query = null)
     {
         $signature = json_encode($signature);
         $query = $query ? '&query=' . $query : '';
@@ -479,15 +507,18 @@ class ApiRequester
         try {
             $res = $this->client->get($url);
             $body = $res->getBody();
-            return json_decode($body->getContents(), true);
+            $response = json_decode($body->getContents(), true);
+
+            return $response;
         } catch (\Exception $exception) {
             return $this->getError(json_encode($exception->getMessage()));
         }
     }
 
-    public function sendTxToBroadcast($broadcastPayload) {
-		$response = $this->post('http://185.242.122.118/rest/cosmos/tx/v1beta1/txs',$broadcastPayload);
-		return $response;
-	}
-	
+    public function sendTxToBroadcast($broadcastPayload)
+    {
+        $response = $this->post('https://devnet-val.decimalchain.com/rest/cosmos/tx/v1beta1/txs', $broadcastPayload);
+        return $response;
+    }
+
 }
