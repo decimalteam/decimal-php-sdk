@@ -12,7 +12,7 @@ class ApiRequester
     const TEST_GATE_API = 'https://devnet-gate.decimalchain.com/api/';
     const GET = 'get';
     const POST = 'post';
-    const TIMEOUT = 5.0;
+    const TIMEOUT = 6.0;
     const DEFAULT_NODE_URL = 'https://devnet-gate.decimalchain.com/api/rpc/broadcast';
     const DEFAULT_DEFAULT_NODE_RPC_PORT = '26657';
     const DEFAULT_DEFAULT_NODE_REST_PORT = '1317';
@@ -28,6 +28,7 @@ class ApiRequester
     private $restPort;
     private $validModes = ['sync', 'async', 'block'];
     private $wallet;
+    private $chain = 'dev';
 
     /**
      * ApiRequester constructor.
@@ -58,6 +59,14 @@ class ApiRequester
             $this->options['useGate'] = true;
         }
         if ($this->options['useGate']) {
+            if (isset($this->options['gateUrl'])) {
+                if (strpos($this->options['gateUrl'], 'main')) {
+                    $this->chain = 'main';
+                } elseif (strpos($this->options['gateUrl'], 'test')) {
+                    $this->chain = 'main';
+                }
+            }
+
             $this->options['baseUrl'] = $this->options['gateUrl'] ?? self::TEST_GATE_API;
         } elseif (!$this->options['useGate']) {
             $this->options['baseUrl'] = $this->options['nodeUrl'] ?? self::DEFAULT_NODE_URL;
@@ -138,7 +147,7 @@ class ApiRequester
         }
 
         //todo temp fix
-        $response = file_get_contents("https://devnet-val.decimalchain.com/rest/cosmos/auth/v1beta1/accounts/" . $address);
+        $response = file_get_contents("https://" . $this->chain . "net-val.decimalchain.com/rest/cosmos/auth/v1beta1/accounts/" . $address);
 
         return json_decode($response);
     }
@@ -175,7 +184,11 @@ class ApiRequester
             throw new DecimalException('address is required');
         }
 
-        $url = "address/$address?txLimit=$txLimit$timestamp$signature";
+        try {
+            $url = "address/$address?txLimit=$txLimit$timestamp$signature";
+        } catch (\Exception $e) {
+            throw new DecimalException('Address not initialized yet.');
+        }
 
         return $this->_request($url, self::GET);
     }
@@ -226,20 +239,10 @@ class ApiRequester
             throw new DecimalException('hash is required');
         }
 
-        $url = "https://devnet-dec2-explorer-api.decimalchain.com/api/tx/$hash";
+        $url = "https://" . $this->chain . "net-gate.decimalchain.com/api/tx/$hash";
 
         $response = $this->_request($url, self::GET, false);
         return $response;
-    }
-
-
-    public function getEstimateTxFee($type, $data, $options = null)
-    {
-        var_dump("Estimate TX Fee");
-        var_dump("Type:", $type);
-        var_dump("Data: ", $data);
-
-        return 0.453;
     }
 
     public function getNftMetadata($addressNft)
@@ -359,7 +362,7 @@ class ApiRequester
             'capped' => $capped
         ] = $payload;
 
-        $url = "https://devnet-gate.decimalchain.com/api/evm-token/data?name=" . $name . "&symbol=" . $symbol . "&supply=" . $supply .
+        $url = "https://" . $this->chain . "net-gate.decimalchain.com/api/evm-token/data?name=" . $name . "&symbol=" . $symbol . "&supply=" . $supply .
             '&maxSupply=' . $maxSupply . '&mintable=' . $mintable . '&burnable=' . $burnable . '&capped=' . $capped;
 
         $res = $this->_request($url, self::GET);
@@ -517,8 +520,12 @@ class ApiRequester
 
     public function sendTxToBroadcast($broadcastPayload)
     {
-        $response = $this->post('https://devnet-val.decimalchain.com/rest/cosmos/tx/v1beta1/txs', $broadcastPayload);
+        $response = $this->post('https://' . $this->chain . 'net-val.decimalchain.com/rest/cosmos/tx/v1beta1/txs', $broadcastPayload);
         return $response;
+    }
+
+    public function getChain() {
+        return $this->chain;
     }
 
 }

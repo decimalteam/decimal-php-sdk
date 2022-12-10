@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * MsgCreateTransactionResponse defines the Msg/CreateTransaction response type.
+ * MsgCreateTransactionResponse defines the MsgCreateTransaction response type.
  *
  * Generated from protobuf message <code>decimal.multisig.v1.MsgCreateTransactionResponse</code>
  */

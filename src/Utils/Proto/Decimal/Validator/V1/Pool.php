@@ -18,13 +18,13 @@ class Pool extends \Google\Protobuf\Internal\Message
     /**
      * bonded defines complete list of coins delegated and currently bonded.
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin bonded = 1 [json_name = "bonded", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin bonded = 1 [json_name = "bonded", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
     private $bonded;
     /**
      * not_bonded defines complete list of coins delegated but not bonded (redelegating or undelegating).
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin not_bonded = 2 [json_name = "notBonded", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin not_bonded = 2 [json_name = "notBonded", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      */
     private $not_bonded;
 
@@ -48,7 +48,7 @@ class Pool extends \Google\Protobuf\Internal\Message
     /**
      * bonded defines complete list of coins delegated and currently bonded.
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin bonded = 1 [json_name = "bonded", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin bonded = 1 [json_name = "bonded", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getBonded()
@@ -59,7 +59,7 @@ class Pool extends \Google\Protobuf\Internal\Message
     /**
      * bonded defines complete list of coins delegated and currently bonded.
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin bonded = 1 [json_name = "bonded", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin bonded = 1 [json_name = "bonded", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -74,7 +74,7 @@ class Pool extends \Google\Protobuf\Internal\Message
     /**
      * not_bonded defines complete list of coins delegated but not bonded (redelegating or undelegating).
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin not_bonded = 2 [json_name = "notBonded", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin not_bonded = 2 [json_name = "notBonded", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getNotBonded()
@@ -85,7 +85,7 @@ class Pool extends \Google\Protobuf\Internal\Message
     /**
      * not_bonded defines complete list of coins delegated but not bonded (redelegating or undelegating).
      *
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin not_bonded = 2 [json_name = "notBonded", (.gogoproto.nullable) = false];</code>
+     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin not_bonded = 2 [json_name = "notBonded", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
      * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */

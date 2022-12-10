@@ -24,13 +24,9 @@ class MsgCreateTransaction extends \Google\Protobuf\Internal\Message
      */
     protected $wallet = '';
     /**
-     * Generated from protobuf field <code>string receiver = 3 [json_name = "receiver", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
+     * Generated from protobuf field <code>.google.protobuf.Any content = 3 [json_name = "content", (.cosmos_proto.accepts_interface) = "Content"];</code>
      */
-    protected $receiver = '';
-    /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 4 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     */
-    private $coins;
+    protected $content = null;
 
     /**
      * Constructor.
@@ -40,8 +36,7 @@ class MsgCreateTransaction extends \Google\Protobuf\Internal\Message
      *
      *     @type string $sender
      *     @type string $wallet
-     *     @type string $receiver
-     *     @type array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $coins
+     *     @type \Google\Protobuf\Any $content
      * }
      */
     public function __construct($data = NULL) {
@@ -94,45 +89,33 @@ class MsgCreateTransaction extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string receiver = 3 [json_name = "receiver", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @return string
+     * Generated from protobuf field <code>.google.protobuf.Any content = 3 [json_name = "content", (.cosmos_proto.accepts_interface) = "Content"];</code>
+     * @return \Google\Protobuf\Any|null
      */
-    public function getReceiver()
+    public function getContent()
     {
-        return $this->receiver;
+        return $this->content;
+    }
+
+    public function hasContent()
+    {
+        return isset($this->content);
+    }
+
+    public function clearContent()
+    {
+        unset($this->content);
     }
 
     /**
-     * Generated from protobuf field <code>string receiver = 3 [json_name = "receiver", (.cosmos_proto.scalar) = "cosmos.AddressString"];</code>
-     * @param string $var
+     * Generated from protobuf field <code>.google.protobuf.Any content = 3 [json_name = "content", (.cosmos_proto.accepts_interface) = "Content"];</code>
+     * @param \Google\Protobuf\Any $var
      * @return $this
      */
-    public function setReceiver($var)
+    public function setContent($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->receiver = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 4 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getCoins()
-    {
-        return $this->coins;
-    }
-
-    /**
-     * Generated from protobuf field <code>repeated .cosmos.base.v1beta1.Coin coins = 4 [json_name = "coins", (.gogoproto.nullable) = false, (.gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];</code>
-     * @param array<\Cosmos\Base\V1beta1\Coin>|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setCoins($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cosmos\Base\V1beta1\Coin::class);
-        $this->coins = $arr;
+        GPBUtil::checkMessage($var, \Google\Protobuf\Any::class);
+        $this->content = $var;
 
         return $this;
     }

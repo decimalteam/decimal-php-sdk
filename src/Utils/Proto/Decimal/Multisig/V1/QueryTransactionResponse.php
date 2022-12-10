@@ -19,6 +19,14 @@ class QueryTransactionResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.decimal.multisig.v1.Transaction transaction = 1 [json_name = "transaction", (.gogoproto.nullable) = false];</code>
      */
     protected $transaction = null;
+    /**
+     * Generated from protobuf field <code>repeated string signers = 2 [json_name = "signers"];</code>
+     */
+    private $signers;
+    /**
+     * Generated from protobuf field <code>bool completed = 3 [json_name = "completed"];</code>
+     */
+    protected $completed = false;
 
     /**
      * Constructor.
@@ -27,6 +35,8 @@ class QueryTransactionResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Decimal\Multisig\V1\Transaction $transaction
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $signers
+     *     @type bool $completed
      * }
      */
     public function __construct($data = NULL) {
@@ -62,6 +72,50 @@ class QueryTransactionResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Decimal\Multisig\V1\Transaction::class);
         $this->transaction = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string signers = 2 [json_name = "signers"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getSigners()
+    {
+        return $this->signers;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string signers = 2 [json_name = "signers"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setSigners($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->signers = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool completed = 3 [json_name = "completed"];</code>
+     * @return bool
+     */
+    public function getCompleted()
+    {
+        return $this->completed;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool completed = 3 [json_name = "completed"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setCompleted($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->completed = $var;
 
         return $this;
     }

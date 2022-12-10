@@ -98,7 +98,7 @@ $test_data = [
             'sub_token_ids' => [1],
             'validator_address' => 'dxvaloper1lx4lvt8sjuxj8vw5dcf6knnq0pacre4wx926l8'
         ],
-        'nftUnbond' => [
+        'nftUnbound' => [
             'denom' => $_ENV['DENOM'],
             'id' => $_ENV['NFT_ID'],
             'sub_token_ids' => [1],

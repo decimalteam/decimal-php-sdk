@@ -38,14 +38,6 @@ trait TransactionHelpers
         $signature = Encrypt::sepc256k1Sign(json_encode($toSignPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             $this->wallet->getPrivateKey());
 
-        // $unsignedTx['signatures'] = [[
-        //     'signature' => $signature,
-        //     'pub_key' => [
-        //         'type' => self::PUB_KEY_TYPE,
-        //         'value' => base64_encode(hex2bin($this->wallet->getPublicKey())),
-        //     ],
-        // ]];
-
         return $unsignedTx;
     }
 
@@ -251,107 +243,8 @@ trait TransactionHelpers
         }
 
         $tx['fee']['amount'][0]['amount'] = amountUNIRecalculate($totalFee);
-//        $tx['fee']['gas'] = (string)($fee['base'] + $feeForFeeAmount);
 
         return $tx;
-    }
-
-    /**
-     * @param $type
-     * @param $payload
-     * @return array
-     * @throws DecimalException
-     */
-    public function formatePrepayload($type, $payload = [])
-    {
-        switch ($type) {
-            case $this->txSchemes['COIN_SEND']['type'];
-                return $this->coinSendPayload($payload);
-                break;
-            case $this->txSchemes['COIN_BURN']['type'];
-                return $this->coinBurnPayload($payload);
-                break;
-            case $this->txSchemes['COIN_BUY']['type'];
-                return $this->coinBuyPayload($payload);
-                break;
-            case $this->txSchemes['COIN_SELL']['type'];
-                return $this->coinSellPayload($payload);
-                break;
-            case $this->txSchemes['COIN_SELL_ALL']['type'];
-                return $this->coinSellAllPayload($payload);
-                break;
-            case $this->txSchemes['VALIDATOR_DELEGATE']['type'];
-                return $this->validatorDelegatePayload($payload);
-                break;
-            case $this->txSchemes['VALIDATOR_UNBOND']['type'];
-                return $this->validatorUnbondPayload($payload);
-                break;
-            case $this->txSchemes['VALIDATOR_CANDIDATE']['type'];
-                return $this->validatorCandidatePayload($payload);
-                break;
-            case $this->txSchemes['VALIDATOR_CANDIDATE_EDIT']['type'];
-                return $this->validatorCandidateEditPayload($payload);
-                break;
-            case $this->txSchemes['VALIDATOR_SET_OFFLINE']['type'];
-                return ['validator_address' => $this->wallet->getValidatorAddress()];
-                break;
-            case $this->txSchemes['VALIDATOR_SET_ONLINE']['type'];
-                return ['validator_address' => $this->wallet->getValidatorAddress()];
-                break;
-            case $this->txSchemes['COIN_CREATE']['type'];
-                return $this->coinCreatePayload($payload);
-                break;
-            case $this->txSchemes['COIN_UPDATE']['type'];
-                return $this->coinUpdatePayload($payload);
-                break;
-            case $this->txSchemes['MULTISIG_CREATE_WALLET']['type'];
-                return $this->multisigCreateWalletPayload($payload);
-                break;
-            case $this->txSchemes['MULTISIG_CREATE_TX']['type'];
-                return $this->multisigCreateTXPayload($payload);
-                break;
-            case $this->txSchemes['MULTISIG_SIGN_TX']['type'];
-                return $this->multisigSignTXPayload($payload);
-                break;
-            case $this->txSchemes['COIN_MULTISEND']['type'];
-                return $this->coinMultiSendPayload($payload);
-                break;
-            case $this->txSchemes['NFT_MINT']['type'];
-                return $this->nftMintPayload($payload);
-                break;
-            case $this->txSchemes['NFT_BURN']['type'];
-                return $this->nftBurnPayload($payload);
-                break;
-            case $this->txSchemes['NFT_EDIT_METADATA']['type'];
-                return $this->nftEditMetadataPayload($payload);
-                break;
-            case $this->txSchemes['NFT_UPDATE_RESERVE']['type'];
-                return $this->nftUpdateReservePayload($payload);
-                break;
-            case $this->txSchemes['NFT_TRANSFER']['type'];
-                return $this->ntfTransferPayload($payload);
-                break;
-            case $this->txSchemes['NFT_DELEGATE']['type'];
-                return $this->nftDelegatePayload($payload);
-                break;
-            case $this->txSchemes['NFT_UNBOND']['type'];
-                return $this->nftUnbondPayload($payload);
-                break;
-            case  $this->txSchemes['PROPOSAL_VOTE']['type'];
-                return $this->proposalVotePayload($payload);
-                break;
-            case $this->txSchemes['SWAP_INIT']['type'];
-                return $this->msgSwapInitPayload($payload);
-                break;
-            case $this->txSchemes['SWAP_REDEEM']['type'];
-                return $this->msgSwapRedeemPayload($payload);
-                break;
-            case $this->txSchemes['SIMULATE_FEE']['type'];
-                return $this->simulateFeePayload($payload);
-                break;
-            default:
-                throw new DecimalException('Invalid type of transaction');
-        }
     }
 
     public function simulateFeePayload($payload) {
@@ -413,7 +306,7 @@ trait TransactionHelpers
     {
         return [
             'delegator_address' => $this->wallet->getAddress(),
-            'validator_address' => WalletHelpers::checkAddress($payload['address'], WalletHelpers::DXVALOPER),
+            'validator_address' => WalletHelpers::checkAddress($payload['address'], WalletHelpers::D0VALOPER),
             'coin' => [
                 'amount' => amountUNIRecalculate($payload['stake']),
                 'denom' => strtolower($payload['coin']),
@@ -425,7 +318,7 @@ trait TransactionHelpers
     {
         return [
             'delegator_address' => $this->wallet->getAddress(),
-            'validator_address' => WalletHelpers::checkAddress($payload['address'], WalletHelpers::DXVALOPER),
+            'validator_address' => WalletHelpers::checkAddress($payload['address'], WalletHelpers::D0VALOPER),
             'coin' => [
                 'amount' => amountUNIRecalculate($payload['stake']),
                 'denom' => strtolower($payload['coin']),
@@ -438,7 +331,7 @@ trait TransactionHelpers
         return [
             'commission' => ($payload['commission'] / 100) . '.000000000000000000',
             'validator_addr' => $this->wallet->getValidatorAddress(),
-            'reward_addr' => WalletHelpers::checkAddress($payload['rewardAddress'], WalletHelpers::DX),
+            'reward_addr' => WalletHelpers::checkAddress($payload['rewardAddress'], WalletHelpers::D0),
             'pub_key' => [
                 'type' => 'tendermint/PubKeyEd25519',
                 'value' => $payload['pubKey'],
@@ -461,7 +354,7 @@ trait TransactionHelpers
     {
         return [
             'validator_address' => $this->wallet->getValidatorAddress(),
-            'reward_address' => WalletHelpers::checkAddress($payload['rewardAddress'], WalletHelpers::DX),
+            'reward_address' => WalletHelpers::checkAddress($payload['rewardAddress'], WalletHelpers::D0),
             'description' => [
                 'moniker' => $payload['moniker'],
                 'identity' => $payload['identity'],
@@ -504,7 +397,7 @@ trait TransactionHelpers
     public function multisigCreateWalletPayload($payload)
     {
         foreach ($payload['owners'] as $owner) {
-            WalletHelpers::checkAddress($owner, WalletHelpers::DX);
+            WalletHelpers::checkAddress($owner, WalletHelpers::D0);
         }
         return [
             'sender' => $this->wallet->getAddress(),
@@ -519,7 +412,7 @@ trait TransactionHelpers
         return [
             'sender' => $this->wallet->getAddress(),
             'wallet' => $payload['from'],
-            'receiver' => WalletHelpers::checkAddress($payload['to'], WalletHelpers::DX),
+            'receiver' => WalletHelpers::checkAddress($payload['to'], WalletHelpers::D0),
             'coins' => [
                 [
                     'denom' => strtolower($payload['coin']),
@@ -555,7 +448,7 @@ trait TransactionHelpers
             'reserve' => amountUNIRecalculate($payload['reserve']),
             'sender' => $this->wallet->getAddress(),
             'recipient' => WalletHelpers::checkAddress($payload['recipient'],
-                    WalletHelpers::DX) ?? $this->wallet->getAddress(),
+                    WalletHelpers::D0) ?? $this->wallet->getAddress(),
             'allow_mint' => $payload['allow_mint']
         ];
     }
@@ -597,7 +490,7 @@ trait TransactionHelpers
     {
         return [
             'id' => $payload['id'],
-            'recipient' => WalletHelpers::checkAddress($payload['recipient'], WalletHelpers::DX),
+            'recipient' => WalletHelpers::checkAddress($payload['recipient'], WalletHelpers::D0),
             'sub_token_ids' => $payload['sub_token_ids'],
             'denom' => $payload['denom'],
             'sender' => $this->wallet->getAddress()
@@ -608,18 +501,18 @@ trait TransactionHelpers
     {
         return [
             'id' => $payload['id'],
-            'validator_address' => WalletHelpers::checkAddress($payload['validator_address'], WalletHelpers::DX),
+            'validator_address' => WalletHelpers::checkAddress($payload['validator_address'], WalletHelpers::D0),
             'sub_token_ids' => $payload['sub_token_ids'],
             'denom' => $payload['denom'],
             'delegator_address' => $this->wallet->getAddress()
         ];
     }
 
-    public function nftUnbondPayload($payload)
+    public function nftUnboundPayload($payload)
     {
         return [
             'id' => $payload['id'],
-            'validator_address' => WalletHelpers::checkAddress($payload['validator_address'], WalletHelpers::DX),
+            'validator_address' => WalletHelpers::checkAddress($payload['validator_address'], WalletHelpers::D0),
             'sub_token_ids' => $payload['sub_token_ids'],
             'denom' => $payload['denom'],
             'delegator_address' => $this->wallet->getAddress()
@@ -639,7 +532,7 @@ trait TransactionHelpers
     {
         return [
             'from' => $this->wallet->getAddress(),
-            'recipient' => WalletHelpers::checkAddress($payload['recipient'], WalletHelpers::DX),
+            'recipient' => WalletHelpers::checkAddress($payload['recipient'], WalletHelpers::D0),
             'amount' => amountUNIRecalculate($payload['amount']),
             'token_symbol' => $payload['tokenSymbol'],
             'transaction_number' => date('U'),

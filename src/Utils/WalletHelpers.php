@@ -11,8 +11,8 @@ use DecimalSDK\Wallet;
 
 class WalletHelpers {
 
-    const DXVALOPER = 'dxvaloper';
-    const DX = 'dx';
+    const D0VALOPER = 'd0valoper';
+    const D0 = 'd0';
     const MAX_AUTOMATICALLY_NONCE_VALID_UNTIL = 6;
     /**
      * verify address
@@ -21,7 +21,7 @@ class WalletHelpers {
      * @param  string  $prefix
      * @return bool
      */
-    public static function checkAddress($string, $prefix = 'dx')
+    public static function checkAddress($string, $prefix = 'd0')
     {
         try{
             $decoded = Encrypt::decodeBech32($string);

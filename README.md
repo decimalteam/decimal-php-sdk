@@ -21,15 +21,7 @@ https://packagist.org/packages/decimalteam/decimal-php-sdk
 
 ```php
 $wHelper = new WalletHelpers();
-return $wHelper->checkAddress('address', 'dx'); // dx || dxvaloper
-```
-
-## Get Address count
-
-```php
-$api = new ApiRequester();
-$result = $api->getAddressCount();
-return $result->result;
+return $wHelper->checkAddress('address', 'd0'); // d0 || d0valoper
 ```
 
 ## Create wallet
@@ -41,7 +33,7 @@ use DecimalSDK\Wallet;
 $wallet = new Wallet(/*your mnemonics*/);
 
 echo $wallet->getAddress();
-//dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g
+//d013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g
 ```
 
 ## Get public key wallet
@@ -88,18 +80,6 @@ $transaction = new TransactionDecimal($wallet, [
 ]);
 ```
 
-## Start tests
-
-```php
-use DecimalSDK\Tests;
-
-Test::runTest($wallet, [
-                'gateUrl' => 'http://your-address.node/api',
-                'useGate' => true/false,
-                'mode' => 'sync'
-            ]);
-```
-
 ## Create coins
 
 ```php
@@ -112,11 +92,35 @@ $txPayload = [
     'reserve' => '12000',
     'crr' => '45'
 ];
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+// For all functions that sends transactions, You can provide address of custom coin that should be used as fee in 'options'.
+// Also You can provide 'simulate' flag for estimate fee value. Can be estimated, only if 'feeCoin' set.
+// To simulate fee in DEL, set 'feeCoin' => 'del'.
+// Also You can provide 'txBroadcastMode' option which should be equal 'sync', 'async' or 'block', default: 'sync'. 
+// Modes:
+// 'sync' - waiting for blockchain's response and returning respone object.
+// 'async' - isn't waiting any responses, always return true.
+// 'block' - waiting until transaction will be include in block and return transaction object.
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = [] and using DEL as fee coin.
 $result = $transaction->createCoin($payload, $options);
+// => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
+```
+
+## Update coin
+
+```php
+
+$payload = [
+    'maxSupply' => '270000',
+    'ticker' => 'testsdk10',
+    'identity' => '2a3f8bbdbed335aa7544836a9ff57a79'
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->updateCoin($payload, $options);
 // => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
 ```
 
@@ -125,15 +129,14 @@ $result = $transaction->createCoin($payload, $options);
 ```php
 
 $payload = [
-  'recipient' = 'dx14x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj';
+  'recipient' = 'd014x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj';
   'denom' = 'del';
   'amount' = 3;
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->sendCoin($payload, $options);
 // => {hash: '4C0A408B6EBC33AD...', success: true, error: null}
 ```
@@ -146,10 +149,9 @@ $txPayload = [
     'amount' => '100', // 100 tDEL
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->burnCoins($txPayload, $options);
 ```
 
@@ -163,10 +165,9 @@ $payload = [
   'amountBuy' = 2;
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->sellCoin($payload, $options);
 ```
 
@@ -180,10 +181,9 @@ $payload = [
   'amountSell' = 10;
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->buyCoin($payload, $options);
 ```
 
@@ -194,51 +194,67 @@ $result = $transaction->buyCoin($payload, $options);
 $payload = [
   'denomSell' = 'A1111111';
   'denomBuy' = 'del';
-  'minCoinToBuy' = 2;
 ];
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->sellAllCoin($payload, $options);
 ```
+
 
 ## Validator delegate
 
 ```php
 
 $payload = [
-'address' = 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
+'address' = 'd0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
 'coin' = 'tdel';
 'stake' = '10';
 ];
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->validatorDelegate($payload, $options);
 ```
 
-## Validator unbound
+## Validator undelegate
 
 ```php
 $payload = [
-  'address' = 'dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
+  'address' = 'd0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
   'coin' = 'tdel';
   'stake' = '10';
 ];
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
-$result = $transaction->validatorUnbound($payload, $options);
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->validatorUndelegate($payload, $options);
+```
+
+## Validator redelegate
+
+```php
+$payload = [
+    'old_validator' => 'd0valoper14elhyzmq95f98wrkvujtsr5cyudffp6qk9wmzm',
+    'new_validator' => 'd0valoper1yvgq6uh35a395hexhxcde2zfpwwafzpaxvupmc',
+    'stake' => '1',
+    'coin' => 'del'
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->validatorRedelegate($payload, $options);
 ```
 
 ## Validator declare
 
 ```php
 $txPayload = [
-    'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'rewardAddress' => 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
     'stake' => '10',
     'coin' => 'tdel',
     'pubKey' => 'JRlv38BXuD1TvWQJ9ic1KHr8PzuOITZH3rD8Zm0Vj3Y',
@@ -249,37 +265,54 @@ $txPayload = [
     'securityContact' => 'test@test.com',
     'details' => 'details node',
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->validatorDeclare($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->validatorDeclare($txPayload, $options);
 ```
 
 ## Validator edit
 
 ```php
 $txPayload = [
-    'rewardAddress' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'rewardAddress' => 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
     'moniker' => 'my-node-123-edit',
     'identity' => '321',
     'website' => 'hello.ru',
     'securityContact' => 'test@test.com',
     'details' => 'details node',
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->validatorEdit($txPayload);
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->validatorEdit($txPayload, $options);
 ```
 
 ## Disable validator
 
 ```php
-// Custom fee isn't implemented yet.
-$result = $transaction->disableValidator($txPayload);
+$payload = [
+    'validator' => 'd0valoper1fatzsagt96pfglxlq245th252mv3necksyuy0v',
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->disableValidator($payload, $options);
 ```
 
 ## Enable validator
 
 ```php
-// Custom fee isn't implemented yet.
-$result = $transaction->enableValidator($txPayload);
+$payload = [
+    'validator' => 'd0valoper1fatzsagt96pfglxlq245th252mv3necksyuy0v',
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->enableValidator($payload, $options);
 ```
 
 ## Multisig create
@@ -287,34 +320,43 @@ $result = $transaction->enableValidator($txPayload);
 ```php
 $txPayload = [
     'threshold' => '2',
-    'owners' => ['dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', 'dx1v9macmluxh7rk3zsd69v7dwv9fsjhctn2jfhz9'],
+    'owners' => ['d013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', 'd01v9macmluxh7rk3zsd69v7dwv9fsjhctn2jfhz9'],
     'weights' => ['1', '1'],
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->multisigCreate($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->multisigCreate($txPayload, $options);
 ```
 
 ## Multisig create tx
 
 ```php
 $txPayload = [
-    'from' => 'dx1am6ke3l79kjzdqhwgx37em04mzg686ekf9p3pq',
-    'to' => 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'from' => 'd01am6ke3l79kjzdqhwgx37em04mzg686ekf9p3pq',
+    'to' => 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
     'coin' => 'tdel',
     'amount' => '10',
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->multisigCreateTX($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->multisigCreateTX($txPayload, $options);
 ```
 
 ## Multisig Sign tx
 
 ```php
 $txPayload = [
-    'txId' => 'dxmstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
+    'txId' => 'd0mstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
 ];
-// Custom fee isn't implemented yet.
-$result = $transaction->multisigSignTX($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->multisigSignTX($txPayload, $options);
 ```
 
 ## Multisend Coins
@@ -323,12 +365,12 @@ $result = $transaction->multisigSignTX($txPayload);
 $txPayload = [
         'sends' => [
              [
-                'to'=> 'dx1lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
+                'to'=> 'd01lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
                'coin'=>  'DEL',
                'amount'=> 100
             ],
             [
-                'to'=> 'dx1n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
+                'to'=> 'd01n4hnaynrm0n56yza9959604t93hlnpvmfasw67',
                 'coin'=>  'DEL',
                 'amount'=> 100
             ],
@@ -336,24 +378,11 @@ $txPayload = [
         'memo' => 'message' // optional
 ];
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->multiSendCoins($txPayload, $options);
 
-```
-
-## Proposal vote
-
-```php
-$txPayload = [
-    'id' => 1,
-   'decision'=> 'Yes'//Yes or No
-    ];
-
-// Custom fee isn't implemented yet.
-$result = $transaction->proposalVote($txPayload);
 ```
 
 ## Swap init
@@ -365,8 +394,11 @@ $txPayload = [
       'tokenSymbol'=> 'DEL',
       'destChain'=> '2'
      ];
-// Custom fee isn't implemented yet.
-$result = $transaction->msgSwapInit($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->swapInit($txPayload, $options);
 ```
 
 ## Swap redeem
@@ -375,8 +407,7 @@ $result = $transaction->msgSwapInit($txPayload);
 $txPayload = [
     'from'=> '0x45376AD024c767577714C7B92882578aE8B7f98C',
     'amount'=> '1',
-    'recipient'=> 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
-    'tokenName'=> 'decimal',
+    'recipient'=> 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
     'transactionNumber'=> 'lksdnd-asvkla-SDCds',
     'tokenSymbol'=> 'del',
     'fromChain'=> '2',
@@ -384,8 +415,11 @@ $txPayload = [
      'r'=> '0x0e0eb6089caa52794f7ad64a5ad7ab500b12cc7b640180e30b30b48a19c296e1',
      's'=> '0x2005adafda24593f221aec030126d989609455b2ed66969b2bb64926137f3ce3',
      ];
-// Custom fee isn't implemented yet.
-$result = $transaction->msgSwapRedeem($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->swapRedeem($txPayload, $options);
 ```
 
 ## NFT mint
@@ -417,30 +451,17 @@ $result = $transaction->msgSwapRedeem($txPayload);
 }
  * */
 
-// create nft id
-// put $headline, $description, $slug from response
-$headline = 'headline_example';
-$description = 'description_example';
-$slug = 'CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ';
-
-//get hash (sha1) from file
-$assetHash = hash_file('sha1', $path_to_file_asset , false);
-$coverHash = hash_file('sha1', $path_to_file_cover , false);
-
-$id = $transaction->generateNftId($headline, $description, $slug, $coverHash, $assetHash);
-
 // denom - name of nft collection
-$recipient ='dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v';
+$recipient ='d01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v';
 $denom = 'test';
 $tokenUri = 'https://devnet-nft.decimalchain.com/api/nfts/ZOmGepIA6YWSkrTFaXXb5klr38Mv40Kv';
 $reserve = ['denom' => 'del', 'amount'=> 1];
 $quantity = '1';
 $allow_mint = true;
 
-// You can provide address of coin that should be used as fee via 'options'.
-$options = ['feeCoin' => 'testtt'];
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-// 'options' is optional argument that equal ampty array by default $options = []
+// 'options' is optional argument that equal empty array by default $options = []
 $result = $transaction->mintNft($id,
         $recipient, // optional
         $denom,
@@ -455,66 +476,122 @@ $result = $transaction->mintNft($id,
 ## NFT burn
 
 ```php
-$result = $transaction->burnNft('f98a662205beea30b3c90a95723f320b902919c8', [1]);
+$payload = [
+    'id' => '90b6dc232e040d38a1bb2ec7711ab35629b9ca5e',
+    'subtokenIds' => ['1', '2']
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->burnNft($payload, $options);
 ```
 
 ## NFT edit metadata
 
 ```php
 
-$id = 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689';
-$tokenUri ='https://develop.nft.decimalchain.com/api/nfts/pepe1111';
+$payload = [
+        'tokenId' => 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689',
+        'tokenURI' => 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689'
+    ];
 
-$result = $transaction->editNftMetadata($id,$tokenUri);
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->editNftMetadata($payload, $options);
 ```
 
 ## NFT transfer
 
 ```php
 
-$recipient = 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v';
+$recipient = 'd01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v';
 $id ='c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689';
-$subTokenId = [1];
+$payload = [
+        'id' => 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689',
+        'recipient' => 'd01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
+        'sub_token_ids' => [1]
+    ];
 
-$result = $transaction->transferNft($recipient, $id, $subTokenId);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->transferNft($payload, $options);
 ```
 
 ## NFT delegate
 
 ```php
 $txPayload = [
-    'denom'=> 'timPhone',
     'id'=> '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
     'sub_token_ids'=> [1,2],
-    'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+    'validator_address'=> 'd01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
 
-$result = $transaction->nftDelegate($txPayload);
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->nftDelegate($payload, $options);
 ```
 
-## NFT unbond
+## NFT undelegate
 
 ```php
 $txPayload = [
-    'denom'=> 'timPhone',
     'id'=> '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
     'sub_token_ids'=> [1,2],
-    'validator_address'=> 'dx1lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+    'validator_address'=> 'd01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
      ];
-// Custom fee isn't implemented yet.
-$result = $transaction->nftUnbond($txPayload);
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->nftUndelegate($payload, $options);
+```
+
+## NFT redelegate
+
+```php
+$payload = [
+    'id' => '90b6dc232e040d38a1bb2ec7711ab35629b9ca5e',
+    'old_validator' => 'd0valoper14elhyzmq95f98wrkvujtsr5cyudffp6qk9wmzm',
+    'new_validator' => 'd0valoper1yvgq6uh35a395hexhxcde2zfpwwafzpaxvupmc',
+    'sub_token_ids' => ['2']
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->nftRedelegate($payload, $options);
 ```
 
 ## NFT reserve update
 
 ```php
+$payload = [
+        'id' => '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
+        'sub_token_ids' => ['1'],
+        'denom' => 'timPhone',
+        'reserve' => '1'
+    ];
 
-$id => '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
-$reserve => '1',
-$denom => 'timPhone',
-$sub_token_ids => ['1']
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
-$result = $transaction->nftUpdateReserve($id,$sub_token_ids, $reserve, $denom);
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->nftUpdateReserves($payload, $options);
+```
+
+## Reown legacy
+
+```php
+$payload = [
+    'pubKey' => '04b7a5dcb1cd9078a6e55ff2dbeb58afad5f235065d5b82ff15e18e89394cc2cf3ae2e200c897045d7fd9ae1a9029578d07419b6fc52ca6124c71ff88002f1d2cb'
+];
+
+// This function make call to backend, not to blockchain, so it's free.
+$result = $transaction->reownLegacy($id,$sub_token_ids, $reserve, $denom);
 ```
 
 ## get NFT metadata
@@ -536,7 +613,7 @@ common fields for all users
   blockId: 17187
   cover: "data:image/png;base64,iVBORw0KGgo..."
   createdAt: "2021-09-28T06:43:48.378Z"
-  creator: "dx1wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8"
+  creator: "d01wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8"
   description: "token"
   headline: "tok"
   id: 422
@@ -576,7 +653,7 @@ if user is not owner of requested nft then response is
 ## get list of NFT
 
 ```php
-$address = 'dx1wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8'; // address of requested user with nfts
+$address = 'd01wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8'; // address of requested user with nfts
 $limit = 10;
 $offset = 0;
 $query = '2ff8d64694c05777770'; // nft id or nft collection to search
@@ -593,7 +670,7 @@ common fields for all users
     allowMint: false
     blockId: 17187
     createdAt: "2021-09-28T06:43:48.378Z"
-    creator: "dx1wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8"
+    creator: "d01wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8"
     description: "token"
     headline: "tok"
     id: 422
@@ -636,14 +713,14 @@ if not user's address
 ## get address
 
 ```php
-$address = 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g'; // address of requested user, required property
+$address = 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g'; // address of requested user, required property
 $txLimit = 10; // optional property
 $result = $transaction->getAddress($address, $txLimit);
 /*
 {
   "address": {
     "id": 31,
-    "address": "dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g",
+    "address": "d013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g",
     "type": "single",
     "balance": {
       "tdel": "14999120000000000000000"
@@ -680,7 +757,7 @@ $result = $transaction->getAddress($address, $txLimit);
 
 ```php
 $hash = '90EFE7E117B9C27355AB0885077E0B22C343594280ED8CBC4100D516FC228BFD'; // transaction hash
-$transaction->checkTransaction($hash);
+$apiRequester->getTransaction($hash);
 
 /*
 [ "ok" => true
@@ -716,7 +793,7 @@ $transaction->checkTransaction($hash);
       "amount" => ""
       "issuer" => ""
       "owners" => ""
-      "sender" => "dx19uw05epj00fctthnv6y8tnayf9k8rnsqr46au3"
+      "sender" => "d019uw05epj00fctthnv6y8tnayf9k8rnsqr46au3"
       "symbol" => ""
       "wallet" => ""
       "weights" => ""
@@ -801,14 +878,14 @@ $transaction->checkTransaction($hash);
       "min_amount_to_buy" => ""
       "validator_address" => ""
       "max_amount_to_sell" => ""
-      "multisend_receivers" => "[{"dx17uvraxkrlvuwfwwgz7yqe0kdzv4dttze4394vq":{"amount":"182963397998034976768","coin":"tdel"}},{"dx1xc0x5zemdyu29m0yufyxldm68fwqx39vy6twkk":{"amount":"231753637464179015680","coin":"tdel"}},{"dx1hmk05dlv7npzmy3q7hsj7yvds8yr3ff6fa6mkr":{"amount":"48790239466142703616","coin":"tdel"}},{"dx1ptj8fcf7df8nczdgwnhsszmzm5xyv6x0k2vqfq":{"amount":"176102270573110001664","coin":"tdel"}},{"dx1lzs6psv3u6vzgm5qnrz49ugvtmnd4hx09c6l5d":{"amount":"176102270573110001664","coin":"tdel"}},{"dx1wgrgknfdcft06e3604alec2a50d8gcm7w2kfem":{"amount":"6098779933267869696","coin":"tdel"}}]"
+      "multisend_receivers" => "[{"d017uvraxkrlvuwfwwgz7yqe0kdzv4dttze4394vq":{"amount":"182963397998034976768","coin":"tdel"}},{"d01xc0x5zemdyu29m0yufyxldm68fwqx39vy6twkk":{"amount":"231753637464179015680","coin":"tdel"}},{"d01hmk05dlv7npzmy3q7hsj7yvds8yr3ff6fa6mkr":{"amount":"48790239466142703616","coin":"tdel"}},{"d01ptj8fcf7df8nczdgwnhsszmzm5xyv6x0k2vqfq":{"amount":"176102270573110001664","coin":"tdel"}},{"d01lzs6psv3u6vzgm5qnrz49ugvtmnd4hx09c6l5d":{"amount":"176102270573110001664","coin":"tdel"}},{"d01wgrgknfdcft06e3604alec2a50d8gcm7w2kfem":{"amount":"6098779933267869696","coin":"tdel"}}]"
       "constant_reserve_ratio" => null
     ]
     "nonce" => 21
     "code" => 0
     "message" => ""
     "blockId" => 2499678
-    "from" => "dx19uw05epj00fctthnv6y8tnayf9k8rnsqr46au3"
+    "from" => "d019uw05epj00fctthnv6y8tnayf9k8rnsqr46au3"
     "to" => null
     "createdAt" => "2022-02-14T07:01:09.242Z"
     "updatedAt" => "2022-02-14T07:01:09.245Z"
@@ -820,62 +897,12 @@ $transaction->checkTransaction($hash);
 ## getNftsTxes
 
 ```php
-$address = 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g'; // address of requested user with nfts, required property
+$address = 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g'; // address of requested user with nfts, required property
 $limit = 10; // optional property
 $offset = 0; // optional property
 $order = 'order[createdAt]=DESC'; // sort field and direction in format order[FIELD]=DIRECTION where DIRECTION in (DISC, ASC), optional property
 $result = $transaction->getNftsTxes($address, $limit, $offset, $order);
 /*
-
-common fields for all users
-
-{
-  count: 1,
-  txs: [{
-    blockId: 648044
-    code: 0
-    cover: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUQ
-    createdAt: "2021-10-15T04:53:40.411Z"
-    creator: "dx1zenxxwspj8rnjstqyst9qvwaptq7jwwjnzul04"
-    data: {log: "",…}
-    description: "DAY"
-    fee: {gas_coin: null, gas_used: "430000000000000000", gas_amount: null, gas_used_number: 430000000000000000}
-    from: "dx1wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8"
-    hash: "7F3BFBBAB54373E7E83EA7ECAF32CB1C42BC5ED4CD37AE3ECBF984D3058E8F00"
-    headline: "DAY"
-    id: 528
-    isPrivate: false
-    message: ""
-    misc: {coverHash: "6c37327f0e961595787924a89944894cd62d2a83",…}
-    nonce: 119
-    slug: "ndFK0PT2V1VmrEvd7F9jhzZLbG3b8cfI"
-    status: "active"
-    timestamp: "2021-11-15T10:15:52.669Z"
-    to: null
-    type: "delegate_nft"
-    updatedAt: "2021-10-15T04:53:48.550Z"
-  }]
-}
-
-if user's address
-
-{
-  cover: "data:image/png;base64,iVBORw0KGgoAAAA...", // original cover of nft
-  misc: {coverHash: '307a3e7ccac8dfbd522805d980e199e5e5dc1541', coverPath: 'cSWF9hjezHlgxCPvAj4DtjpIstBnvHHo_cover_93b28.png', coverExtension: 'png'}
-  ...commonFields,
-}
-
-if not user's address
-
-{
-  // predefined data
-  cover: "data:image/png;base64,FrrvfwqeyttytyT...", // a placeholder image used for common display
-  misc: null,
-  ...commonFields,
-}
-
-*/
-```
 
 ## getNftTxes
 
@@ -897,11 +924,11 @@ common fields for all users
     code: 0
     cover: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUQ
     createdAt: "2021-10-15T04:53:40.411Z"
-    creator: "dx1zenxxwspj8rnjstqyst9qvwaptq7jwwjnzul04"
+    creator: "d01zenxxwspj8rnjstqyst9qvwaptq7jwwjnzul04"
     data: {log: "",…}
     description: "DAY"
     fee: {gas_coin: null, gas_used: "430000000000000000", gas_amount: null, gas_used_number: 430000000000000000}
-    from: "dx1wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8"
+    from: "d01wjewzht52hfy3m0rpm8usdmfk764ca4yrwd6q8"
     hash: "7F3BFBBAB54373E7E83EA7ECAF32CB1C42BC5ED4CD37AE3ECBF984D3058E8F00"
     headline: "DAY"
     id: 528
@@ -941,13 +968,13 @@ if not user's nft
 ## get stakes
 
 ```php
-$id = 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g';
+$id = 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g';
 $result = $transaction->getStakesByAddress($id);
 /*
 {
   "validators": [
     {
-      "validatorId": "dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
+      "validatorId": "d0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
       "stakesNfts": [
         {
            "baseQuantity": "1000",
@@ -958,9 +985,9 @@ $result = $transaction->getStakesByAddress($id);
       ],
       "totalStake": "500000000000000000000",
       "validator": {
-        "address": "dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
-        "consensusAddress": "dxvalcons17ntss5hyuutk5w4a4upptz3xc9f3f0tgwwmfw8",
-        "rewardAddress": "dx1ajytg8jg8ypx0rj9p792x32fuxyezga43jd3ry",
+        "address": "d0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
+        "consensusAddress": "d0valcons17ntss5hyuutk5w4a4upptz3xc9f3f0tgwwmfw8",
+        "rewardAddress": "d01ajytg8jg8ypx0rj9p792x32fuxyezga43jd3ry",
         "moniker": "test-node-fra1-02",
         "website": "decimalchain.com",
         "details": "Declaring validator on test-node-fra1-02",
@@ -990,13 +1017,13 @@ $result = $transaction->getStakesByAddress($id);
 ## get NFT stakes
 
 ```php
-$id = 'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g'; // wallet id
+$id = 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g'; // wallet id
 $result = $transaction->getNftStakesByAddress($id);
 /*
 {
   "validators": [
     {
-      "validatorId": "dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
+      "validatorId": "d0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
       "stakes": [
         {
           "coin": "tdel",
@@ -1007,9 +1034,9 @@ $result = $transaction->getNftStakesByAddress($id);
       ],
       "totalStake": "500000000000000000000",
       "validator": {
-        "address": "dxvaloper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
-        "consensusAddress": "dxvalcons17ntss5hyuutk5w4a4upptz3xc9f3f0tgwwmfw8",
-        "rewardAddress": "dx1ajytg8jg8ypx0rj9p792x32fuxyezga43jd3ry",
+        "address": "d0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0",
+        "consensusAddress": "d0valcons17ntss5hyuutk5w4a4upptz3xc9f3f0tgwwmfw8",
+        "rewardAddress": "d01ajytg8jg8ypx0rj9p792x32fuxyezga43jd3ry",
         "moniker": "test-node-fra1-02",
         "website": "decimalchain.com",
         "details": "Declaring validator on test-node-fra1-02",
@@ -1054,7 +1081,7 @@ $result = $transaction->getCoinsList(LIMIT,OFFSET,QUERY);
       "reserve": "12609116636032889229477",
       "crr": 10,
       "limitVolume": "2000000000000000000000",
-      "creator": "dx1vkn4lje42gjmyghc3vneg0yqa39wfgqvh4f8zg",
+      "creator": "d01vkn4lje42gjmyghc3vneg0yqa39wfgqvh4f8zg",
       "txHash": "93AC6D86FF12BD9594889FEF4092542CBA6FEFA09F5E4A710D9E6CF12C1006A7",
       "blockId": 1529,
       "avatar": "data:image/png;base64...",
@@ -1065,31 +1092,6 @@ $result = $transaction->getCoinsList(LIMIT,OFFSET,QUERY);
   ]
 }
 */
-```
-
-## Estimate tx fee
-
-```php
-$type='coin/send_coin';
-$txPayload = [
-    'to'=>'dx13ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
-    'coin'=>'del',
-    'amount'=>'1'
-     ];
-$options=[
-    'feeCoin'=> 'del',
-    'message'=> 'message text',
-    'gasLimit'=> '9000000000000000000',
-    'mode' => 'sync'
-    ];
-$transaction = new TransactionDecimal($wallet);
-$result = $transaction->estimateTxFee($type ,$txPayload,$options); //0.44
-```
-
-## Check required fields
-
-```php
-$result = $transaction->checkRequiredFields($data ,$txPayload);
 ```
 
 ## ERC20 Token creation
