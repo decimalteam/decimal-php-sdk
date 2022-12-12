@@ -78,9 +78,9 @@ $network = 'devnet';
 $isNodeDirectMode = true; // enable work only through node. 'false' by default.
 $options = [
     'customNodeEndpoint' => [
-      'nodeRestUrl' => 'http://your-address.node/rest',
-      'rpcEndpoint' => 'http://your-address.node/api',
-      'web3Node' => 'http://your-address.node/web3'
+      'nodeRestUrl' => 'http://127.0.0.1:1317',
+      'rpcEndpoint' => 'http://127.0.0.1:26657',
+      'web3Node' => 'http://127.0.0.1:12289'
     ]
 ]; // Will be used only if flag 'isNodeDirectMode' set as 'true'.
 $transaction = new TransactionDecimal($wallet, $network, $isNodeDirectMode, $options);
