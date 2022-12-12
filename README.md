@@ -65,19 +65,25 @@ use DecimalSDK\Wallet;
 use DecimalSDK\TransactionDecimal;
 
 // Use wallet instance to init transaction
-// gateUrl - mainnet/devnet
-// nodeUrl - if not set using http://localhost
-// rpcPort - default 26657
-// restPort - default 1317
+// using our gateway to send transactions - the simpliest way
+// $transaction = new TransactionDecimal($wallet, DecimalNetworks::DEVNET);
+// network - "mainnet"/"testnet"/"devnet"
+// isNodeDirectMode - by default equal 'false' and in this case You will be using our node.
+// Advanced users can use their own node rest and rpc endpoints.
+// To set it, create array 'options' as shown below.
+
 $wallet = new Wallet();
 // Enter your address node http://your-address.node/api
-$transaction = new TransactionDecimal($wallet, [
-    'gateUrl' => 'http://your-address.node/api',
-    'useGate' => true/false,
-    'mode' => 'sync', // Broadcast tx mode (sync | async | block) (default value sync)
-    'setNonceAutomatically' => true/false, // (optional) Automatically calculate nonce within a small transaction pool, after getting the first one from blockchain (default value true)
-     'nonce' => '100' // (optional)  Custom nonce for the transaction {valid number string}. If you don't set nonce, sdk get it from blockchain
-]);
+$network = 'devnet';
+$isNodeDirectMode = true; // enable work only through node. 'false' by default.
+$options = [
+    'customNodeEndpoint' => [
+      'nodeRestUrl' => 'http://127.0.0.1:1317',
+      'rpcEndpoint' => 'http://127.0.0.1:26657',
+      'web3Node' => 'http://127.0.0.1:12289'
+    ]
+]; // Will be used only if flag 'isNodeDirectMode' set as 'true'.
+$transaction = new TransactionDecimal($wallet, $network, $isNodeDirectMode, $options);
 ```
 
 ## Create coins
@@ -1189,7 +1195,7 @@ $payload = [
     ];
 
 // Returns token balance of given account.
-$result = $transaction->balanceOfToken($txPayload);
+$result = $transaction->getBalanceOfToken($txPayload);
 ```
 
 ## ERC20 allowance
@@ -1202,7 +1208,7 @@ $payload = [
     ];
 
 // Returns allowance of given account.
-$result = $transaction->allowanceOfToken($txPayload);
+$result = $transaction->getAllowanceOfToken($txPayload);
 ```
 
 ## ERC20 Token info
@@ -1213,5 +1219,5 @@ $payload = [
     ];
 
 // Returns name, symbol, decimal and total supply of given ERC20 contract.
-$result = $transaction->tokenInfo($txPayload);
+$result = $transaction->getTokenInfo($txPayload);
 ```

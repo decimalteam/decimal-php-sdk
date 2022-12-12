@@ -31,7 +31,7 @@ class Wallet
         $this->mnemonics = $mnemonics;
         $this->arguments = WalletHelpers::generateNewAddress('d0', $mnemonics, $path_key);
         $this->validatorAddress = WalletHelpers::generateNewAddress('d0valoper', $mnemonics, $path_key);
-        $this->currentNonce = $currentNonce;
+        $this->sequence = $currentNonce;
     }
 
     public function getAddress()
