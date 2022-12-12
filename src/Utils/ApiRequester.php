@@ -7,6 +7,8 @@ use DecimalSDK\Errors\DecimalException;
 use DecimalSDK\Wallet;
 use GuzzleHttp\Client as GClient;
 
+require __DIR__ . '/Endpoints.php';
+
 class ApiRequester
 {
     const TEST_GATE_API = 'https://devnet-gate.decimalchain.com/api/';
@@ -19,6 +21,7 @@ class ApiRequester
 
 
     private $options;
+    private $isNodeDirectMode;
     private $client;
     private $clientRpc;
     private $useGate;
@@ -45,34 +48,30 @@ class ApiRequester
      *
      *
      */
-    public function __construct(Wallet $wallet, $options = [])
+    public function __construct(Wallet $wallet, $network, $isNodeDirectMode, $options = [])
     {
-        $this->validateOptions($options);
+        $this->isNodeDirectMode = $isNodeDirectMode;
+        $this->validateOptions($network, $options);
         $this->setClient();
         $this->wallet = $wallet;
     }
 
-    protected function validateOptions($options)
+    protected function validateOptions($network, $options)
     {
         $this->options = $options;
-        if (!array_key_exists('useGate', $this->options)) {
-            $this->options['useGate'] = true;
+        $nodeRestUrl = 0;
+        $rpcEndpoint = 0;
+        if (isset($options['customNodeEndpoint']) && $this->isNodeDirectMode) {
+            $nodeRestUrl = $options['customNodeEndpoint']['nodeRestUrl'];
+            $rpcEndpoint = $options['customNodeEndpoint']['rpcEndpoint'];
+        } else {
+            $nodeRestUrl = getRestNodeEndpoint($network);
+            $rpcEndpoint = getRpcEndpoint($network, $this->isNodeDirectMode);
         }
-        if ($this->options['useGate']) {
-            if (isset($this->options['gateUrl'])) {
-                if (strpos($this->options['gateUrl'], 'main')) {
-                    $this->chain = 'main';
-                } elseif (strpos($this->options['gateUrl'], 'test')) {
-                    $this->chain = 'main';
-                }
-            }
+        $this->options['gateUrl'] = getApiEndpoint($network);
 
-            $this->options['baseUrl'] = $this->options['gateUrl'] ?? self::TEST_GATE_API;
-        } elseif (!$this->options['useGate']) {
-            $this->options['baseUrl'] = $this->options['nodeUrl'] ?? self::DEFAULT_NODE_URL;
-            $this->options['rpcPort'] = ':' . ($this->options['rpcPort'] ?? self::DEFAULT_DEFAULT_NODE_RPC_PORT);
-            $this->options['restPort'] = ':' . ($this->options['restPort'] ?? self::DEFAULT_DEFAULT_NODE_REST_PORT);
-        }
+        $this->options['nodeRestUrl'] = $nodeRestUrl;
+        $this->options['rpcEndpoint'] = $rpcEndpoint;
 
         if (isset($this->options['mode']) && !in_array($options['mode'], $this->validModes)) {
             throw new DecimalException('Mode is not valid');
@@ -92,18 +91,18 @@ class ApiRequester
 
     protected function setClient()
     {
-        if ($this->options['useGate']) {
+        if (!$this->isNodeDirectMode) {
             $params = [
-                'base_uri' => $this->options['baseUrl'],
+                'base_uri' => $this->options['gateUrl'],
                 'timeout' => self::TIMEOUT,
             ];
-        } elseif (!$this->options['useGate']) {
+        } else {
             $params = [
-                'base_uri' => $this->options['baseUrl'] . $this->options['restPort'],
+                'base_uri' => $this->options['nodeRestUrl'],
                 'timeout' => self::TIMEOUT,
             ];
             $paramsRpc = [
-                'base_uri' => $this->options['baseUrl'] . $this->options['rpcPort'],
+                'base_uri' => $this->options['rpcEndpoint'],
                 'timeout' => self::TIMEOUT,
             ];
             $this->clientRpc = new GClient($paramsRpc);
@@ -130,28 +129,34 @@ class ApiRequester
         return $meta;
     }
 
-    public function getNodeInfo()
-    {
-        $url = 'rpc/node_info';
-        $response = $this->_request($url, self::GET, false);
-        return $response;
-    }
-
     public function getAccountInfo($address)
     {
-        //todo check it
-        if (isset($this->options['createNonce'])) {
-            $url = "/accounts/$address";
-        } else {
-            $url = "accounts/$address";
-        }
-
-        //todo temp fix
-        $response = file_get_contents("https://" . $this->chain . "net-val.decimalchain.com/rest/cosmos/auth/v1beta1/accounts/" . $address);
+        $response = @file_get_contents($this->options['nodeRestUrl'] . "cosmos/auth/v1beta1/accounts/" . $address);
 
         return json_decode($response);
     }
 
+
+    public function getNodeInfo()
+    { 
+        if ($this->isNodeDirectMode) {
+            $url = 'cosmos/base/tendermint/v1beta1/node_info';
+        } else {
+            $url = 'rpc/node_info';
+        }
+        
+        $response = $this->_request($url, self::GET, false);
+        return $response;
+    }
+
+    public function getChainId()
+    {
+        $nodeInfo = $this->getNodeInfo();
+        preg_match('/_(.*?)-/', $nodeInfo->default_node_info->network, $chainId);
+        return $chainId[1];
+    }
+
+    
     public function getCoinsList($address, $limit = 1, $offset = 0, $query = null)
     {
         //todo this coin to coins
@@ -218,19 +223,7 @@ class ApiRequester
 
     public function getNonce($address)
     {
-        if (!$address) {
-            throw new DecimalException('address is required');
-        }
-
-        $url = $this->getRpcPrefix() . "auth/accounts-with-unconfirmed-nonce/$address";
-
-        if ($this->options['baseUrl'] == self::MAINNET_GATE_API) {
-            $url = $this->getRpcPrefix() . "auth/accounts/$address";
-        }
-
-        $res = $this->_request($url, self::GET, false);
-        $res->result->value->sequence++;
-        return $res;
+        return $this->wallet->getSequence();
     }
 
     public function getTransaction($hash)
@@ -239,9 +232,15 @@ class ApiRequester
             throw new DecimalException('hash is required');
         }
 
-        $url = "https://" . $this->chain . "net-gate.decimalchain.com/api/tx/$hash";
+        if ($this->isNodeDirectMode) {
+            $url = "tx?hash=0x$hash";
+            $rpc = true;
+        } else {
+            $url = "tx/$hash";
+            $rpc = false;
+        }
 
-        $response = $this->_request($url, self::GET, false);
+        $response = $this->_request($url, self::GET, $rpc);
         return $response;
     }
 
@@ -362,12 +361,18 @@ class ApiRequester
             'capped' => $capped
         ] = $payload;
 
-        $url = "https://" . $this->chain . "net-gate.decimalchain.com/api/evm-token/data?name=" . $name . "&symbol=" . $symbol . "&supply=" . $supply .
-            '&maxSupply=' . $maxSupply . '&mintable=' . $mintable . '&burnable=' . $burnable . '&capped=' . $capped;
+        $url = $this->options['gateUrl'] . 
+            "evm-token/data?name=$name&symbol=$symbol&supply=$supply&maxSupply=$maxSupply&mintable=$mintable&burnable=$burnable&capped=$capped";
 
         $res = $this->_request($url, self::GET);
 
         return $res->result;
+    }
+
+    public function getCommission($url)
+    {
+        $res = $this->_request($url, self::GET);
+        return $res;
     }
 
     public function checkTransaction($hash)
@@ -385,7 +390,7 @@ class ApiRequester
     public function sendTx($tx, $rpc = false, $options = [], $method = self::POST)
     {
         try {
-            $url = $this->getRpcPrefix() . 'txs';
+            $url = '/txs';
             $tx = ['tx' => $tx, 'mode' => $this->options['mode']];
 
             return $this->txResult($this->_request($url, $method, $rpc, $tx, $options));
@@ -460,8 +465,8 @@ class ApiRequester
             'error' => $error,
         ];
 
-        if (boolval($this->wallet->currentNonce)) {
-            WalletHelpers::updateNonce($this->wallet, $jsonResp->code ? null : (int) $this->wallet->currentNonce + 1);
+        if (boolval($this->wallet->getSequence())) {
+            WalletHelpers::updateNonce($this->wallet, $jsonResp->code ? null : (int) $this->wallet->getSequence() + 1);
         }
 
 
@@ -478,7 +483,6 @@ class ApiRequester
      */
     protected function getError($exception, $code = null, $txhash = null)
     {
-        //todo log errors
         return [
             'hash' => $txhash,
             'success' => false,
@@ -520,12 +524,8 @@ class ApiRequester
 
     public function sendTxToBroadcast($broadcastPayload)
     {
-        $response = $this->post('https://' . $this->chain . 'net-val.decimalchain.com/rest/cosmos/tx/v1beta1/txs', $broadcastPayload);
+        $response = $this->post($this->options['nodeRestUrl'] . 'cosmos/tx/v1beta1/txs', $broadcastPayload);
         return $response;
-    }
-
-    public function getChain() {
-        return $this->chain;
     }
 
 }

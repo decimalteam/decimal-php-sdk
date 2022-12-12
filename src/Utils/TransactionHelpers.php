@@ -176,7 +176,7 @@ trait TransactionHelpers
             'value' => $tx
         ];
         $signatureSize = 109;
-        $url = $this->requester->getRpcPrefix() . 'txs/encode';
+        $url = '/txs/encode';
         $encodedTxResp = $this->requester->post($url, $preparedTx, $rpc);
 
         try {
@@ -231,8 +231,6 @@ trait TransactionHelpers
         $fee = $this->getCommission($tx, $feeCoin, $options['fee'], $options);
 
         $feeAmountSize = strlen(amountUNIRecalculate($fee['value'] * self::UNIT));
-//        $gasAmountSize = strlen(round($fee['base'],0,PHP_ROUND_HALF_DOWN));
-//        $feeForFeeAmount = ($feeAmountSize + $gasAmountSize) * 2;
         $feeForFeeAmount = $feeAmountSize * 2;
         $totalFee = '';
         if (!in_array($feeCoin, ['tdel', 'del'])) {

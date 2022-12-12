@@ -12,10 +12,8 @@ use DecimalSDK\Utils\ProtoManagerAddition;
 use DecimalSDK\Utils\TransactionHelpers;
 use DecimalSDK\Wallet;
 use Elliptic\EC;
-use EllipticCurve\PrivateKey;
 use Exception;
 use kornrunner\Keccak;
-use kornrunner\Secp256k1;
 use Web3\Web3;
 use Web3\Providers\HttpProvider;
 use Web3\RequestManagers\HttpRequestManager;
@@ -23,7 +21,7 @@ use Web3\Contract;
 use DecimalSDK\Utils\Abis;
 use Web3p\EthereumTx\Transaction;
 use Web3p\RLP\RLP;
-use EllipticCurve\Ecdsa;
+
 
 
 class TransactionDecimal
@@ -35,17 +33,20 @@ class TransactionDecimal
     const DEFAULT_ORDER_FIELD = 'createdAt';
     const DEFAULT_ORDER_DIRECTION = 'DESC';
     const DEFAULT_ORDER = 'order[' . self::DEFAULT_ORDER_FIELD . ']=' . self::DEFAULT_ORDER_DIRECTION;
-    const CHAIN_ID = 2020;
     const SECONDS_TO_WAIT_FOR_RECEIPT = 15;
-   
 
     private $account;
     private $wallet;
     private $requester;
+    private $gateUrl;
+    private $nodeRestUrl;
+    private $chainId;
+    private $isNodeDirectMode;
+    private $network;
     private $nodeMeta;
     private $protoManager;
     private $protoManagerAddition;
-    private $web3RpcNode = 'https://devnet-val.decimalchain.com/web3/';
+    private $web3RpcNode;
 
 
     /**
@@ -55,19 +56,26 @@ class TransactionDecimal
      * @throws DecimalException
      */
 
-    public function __construct(Wallet $wallet, $options = [])
+    public function __construct(Wallet $wallet, $network, $isNodeDirectMode = false, $options = [])
     {
-        if (!$wallet) {
-            throw new DecimalException('Wrong wallet');
+        try {
+            if (!$wallet) {
+                throw new DecimalException('Wrong wallet');
+            }
+
+            $this->gateUrl = Utils\getApiEndpoint($network);
+            $this->isNodeDirectMode = $isNodeDirectMode;
+            $this->network = $network;
+            $this->wallet = $wallet;
+            $this->requester = new ApiRequester($wallet, $network, $isNodeDirectMode, $options);
+            $this->chainId = $this->requester->getChainId();
+            $this->web3RpcNode = isset($options['web3Node']) ? $options['web3Node'] : 'https://' . $network . '-val.decimalchain.com/web3/';
+            $this->signMeta = $this->requester->getSignMeta($this->wallet);
+            $this->protoManager = ProtoManager::instance();
+            $this->protoManagerAddition = ProtoManagerAddition::instance();
+        } catch (\Exception $e) {
+            throw new DecimalException("Creation of transaction instance failed.");
         }
-
-        $this->wallet = $wallet;
-        $this->requester = new ApiRequester($wallet, $options);
-        $this->web3RpcNode = 'https://' . $this->requester->getChain() . 'net-val.decimalchain.com/web3/';
-        $this->signMeta = $this->requester->getSignMeta($this->wallet);
-        $this->protoManager = ProtoManager::instance();
-        $this->protoManagerAddition = ProtoManagerAddition::instance();
-
     }
 
     public function createCoin($payload, $options = [])
@@ -338,23 +346,28 @@ class TransactionDecimal
             );
 
             $txBytes = $txRaw->serializeToString();
-
-            $payload = [
-                'tx_bytes' => bin2hex($txBytes),
-                'denom' => $feeCoin->getDenom()
-            ];
-            
-            $predictedFee = $this->requester->post('tx/estimate', $payload);
+            if (!$this->isNodeDirectMode) {
+                $payload = [
+                    'tx_bytes' => bin2hex($txBytes),
+                    'denom' => $feeCoin->getDenom()
+                ];
+                $predictedFeeObj = $this->requester->post('tx/estimate', $payload);
+                $predictedFee = $predictedFeeObj->result->commission;
+            } else {
+                $nodeEstimationEndpoint = Utils\getNodeFeeEstimationEndpoint(Utils\getRestNodeEndpoint($this->network), bin2hex($txBytes), $feeCoin->getDenom());
+                $predictedFeeObj = $this->requester->getCommission($nodeEstimationEndpoint);
+                $predictedFee = $predictedFeeObj->commission;
+            }
             
             if(isset($options['simulate'])) {
                 if ($options['simulate'] == 'true') {
                     return [
-                        'amount' => $predictedFee->result->commission,
+                        'amount' => $predictedFee,
                         'coin' => $denom
                     ];
                 }
             }
-            $feeCoin = $this->protoManager->getCoin($denom, $predictedFee->result->commission);
+            $feeCoin = $this->protoManager->getCoin($denom, "$predictedFee");
             $fee = $this->protoManager->getFee(self::DEFAULT_GAS_LIMIT, $feeCoin);
         }
         
@@ -459,16 +472,16 @@ class TransactionDecimal
         return $result;
     }
 
-    public function createToken($payload)
+    public function createToken($payload, $options = [])
     {
         $tokenBytecode = $this->requester->getTokenCreationBytecode($payload);
 
-        $response = $this->sendRawEvmTransaction(null, $tokenBytecode);
+        $response = $this->sendRawEvmTransaction(null, $tokenBytecode, $options);
 
         return $response;
     }
 
-    public function transferTokens($payload)
+    public function transferTokens($payload, $options = [])
     {
         [
             'recipient' => $recipient,
@@ -479,10 +492,10 @@ class TransactionDecimal
         $transferSelector = '0xa9059cbb';
         $rawTransactionData = $transferSelector . str_pad(substr($recipient, 2), 64, '0', STR_PAD_LEFT) . str_pad(dec2hex(amountUNIRecalculate($amount)), 64, '0', STR_PAD_LEFT);
 
-        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData);
+        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData, $options);
     }
 
-    public function approveTokens($payload)
+    public function approveTokens($payload, $options = [])
     {
         [
             'spender' => $spender,
@@ -493,10 +506,10 @@ class TransactionDecimal
         $approveSelector = '0x095ea7b3';
         $rawTransactionData = $approveSelector . str_pad(substr($spender, 2), 64, '0', STR_PAD_LEFT) . str_pad(dec2hex(amountUNIRecalculate($amount)), 64, '0', STR_PAD_LEFT);
 
-        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData);
+        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData, $options);
     }
 
-    public function mintTokens($payload)
+    public function mintTokens($payload, $options = [])
     {
         [
             'recipient' => $recipient,
@@ -509,10 +522,10 @@ class TransactionDecimal
 
         $rawTransactionData = $transferSelector . str_pad(substr($recipient, 2), 64, '0', STR_PAD_LEFT) . str_pad(dec2hex(amountUNIRecalculate($amount)), 64, '0', STR_PAD_LEFT);
 
-        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData);
+        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData, $options);
     }
 
-    public function burnTokens($payload)
+    public function burnTokens($payload, $options = [])
     {
         [
             'recipient' => $recipient,
@@ -531,10 +544,10 @@ class TransactionDecimal
             $rawTransactionData = $transferSelector . str_pad(substr($recipient, 2), 64, '0', STR_PAD_LEFT) . str_pad(dec2hex(amountUNIRecalculate($amount)), 64, '0', STR_PAD_LEFT);
         }
 
-        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData);
+        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData, $options);
     }
 
-    public function transferTokensFrom($payload)
+    public function transferTokensFrom($payload, $options = [])
     {
         [
             'from' => $from,
@@ -546,10 +559,10 @@ class TransactionDecimal
         $transferFromSelector = '0x23b872dd';
         $rawTransactionData = $transferFromSelector . str_pad(substr($from, 2), 64, '0', STR_PAD_LEFT) . str_pad(substr($to, 2), 64, '0', STR_PAD_LEFT) . str_pad(dec2hex(amountUNIRecalculate($amount)), 64, '0', STR_PAD_LEFT);
 
-        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData);
+        return $this->sendRawEvmTransaction($tokenAddress, $rawTransactionData, $options);
     }
 
-    public function balanceOfToken($payload)
+    public function getBalanceOfToken($payload)
     {
         [
             'account' => $account,
@@ -575,7 +588,7 @@ class TransactionDecimal
         }
     }
 
-    public function allowanceOfToken($payload)
+    public function getAllowanceOfToken($payload)
     {
         [
             'owner' => $owner,
@@ -602,7 +615,7 @@ class TransactionDecimal
         }
     }
 
-    public function tokenInfo($payload)
+    public function getTokenInfo($payload)
     {
         [
             'tokenAddress' => $tokenAddress,
@@ -659,7 +672,7 @@ class TransactionDecimal
         }
     }
 
-    private function sendRawEvmTransaction($to, $rawTransactionData)
+    private function sendRawEvmTransaction($to, $rawTransactionData, $options)
     {
         $web3 = new Web3(new HttpProvider(new HttpRequestManager($this->web3RpcNode)));
         $sequence = $this->wallet->getSequence();
@@ -667,11 +680,17 @@ class TransactionDecimal
         $publicKey = $this->wallet->getPublicKey();
         $signer = $this->getEvmAddress($publicKey);
 
+        if (isset($options['gasLimit'])) {
+            $gasLimit = $options['gasLimit'];
+        } else {
+            $gasLimit = 1000000;
+        }
+
         $transactionParams = [
             'nonce' => "0x" . dechex($sequence),
             'from' => $signer,
             'to' => $to,
-            'gas' => '0x' . dechex(80000),
+            'gas' => '0x' . dechex($gasLimit),
             'value' => '0x0',
             'data' => $rawTransactionData,
         ];
@@ -696,7 +715,7 @@ class TransactionDecimal
 
             $transactionParams['gas'] = '0x' . dechex($estimatedGas->toString());
             $transactionParams['gasPrice'] = '0x' . dechex($currentGasPrice->toString());
-            $transactionParams['chainId'] = self::CHAIN_ID;
+            $transactionParams['chainId'] = $this->chainId;
 
             $tx = new Transaction($transactionParams);
 
@@ -1365,21 +1384,23 @@ class TransactionDecimal
 
     public function reownLegacy($payload, $options = [])
     {
-        [ 'pubKey' => $pubKey ] = $payload;
-        // $privateKey = $this->wallet->getPrivateKey();
-        // $bitcoinECDSA = new BitcoinECDSA();
-        // $bitcoinECDSA->setPrivateKey($privateKey);
+        if($this->isNodeDirectMode) {
+            $privateKey = $this->wallet->getPrivateKey();
+            $bitcoinECDSA = new BitcoinECDSA();
+            $bitcoinECDSA->setPrivateKey($privateKey);
 
-        $result = $this->requester->post('rpc/check-legacy', (object) ['pubKey' => $pubKey]);
+            $msg = $this->protoManager->getMsgReturnLegacy(
+                $this->wallet->getAddress(),
+                hex2bin($bitcoinECDSA->getPubKey())
+            );
 
-        // $msg = $this->protoManager->getMsgReturnLegacy(
-        //         $this->wallet->getAddress(),
-        //     hex2bin($bitcoinECDSA->getPubKey())
-        // );
+            $result = $this->sendTransaction($msg, $options);
+        } else {
+            ['pubKey' => $pubKey] = $payload;
 
-        // $result = $this->sendTransaction($msg, $options);
+            $result = $this->requester->post('rpc/check-legacy', (object) ['pubKey' => $pubKey]);
+        }
         return $result;
-        
     }
 
 
@@ -1394,7 +1415,7 @@ class TransactionDecimal
         return $response;
     }
 
-    public function getNftList($limit, $offset, $query = null) {
+    public function getNftList($limit = 1, $offset = 0, $query = null) {
         $response = $this->requester->getNftList($this->wallet->getAddress(), $limit, $offset, $query);
         return $response;
     }
