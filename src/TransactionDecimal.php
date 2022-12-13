@@ -69,7 +69,7 @@ class TransactionDecimal
             $this->wallet = $wallet;
             $this->requester = new ApiRequester($wallet, $network, $isNodeDirectMode, $options);
             $this->chainId = $this->requester->getChainId();
-            $this->web3RpcNode = isset($options['web3Node']) ? $options['web3Node'] : 'https://' . $network . '-val.decimalchain.com/web3/';
+            $this->web3RpcNode = isset($options['customNodeEndpoint']['web3Node']) ? $options['customNodeEndpoint']['web3Node'] : 'https://' . $network . '-val.decimalchain.com/web3/';
             $this->signMeta = $this->requester->getSignMeta($this->wallet);
             $this->protoManager = ProtoManager::instance();
             $this->protoManagerAddition = ProtoManagerAddition::instance();
@@ -1382,22 +1382,19 @@ class TransactionDecimal
         
     }
 
-    public function reownLegacy($payload, $options = [])
+    public function reownLegacy($options = [])
     {
+        $privateKey = $this->wallet->getPrivateKey();
+        $bitcoinECDSA = new BitcoinECDSA();
+        $bitcoinECDSA->setPrivateKey($privateKey);
         if($this->isNodeDirectMode) {
-            $privateKey = $this->wallet->getPrivateKey();
-            $bitcoinECDSA = new BitcoinECDSA();
-            $bitcoinECDSA->setPrivateKey($privateKey);
-
             $msg = $this->protoManager->getMsgReturnLegacy(
                 $this->wallet->getAddress(),
                 hex2bin($bitcoinECDSA->getPubKey())
             );
-
             $result = $this->sendTransaction($msg, $options);
         } else {
-            ['pubKey' => $pubKey] = $payload;
-
+            $pubKey = $bitcoinECDSA->getPubKey();
             $result = $this->requester->post('rpc/check-legacy', (object) ['pubKey' => $pubKey]);
         }
         return $result;
