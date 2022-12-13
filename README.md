@@ -90,7 +90,7 @@ $transaction = new TransactionDecimal($wallet, $network, $isNodeDirectMode, $opt
 
 ```php
 
-$txPayload = [
+$payload = [
     'title' => 'Test coin',
     'ticker' => 'TESTTT',
     'initSupply' => '50000',
@@ -150,7 +150,7 @@ $result = $transaction->sendCoin($payload, $options);
 ## Burn coins
 
 ```php
-$txPayload = [
+$payload = [
     'coin' => 'tDEL', //coin
     'amount' => '100', // 100 tDEL
 ];
@@ -158,7 +158,7 @@ $txPayload = [
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->burnCoins($txPayload, $options);
+$result = $transaction->burnCoins($payload, $options);
 ```
 
 ## Sell coins
@@ -208,6 +208,27 @@ $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 $result = $transaction->sellAllCoin($payload, $options);
 ```
 
+## Validator declare
+
+```php
+$payload = [
+    'rewardAddress' => 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
+    'stake' => '10',
+    'coin' => 'tdel',
+    'pubKey' => 'JRlv38BXuD1TvWQJ9ic1KHr8PzuOITZH3rD8Zm0Vj3Y',
+    'commission' => '10',
+    'moniker' => 'my-node-123',
+    'identity' => '',
+    'website' => 'hello.ru',
+    'securityContact' => 'test@test.com',
+    'details' => 'details node',
+];
+
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
+
+// 'options' is optional argument that equal empty array by default $options = []
+$result = $transaction->validatorDeclare($payload, $options);
+```
 
 ## Validator delegate
 
@@ -237,7 +258,7 @@ $payload = [
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->validatorUndelegate($payload, $options);
+$result = $transaction->validatorUnbound($payload, $options);
 ```
 
 ## Validator redelegate
@@ -256,32 +277,11 @@ $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 $result = $transaction->validatorRedelegate($payload, $options);
 ```
 
-## Validator declare
-
-```php
-$txPayload = [
-    'rewardAddress' => 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
-    'stake' => '10',
-    'coin' => 'tdel',
-    'pubKey' => 'JRlv38BXuD1TvWQJ9ic1KHr8PzuOITZH3rD8Zm0Vj3Y',
-    'commission' => '10',
-    'moniker' => 'my-node-123',
-    'identity' => '',
-    'website' => 'hello.ru',
-    'securityContact' => 'test@test.com',
-    'details' => 'details node',
-];
-
-$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
-
-// 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->validatorDeclare($txPayload, $options);
-```
 
 ## Validator edit
 
 ```php
-$txPayload = [
+$payload = [
     'rewardAddress' => 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
     'moniker' => 'my-node-123-edit',
     'identity' => '321',
@@ -292,7 +292,7 @@ $txPayload = [
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->validatorEdit($txPayload, $options);
+$result = $transaction->validatorEdit($payload, $options);
 ```
 
 ## Disable validator
@@ -324,7 +324,7 @@ $result = $transaction->enableValidator($payload, $options);
 ## Multisig create
 
 ```php
-$txPayload = [
+$payload = [
     'threshold' => '2',
     'owners' => ['d013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g', 'd01v9macmluxh7rk3zsd69v7dwv9fsjhctn2jfhz9'],
     'weights' => ['1', '1'],
@@ -333,14 +333,14 @@ $txPayload = [
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->multisigCreate($txPayload, $options);
+$result = $transaction->multisigCreate($payload, $options);
 ```
 
 ## Multisig create tx
 
 ```php
-$txPayload = [
-    'from' => 'd01am6ke3l79kjzdqhwgx37em04mzg686ekf9p3pq',
+$payload = [
+    'from' => 'd01am6ke3l79kjzdqhwgx37em04mzg686ekf9p3pq', // Multisig wallet address
     'to' => 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
     'coin' => 'tdel',
     'amount' => '10',
@@ -349,26 +349,26 @@ $txPayload = [
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->multisigCreateTX($txPayload, $options);
+$result = $transaction->multisigCreateTX($payload, $options);
 ```
 
 ## Multisig Sign tx
 
 ```php
-$txPayload = [
+$payload = [
     'txId' => 'd0mstx1tqmjch2x5uk9wgnu8zl88rj6h4hy8rm8mtqfft',
 ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->multisigSignTX($txPayload, $options);
+$result = $transaction->multisigSignTX($payload, $options);
 ```
 
 ## Multisend Coins
 
 ```php
-$txPayload = [
+$payload = [
         'sends' => [
              [
                 'to'=> 'd01lh8uv55uwras3zgzpe8awq35ucxhr66pn3d97k',
@@ -387,30 +387,30 @@ $txPayload = [
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->multiSendCoins($txPayload, $options);
+$result = $transaction->multiSendCoins($payload, $options);
 
 ```
 
 ## Swap init
 
 ```php
-$txPayload = [
+$payload = [
       'recipient'=> '0x45376AD024c767577714C7B92882578aE8B7f98C',
       'amount'=> '1',
       'tokenSymbol'=> 'DEL',
-      'destChain'=> '2'
+      'destChain'=> '2' // 1 - decimal, 2 - eth, 3 - bsc
      ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->swapInit($txPayload, $options);
+$result = $transaction->swapInit($payload, $options);
 ```
 
 ## Swap redeem
 
 ```php
-$txPayload = [
+$payload = [
     'from'=> '0x45376AD024c767577714C7B92882578aE8B7f98C',
     'amount'=> '1',
     'recipient'=> 'd013ykakvugqwzqqmqdj2j2hgqauxmftdn3kqy69g',
@@ -425,7 +425,7 @@ $txPayload = [
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->swapRedeem($txPayload, $options);
+$result = $transaction->swapRedeem($payload, $options);
 ```
 
 ## NFT mint
@@ -458,25 +458,20 @@ $result = $transaction->swapRedeem($txPayload, $options);
  * */
 
 // denom - name of nft collection
-$recipient ='d01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v';
-$denom = 'test';
-$tokenUri = 'https://devnet-nft.decimalchain.com/api/nfts/ZOmGepIA6YWSkrTFaXXb5klr38Mv40Kv';
-$reserve = ['denom' => 'del', 'amount'=> 1];
-$quantity = '1';
-$allow_mint = true;
+$payload = [
+    'id'=> 'dd5d84d6151e2d44f8c0ce9ff147e6bacd4eb50a',
+    'denom'=> 'Testsdkup',
+    'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/ZOmGepIA6YWSkrTFaXXb5klr38Mv40Kv',
+    'quantity'=> '4',
+    'reserveDenom'=> 'del',
+    'reserveAmount'=> '10',
+     'allowMint'=> true,
+     ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->mintNft($id,
-        $recipient, // optional
-        $denom,
-        $tokenUri,
-        $quantity,
-        $reserve,
-        $allow_mint,
-        $options // optional
-        );
+$result = $transaction->mintNft($txPaload, $options);
 ```
 
 ## NFT burn
@@ -499,21 +494,18 @@ $result = $transaction->burnNft($payload, $options);
 
 $payload = [
         'tokenId' => 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689',
-        'tokenURI' => 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689'
+        'tokenURI' => 'https://devnet-nft.decimalchain.com/api/nfts/k8aUD7GMGR74LlHuYeEmvRtYScrGIfQy'
     ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->editNftMetadata($payload, $options);
+$result = $transaction->nftEditMetadata($payload, $options);
 ```
 
 ## NFT transfer
 
 ```php
-
-$recipient = 'd01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v';
-$id ='c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689';
 $payload = [
         'id' => 'c3cb2a5ab98878d7ec5c6d3aaed2b17154f60689',
         'recipient' => 'd01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v',
@@ -524,16 +516,16 @@ $payload = [
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 
 // 'options' is optional argument that equal empty array by default $options = []
-$result = $transaction->transferNft($payload, $options);
+$result = $transaction->nftTransfer($payload, $options);
 ```
 
 ## NFT delegate
 
 ```php
-$txPayload = [
+$payload = [
     'id'=> '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
-    'sub_token_ids'=> [1,2],
-    'validator_address'=> 'd01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+    'sub_token_ids'=> [1, 2],
+    'validator_address'=> 'd0valoper14elhyzmq95f98wrkvujtsr5cyudffp6qwyerml'
      ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
@@ -545,10 +537,10 @@ $result = $transaction->nftDelegate($payload, $options);
 ## NFT undelegate
 
 ```php
-$txPayload = [
+$payload = [
     'id'=> '78cd420474bf27ecdf4f5f87219e824f7aadf6f3',
     'sub_token_ids'=> [1,2],
-    'validator_address'=> 'd01lx4lvt8sjuxj8vw5dcf6knnq0pacre4w6hdh2v'
+    'validator_address'=> 'd0valoper14elhyzmq95f98wrkvujtsr5cyudffp6qwyerml'
      ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
@@ -592,12 +584,10 @@ $result = $transaction->nftUpdateReserves($payload, $options);
 ## Reown legacy
 
 ```php
-$payload = [
-    'pubKey' => '04b7a5dcb1cd9078a6e55ff2dbeb58afad5f235065d5b82ff15e18e89394cc2cf3ae2e200c897045d7fd9ae1a9029578d07419b6fc52ca6124c71ff88002f1d2cb'
-];
-
+// Make transaction only in node direct mode, otherwise procedures via backend.
+$options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 // This function make call to backend, not to blockchain, so it's free.
-$result = $transaction->reownLegacy($id,$sub_token_ids, $reserve, $denom);
+$result = $transaction->reownLegacy($options);
 ```
 
 ## get NFT metadata
@@ -1114,7 +1104,7 @@ $payload = [
     ];
 
 // If executed successfully, returns tx object.
-$result = $transaction->createToken($txPayload);
+$result = $transaction->createToken($payload);
 ```
 
 ## ERC20 Token transfer
@@ -1127,7 +1117,7 @@ $payload = [
         ];
 
 // If executed successfully, returns tx object.
-$result = $transaction->transferTokens($txPayload);
+$result = $transaction->transferTokens($payload);
 ```
 
 ## ERC20 Token approve
@@ -1140,7 +1130,7 @@ $payload = [
     ];
 
 // If executed successfully, returns tx object.
-$result = $transaction->approveTokens($txPayload);
+$result = $transaction->approveTokens($payload);
 ```
 
 ## ERC20 Token transferFrom
@@ -1155,7 +1145,7 @@ $payload = [
         ];
 
 // If executed successfully, returns tx object.
-$result = $transaction->transferTokensFrom($txPayload);
+$result = $transaction->transferTokensFrom($payload);
 ```
 
 ## ERC20 Token mint
@@ -1169,7 +1159,7 @@ $payload = [
         ];
 
 // If executed successfully, returns tx object.
-$result = $transaction->mintTokens($txPayload);
+$result = $transaction->mintTokens($payload);
 ```
 
 ## ERC20 Token burn
@@ -1183,7 +1173,7 @@ $payload = [
         ];
 
 // If executed successfully, returns tx object.
-$result = $transaction->burnTokens($txPayload);
+$result = $transaction->burnTokens($payload);
 ```
 
 ## ERC20 balanceOf
@@ -1195,7 +1185,7 @@ $payload = [
     ];
 
 // Returns token balance of given account.
-$result = $transaction->getBalanceOfToken($txPayload);
+$result = $transaction->getBalanceOfToken($payload);
 ```
 
 ## ERC20 allowance
@@ -1208,7 +1198,7 @@ $payload = [
     ];
 
 // Returns allowance of given account.
-$result = $transaction->getAllowanceOfToken($txPayload);
+$result = $transaction->getAllowanceOfToken($payload);
 ```
 
 ## ERC20 Token info
@@ -1219,5 +1209,5 @@ $payload = [
     ];
 
 // Returns name, symbol, decimal and total supply of given ERC20 contract.
-$result = $transaction->getTokenInfo($txPayload);
+$result = $transaction->getTokenInfo($payload);
 ```
