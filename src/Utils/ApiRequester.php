@@ -63,7 +63,7 @@ class ApiRequester
                 if (strpos($this->options['gateUrl'], 'main')) {
                     $this->chain = 'main';
                 } elseif (strpos($this->options['gateUrl'], 'test')) {
-                    $this->chain = 'main';
+                    $this->chain = 'test';
                 }
             }
 
