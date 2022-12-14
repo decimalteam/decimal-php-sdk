@@ -18,6 +18,11 @@ function getRestNodeEndpoint($network): string {
   return restNodeEndpoints[$network];
 }
 
+function getWeb3Endpoint($network): string
+{
+  return web3Nodes[$network];
+}
+
 function getRpcEndpoint(
   $network,
   $isNodeDirectMode
@@ -70,4 +75,10 @@ const apiEndpoints = [
     DecimalNetworks::DEVNET => "https://devnet-gate.decimalchain.com/api/",
     DecimalNetworks::TESTNET => "https://testnet-gate.decimalchain.com/api/",
     DecimalNetworks::MAINNET => "https://mainnet-gate.decimalchain.com/api/",
+];
+
+const web3Nodes = [
+  DecimalNetworks::DEVNET => "https://devnet-val.decimalchain.com/web3/",
+  DecimalNetworks::TESTNET => "https://testnet-val.decimalchain.com/web3/",
+  DecimalNetworks::MAINNET => "https://node.decimalchain.com/web3/",
 ];
