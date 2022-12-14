@@ -63,17 +63,17 @@ class TransactionDecimal
                 throw new DecimalException('Wrong wallet');
             }
 
-            $this->gateUrl = Utils\getApiEndpoint($network);
             $this->isNodeDirectMode = $isNodeDirectMode;
             $this->network = $network;
             $this->wallet = $wallet;
             $this->requester = new ApiRequester($wallet, $network, $isNodeDirectMode, $options);
+            $this->gateUrl = Utils\getApiEndpoint($network);
             $this->chainId = $this->requester->getChainId();
-            $this->web3RpcNode = isset($options['customNodeEndpoint']['web3Node']) ? $options['customNodeEndpoint']['web3Node'] : 'https://' . $network . '-val.decimalchain.com/web3/';
+            $this->web3RpcNode = isset($options['customNodeEndpoint']['web3Node']) ? $options['customNodeEndpoint']['web3Node'] : Utils\getWeb3Endpoint($network);
             $this->signMeta = $this->requester->getSignMeta($this->wallet);
             $this->protoManager = ProtoManager::instance();
             $this->protoManagerAddition = ProtoManagerAddition::instance();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new DecimalException("Creation of transaction instance failed.");
         }
     }
