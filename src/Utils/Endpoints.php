@@ -51,7 +51,7 @@ const testnetEndpoints = [
 // // for now does not know
 const mainnetEndpoints = [
     'gateHost' => "https://mainnet-gate.decimalchain.com/api/rpc/",
-    'nodeHost' => "https://mainnet-val.decimalchain.com/rpc/",
+    'nodeHost' => "https://node.decimalchain.com/rpc/",
 ];
 
 const rpcEndpoints = [
@@ -63,7 +63,7 @@ const rpcEndpoints = [
 const restNodeEndpoints = [
     DecimalNetworks::DEVNET => "https://devnet-val.decimalchain.com/rest/",
     DecimalNetworks::TESTNET => "https://testnet-val.decimalchain.com/rest/",
-    DecimalNetworks::MAINNET => "https://mainnet-val.decimalchain.com/rest/",
+    DecimalNetworks::MAINNET => "https://node.decimalchain.com/rest/",
 ];
 
 const apiEndpoints = [
