@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+### [v0.14.01](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/0.14.01%0D0.14?topic=0) - 2022-14-13
+###
+* Fixes of endpoints and web3 nodes for mainnet added. [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/73)
+
+### [v0.14](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/0.14%0D0.13.01?topic=0) - 2022-14-13
+###
+* Update of mainnet endpoints. [`COMMIT`](https://bitbucket.org/decimalteam/decimal-php-sdk/commits/27426ef24444dbf11170b9fc3c3718744fa3d364)
+
+### [v0.13.01](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/0.13.01%0D0.13?topic=0) - 2022-12-13
+###
+* Reown legacy changes and readme fixes. [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/71)
+
 ### [v0.13](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/0.13%0Dv0.12?topic=0) - 2022-12-10
 ###
 * Added functions to create and interact with ERC20 tokens. [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/67)
