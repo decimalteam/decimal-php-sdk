@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-### [v0.14.01](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/0.14.02%0D0.14.01?topic=0) - 2022-16-13
+### [v0.14.02](https://bitbucket.org/decimalteam/decimal-php-sdk/compare/0.14.02%0D0.14.01?topic=0) - 2022-16-13
 ###
 * Simulate fee of transactions with base coin changes and requires changes. [`PR`](https://bitbucket.org/decimalteam/decimal-php-sdk/pull-requests/74)
 
