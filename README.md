@@ -100,7 +100,6 @@ $payload = [
 ];
 // For all functions that sends transactions, You can provide address of custom coin that should be used as fee in 'options'.
 // Also You can provide 'simulate' flag for estimate fee value. Can be estimated, only if 'feeCoin' set.
-// To simulate fee in DEL, set 'feeCoin' => 'del'.
 // Also You can provide 'txBroadcastMode' option which should be equal 'sync', 'async' or 'block', default: 'sync'. 
 // Modes:
 // 'sync' - waiting for blockchain's response and returning respone object.
