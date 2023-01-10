@@ -1,7 +1,7 @@
 {
     "name": "decimalteam/decimal-php-sdk",
     "description": "decimal sdk",
-    "version": "0.14.01",
+    "version": "0.14.02",
     "license": "MIT",
     "authors": [
         {
@@ -18,7 +18,7 @@
         "kornrunner/secp256k1": "^0.1.2",
         "kornrunner/keccak": "^1.1",
         "simplito/elliptic-php": "^1.0",
-        "php": "^7.3|^8.0",
+        "php": "^7.3",
         "google/protobuf": "^3.21",
         "bitcoin-php/bitcoin-ecdsa": "^1.3",
         "grpc/grpc": "~1.30.0",

@@ -329,47 +329,52 @@ class TransactionDecimal
         $memo = isset($options['message']) ? $options['message'] : '';
         $txBody = $this->protoManager->getTxBody($msg, $memo);
 
+        $denom = null;
         $fee = null;
+        $feeCoin = null;
+
         if (!isset($options['feeCoin'])) {
-            $fee = $this->protoManager->getDefaultFee();
+            $denom = $this->network == 'testnet' ? 'tdel' : 'del';
         } else {
             $denom = strtolower(trim($options['feeCoin']));
-            $feeCoin = $this->protoManager->getCoin($denom, '0000000000000000000000000000');
-            $fee = $this->protoManager->getFee(self::DEFAULT_GAS_LIMIT, $feeCoin);
-
-            $signObj = $this->singTransaction($txBody, $fee);
-
-            $txRaw = $this->protoManager->getTxRaw(
-                $txBody->serializeToString(),
-                $signObj['authInfoBytes'],
-                [$signObj['signature']],
-            );
-
-            $txBytes = $txRaw->serializeToString();
-            if (!$this->isNodeDirectMode) {
-                $payload = [
-                    'tx_bytes' => bin2hex($txBytes),
-                    'denom' => $feeCoin->getDenom()
-                ];
-                $predictedFeeObj = $this->requester->post('tx/estimate', $payload);
-                $predictedFee = $predictedFeeObj->result->commission;
-            } else {
-                $nodeEstimationEndpoint = Utils\getNodeFeeEstimationEndpoint(Utils\getRestNodeEndpoint($this->network), bin2hex($txBytes), $feeCoin->getDenom());
-                $predictedFeeObj = $this->requester->getCommission($nodeEstimationEndpoint);
-                $predictedFee = $predictedFeeObj->commission;
-            }
-            
-            if(isset($options['simulate'])) {
-                if ($options['simulate'] == 'true') {
-                    return [
-                        'amount' => $predictedFee,
-                        'coin' => $denom
-                    ];
-                }
-            }
-            $feeCoin = $this->protoManager->getCoin($denom, "$predictedFee");
-            $fee = $this->protoManager->getFee(self::DEFAULT_GAS_LIMIT, $feeCoin);
         }
+
+        $feeCoin = $this->protoManager->getCoin($denom, '0000000000000000000000000000');
+        $fee = $this->protoManager->getFee(self::DEFAULT_GAS_LIMIT, $feeCoin);
+
+        $signObj = $this->singTransaction($txBody, $fee);
+
+        $txRaw = $this->protoManager->getTxRaw(
+            $txBody->serializeToString(),
+            $signObj['authInfoBytes'],
+            [$signObj['signature']],
+        );
+
+        $txBytes = $txRaw->serializeToString();
+
+        if (!$this->isNodeDirectMode) {
+            $payload = [
+                'tx_bytes' => bin2hex($txBytes),
+                'denom' => $feeCoin->getDenom()
+            ];
+            $predictedFeeObj = $this->requester->post('tx/estimate', $payload);
+            $predictedFee = $predictedFeeObj->result->commission;
+        } else {
+            $nodeEstimationEndpoint = Utils\getNodeFeeEstimationEndpoint(Utils\getRestNodeEndpoint($this->network), bin2hex($txBytes), $feeCoin->getDenom());
+            $predictedFeeObj = $this->requester->getCommission($nodeEstimationEndpoint);
+            $predictedFee = $predictedFeeObj->commission;
+        }
+
+        if (isset($options['simulate'])) {
+            if ($options['simulate'] == 'true') {
+                return [
+                    'amount' => $predictedFee,
+                    'coin' => $denom
+                ];
+            }
+        }
+        $feeCoin = $this->protoManager->getCoin($denom, "$predictedFee");
+        $fee = $this->protoManager->getFee(self::DEFAULT_GAS_LIMIT, $feeCoin);
         
         $signObj = $this->singTransaction($txBody, $fee, $tryTimes);
         $txRaw = $this->protoManager->getTxRaw(          
