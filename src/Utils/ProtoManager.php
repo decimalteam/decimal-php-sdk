@@ -587,12 +587,12 @@ class ProtoManager
         ]);
     }
 
-    public function getMsgSellCoin($sender, $denomSell, $amountSell, $denomBuy, $amountBuy)
+    public function getMsgSellCoin($sender, $denomSell, $amountSell, $denomBuy)
     {
         $msg = new MsgSellCoin();
         $msg->setSender($sender);
         $msg->setCoinToSell($this->getCoin($denomSell, $amountSell));
-        $msg->setMinCoinToBuy($this->getCoin($denomBuy, $amountBuy));
+        $msg->setMinCoinToBuy($this->getCoin($denomBuy, 1));
 
         return $this->getAny([
             'type_url' => TxTypes::COIN_SELL,

@@ -170,8 +170,7 @@ class TransactionDecimal
         [ 
             'denomSell'     => $denomSell,
             'denomBuy'      => $denomBuy,
-            'amountSell'    => $amountSell,
-            'amountBuy'     => $amountBuy
+            'amountSell'    => $amountSell
         ] = $payload;
 
         $msg = $this->protoManager->getMsgSellCoin(
@@ -179,7 +178,6 @@ class TransactionDecimal
             strtolower(trim($denomSell)),
             amountUNIRecalculate($amountSell),
             strtolower(trim($denomBuy)),
-            amountUNIRecalculate($amountBuy)
         );
 
         $result = $this->sendTransaction($msg, $options);
