@@ -295,6 +295,19 @@ class TransactionDecimal
             'subtokenIds' => $subtokenIds,
         ] = $payload;
 
+        $nftData = $this->getNftMetadata($id);
+
+        $subIdsCheck = [];
+        foreach ($nftData->result->nftReserve as $reserve){
+            if(in_array($reserve->subTokenId, $subtokenIds)){
+                $subIdsCheck[] = $reserve->subTokenId;
+            }
+        }
+
+        if(count($subIdsCheck) == 0){
+            throw new DecimalException('SubtokenIds is not exist');
+        }
+
         $msg = $this->protoManager->getMsgBurnNft(
                 $this->wallet->getAddress(),
             $id,

@@ -22,6 +22,11 @@ abstract class TestCase extends BaseTestCase
      */
     private $requester;
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     protected function getFaucetCoin(){
         $this->addressSend = new Wallet('shuffle fix card gallery mirror coffee weekend vote opera pass sand access');
 //        $this->requester = new ApiRequester($this->addressSend, Networks::DEVNET, false, []);
