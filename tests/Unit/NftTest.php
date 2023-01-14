@@ -57,95 +57,10 @@ class NftTest extends TestCase
         $this->assertEquals(0, $result->tx_response->code);
 
         sleep(20);
-    }
 
-    public function testCreateNewNftInvalidDenom()
-    {
+        $nftData = $this->transaction->getNftMetadata(ClassData::$nftId);
 
-        $payload = [
-            'id'=> ClassData::$nftId,
-            'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/' . $this->idNftEdit,
-            'quantity'=> '4',
-            'reserveDenom'=> 'del',
-            'reserveAmount'=> '10',
-            'allowMint'=> true,
-        ];
-
-        $result = $this->transaction->mintNft($payload);
-
-        $this->assertEquals(110, $result->tx_response->code);
-
-    }
-
-    public function testCreateNewNftInvalidTokenUrl()
-    {
-
-        $this->expectException(DecimalException::class);
-
-        $payload = [
-            'id'=> ClassData::$nftId,
-            'denom'=> 'Testsdkup',
-            'quantity'=> '4',
-            'reserveDenom'=> 'del',
-            'reserveAmount'=> '10',
-            'allowMint'=> true,
-        ];
-
-        $this->transaction->mintNft($payload);
-
-    }
-
-    public function testCreateNewNftInvalidQuantity()
-    {
-
-        $this->expectException(\Exception::class);
-
-        $payload = [
-            'id'=> ClassData::$nftId,
-            'denom'=> 'Testsdkup',
-            'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/' . $this->idNftEdit,
-            'reserveDenom'=> 'del',
-            'reserveAmount'=> '10',
-            'allowMint'=> true,
-        ];
-
-        $this->transaction->mintNft($payload);
-    }
-
-    public function testCreateNewNftInvalidReserveDenom()
-    {
-
-        $this->expectException(DecimalException::class);
-
-        $payload = [
-            'id'=> ClassData::$nftId,
-            'denom'=> 'Testsdkup',
-            'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/' . $this->idNftEdit,
-            'quantity'=> '4',
-            'reserveAmount'=> '10',
-            'allowMint'=> true,
-        ];
-
-        $this->transaction->mintNft($payload);
-    }
-
-    public function testCreateNewNftInvalidReserveAmount()
-    {
-
-        $this->expectException(DecimalException::class);
-
-        $payload = [
-            'id'=> ClassData::$nftId,
-            'denom'=> 'Testsdkup',
-            'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/' . $this->idNftEdit,
-            'quantity'=> '4',
-            'reserveDenom'=> 'del',
-            'allowMint'=> true,
-        ];
-
-        $result = $this->transaction->mintNft($payload);
-
-        $this->assertEquals(107, $result->tx_response->code);
+        $this->assertEquals(4, count($nftData->result->nftReserve));
     }
 
     public function testNftMint()

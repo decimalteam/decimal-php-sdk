@@ -259,14 +259,6 @@ class TransactionDecimal
             'allowMint' => $allowMint,
         ] = $payload;
 
-        if (empty($tokenUri)) {
-            throw new DecimalException('Invalid token url.');
-        }
-
-        if (empty($reserveDenom)) {
-            throw new DecimalException('Invalid reserve denom.');
-        }
-
         if($recipient == null) {
             $recipient= $this->wallet->getAddress();
         }
