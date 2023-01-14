@@ -134,9 +134,9 @@ $result = $transaction->updateCoin($payload, $options);
 ```php
 
 $payload = [
-  'recipient' = 'd014x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj';
-  'denom' = 'del';
-  'amount' = 3;
+    'recipient' => 'd014x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj',
+    'denom' => 'del',
+    'amount' => 3
 ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];

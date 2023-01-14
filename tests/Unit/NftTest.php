@@ -15,8 +15,6 @@ use Tests\TestCase;
 class NftTest extends TestCase
 {
 
-    private $idNftEdit;
-
     public function __construct()
     {
         parent::__construct();

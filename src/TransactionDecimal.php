@@ -107,8 +107,7 @@ class TransactionDecimal
     {
         [
             'maxSupply' => $maxSupply,
-            'ticker' => $denom,
-            'identity' => $identity,
+            'ticker' => $denom
         ] = $payload;
 
         $msg = $this->protoManager->getMsgUpdateCoin(

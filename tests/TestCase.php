@@ -28,7 +28,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     protected function getFaucetCoin(){
-        $this->addressSend = new Wallet('shuffle fix card gallery mirror coffee weekend vote opera pass sand access');
+        $this->addressSend = new Wallet('device chronic spirit state swarm enough key mention spin foster receive project');
 //        $this->requester = new ApiRequester($this->addressSend, Networks::DEVNET, false, []);
 //        $data = $this->requester->post('/api/faucet', ['address' => $this->addressSend->getAddress()]);
 //        if(!$data->ok){
