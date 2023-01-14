@@ -33,7 +33,7 @@ class CoinTest extends TestCase
 
         $result = $this->transaction->createCoin($payload);
 
-        $this->assertTrue(true);
+        $this->assertEquals(0, $result->tx_response->code);
     }
 
 

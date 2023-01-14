@@ -258,6 +258,15 @@ class TransactionDecimal
             'reserveAmount' => $reserveAmount,
             'allowMint' => $allowMint,
         ] = $payload;
+
+        if (empty($tokenUri)) {
+            throw new DecimalException('Invalid token url.');
+        }
+
+        if (empty($reserveDenom)) {
+            throw new DecimalException('Invalid reserve denom.');
+        }
+
         if($recipient == null) {
             $recipient= $this->wallet->getAddress();
         }
@@ -268,7 +277,7 @@ class TransactionDecimal
 
         try {
             if (!isBech32($recipient) && ($recipient != null)) {
-                return new Exception('Invalid address.');
+                throw new Exception('Invalid address.');
             }
         } catch (Exception $er) {
             return $er;
