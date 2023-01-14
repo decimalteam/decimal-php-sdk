@@ -19,8 +19,6 @@ class WalletTest extends TestCase
         $wallet->getAddress();
 
         $this->assertTrue(isBech32(($wallet->getAddress())));
-
-        $this->addressSend = $wallet;
     }
 
     public function testCreateAddressFromMnemonic()

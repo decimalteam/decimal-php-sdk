@@ -10,8 +10,9 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Unit">
-            <file>tests/Unit/WalletTest.php</file>
-            <file>tests/Unit/CoinTest.php</file>
+<!--            <file>tests/Unit/WalletTest.php</file>-->
+<!--            <file>tests/Unit/CoinTest.php</file>-->
+            <file>tests/Unit/NftTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

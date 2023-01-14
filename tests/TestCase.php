@@ -23,17 +23,19 @@ abstract class TestCase extends BaseTestCase
     private $requester;
 
     protected function getFaucetCoin(){
-        $this->requester = new ApiRequester($this->addressSend, Networks::DEVNET, false, []);
-        $data = $this->requester->post('/api/faucet', ['address' => $this->addressSend->getAddress()]);
-        var_dump($data);
-        if(!$data->ok){
-            throw new \Exception('faucet error');
-        }
-
-        sleep(20);
+        $this->addressSend = new Wallet('shuffle fix card gallery mirror coffee weekend vote opera pass sand access');
+//        $this->requester = new ApiRequester($this->addressSend, Networks::DEVNET, false, []);
+//        $data = $this->requester->post('/api/faucet', ['address' => $this->addressSend->getAddress()]);
+//        if(!$data->ok){
+//            throw new \Exception('faucet error');
+//        }
+//
+//        var_dump($this->addressSend->getMnemonics());
+//
+//        sleep(50);
     }
 
     protected function createTrx(Wallet $wallet){
-        $this->transaction = new TransactionDecimal($wallet, Networks::TESTNET);
+        $this->transaction = new TransactionDecimal($wallet, Networks::DEVNET);
     }
 }
