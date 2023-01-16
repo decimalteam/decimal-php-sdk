@@ -471,13 +471,13 @@ $nftId = generateNftId($headline, $description, $pathCover, $pathImage);
 
 // denom - name of nft collection
 $payload = [
-    'id'=> 'dd5d84d6151e2d44f8c0ce9ff147e6bacd4eb50a', // use id if nft exit if not use generateNftId for generate nftId
-    'denom'=> 'Testsdkup', // for mint is required
-    'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/ZOmGepIA6YWSkrTFaXXb5klr38Mv40Kv', // required for create
-    'quantity'=> '4', // if mind to this will add to number of nft
-    'reserveDenom'=> 'del', // required for create
+    'id'=> 'dd5d84d6151e2d44f8c0ce9ff147e6bacd4eb50a', // use nftid if nft exist if not use generateNftId for generate new nftId
+    'denom'=> 'Testsdkup', 
+    'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/ZOmGepIA6YWSkrTFaXXb5klr38Mv40Kv',
+    'quantity'=> '4',
+    'reserveDenom'=> 'del', 
     'reserveAmount'=> '10', // for mint is required
-     'allowMint'=> true, // if true to you can add after new nft, if false to can. Required for create
+     'allowMint'=> true, // if true to you can add after new nft, if false to can
 ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];

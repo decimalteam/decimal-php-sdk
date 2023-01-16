@@ -28,7 +28,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     protected function getFaucetCoin(){
-        $this->addressSend = new Wallet('device chronic spirit state swarm enough key mention spin foster receive project');
+        $this->addressSend = new Wallet('waste meadow example jelly shed unit fiction segment spend monitor give insane');
 //        $this->requester = new ApiRequester($this->addressSend, Networks::DEVNET, false, []);
 //        $data = $this->requester->post('/api/faucet', ['address' => $this->addressSend->getAddress()]);
 //        if(!$data->ok){
@@ -37,7 +37,7 @@ abstract class TestCase extends BaseTestCase
 //
 //        var_dump($this->addressSend->getMnemonics());
 //
-//        sleep(50);
+//        sleep(10);
     }
 
     protected function createTrx(Wallet $wallet){

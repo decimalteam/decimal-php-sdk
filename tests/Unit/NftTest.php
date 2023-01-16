@@ -43,9 +43,9 @@ class NftTest extends TestCase
         $payload = [
             'id'=> ClassData::$nftId,
             'denom'=> 'Testsdkup',
-            'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/' . $this->idNftEdit,
+            'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/' . ClassData::$nftId,
             'quantity'=> '4',
-            'reserveDenom'=> 'del',
+            'reserveDenom'=> 'test936563',
             'reserveAmount'=> '10',
             'allowMint'=> true,
         ];
@@ -54,7 +54,7 @@ class NftTest extends TestCase
 
         $this->assertEquals(0, $result->tx_response->code);
 
-        sleep(20);
+        sleep(ClassData::$sleepTime);
 
         $nftData = $this->transaction->getNftMetadata(ClassData::$nftId);
 
@@ -67,14 +67,14 @@ class NftTest extends TestCase
             'id'=> ClassData::$nftId,
             'denom'=> 'Testsdkup',
             'quantity'=> '4',
-            'reserveDenom'=> 'del',
+            'reserveDenom'=> 'test936563',
             'reserveAmount'=> '10',
         ];
 
         $result = $this->transaction->mintNft($payload);
 
         $this->assertEquals(0, $result->tx_response->code);
-        sleep(20);
+        sleep(ClassData::$sleepTime);
 
         $nftData = $this->transaction->getNftMetadata(ClassData::$nftId);
 
@@ -91,7 +91,7 @@ class NftTest extends TestCase
         $result = $this->transaction->burnNft($payload);
 
         $this->assertEquals(0, $result->tx_response->code);
-        sleep(20);
+        sleep(ClassData::$sleepTime);
     }
 
     public function testNftBurnError()

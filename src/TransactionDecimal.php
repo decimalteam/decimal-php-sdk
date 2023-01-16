@@ -243,6 +243,7 @@ class TransactionDecimal
         $msg = $this->protoManager->getMsgMultiSendCoins($this->wallet->getAddress(),$sendsPrepare);
 
         $result = $this->sendTransaction($msg, $options);
+
         return $result;
     }
 
@@ -362,7 +363,7 @@ class TransactionDecimal
         );
 
         $txBytes = $txRaw->serializeToString();
-
+//        exit($fee);
         if (!$this->isNodeDirectMode) {
             $payload = [
                 'tx_bytes' => bin2hex($txBytes),
@@ -370,6 +371,8 @@ class TransactionDecimal
             ];
             $predictedFeeObj = $this->requester->post('tx/estimate', $payload);
             $predictedFee = $predictedFeeObj->result->commission;
+            var_dump($payload);
+            var_dump(json_encode($predictedFeeObj));
         } else {
             $nodeEstimationEndpoint = Utils\getNodeFeeEstimationEndpoint(Utils\getRestNodeEndpoint($this->network), bin2hex($txBytes), $feeCoin->getDenom());
             $predictedFeeObj = $this->requester->getCommission($nodeEstimationEndpoint);
