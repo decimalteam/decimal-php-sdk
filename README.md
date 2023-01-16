@@ -134,9 +134,9 @@ $result = $transaction->updateCoin($payload, $options);
 ```php
 
 $payload = [
-  'recipient' = 'd014x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj';
-  'denom' = 'del';
-  'amount' = 3;
+    'recipient' => 'd014x9aqf062ey3hr9y3ktv5cu7tchdfjgxg3l3kj',
+    'denom' => 'del',
+    'amount' => 3
 ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
@@ -427,6 +427,19 @@ $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 $result = $transaction->swapRedeem($payload, $options);
 ```
 
+## NFT Generate new nftId
+
+```php
+// denom - name of nft collection
+$headline = 'Headline';
+$description = 'Description';
+$pathCover = dirname(__DIR__) . '/img_nft/nft_cover.png';
+$pathImage = dirname(__DIR__) . '/img_nft/nft_image.png';
+
+$nftId = generateNftId($headline, $description, $pathCover, $pathImage);
+```
+
+
 ## NFT mint
 
 ```php
@@ -458,14 +471,14 @@ $result = $transaction->swapRedeem($payload, $options);
 
 // denom - name of nft collection
 $payload = [
-    'id'=> 'dd5d84d6151e2d44f8c0ce9ff147e6bacd4eb50a',
-    'denom'=> 'Testsdkup',
+    'id'=> 'dd5d84d6151e2d44f8c0ce9ff147e6bacd4eb50a', // use nftid if nft exist if not use generateNftId for generate new nftId
+    'denom'=> 'Testsdkup', 
     'tokenUri'=> 'https://devnet-nft.decimalchain.com/api/nfts/ZOmGepIA6YWSkrTFaXXb5klr38Mv40Kv',
     'quantity'=> '4',
-    'reserveDenom'=> 'del',
-    'reserveAmount'=> '10',
-     'allowMint'=> true,
-     ];
+    'reserveDenom'=> 'del', 
+    'reserveAmount'=> '10', // for mint is required
+     'allowMint'=> true, // if true to you can add after new nft, if false to can
+];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
 

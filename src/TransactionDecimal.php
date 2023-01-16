@@ -107,8 +107,7 @@ class TransactionDecimal
     {
         [
             'maxSupply' => $maxSupply,
-            'ticker' => $denom,
-            'identity' => $identity,
+            'ticker' => $denom
         ] = $payload;
 
         $msg = $this->protoManager->getMsgUpdateCoin(
@@ -170,8 +169,7 @@ class TransactionDecimal
         [ 
             'denomSell'     => $denomSell,
             'denomBuy'      => $denomBuy,
-            'amountSell'    => $amountSell,
-            'amountBuy'     => $amountBuy
+            'amountSell'    => $amountSell
         ] = $payload;
 
         $msg = $this->protoManager->getMsgSellCoin(
@@ -179,7 +177,6 @@ class TransactionDecimal
             strtolower(trim($denomSell)),
             amountUNIRecalculate($amountSell),
             strtolower(trim($denomBuy)),
-            amountUNIRecalculate($amountBuy)
         );
 
         $result = $this->sendTransaction($msg, $options);
@@ -246,6 +243,7 @@ class TransactionDecimal
         $msg = $this->protoManager->getMsgMultiSendCoins($this->wallet->getAddress(),$sendsPrepare);
 
         $result = $this->sendTransaction($msg, $options);
+
         return $result;
     }
 
@@ -260,6 +258,7 @@ class TransactionDecimal
             'reserveAmount' => $reserveAmount,
             'allowMint' => $allowMint,
         ] = $payload;
+
         if($recipient == null) {
             $recipient= $this->wallet->getAddress();
         }
@@ -270,7 +269,7 @@ class TransactionDecimal
 
         try {
             if (!isBech32($recipient) && ($recipient != null)) {
-                return new Exception('Invalid address.');
+                throw new Exception('Invalid address.');
             }
         } catch (Exception $er) {
             return $er;
@@ -296,6 +295,19 @@ class TransactionDecimal
             'id' => $id,
             'subtokenIds' => $subtokenIds,
         ] = $payload;
+
+        $nftData = $this->getNftMetadata($id);
+
+        $subIdsCheck = [];
+        foreach ($nftData->result->nftReserve as $reserve){
+            if(in_array($reserve->subTokenId, $subtokenIds)){
+                $subIdsCheck[] = $reserve->subTokenId;
+            }
+        }
+
+        if(count($subIdsCheck) == 0){
+            throw new DecimalException('SubtokenIds is not exist');
+        }
 
         $msg = $this->protoManager->getMsgBurnNft(
                 $this->wallet->getAddress(),
@@ -351,7 +363,7 @@ class TransactionDecimal
         );
 
         $txBytes = $txRaw->serializeToString();
-
+//        exit($fee);
         if (!$this->isNodeDirectMode) {
             $payload = [
                 'tx_bytes' => bin2hex($txBytes),
@@ -359,6 +371,8 @@ class TransactionDecimal
             ];
             $predictedFeeObj = $this->requester->post('tx/estimate', $payload);
             $predictedFee = $predictedFeeObj->result->commission;
+            var_dump($payload);
+            var_dump(json_encode($predictedFeeObj));
         } else {
             $nodeEstimationEndpoint = Utils\getNodeFeeEstimationEndpoint(Utils\getRestNodeEndpoint($this->network), bin2hex($txBytes), $feeCoin->getDenom());
             $predictedFeeObj = $this->requester->getCommission($nodeEstimationEndpoint);

@@ -1,5 +1,7 @@
 <?php
 
+use DecimalSDK\Errors\DecimalException;
+
 if (!function_exists('sortPayload')) {
 
     function sortPayload($payload)
@@ -97,5 +99,34 @@ if (!function_exists('isBech32')) {
         }
 
         return false;
+    }
+}
+
+if (!function_exists('generateNftId')) {
+    function generateNftId($headline, $description, $pathCover, $pathImage)
+    {
+        $characters = "CadgWIHKcOkPzn5X0Eji96F7RLiLAxPQ";
+        $randomString = '';
+        for ($i = 0; $i < strlen($characters); $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+        $assetHash = hash_file('sha1', $pathCover, false);
+        $coverHash = hash_file('sha1', $pathImage, false);
+
+        try {
+            $hashes = [
+                sha1($headline),
+                sha1($description),
+                sha1($randomString),
+                $coverHash,
+                $assetHash
+            ];
+            $id = implode('', $hashes);
+
+            return sha1($id);
+        } catch (\Exception $error) {
+            throw new DecimalException('Error wher trying to get hash ' . $error->getMessage());
+        }
     }
 }
