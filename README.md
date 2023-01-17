@@ -164,10 +164,9 @@ $result = $transaction->burnCoins($payload, $options);
 
 ```php
 $payload = [
-  'denomSell' = 'del';
-  'denomBuy' = 'a1111111';
-  'amountSell' = 10;
-  'amountBuy' = 2;
+  'denomSell' => 'del',
+  'denomBuy' => 'a1111111',
+  'amountBuy' => 2,
 ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
@@ -180,10 +179,9 @@ $result = $transaction->sellCoin($payload, $options);
 
 ```php
 $payload = [
-  'denomSell' = 'del';
-  'denomBuy' = 'a1111111';
-  'amountBuy' = 10;
-  'amountSell' = 10;
+  'denomSell' => 'del',
+  'denomBuy' => 'a1111111',
+  'amountSell' => 10,
 ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
@@ -197,8 +195,8 @@ $result = $transaction->buyCoin($payload, $options);
 ```php
 
 $payload = [
-  'denomSell' = 'A1111111';
-  'denomBuy' = 'del';
+  'denomSell' => 'A1111111',
+  'denomBuy' => 'del',
 ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
@@ -234,9 +232,9 @@ $result = $transaction->validatorDeclare($payload, $options);
 ```php
 
 $payload = [
-'address' = 'd0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
-'coin' = 'tdel';
-'stake' = '10';
+    'address' => 'd0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
+    'coin' => 'tdel',
+    'stake' => '10',
 ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
@@ -249,9 +247,9 @@ $result = $transaction->validatorDelegate($payload, $options);
 
 ```php
 $payload = [
-  'address' = 'd0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0';
-  'coin' = 'tdel';
-  'stake' = '10';
+  'address' => 'd0valoper1ajytg8jg8ypx0rj9p792x32fuxyezga4dq2uk0',
+  'coin' => 'tdel',
+  'stake' => '10',
 ];
 
 $options = ['feeCoin' => 'testtt', 'simulate' => 'false'];
