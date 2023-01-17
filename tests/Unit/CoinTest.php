@@ -17,49 +17,49 @@ class CoinTest extends TestCase
         ClassData::$coinTicker = 'TEST' . rand(100000, 999999);
     }
 
-//    public function testCreateNewCoin()
-//    {
-//        $payload = [
-//            'title' => 'Test ' . rand(100000, 999999),
-//            'ticker' => ClassData::$coinTicker,
-//            'initSupply' => '500',
-//            'maxSupply' => '1000',
-//            'reserve' => '1200',
-//            'crr' => '45'
-//        ];
-//
-//        $result = $this->transaction->createCoin($payload);
-//        $this->assertEquals(0, $result->tx_response->code);
-//        sleep(ClassData::$sleepTime);
-//    }
-//
-//    public function testUpdateCoin()
-//    {
-//        $payload = [
-//            'ticker' => ClassData::$coinTicker,
-//            'maxSupply' => '1000',
-//        ];
-//
-//        $result = $this->transaction->updateCoin($payload);
-//        $this->assertEquals(0, $result->tx_response->code);
-//        sleep(ClassData::$sleepTime);
-//    }
-//
-//    public function testSendCoin()
-//    {
-//
-//        $address = new Wallet();
-//
-//        $payload = [
-//            'recipient' => $address->getAddress(),
-//            'denom' => 'del',
-//            'amount' => 3
-//        ];
-//
-//        $result = $this->transaction->sendCoin($payload);
-//        $this->assertEquals(0, $result->tx_response->code);
-//        sleep(ClassData::$sleepTime);
-//    }
+    public function testCreateNewCoin()
+    {
+        $payload = [
+            'title' => 'Test ' . rand(100000, 999999),
+            'ticker' => ClassData::$coinTicker,
+            'initSupply' => '500',
+            'maxSupply' => '1000',
+            'reserve' => '1200',
+            'crr' => '45'
+        ];
+
+        $result = $this->transaction->createCoin($payload);
+        $this->assertEquals(0, $result->tx_response->code);
+        sleep(ClassData::$sleepTime);
+    }
+
+    public function testUpdateCoin()
+    {
+        $payload = [
+            'ticker' => ClassData::$coinTicker,
+            'maxSupply' => '1000',
+        ];
+
+        $result = $this->transaction->updateCoin($payload);
+        $this->assertEquals(0, $result->tx_response->code);
+        sleep(ClassData::$sleepTime);
+    }
+
+    public function testSendCoin()
+    {
+
+        $address = new Wallet();
+
+        $payload = [
+            'recipient' => $address->getAddress(),
+            'denom' => 'del',
+            'amount' => 3
+        ];
+
+        $result = $this->transaction->sendCoin($payload);
+        $this->assertEquals(0, $result->tx_response->code);
+        sleep(ClassData::$sleepTime);
+    }
 
     public function testCreateMultiSing()
     {
@@ -81,8 +81,20 @@ class CoinTest extends TestCase
         ];
 
         $result = $this->transaction->multiSendCoins($payload);
-       echo 'dsa';
-//        print_r($result);
+    }
+
+    public function testBuyCoin()
+    {
+
+        $payload = [
+            'denomSell' => 'del',
+            'denomBuy' => 'a1111111',
+            'amountSell' => 10,
+        ];
+
+        $result = $this->transaction->sellCoin($payload);
+        $this->assertEquals(0, $result->tx_response->code);
+        sleep(ClassData::$sleepTime);
     }
 
 
