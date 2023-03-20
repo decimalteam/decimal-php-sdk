@@ -58,10 +58,5 @@
         ]
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "allow-plugins": {
-            "phabel/phabel": true
-        }
-    }
+    "prefer-stable": true
 }
