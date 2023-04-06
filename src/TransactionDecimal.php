@@ -413,7 +413,7 @@ class TransactionDecimal
             while (!isset($response->tx_response)) {
                 sleep(1);
                 $secondsWaited++;
-                if ($secondsWaited > 10) {
+                if ($secondsWaited > 15) {
                     if (!isset($response->tx_response)) {
                         throw new DecimalException('Your transaction was not found on the chain yet. There was a wait of ' . $secondsWaited . ' seconds.');
                     }
