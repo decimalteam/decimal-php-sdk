@@ -10,12 +10,9 @@
         }
     ],
     "require": {
-        "mdanter/ecc":"~0.5.2",
         "fgrosse/phpasn1": "^2.1",
-        "bitwasp/bitcoin": "^1.0",
         "bitwasp/bech32": "^0.0.1",
         "guzzlehttp/guzzle": "~6.5|^7",
-        "kornrunner/secp256k1": "^0.1.2",
         "kornrunner/keccak": "^1.1",
         "simplito/elliptic-php": "^1.0",
         "php": "^7.3|8.*",
@@ -25,7 +22,10 @@
         "web3p/ethereum-tx": "^0.4.3",
         "protobuf-php/protobuf": "^0.1.3",
         "web3p/web3.php": "0.1.6",
-        "ext-json": "*"
+        "ext-json": "*",
+        "mdanter/ecc": "^1.0",
+        "kornrunner/secp256k1": "^0.2.0",
+        "protonlabs/bitcoin": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5"
@@ -58,5 +58,10 @@
         ]
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "phabel/phabel": true
+        }
+    }
 }
